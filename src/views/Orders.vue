@@ -57,6 +57,7 @@ import Pagination from '@/components/Pagination.vue';
 import {adminOrderApi, adminOrdersApi} from '@/utils/path'
 
 export default {
+  inject: ['httpMessageState'],
   data() {
     return {
       orders: {},
@@ -104,7 +105,7 @@ export default {
       this.$http.put(api, {data: paid}).then((response) => {
         this.isLoading = false;
         this.getOrders(this.currentPage);
-        this.$httpMessageState(response, '更新付款狀態');
+        this.httpMessageState(response, '更新付款狀態');
       });
     },
     delOrder() {

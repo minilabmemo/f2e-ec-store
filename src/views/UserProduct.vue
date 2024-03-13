@@ -30,6 +30,7 @@
 <script>
 import {userProductApi, userCartApi} from '@/utils/path'
 export default {
+  inject: ['httpMessageState'],
   data() {
     return {
       product: {},
@@ -57,7 +58,7 @@ export default {
       this.isLoading = true;
       this.$http.post(url, {data: cart}).then((response) => {
         this.isLoading = false;
-        this.$httpMessageState(response, '加入購物車');
+        this.httpMessageState(response, '加入購物車');
         this.$router.push('/user/cart');
       });
     },

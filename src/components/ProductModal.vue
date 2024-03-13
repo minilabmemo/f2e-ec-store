@@ -136,6 +136,8 @@ export default {
         console.log(response.data);
         if (response.data.success) {
           this.tempProduct.imageUrl = response.data.imageUrl;
+        }else{
+          
         }
       });
     },

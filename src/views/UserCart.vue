@@ -151,6 +151,7 @@
 <script>
 import {userProductsApi, userCartApi, userCouponApi, userOrderApi} from '@/utils/path'
 export default {
+  inject: ['httpMessageState'],
   data() {
     return {
       products: [],
@@ -226,7 +227,7 @@ export default {
       const url = `${userCartApi}/${id}`;
       this.isLoading = true;
       this.$http.delete(url).then((response) => {
-        this.$httpMessageState(response, '移除購物車品項');
+        this.httpMessageState(response, '移除購物車品項');
         this.status.loadingItem = '';
         this.getCart();
         this.isLoading = false;
@@ -239,7 +240,7 @@ export default {
       };
       this.isLoading = true;
       this.$http.post(url, {data: coupon}).then((response) => {
-        this.$httpMessageState(response, '加入優惠券');
+        this.httpMessageState(response, '加入優惠券');
         this.getCart();
         this.isLoading = false;
       });

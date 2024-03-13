@@ -11,7 +11,7 @@ import LoadingOverlay from 'vue3-loading-overlay';
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { currency,date } from '@/utils/methods/filters';
-import $httpMessageState from '@/utils/methods/pushMessageState';
+import httpMessageState from '@/utils/methods/pushMessageState';
 import {
   Form, Field, ErrorMessage, defineRule, configure,
 } from 'vee-validate';
@@ -33,7 +33,8 @@ configure({
   validateOnInput: true, // 當輸入任何內容直接進行驗證
 });
 setLocale('zh_TW');
-app.config.globalProperties.$httpMessageState = $httpMessageState;
+
+app.provide('httpMessageState', httpMessageState)
 app.use(createPinia())
 app.use(router)
 app.use(VueAxios, axios)
