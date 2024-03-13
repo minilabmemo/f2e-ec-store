@@ -149,7 +149,7 @@
 </template>
 
 <script>
-import {userProductsApi, userCartApi, userCouponApi, userOrdernApi} from '@/utils/path'
+import {userProductsApi, userCartApi, userCouponApi, userOrderApi} from '@/utils/path'
 export default {
   data() {
     return {
@@ -245,7 +245,7 @@ export default {
       });
     },
     createOrder() {
-      const url = userOrdernApi;
+      const url = userOrderApi;
       const order = this.form;
       this.$http.post(url, {data: order})
         .then((res) => {
