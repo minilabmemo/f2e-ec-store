@@ -12,34 +12,61 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-sm-4">
-              <div class="mb-3">
-                <label for="image" class="form-label">輸入圖片網址</label>
-                <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結" v-model="tempProduct.imageUrl">
-              </div>
-              <div class="mb-3">
-                <label for="customFile" class="form-label">或 上傳圖片
-                  <i class="fas fa-spinner fa-spin"></i>
-                </label>
-                <input type="file" id="customFile" class="form-control" @change="uploadFile" ref="fileInput">
-              </div>
-              <img class="img-fluid" alt="" :src="tempProduct.imageUrl">
-              <!-- 延伸技巧，多圖 -->
-              <div class="mt-5">
-                <div class="mb-3 input-group">
-                  <input type="url" class="form-control form-control" placeholder="請輸入連結">
-                  <button type="button" class="btn btn-outline-danger">
-                    移除
-                  </button>
+            <div class="col-sm-6">
+              <div><span class="text-sm text-danger ">*圖片上傳限制 1MB</span></div>
+              <h5>主圖 </h5>
+              <div class="row">
+                <div class="mb-3 col-sm-6">
+                  <label for="image" class="form-label">輸入圖片網址</label>
+                  <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結"
+                    v-model="tempProduct.imageUrl">
+
                 </div>
-                <div>
-                  <button class="btn btn-outline-primary btn-sm d-block w-100">
+                <div class="mb-3 col-sm-6">
+                  <label for="customFile" class="form-label">或 上傳圖片
+                    <i class="fas fa-spinner fa-spin"></i>
+                  </label>
+                  <input type="file" id="customFile" class="form-control" @change="uploadFile(true)" ref="fileInput">
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-center align-items-center" style="width: 200px; height: 200px;"> <img
+                  class="img-fluid" alt="main photo" :src="tempProduct.imageUrl"></div>
+              <button type="button" class="btn btn-outline-danger">
+                移除
+              </button>
+
+              <!-- TODO B 移除圖片與整理 A 上傳動畫-->
+              <!-- TODO A 單位限制 B 分類選項 -->
+              <div class="mt-5">
+                <h5>副圖
+                  <button class="btn btn-outline-primary btn-sm d-block " @click="addImages">
                     新增圖片
                   </button>
+                </h5>
+                <div class="row" v-for="(item, index) in this.tempProduct.imagesUrl" :key="item">
+                  <div class="mb-3 col-sm-6">
+                    <label for="image" class="form-label">輸入圖片網址</label>
+                    <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結"
+                      v-model="tempProduct.imagesUrl[index]">
+                    <label for="customFile" class="form-label">或 上傳圖片
+                      <i class="fas fa-spinner fa-spin"></i>
+                    </label>
+                    <input type="file" id="customFile" class="form-control" @change="uploadFile(false, index)"
+                      ref="filesInput">
+                    <hr>
+                  </div>
+                  <div class="mb-3 col-sm-6">
+
+                    <div class="d-flex justify-content-center align-items-center" style="width: 200px; height: 200px;">
+                      <img class="img-fluid" alt="images photo" :src="item">
+                    </div>
+                  </div>
                 </div>
+
               </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-6">
               <div class="mb-3">
                 <label for="title" class="form-label">標題</label>
                 <input type="text" class="form-control" id="title" placeholder="請輸入標題" v-model="tempProduct.title">
@@ -107,6 +134,7 @@
 import {adminUploadApi} from "@/utils/path"
 import modalMixin from "@/utils/mixins/modalMixin"
 export default {
+  inject: ['httpMessageState'],
   props: {
     product: {
       type: Object,
@@ -118,29 +146,51 @@ export default {
     return {
       modal: {},
       tempProduct: {},
+
     }
   },
   watch: {
     product() { //NOTE 單向數據流 外層不能修改內層，但可以這樣改內容資料，當外層 prop 改變就監聽改內層 data
       this.tempProduct = this.product;
+      this.tempProduct.imagesUrl = this.tempProduct.imagesUrl ? this.tempProduct.imagesUrl : [];
     }
   },
   mixins: [modalMixin],
+  updated() {
+    console.log("refs", this.$refs)
+  },
   methods: {
 
-    uploadFile() {
-      const uploadedFile = this.$refs.fileInput.files[0];
+    uploadFile(isMain, index) {
+      let uploadedFile = null;
+      if (isMain) {
+        uploadedFile = this.$refs.fileInput.files[0];
+      }
+      if (!isMain) {
+        uploadedFile = this.$refs.filesInput[index].files[0];
+      }
+
+
+
       const formData = new FormData();
       formData.append('file-to-upload', uploadedFile);
       this.$http.post(adminUploadApi, formData).then((response) => {
         console.log(response.data);
+        this.httpMessageState(response, '上傳圖片');
         if (response.data.success) {
-          this.tempProduct.imageUrl = response.data.imageUrl;
-        }else{
-          
+          if (isMain) {
+            this.tempProduct.imageUrl = response.data.imageUrl;
+          } else {
+            this.tempProduct.imagesUrl[index] = response.data.imageUrl;
+          }
+
         }
       });
     },
+    addImages() {
+      console.log("addImages")
+      this.tempProduct.imagesUrl.push([]);
+    }
   },
 
 }
