@@ -30,8 +30,9 @@
                 </div>
               </div>
 
-              <div class="d-flex justify-content-center align-items-center" style="width: 200px; height: 200px;"> <img
-                  class="img-fluid" alt="main photo" :src="tempProduct.imageUrl"></div>
+              <div class="d-flex justify-content-center align-items-center w-25">
+                <img class="img-fluid " alt="main photo" :src="tempProduct.imageUrl">
+              </div>
               <button type="button" class="btn btn-outline-danger">
                 移除
               </button>
@@ -58,7 +59,7 @@
                   </div>
                   <div class="mb-3 col-sm-6">
 
-                    <div class="d-flex justify-content-center align-items-center" style="width: 200px; height: 200px;">
+                    <div class="d-flex justify-content-center align-items-center object-fit-cover w-50">
                       <img class="img-fluid" alt="images photo" :src="item">
                     </div>
                   </div>
