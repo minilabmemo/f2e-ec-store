@@ -1,0 +1,48 @@
+
+
+@import "./fonts/tenorsans.css";
+
+.tenor-sans-regular {
+  font-family: "Tenor Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Small devices (landscape phones, 375px and up) */
+@media (min-width: 375px) {  
+  h1 {font-size:1.125rem;} /*18px*/
+  h3 {
+    font-size:1rem;/*16px*/
+    color: var(--bs-gray-800);
+  } 
+  h4 {
+    font-size:0.875rem;/*14px*/
+    color: var(--bs-gray-800);
+  } 
+  .price{
+    font-size:0.875rem;/*14px*/
+    color: var(--bs-primary);
+  }
+  .q-btn{font-size:1rem}/*16px*/
+}
+/* Small devices (landscape phones, 544px and up) */
+@media (min-width: 544px) {  
+  h1 {font-size:1.5rem;} /*1rem = 16px*/
+}
+ 
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {  
+  h1 {font-size:2rem;} /*1rem = 16px*/
+}
+ 
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+  h1 {font-size:2.5rem;} /*1rem = 16px*/
+}
+ 
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  
+  .price{font-size:2rem}/*32px*/
+  .q-btn{font-size:1.5rem}/*24px*/
+}
+ 

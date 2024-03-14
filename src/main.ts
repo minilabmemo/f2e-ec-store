@@ -1,5 +1,6 @@
 //import './assets/main.css'
 import './assets/all.scss'
+import './assets/custom.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import * as Vue from 'vue' // in Vue 3
