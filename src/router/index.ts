@@ -7,7 +7,10 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: {
+        title: 'Koring Shop | 韓國流行服飾 - 最新韓國時尚、服飾、配件和潮流'
+      }
     },
     {
       path: '/showcase',
@@ -58,5 +61,9 @@ const router = createRouter({
     },
   ]
 })
-
+router.afterEach((to) => {
+  if (to.meta.title) {
+    document.title = to.meta.title as string;
+  }
+});
 export default router
