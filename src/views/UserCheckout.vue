@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import {userOrderApi, userOrderPayApi} from '@/utils/path'
+import {userOrderApi, userOrderPayApi} from '@/utils/const/path'
 export default {
 
   data() {
@@ -100,4 +100,4 @@ export default {
     this.getOrder();
   },
 };
-</script>
+</script>@/utils/const/path

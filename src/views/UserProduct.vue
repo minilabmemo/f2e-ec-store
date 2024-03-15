@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {userProductApi, userCartApi} from '@/utils/path'
+import {userProductApi, userCartApi} from '@/utils/const/path'
 export default {
   inject: ['httpMessageState'],
   data() {
@@ -68,4 +68,4 @@ export default {
     this.getProduct();
   },
 };
-</script>
+</script>@/utils/const/path

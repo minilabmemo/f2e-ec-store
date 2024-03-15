@@ -1,25 +1,31 @@
 <template>
-  <div class="">
+
+  <div class="d-flex flex-column gap-3  ">
+
     <div class="position-relative ">
-      <div class="img-fluid "><img :src="item.src" alt="Logo"></div>
-      <div class="photo-mix-text" :class="item.color">
+
+      <img :src="item.src" alt="image" class="rwd-image">
+
+      <div class="photo-mix-text" :class="item.color" v-if="status.isLoading || status.error | filterErr !== ''">
         <h1>coming</h1>
         <h1>soon</h1>
       </div>
 
     </div>
 
-    <h4>
-      <div class="lds-ellipsis" v-if="isLoading">
+    <div>
+      <div class="lds-ellipsis" v-if="status.isLoading">
         <div></div>
         <div></div>
         <div></div>
         <div></div>
       </div>
 
-      <div v-else>{{ item.title }} </div>
+      <h4 v-else>
+        {{ item.title }}
+      </h4>
 
-    </h4>
+    </div>
 
     <div class="price"></div>
   </div>
@@ -30,12 +36,16 @@
 //TODO <div class="text-primary ">[後端服務出現問題，請洽客服人員] </div>
 export default {
   props: {
-    isLoading: Boolean,
-    error: String,
+    filterErr: String,
     item: {title: "no name"},
   },
+  inject: ["status"],
   created() {
-    console.log("isLoading", this.isLoading)
+    console.log("product filterErr", this.filterErr)
+  },
+  update() {
+    console.log("product isLoading", this.status.isLoading)
+
   },
 }
 </script>
@@ -145,5 +155,12 @@ export default {
   100% {
     transform: translate(24px, 0);
   }
+}
+
+.rwd-image {
+  object-fit: cover;
+  aspect-ratio: 2/3;
+  width: 100%;
+  height: auto;
 }
 </style>

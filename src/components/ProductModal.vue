@@ -132,7 +132,7 @@
 
 <script>
 
-import {adminUploadApi} from "@/utils/path"
+import {adminUploadApi} from "@/utils/const/path"
 import modalMixin from "@/utils/mixins/modalMixin"
 export default {
   inject: ['httpMessageState'],
@@ -195,4 +195,4 @@ export default {
   },
 
 }
-</script>
+</script>@/utils/const/path

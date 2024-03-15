@@ -54,7 +54,7 @@
 import DelModal from '@/components/DelModal.vue';
 import OrderModal from '@/components/orderModal.vue';
 import Pagination from '@/components/Pagination.vue';
-import {adminOrderApi, adminOrdersApi} from '@/utils/path'
+import {adminOrderApi, adminOrdersApi} from '@/utils/const/path'
 
 export default {
   inject: ['httpMessageState'],
@@ -124,4 +124,4 @@ export default {
 
   },
 };
-</script>
+</script>@/utils/const/path

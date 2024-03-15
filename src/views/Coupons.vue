@@ -42,7 +42,7 @@
 <script>
 import CouponModal from '@/components/CouponModal.vue';
 import DelModal from '@/components/DelModal.vue';
-import {adminCouponsApi, adminCouponApi} from '@/utils/path'
+import {adminCouponsApi, adminCouponApi} from '@/utils/const/path'
 export default {
   components: {CouponModal, DelModal},
   inject: ['httpMessageState'],
@@ -123,4 +123,4 @@ export default {
     this.getCoupons();
   },
 };
-</script>
+</script>@/utils/const/path

@@ -149,7 +149,7 @@
 </template>
 
 <script>
-import {userProductsApi, userCartApi, userCouponApi, userOrderApi} from '@/utils/path'
+import {userProductsApi, userCartApi, userCouponApi, userOrderApi} from '@/utils/const/path'
 export default {
   inject: ['httpMessageState'],
   data() {
@@ -259,4 +259,4 @@ export default {
     this.getCart();
   },
 };
-</script>
+</script>@/utils/const/path

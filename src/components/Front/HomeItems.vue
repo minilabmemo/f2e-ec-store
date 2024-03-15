@@ -1,10 +1,8 @@
 <template>
 
-  <h1 class="d-flex justify-content-center m-5 ">{{ section }} {{ CAT }}</h1>
-  <div class="d-flex justify-content-center gap-3">
-
-    <ProductItem v-for="(item, index) in items" :key="index" :isLoading="isLoading" :item="item"></ProductItem>
-
+  <h1 class=" ">{{ section }} {{ CAT }}</h1>
+  <div class="row">
+    <DataItem v-for="(item, index) in items" :key="index" :item="item" class="col-4" :filter-err="filterErr"></DataItem>
   </div>
   <div class="d-flex justify-content-center gap-3">
     <button class="btn btn-black q-btn">Explore More <img src="@/assets/icons/next_arrow.svg" alt="Next Arrow">
@@ -14,32 +12,53 @@
 
 
 <script>
-import ProductItem from '@/components/Front/ProductItem.vue';
+import DataItem from '@/components/Front/DataItem.vue';
 import coming1 from '@/assets/images/design/coming1.png';
 import coming2 from '@/assets/images/design/coming2.png';
 import coming3 from '@/assets/images/design/coming3.png';
+import categories from '@/utils/const/categories'
 export default {
-  components: {ProductItem},
+  components: {DataItem},
   props: {
     section: String,
     CAT: String,
+    products: Array,
   },
   data() {
     return {
-
-      isLoading: false,
-
+      filterErr: "",
       items: {
         1: {
-          title: "韓國 ONLINE 收腰洋裝 - 氣質浪漫素面渡假連身裙", src: coming1, color: "orange",
+          title: `${this.CAT === categories.new.name ? "韓國熱銷 ONLINE - 新品 12/25" : ""}`, src: coming1, color: "orange",
         },
         2: {
-          title: "韓國大衣 - 素面西裝面料 V 領無釦長版連肩長袖 ", src: coming2, color: "secondary",
+          title: `${this.CAT === categories.new.name ? "秋冬時裝 - 最新流行色" : ""}`, src: coming2, color: "secondary",
         },
-        3: {title: "針織罩衫 - 簡約素面開襟無釦長袖好氣色長版外套", src: coming3, color: "gray", },
+        3: {title: `${this.CAT === categories.new.name ? "針織罩衫系列 - 簡約氣質" : ""}`, src: coming3, color: "gray", },
       }
     }
   },
+  watch: {
+    products(n, o) {
+      let previewItem = [];
+      let newProducts = this.products.filter((item) => item.category === this.CAT)
+      if (newProducts.length >= 3) {
+        previewItem = newProducts.slice(0, 3);
+      }
+      console.log("products", previewItem)
+      if (previewItem.length !== 0) {
+        this.items = previewItem.map(item => ({
+          title: item.title,
+          src: item.imageUrl,
+
+        }));
+      } else {
+        this.filterErr = "無此商品分類"
+      }
+    }
+  }
+
+
 
 }
 </script>

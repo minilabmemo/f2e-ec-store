@@ -21,13 +21,15 @@
       <div class="  border-bottom   "></div>
       <HomeNav></HomeNav>
     </header>
-    <div class="container  d-flex-column align-items-center ">
+    <div class="container  d-flex flex-column align-items-center ">
 
       <HomeBanner></HomeBanner>
-      <div class="img-fluid d-flex justify-content-center my-4"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+      <div class="img-fluid  my-4"><img src="@/assets/icons/hr.svg" alt="hr"></div>
 
-      <HomeItems section="New Arrival" :CAT="categories.new.name"></HomeItems>
-      <HomeItems section="Just For You" :CAT="categories.all.name"></HomeItems>
+      <HomeItems section="New Arrival" :CAT="categories.new.category" :products="products"></HomeItems>
+
+      <div class="img-fluid  my-4"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+      <HomeItems section="Just For You" :CAT="categories.hot.category" :products="products"></HomeItems>
     </div>
 
   </div>
@@ -42,12 +44,46 @@ import categories from '@/utils/const/categories'
 import HomeNav from '@/components/Front/HomeNav.vue';
 import HomeBanner from '@/components/Front/HomeBanner.vue';
 import HomeItems from '@/components/Front/HomeItems.vue';
+import {userProductsApi} from '@/utils/const/path'
 export default {
   components: {HomeNav, HomeBanner, HomeItems},
   data() {
     return {
       categories: categories,
+      products: [],
+      status: {
+        isLoading: false,
+        error: ""
+      }
+
     }
+  },
+  provide() {
+    return {
+      status: this.status
+    };
+  },
+
+  created() {
+
+    const url = userProductsApi;
+    this.status.isLoading = true;
+    this.axios.get(url).then((response) => {
+      this.status.isLoading = false;
+      if (response.data.success) {
+        this.products = response.data.products
+        console.log("products data done", this.isLoading)
+
+      } else {
+        this.status.error = "取得資料失敗，請稍後再重新載入。";
+        console.log("err:", response.data)
+      }
+    }).catch((err) => {
+      this.status.isLoading = false;
+      this.status.error = "取得資料錯誤，請稍後再重新載入。"; //TODO 錯誤集中
+      console.log("err:", err)
+
+    });
   },
 
 }
