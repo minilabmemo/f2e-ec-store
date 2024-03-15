@@ -102,3 +102,10 @@ npm run test:e2e
 ```sh
 npm run lint
 ```
+
+
+
+-------------------------
+
+# [補充] 用到的套件或 CSS 樣式庫
+- [https://loading.io/css/](https://loading.io/css/) 現成的 CSS 效果可以直接複製
