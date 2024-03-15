@@ -3,10 +3,10 @@
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav m-auto ">
-          <li class="nav-item mx-2" v-for="item in categories.getName()" :key="item">
-            <a class="nav-link active" aria-current="page" href="#">
-              <h3>{{ item }}</h3>
-            </a>
+          <li class="nav-item mx-2" v-for="item in categories" :key="item">
+            <router-link :to="`/product/${item.category}`" class="nav-link">
+              <h3>{{ item.name }} </h3>
+            </router-link>
             <!--TODO active & href <a class="nav-link active" aria-current="page" href="#">Home</a> -->
           </li>
 

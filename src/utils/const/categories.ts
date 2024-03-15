@@ -1,15 +1,6 @@
 export class Category {
   [key: string]: CategoryItem;
-
-  constructor(data: { [key: string]: CategoryItem }) {
-    Object.keys(data).forEach(key => {
-      this[key] = data[key];
-    });
-  }
 }
-Category.prototype.getName = function(this: Category) {
-  return Object.values(this).map(item => item.name);
-} as any;
 
 
 export interface CategoryItem {
@@ -20,17 +11,18 @@ export interface CategoryItem {
 }
 
 
-const categories = new Category({
+const categories :Category= {
   all: {
     category:"all",
     name: "全部",
     list: [],
-    path: "",
+
   },
   hot: {
     category:"hot",
     name: "熱銷",
-    list: []
+    list: [],
+  
   },
   new: {
     category:"new",
@@ -67,6 +59,6 @@ const categories = new Category({
     name: "Styles",
     list: []
   }
-});
+};
 
 export default categories;

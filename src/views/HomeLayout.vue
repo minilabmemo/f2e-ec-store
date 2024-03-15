@@ -21,40 +21,8 @@
       <div class="  border-bottom   "></div>
       <HomeNav></HomeNav>
     </header>
-    <div class="container  d-flex flex-column align-items-center ">
 
-      <HomeBanner></HomeBanner>
-      <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
-
-      <HomeItems section="NEW ARRIVAL" :CAT="categories.new.category" :products="products"></HomeItems>
-
-      <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
-      <HomeItems section="JUST FOR YOU" :CAT="categories.hot.category" :products="products"></HomeItems>
-      <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
-      <div class="row g-5 ">
-        <div class="col-4"><img src="@/assets/images/design/d1.png" alt="discount"></div>
-        <div class="col-4"><img src="@/assets/images/design/d2.png" alt="discount"></div>
-        <div class="col-4"><img src="@/assets/images/design/d3.png" alt="discount"></div>
-      </div>
-      <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
-      <h1 class="mb-5 ">COLLECTIONS</h1>
-      <div class="d-flex flex-column gap-3  ">
-        <div class=" "><img src="@/assets/images/design/c1.png" alt="style" class="img-fluid"></div>
-        <div class=""><img src="@/assets/images/design/c2.png" alt="style" class="img-fluid"></div>
-      </div>
-      <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
-
-      <div class="d-flex gap-5  ">
-
-        <div class="  my-5"><img src="@/assets/icons/facebook.svg" alt="facebook"></div>
-        <div class="my-5"><img src="@/assets/icons/Instagram.svg" alt="Instagram"></div>
-        <div class="my-5"><img src="@/assets/icons/YouTube.svg" alt="YouTube"></div>
-        <div class="my-5"><img src="@/assets/icons/line.svg" alt="line"></div>
-      </div>
-
-
-    </div>
-
+    <RouterView />
     <footer class="bg-orange-100 container-fluid p-5 text-gray-500 ">
       <div class="container">
         <div class=" row d-flex justify-content-center ">
@@ -94,11 +62,10 @@
 import categories from '@/utils/const/categories'
 
 import HomeNav from '@/components/Front/HomeNav.vue';
-import HomeBanner from '@/components/Front/HomeBanner.vue';
-import HomeItems from '@/components/Front/HomeItems.vue';
+
 import {userProductsApi} from '@/utils/const/path'
 export default {
-  components: {HomeNav, HomeBanner, HomeItems},
+  components: {HomeNav, },
   data() {
     return {
       categories: categories,

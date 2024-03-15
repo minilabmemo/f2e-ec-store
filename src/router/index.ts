@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeLayout from '../views/HomeLayout.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,10 +7,20 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: HomeLayout,
       meta: {
         title: 'Koring Shop | 韓國流行服飾 - 最新韓國時尚、服飾、配件和潮流'
-      }
+      },
+      children: [
+        {
+          path: '',
+          component: () => import('../views/HomeBody.vue'),
+        },
+        {
+          path: 'product/:category',
+          component: () => import('../views/UserCart.vue'),
+        },
+      ],
     },
     {
       path: '/showcase',
@@ -18,15 +28,15 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ShowCaseView.vue')
+      component: () => import('../views/ShowCase.vue')
     },{
       path: '/login',
       name: 'login',
-      component: () => import('../views/LoginView.vue')
+      component: () => import('../views/Login.vue')
     },{
       path: '/dashboard',
       name: 'dashboard',
-      component: () => import('../views/DashboardView.vue'),
+      component: () => import('../views/Dashboard.vue'),
       children:[
         {
           path:'products',
