@@ -1,5 +1,5 @@
 <template>
-  <div class="tenor-sans-regular">
+  <div class="tenor-sans-regular ">
     <header class="h-shadow mb-4">
 
       <div class="d-flex justify-content-center  mb-2 container  ">
@@ -24,14 +24,66 @@
     <div class="container  d-flex flex-column align-items-center ">
 
       <HomeBanner></HomeBanner>
-      <div class="img-fluid  my-4"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+      <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
 
-      <HomeItems section="New Arrival" :CAT="categories.new.category" :products="products"></HomeItems>
+      <HomeItems section="NEW ARRIVAL" :CAT="categories.new.category" :products="products"></HomeItems>
 
-      <div class="img-fluid  my-4"><img src="@/assets/icons/hr.svg" alt="hr"></div>
-      <HomeItems section="Just For You" :CAT="categories.hot.category" :products="products"></HomeItems>
+      <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+      <HomeItems section="JUST FOR YOU" :CAT="categories.hot.category" :products="products"></HomeItems>
+      <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+      <div class="row g-5 ">
+        <div class="col-4"><img src="@/assets/images/design/d1.png" alt="discount"></div>
+        <div class="col-4"><img src="@/assets/images/design/d2.png" alt="discount"></div>
+        <div class="col-4"><img src="@/assets/images/design/d3.png" alt="discount"></div>
+      </div>
+      <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+      <h1 class="mb-5 ">COLLECTIONS</h1>
+      <div class="d-flex flex-column gap-3  ">
+        <div class=" "><img src="@/assets/images/design/c1.png" alt="style" class="img-fluid"></div>
+        <div class=""><img src="@/assets/images/design/c2.png" alt="style" class="img-fluid"></div>
+      </div>
+      <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+
+      <div class="d-flex gap-5  ">
+
+        <div class="  my-5"><img src="@/assets/icons/facebook.svg" alt="facebook"></div>
+        <div class="my-5"><img src="@/assets/icons/Instagram.svg" alt="Instagram"></div>
+        <div class="my-5"><img src="@/assets/icons/YouTube.svg" alt="YouTube"></div>
+        <div class="my-5"><img src="@/assets/icons/line.svg" alt="line"></div>
+      </div>
+
+
     </div>
 
+    <footer class="bg-orange-100 container-fluid p-5 text-gray-500 ">
+      <div class="container">
+        <div class=" row d-flex justify-content-center ">
+          <div class="col-4 d-flex flex-column  gap-2 ">
+            <div class="row row-cols-2 g-1 gy-3 ">
+              <div class="col">公司資訊</div>
+              <div class="col">售後服務</div>
+              <div class="col">品牌介紹</div>
+              <div class="col">常見問題</div>
+            </div>
+
+
+          </div>
+          <div class="col-4">
+            <div class="w-75 ">客服時間：上午 10:30~12:00, 下午 13:30~18:00（例假日休息）</div>
+          </div>
+          <div class="col-4">
+            <div>星展區，時尚大道 88 號，韓星大樓 3 樓</div>
+            <div>(02) 888-5678</div>
+            <div>koringoffice@line.tw </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+    </footer>
   </div>
 </template>
 

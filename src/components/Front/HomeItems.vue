@@ -1,13 +1,16 @@
 <template>
+  <section class="d-flex flex-column align-items-center ">
+    <h1 class=" ">{{ section }}</h1>
+    <div class="row">
+      <DataItem v-for="(item, index) in items" :key="index" :item="item" class="col-4" :filter-err="filterErr">
+      </DataItem>
+    </div>
+    <div class="d-flex justify-content-center gap-3">
+      <button class="btn btn-black q-btn">Explore More <img src="@/assets/icons/next_arrow.svg" alt="Next Arrow">
+      </button>
+    </div>
+  </section>
 
-  <h1 class=" ">{{ section }} {{ CAT }}</h1>
-  <div class="row">
-    <DataItem v-for="(item, index) in items" :key="index" :item="item" class="col-4" :filter-err="filterErr"></DataItem>
-  </div>
-  <div class="d-flex justify-content-center gap-3">
-    <button class="btn btn-black q-btn">Explore More <img src="@/assets/icons/next_arrow.svg" alt="Next Arrow">
-    </button>
-  </div>
 </template>
 
 
