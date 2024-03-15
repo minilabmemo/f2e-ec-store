@@ -1,52 +1,62 @@
+export class Category {
+  [key: string]: CategoryItem;
+
+  constructor(data: { [key: string]: CategoryItem }) {
+    Object.keys(data).forEach(key => {
+      this[key] = data[key];
+    });
+  }
+}
+Category.prototype.getName = function(this: Category) {
+  return Object.values(this).map(item => item.name);
+} as any;
 
 
-// export interface Category {
-//   [key: number]: {main: string; list: string[], path?: string};/
+export interface CategoryItem {
+  name: string;
+  list: string[];
+  path?: string;
+}
 
-//   getMain(): string[];
-// }
-//TODO path
-const categories = {
-  1: {
-    main: "全部",
+
+const categories = new Category({
+  all: {
+    name: "全部",
     list: [],
     path: "",
   },
-  2: {
-    main: "熱銷",
+  hot: {
+    name: "熱銷",
     list: []
   },
-  3: {
-    main: "新商品",
+  new: {
+    name: "新商品",
     list: []
   },
-  4: {
-    main: "上衣",
+  upper: {
+    name: "上衣",
     list: ["長袖", "五分袖", "襯衫"]
   },
-  5: {
-    main: "裙子",
+  skirt: {
+    name: "裙子",
     list: ["長裙", "短裙", "中長裙"]
   },
-  6: {
-    main: "褲子",
+  pants: {
+    name: "褲子",
     list: ["長褲", "短褲", "五分褲"]
   },
-  7: {
-    main: "外套",
+  coat: {
+    name: "外套",
     list: ["冬天外套", "薄外套", "小外套"]
   },
-  8: {
-    main: "配件",
+  accessories: {
+    name: "配件",
     list: []
   },
-  9: {
-    main: "Styles",
+  styles: {
+    name: "Styles",
     list: []
-  },
-  getMain(): string[] {
-    return Object.values(this).map((item: {main: string}) => item.main);
   }
+});
 
-}
 export default categories;

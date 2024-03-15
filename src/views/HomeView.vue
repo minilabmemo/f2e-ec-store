@@ -26,8 +26,8 @@
       <HomeBanner></HomeBanner>
       <div class="img-fluid d-flex justify-content-center my-4"><img src="@/assets/icons/hr.svg" alt="hr"></div>
 
-      <HomeArrival></HomeArrival>
-
+      <HomeItems section="New Arrival" :CAT="categories.new.name"></HomeItems>
+      <HomeItems section="Just For You" :CAT="categories.all.name"></HomeItems>
     </div>
 
   </div>
@@ -39,11 +39,11 @@
 
 import categories from '@/utils/const/categories'
 
-import HomeNav from '@/components/HomeNav.vue';
-import HomeBanner from '@/components/HomeBanner.vue';
-import HomeArrival from '@/components/HomeArrival.vue';
+import HomeNav from '@/components/Front/HomeNav.vue';
+import HomeBanner from '@/components/Front/HomeBanner.vue';
+import HomeItems from '@/components/Front/HomeItems.vue';
 export default {
-  components: {HomeNav, HomeBanner, HomeArrival},
+  components: {HomeNav, HomeBanner, HomeItems},
   data() {
     return {
       categories: categories,

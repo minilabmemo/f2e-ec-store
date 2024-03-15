@@ -1,9 +1,9 @@
 <template>
 
-  <h1 class="d-flex justify-content-center m-5 ">New Arrival</h1>
+  <h1 class="d-flex justify-content-center m-5 ">{{ section }} {{ CAT }}</h1>
   <div class="d-flex justify-content-center gap-3">
 
-    <ArrivalItem v-for="(item, index) in items" :key="index" :isLoading="isLoading" :item="item"></ArrivalItem>
+    <ProductItem v-for="(item, index) in items" :key="index" :isLoading="isLoading" :item="item"></ProductItem>
 
   </div>
   <div class="d-flex justify-content-center gap-3">
@@ -14,15 +14,19 @@
 
 
 <script>
-import ArrivalItem from '@/components/ArrivalItem.vue';
+import ProductItem from '@/components/Front/ProductItem.vue';
 import coming1 from '@/assets/images/design/coming1.png';
 import coming2 from '@/assets/images/design/coming2.png';
 import coming3 from '@/assets/images/design/coming3.png';
 export default {
-  components: {ArrivalItem},
+  components: {ProductItem},
+  props: {
+    section: String,
+    CAT: String,
+  },
   data() {
     return {
-      num: 3,
+
       isLoading: false,
 
       items: {
