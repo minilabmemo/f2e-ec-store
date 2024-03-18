@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeLayout from '../views/HomeLayout.vue'
-
+import { useFavicon } from "@vueuse/core";
+const icon = useFavicon();
+const shopFavIcon="logo_favicon.ico"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -9,16 +11,21 @@ const router = createRouter({
       name: 'home',
       component: HomeLayout,
       meta: {
-        title: 'Koring Shop | 韓國流行服飾 - 最新韓國時尚、服飾、配件和潮流'
+        title: 'Koring Shop | 韓國流行服飾 - 最新韓國時尚、服飾、配件和潮流',
+        icon:shopFavIcon
       },
       children: [
         {
+          name:"HomeBody",
           path: '',
           component: () => import('../views/HomeBody.vue'),
+          meta: {icon:shopFavIcon },
         },
         {
+          name:"UserCart",
           path: 'product/:category',
           component: () => import('../views/UserCart.vue'),
+          meta: {icon:shopFavIcon },
         },
       ],
     },
@@ -74,6 +81,11 @@ const router = createRouter({
 router.afterEach((to) => {
   if (to.meta.title) {
     document.title = to.meta.title as string;
+  }
+  if (to.meta.icon) {
+    icon.value = to.meta.icon as string;
+  } else {
+    icon.value = "";
   }
 });
 export default router
