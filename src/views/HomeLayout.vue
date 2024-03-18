@@ -3,7 +3,14 @@
     <header class="h-shadow mb-4">
 
       <div class="d-flex justify-content-center  mb-2 container  ">
-        <div class="mx-auto img-fluid "><img src="@/assets/icons/logo_home.svg" alt="Logo"></div>
+
+        <div class="mx-auto  ">
+          <router-link to="/">
+            <div class="img-fluid "><img src="@/assets/icons/logo_home.svg" alt="Logo"></div>
+          </router-link>
+        </div>
+
+
         <div class="align-self-end ">
           <div class="d-flex">
             <img src="@/assets/icons/save.svg" alt="save">
@@ -11,6 +18,7 @@
             <div class="d-flex gap-2 ">
               <img src="@/assets/icons/cart.svg" alt="cart">
               <span class="bg-black text-white px-1 py-0 align-middle  ">0</span>
+              <!-- TODO -->
             </div>
             <img src="@/assets/icons/split.svg" alt="split">
             <img src="@/assets/icons/person.svg" alt="person">

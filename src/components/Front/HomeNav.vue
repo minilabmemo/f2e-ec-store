@@ -1,19 +1,25 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav m-auto ">
-          <li class="nav-item mx-2" v-for="item in categories" :key="item">
-            <router-link :to="`/product/${item.category}`" class="nav-link">
-              <h3>{{ item.name }} </h3>
+      <div class="collapse navbar-collapse " id="navbarNav">
+        <ul class="navbar-nav mx-auto d-flex  align-items-center   justify-content-center ">
+          <li class="nav-item mx-2 " v-for="item in categories" :key="item.name">
+            <router-link :to="`/product/${item.category}`" class="nav-link "
+              :class="{ active: page_category === item.category }" aria-current="page">
+              <div class="d-flex flex-column  align-items-center ">
+                <div class=""> {{ item.name }}</div>
+                <img src="@/assets/icons/nav.svg" alt="nav" v-if="page_category === item.category" width="12px"
+                  height="12px">
+              </div>
             </router-link>
-            <!--TODO active & href <a class="nav-link active" aria-current="page" href="#">Home</a> -->
           </li>
 
         </ul>
       </div>
     </div>
   </nav>
+
+
 
 </template>
 
@@ -25,8 +31,18 @@ export default {
   data() {
     return {
       categories: categories,
+
     }
   },
+  computed: {
+    page_category() {
+      return this.$route.params.category
+    }
+  }
+
 
 }
 </script>
+
+
+<style lang="css" scoped></style>

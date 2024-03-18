@@ -19,13 +19,13 @@ const router = createRouter({
           name:"HomeBody",
           path: '',
           component: () => import('../views/HomeBody.vue'),
-          meta: {icon:shopFavIcon },
+          meta: {icon:`../${shopFavIcon}` },
         },
         {
           name:"UserCart",
           path: 'product/:category',
           component: () => import('../views/UserCart.vue'),
-          meta: {icon:shopFavIcon },
+          meta: {icon:`../${shopFavIcon}` },
         },
       ],
     },
@@ -84,8 +84,8 @@ router.afterEach((to) => {
   }
   if (to.meta.icon) {
     icon.value = to.meta.icon as string;
-  } else {
-    icon.value = "";
+  } else{
+    icon.value =""
   }
 });
 export default router
