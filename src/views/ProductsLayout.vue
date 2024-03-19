@@ -1,35 +1,14 @@
 <template>
   <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
-
-
-  <div class="bread my-2 d-flex ">
-    <span>首頁</span>
-    <img src="@/assets/icons/Forward.svg" alt="Forward">
-    {{ category_name }}
-    <div v-show="sub_category_name">
-      <img src="@/assets/icons/Forward.svg" alt="Forward">
-      {{ sub_category_name }}
-
-    </div>
-
-  </div>
-
   <div class="row">
-
-    <SaleItem v-for="(item, index) in filterItems" :key="index" :item="item" class="col-4"
-      :path="`${$route.params.category}/${$route.params.subcategory}`">
-    </SaleItem>
-    <div class="col-6 " v-if="!filterItems.length">
-      <img src="@/assets/images/design/empty200.png" alt="empty200" class="img-fluid ">
+    <div class="col-3">
+      <CATNav :products="products"></CATNav>
+    </div>
+    <div class="col-9">
+      <router-view></router-view>
     </div>
 
   </div>
-
-
-
-
-
-
 
 
 </template>
@@ -38,9 +17,10 @@
 <script>
 import getAllProducts from '@/utils/mixins/getAllProducts';
 import categories from '@/utils/const/categories'
-import SaleItem from '@/components/Front/SaleItem.vue';
+import CATNav from '@/components/Front/CATNav.vue'
+
 export default {
-  components: {SaleItem},
+  components: {CATNav},
   data() {
     return {
       categories: categories,
@@ -52,7 +32,7 @@ export default {
       filterErr: "",
     }
   },
-  mixins: [getAllProducts],//TODO layout & cat get twice?? & home get three time
+  mixins: [getAllProducts],
   computed: {
 
     category_name() {

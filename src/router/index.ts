@@ -20,18 +20,24 @@ const router = createRouter({
           path: '',
           component: () => import('../views/HomeBody.vue'),
           meta: {icon:`../${shopFavIcon}` },
-        },  {
-          name:"ProductsByCAT",
-          path: 'product/:category',
-          component: () => import('../views/ProductsByCAT.vue'),
-          meta: {icon:`../${shopFavIcon}` },
-        },
+        }, 
         {
-          name:"ProductsByCATlist",
           path: 'product/:category/:subcategory',
-          component: () => import('../views/ProductsByCAT.vue'),
-          meta: {icon:`../${shopFavIcon}` },
+          component: () => import('../views/ProductsLayout.vue'),
+          children:[
+            {
+              name:"ProductsByCAT",  
+              path: '',
+              component: () => import('../views/ProductsByCAT.vue'),
+            },
+            {
+              name:"ProductsByID",
+              path: 'id/:productId',
+              component: () => import('../views/UserProduct.vue'),
+            }
+          ]
         },
+        
       ],
     },
     {
