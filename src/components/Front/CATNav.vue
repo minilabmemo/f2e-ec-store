@@ -6,7 +6,7 @@
           <img src="@/assets/icons/nav.svg" alt="nav"
             v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/all`" width="12px" height="12px">
           <router-link class="nav-link text-800 fw-bold px-2 " aria-current="page" href="#" :to="`/product/${key}/all`">
-            {{ cat.name }} {{ key }} <span v-if="catNumMap[key] && catNumMap[key].num">({{ catNumMap[key].num }})</span>
+            {{ cat.name }} {{ key }} <span>({{ countByCAT(key) }})</span>
           </router-link>
         </div>
 
@@ -16,9 +16,14 @@
             <img src="@/assets/icons/nav.svg" alt="nav"
               v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/${subKey}`" width="12px"
               height="12px">
-            <router-link class="nav-link text-800  " :to="`/product/${key}/${subKey}`">
+            <router-link class="nav-link text-800  " :to="`/product/${key}/${subKey}`"
+              :class="{ disabled: !countByCAT(key, subKey) }">
               {{ item.name }} {{ subKey }}
-              <!-- <span v-if="products">({{ catNumMap[key].num }})</span> -->
+              <span>
+                ({{ countByCAT(key, subKey) }})
+              </span>
+
+
 
             </router-link>
           </li>
@@ -45,6 +50,20 @@ export default {
     }
   },
   methods: {
+    countByCAT(cat, subCat) {
+
+      if (cat && subCat) {
+        if (this.catNumMap[cat].sub_category[subCat] && this.catNumMap[cat].sub_category[subCat].num) {
+          return this.catNumMap[cat].sub_category[subCat].num
+        }
+      }
+      if (cat) {
+        if (this.catNumMap[cat] && this.catNumMap[cat].num) {
+          return this.catNumMap[cat].num
+        }
+      }
+      return 0
+    },
     sumProductsCAT(products) {
       this.catNumMap = {};
       let obj = JSON.parse(JSON.stringify(categories))
@@ -61,6 +80,19 @@ export default {
               if (obj[cat]) {
                 // console.log("cat", cat, "obj[cat].num", obj[cat].num)
                 obj[cat].num = (obj[cat].num ? obj[cat].num : 0) + 1
+              }
+
+            } else {
+              let catArr = cat.split('/')
+              if (catArr.length == 2) {
+                let cat = catArr[0];
+                if (obj[cat]) {
+                  obj[cat].num = (obj[cat].num ? obj[cat].num : 0) + 1
+                }
+                let subCat = catArr[1];
+                if (obj[cat].sub_category[subCat]) {
+                  obj[cat].sub_category[subCat].num = (obj[cat].sub_category[subCat].num ? obj[cat].sub_category[subCat].num : 0) + 1
+                }
               }
 
             }
