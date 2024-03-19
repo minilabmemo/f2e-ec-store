@@ -12,6 +12,9 @@
 - [x] New Arrival 顯示 New 分類商品，未獲取到資料則顯示 coming soon 圖示及預設商品名稱。
 - [x] Just For You 隨機顯示 Hot 分類商品，未獲取到資料則顯示 coming soon 圖示。
 - [x] 獲取資料中則商品名稱會顯示 Loading
+
+### network
+
 - [ ] 如果出現後端錯誤 ex: 404 則彈出視窗告知，確定仍可繼續瀏覽。
 
 ### 商品列表

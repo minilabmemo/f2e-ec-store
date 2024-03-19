@@ -1,63 +1,107 @@
-export class Category {
+export interface Category {
   [key: string]: CategoryItem;
 }
 
 
 export interface CategoryItem {
-  category: string;
+  key: string;
   name: string;
-  list: string[];
-  path?: string;
+  sub_category?:SubCategory;
 }
-
+export interface SubCategory {
+  [key: string]: SunCategoryItem;
+}
+export interface SunCategoryItem {
+  key: string;
+  name: string;
+  
+}
 
 const categories :Category= {
   all: {
-    category:"all",
+    key:"all",
     name: "全部",
-    list: [],
+
 
   },
   hot: {
-    category:"hot",
+    key:"hot",
     name: "熱銷",
-    list: [],
+
   
   },
   new: {
-    category:"new",
+    key:"new",
     name: "新商品",
-    list: []
+  
   },
   upper: {
-    category:"upper",
+    key:"upper",
     name: "上衣",
-    list: ["長袖", "五分袖", "襯衫"]
+    sub_category: 
+    {
+      long: {
+      key:"long",
+      name: "長袖",
+    
+    },  
+    shirt: {
+      key:"shirt",
+      name: "襯衫",
+    }}
   },
   skirt: {
-    category:"skirt",
+    key:"skirt",
     name: "裙子",
-    list: ["長裙", "短裙", "中長裙"]
+    sub_category: 
+    {
+      long: {
+      key:"long",
+      name: "長裙",
+    
+    },  
+    short: {
+      key:"short",
+      name: "短裙",
+    }}
   },
   pants: {
-    category:"pants",
+    key:"pants",
     name: "褲子",
-    list: ["長褲", "短褲", "五分褲"]
+    sub_category: 
+    {
+      long: {
+      key:"long",
+      name: "長褲",
+    
+    },  
+    short: {
+      key:"short",
+      name: "短褲",
+    }}
   },
   coat: {
-    category:"coat",
+    key:"coat",
     name: "外套",
-    list: ["冬天外套", "薄外套", "小外套"]
+    sub_category: 
+    {
+      knitted: {
+      key:"knitted",
+      name: "針織外套",
+    
+    },  
+    thin: {
+      key:"thin",
+      name: "薄外套",
+    }}
   },
   accessories: {
-    category:"accessories",
+    key:"accessories",
     name: "配件",
-    list: []
   },
   styles: {
-    category:"styles",
+    key:"styles",
     name: "Styles",
-    list: []
   }
 };
 

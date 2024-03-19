@@ -29,8 +29,9 @@
       <div class="  border-bottom   "></div>
       <HomeNav></HomeNav>
     </header>
-
-    <RouterView />
+    <div class="container">
+      <RouterView />
+    </div>
     <footer class="bg-orange-100 container-fluid p-5 text-gray-500 ">
       <div class="container">
         <div class=" row d-flex justify-content-center ">

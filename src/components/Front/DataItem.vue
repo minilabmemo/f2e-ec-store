@@ -38,6 +38,7 @@ export default {
   props: {
     filterErr: String,
     item: {title: "no name"},
+
   },
   inject: ["status"],
   created() {

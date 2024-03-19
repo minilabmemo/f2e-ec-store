@@ -2,7 +2,7 @@
   <section class="d-flex flex-column align-items-center ">
     <h1 class=" ">{{ section }}</h1>
     <div class="row">
-      <DataItem v-for="(item, index) in items" :key="index" :item="item" class="col-4" :filter-err="filterErr">
+      <DataItem v-for="(item, index) in showItems" :key="index" :item="item" class="col-4" :filter-err="filterErr">
       </DataItem>
     </div>
     <div class="d-flex justify-content-center gap-3">
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       filterErr: "",
-      items: {
+      showItems: {
         1: {
           title: `${this.CAT === categories.new.name ? "韓國熱銷 ONLINE - 新品 12/25" : ""}`, src: coming1, color: "orange",
         },
@@ -50,7 +50,7 @@ export default {
       }
       console.log("products", previewItem)
       if (previewItem.length !== 0) {
-        this.items = previewItem.map(item => ({
+        this.showItems = previewItem.map(item => ({
           title: item.title,
           src: item.imageUrl,
 

@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeLayout from '../views/HomeLayout.vue'
 import { useFavicon } from "@vueuse/core";
 const icon = useFavicon();
 const shopFavIcon="logo_favicon.ico"
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
@@ -20,11 +20,16 @@ const router = createRouter({
           path: '',
           component: () => import('../views/HomeBody.vue'),
           meta: {icon:`../${shopFavIcon}` },
+        },  {
+          name:"ProductsByCAT",
+          path: 'product/:category',
+          component: () => import('../views/ProductsByCAT.vue'),
+          meta: {icon:`../${shopFavIcon}` },
         },
         {
-          name:"UserCart",
-          path: 'product/:category',
-          component: () => import('../views/UserCart.vue'),
+          name:"ProductsByCATlist",
+          path: 'product/:category/:subcategory',
+          component: () => import('../views/ProductsByCAT.vue'),
           meta: {icon:`../${shopFavIcon}` },
         },
       ],
