@@ -52,7 +52,7 @@ export default {
       filterErr: "",
     }
   },
-  mixins: [getAllProducts],//TODO layout & cat get twice?? & home get three time
+  mixins: [getAllProducts],//TODO layout & cat get twice?? 
   computed: {
 
     category_name() {
