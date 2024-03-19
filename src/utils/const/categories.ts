@@ -101,7 +101,7 @@ const categories :Category= {
   },
   styles: {
     key:"styles",
-    name: "Styles",
+    name: "Style",
   }
 };
 

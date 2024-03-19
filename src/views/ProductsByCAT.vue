@@ -1,6 +1,6 @@
 <template>
   <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
-  <div class="row" v-if="!status.isLoading">
+  <div class="row">
     <div class="col-3">
 
       <CATNav :products="products"></CATNav>
@@ -21,8 +21,13 @@
       </div>
 
       <div class="row">
+
         <SaleItem v-for="(item, index) in filterItems" :key="index" :item="item" class="col-4">
         </SaleItem>
+        <div class="col-6 " v-if="!filterItems.length">
+          <img src="@/assets/images/design/empty200.png" alt="empty200" class="img-fluid ">
+        </div>
+
       </div>
     </div>
 
@@ -59,7 +64,6 @@ export default {
       return categories[this.$route.params.category] ? categories[this.$route.params.category].name : ''
     },
     sub_category_name() {
-
       if (
         categories[this.$route.params.category]?.sub_category &&
         categories[this.$route.params.category].sub_category[this.$route.params.subcategory]
@@ -69,9 +73,9 @@ export default {
       return ""
     },
     filterItems() {
-      console.warn("filterItem filterItem", this.products)
+
       let itemByCAT = []
-      console.log("his.$route.params.category", this.$route.params.category)
+
       switch (this.$route.params.category) {
         case 'all':
           itemByCAT = this.products.filter((item) => !item.category.toString().includes('test'));
@@ -83,21 +87,19 @@ export default {
       }
       switch (this.$route.params.subcategory) {
         case 'all':
-
           break;
-
         default:
-          itemByCAT = this.products.filter((item) => item.category.toString().includes(this.$route.params.subcategory));
+          itemByCAT = this.products.filter((item) => item.category.toString().includes(this.$route.params.category));
+          itemByCAT = itemByCAT.filter((item) => item.category.toString().includes(this.$route.params.subcategory));
           break;
       }
-      // if (this.$route.params.subcategory) {
-      //   itemByCAT = this.products.filter((item) => item.category.toString().includes(this.$route.params.subcategory));
-      // }
-      console.log("itemByCAT", itemByCAT)
+
+      //  console.log("itemByCAT", itemByCAT)
       if (itemByCAT.length !== 0) {
         return itemByCAT.map(item => ({
           title: item.title,
           src: item.imageUrl,
+          ...item
 
         }));
       }
@@ -110,68 +112,5 @@ export default {
       this.getAllData()
     }
   },
-  updated() {
-    // console.warn("updated", this.$)
-    // this.getAllData()
-  },
-  // methods: {
-  //   filterItem(products) {
-  //     console.log("watch products", products)
-  //     let itemByCAT = []
-  //     console.log("his.$route.params.category", this.$route.params.category)
-  //     switch (this.$route.params.category) {
-  //       case 'all':
-  //         itemByCAT = products.filter((item) => !item.category.toString().includes('test'));
-  //         console.log("all", itemByCAT)
-  //         break;
-  //       default:
-  //         itemByCAT = products.filter((item) => item.category.toString().includes(this.$route.params.category));
-  //         break;
-  //     }
-  //     if (this.$route.params.subcategory) {
-  //       itemByCAT = this.products.filter((item) => item.category.toString().includes(this.$route.params.subcategory));
-  //     }
-  //     console.log("itemByCAT", itemByCAT)
-  //     if (itemByCAT.length !== 0) {
-  //       this.filterItems = itemByCAT.map(item => ({
-  //         title: item.title,
-  //         src: item.imageUrl,
-
-  //       }));
-  //     } else {
-  //       this.filterItems = []
-  //       this.filterErr = "無此商品分類"
-  //     }
-
-  //   }
-  // },
-  // created() {
-  //   console.warn("created p")
-  //   let newVal = this.products;
-  //   this.filterItem(newVal);
-  // },
-  // watch: {
-  //   products: {
-  //     handler(newVal, oldVal) {
-  //       this.filterItem(newVal);
-  //     },
-  //     immediate: true // 立即執行一次
-  //   },
-  //   sub_category_name:{
-  //     handler(newVal, oldVal) {
-  //       this.filterItem(newVal);
-  //     },
-  //   }
-  // },
-  // watch: {
-  //   page_category() {
-  //     this.filterItem();
-  //   },
-  //   page_category_sub() {
-  //     this.filterItem();
-  //   },
-  // },
-
-
 }
 </script>

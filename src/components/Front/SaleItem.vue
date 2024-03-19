@@ -7,16 +7,16 @@
 
 
 
-    <div>
-
-
-
-      {{ item.title }}
-
-
+    <div class="text-center ">
+      <h4> {{ item.title }}</h4>
+      <div class="d-flex gap-2 justify-content-center  align-items-center ">
+        <span class="text-300"> <del>${{ item.origin_price }}</del></span>
+        <span class="price me-4 ">${{ item.price }}</span>
+      </div>
     </div>
 
-    <div class="price"></div>
+
+
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
 
 .rwd-image {
   object-fit: cover;
-  aspect-ratio: 2/3;
+  aspect-ratio: 3/4;
   width: 100%;
   height: auto;
 }
