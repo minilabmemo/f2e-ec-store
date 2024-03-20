@@ -15,10 +15,10 @@
           <div class="d-flex">
             <img src="@/assets/icons/save.svg" alt="save">
             <img src="@/assets/icons/split.svg" alt="split">
-            <div class="d-flex gap-2 ">
+            <div class="d-flex gap-2 justify-content-center  align-items-center ">
               <img src="@/assets/icons/cart.svg" alt="cart">
-              <span class="bg-black text-white px-1 py-0 align-middle  ">0</span>
-              <!-- TODO -->
+              <span class="bg-black text-white px-2 py-0  rounded-1  "> {{ cartTotalQty }}</span>
+              <!-- TODO show tooltip-->
             </div>
             <img src="@/assets/icons/split.svg" alt="split">
             <img src="@/assets/icons/person.svg" alt="person">
@@ -64,11 +64,12 @@
   </div>
 </template>
 
-<!-- TODO cart num-->
+
 
 <script>
 
 import categories from '@/utils/const/categories'
+import getCart from '@/utils/mixins/getCart';
 
 import HomeNav from '@/components/Front/HomeNav.vue';
 
@@ -78,10 +79,24 @@ export default {
   data() {
     return {
       categories: categories,
-
+      cartTotalQty: 0,
 
     }
   },
+  mixins: [getCart],
+  created() {
+    this.getCart();
+  },
+  watch: {
+    cart(newCart, oldCart) {
+      console.log("watch cart", newCart);
+      if (newCart.carts) {
+        newCart.carts.forEach(element => {
+          this.cartTotalQty = this.cartTotalQty + element.qty
+        });
+      }
+    }
+  }
 
 
 }
