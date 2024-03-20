@@ -95,7 +95,7 @@ import {userProductApi, userCartApi} from '@/utils/const/path'
 import categories from '@/utils/const/categories'
 import AddCartConfirm from '@/components/Front/modal/AddCartConfirm.vue';
 export default {
-  inject: ['httpMessageState', 'dataCart'],
+  inject: ['httpMessageState', 'dataCart', 'emitter'],
   components: {AddCartConfirm},
   data() {
     return {
@@ -176,8 +176,8 @@ export default {
         if (redirect) {
           this.goToCart();
         } else {
-          //TODO 觸發父組間更新
-
+          //觸發購物車數量更新
+          this.emitter.emit('update-cartQty');
         }
 
       });

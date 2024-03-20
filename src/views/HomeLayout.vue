@@ -17,7 +17,14 @@
             <img src="@/assets/icons/split.svg" alt="split">
             <div class="d-flex gap-2 justify-content-center  align-items-center ">
               <img src="@/assets/icons/cart.svg" alt="cart">
-              <span class="bg-black text-white px-2 py-0  rounded-1  "> {{ cartTotalQty }}</span>
+              <div class="bg-black text-white px-2 py-0  rounded-1  ">
+                <span v-if="!isGetCartLoading">{{ cartTotalQty }}</span>
+
+                <div v-else class="spinner-border spinner-border-sm" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
+
               <!-- TODO show tooltip-->
             </div>
             <img src="@/assets/icons/split.svg" alt="split">
@@ -70,12 +77,23 @@
 
 import categories from '@/utils/const/categories'
 import getCart from '@/utils/mixins/getCart';
-
 import HomeNav from '@/components/Front/HomeNav.vue';
-
 import {computed} from 'vue'
+import emitter from "@/utils/methods/emitter";
 export default {
   components: {HomeNav, },
+  provide() {
+    return {
+      emitter,
+      dataCart: computed(() => this.cart)
+    };
+  },
+  mounted() {
+    emitter.on('update-cartQty', () => {
+      this.getCart();
+    });
+  },
+
   data() {
     return {
       categories: categories,
@@ -84,18 +102,14 @@ export default {
     }
   },
   mixins: [getCart],
-  provide() {
-    return {
-      dataCart: computed(() => this.cart)
-    };
-  },
+
   created() {
     this.getCart();
   },
   watch: {
     cart(newCart, oldCart) {
       console.log('watch newCart', newCart);
-
+      this.cartTotalQty = 0;
       if (newCart.carts) {
         newCart.carts.forEach(element => {
           this.cartTotalQty = this.cartTotalQty + element.qty
