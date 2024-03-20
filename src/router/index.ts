@@ -33,7 +33,7 @@ const router = createRouter({
             {
               name:"ProductsByID",
               path: 'id/:productId',
-              component: () => import('../views/UserProduct.vue'),
+              component: () => import('../views/ProductByID.vue'),
             }
           ]
         },
@@ -79,7 +79,7 @@ const router = createRouter({
         },
         {
           path: 'product/:productId',
-          component: () => import('../views/UserProduct.vue'),
+          component: () => import('../views/ProductByID.vue'),
         },
         {
           path: 'checkout/:orderId',

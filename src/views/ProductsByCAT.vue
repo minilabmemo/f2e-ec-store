@@ -1,18 +1,18 @@
 <template>
   <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
 
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><router-link :to="`/product/${$route.params.category}/all`"> {{ category_name
+          }}</router-link>
+      </li>
+      <li v-if="sub_category_name" class="breadcrumb-item ">
+        <router-link :to="`/product/${$route.params.category}/${$route.params.subcategory}`"> {{ sub_category_name
+          }}</router-link>
+      </li>
+    </ol>
+  </nav>
 
-  <div class="bread my-2 d-flex ">
-    <span>首頁</span>
-    <img src="@/assets/icons/Forward.svg" alt="Forward">
-    {{ category_name }}
-    <div v-show="sub_category_name">
-      <img src="@/assets/icons/Forward.svg" alt="Forward">
-      {{ sub_category_name }}
-
-    </div>
-
-  </div>
 
   <div class="row">
 
