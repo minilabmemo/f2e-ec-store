@@ -94,6 +94,8 @@ export default {
   },
   watch: {
     cart(newCart, oldCart) {
+      console.log('watch newCart', newCart);
+
       if (newCart.carts) {
         newCart.carts.forEach(element => {
           this.cartTotalQty = this.cartTotalQty + element.qty

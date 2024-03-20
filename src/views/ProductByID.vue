@@ -50,13 +50,14 @@
               </div>
             </div>
             <div class="row gap-3 ">
-              <button type="button" class="col-3 btn btn-outline-danger" @click="addOrGoToCart(product.id, itemQty)">
+              <button type="button" class="col-3 btn btn-outline-danger" @click="checkQty(product.id, itemQty)">
                 立即結帳
               </button>
-              <button type="button" class="col-3 btn btn-outline-danger" @click="addToCart(product.id, itemQty)">
+              <button type="button" class="col-3 btn btn-outline-danger" @click="addToCart(product.id, itemQty, false)"
+                :class="{ disabled: isCartLoading }">
                 加到購物車
               </button>
-              <button type="button" class="col-3 btn btn-outline-dark " @click="addToCart(product.id, itemQty)">
+              <button type="button" class="col-3 btn btn-outline-dark " @click="saveProduct(product.id)">
                 加入收藏
               </button>
             </div>
@@ -85,7 +86,8 @@
       <img :src="product.imageUrl" alt="" class="img-fluid  col-6">
     </div>
   </div>
-  <AddCartConfirm :item="tempOrder" ref="AddCartConfirm" @del-item="delOrder"></AddCartConfirm>
+  <AddCartConfirm :item="{ title: product.title, qty: itemQty }" ref="AddCartConfirm"
+    @add-item="addToCart(product.id, itemQty, true)" @go-carts="goToCart"></AddCartConfirm>
 </template>
 
 <script>
@@ -101,7 +103,8 @@ export default {
       id: '',
       categories: categories,
       itemQty: 1,
-      recordCart: {}
+      isCartLoading: false
+
     };
   },
   computed: {
@@ -131,9 +134,13 @@ export default {
         }
       });
     },
-
-
-    addOrGoToCart(id, qty = 1) {
+    saveProduct() {
+      //TODO
+    },
+    goToCart() {
+      this.$router.push('/user/cart');
+    },
+    checkQty(id, qty = 1) {
       let confirmAddCart = false;
       if (this.dataCart.carts) {
         this.dataCart.carts.forEach(element => {
@@ -146,20 +153,33 @@ export default {
       }
       if (confirmAddCart) {
         console.error('已有相同物品。');
+        const confirmModal = this.$refs.AddCartConfirm;
+        confirmModal.showModal();
+      } else {
+        this.goToCart();
       }
     },
 
-    addToCart(id, qty = 1) {
+    addToCart(id, qty = 1, redirect = false) {
       const url = `${userCartApi}`;
       const cart = {
         product_id: id,
         qty,
       };
+      console.log('this.isLoading', this.isLoading);
       this.isLoading = true;
+      this.isCartLoading = true;
       this.$http.post(url, {data: cart}).then((response) => {
         this.isLoading = false;
+        this.isCartLoading = false;
         this.httpMessageState(response, '加入購物車');
-        this.$router.push('/user/cart');
+        if (redirect) {
+          this.goToCart();
+        } else {
+          //TODO 觸發父組間更新
+
+        }
+
       });
     },
   },

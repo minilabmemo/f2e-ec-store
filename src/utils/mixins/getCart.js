@@ -13,7 +13,6 @@ export default {
   methods: {
     getCart() {
       const url = `${userCartApi}`;
-
       this.status.isLoading = true;
       this.$http.get(url).then((response) => {
         if (response.data.success) {
