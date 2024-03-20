@@ -50,14 +50,14 @@
               </div>
             </div>
             <div class="row gap-3 ">
-              <button type="button" class="col-3 btn btn-outline-danger" @click="addToCart(product.id, itemQty)">
+              <button type="button" class="col-3 btn btn-outline-danger" @click="addOrGoToCart(product.id, itemQty)">
                 立即結帳
               </button>
               <button type="button" class="col-3 btn btn-outline-danger" @click="addToCart(product.id, itemQty)">
                 加到購物車
               </button>
               <button type="button" class="col-3 btn btn-outline-dark " @click="addToCart(product.id, itemQty)">
-                加到購物車
+                加入收藏
               </button>
             </div>
 
@@ -85,19 +85,23 @@
       <img :src="product.imageUrl" alt="" class="img-fluid  col-6">
     </div>
   </div>
+  <AddCartConfirm :item="tempOrder" ref="AddCartConfirm" @del-item="delOrder"></AddCartConfirm>
 </template>
 
 <script>
 import {userProductApi, userCartApi} from '@/utils/const/path'
 import categories from '@/utils/const/categories'
+import AddCartConfirm from '@/components/Front/modal/AddCartConfirm.vue';
 export default {
-  inject: ['httpMessageState'],
+  inject: ['httpMessageState', 'dataCart'],
+  components: {AddCartConfirm},
   data() {
     return {
       product: {},
       id: '',
       categories: categories,
       itemQty: 1,
+      recordCart: {}
     };
   },
   computed: {
@@ -114,18 +118,37 @@ export default {
       return ""
     },
   },
+
   methods: {
     getProduct() {
       const api = `${userProductApi}/${this.id}`;
       this.isLoading = true;
       this.$http.get(api).then((response) => {
-        console.log(response.data);
+
         this.isLoading = false;
         if (response.data.success) {
           this.product = response.data.product;
         }
       });
     },
+
+
+    addOrGoToCart(id, qty = 1) {
+      let confirmAddCart = false;
+      if (this.dataCart.carts) {
+        this.dataCart.carts.forEach(element => {
+          if (element.product_id === this.id) {
+
+            confirmAddCart = true;
+          }
+        });
+
+      }
+      if (confirmAddCart) {
+        console.error('已有相同物品。');
+      }
+    },
+
     addToCart(id, qty = 1) {
       const url = `${userCartApi}`;
       const cart = {
@@ -143,6 +166,8 @@ export default {
   created() {
     this.id = this.$route.params.productId;
     this.getProduct();
+
   },
+
 };
 </script>

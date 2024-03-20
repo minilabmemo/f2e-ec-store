@@ -73,30 +73,34 @@ import getCart from '@/utils/mixins/getCart';
 
 import HomeNav from '@/components/Front/HomeNav.vue';
 
-
+import {computed} from 'vue'
 export default {
   components: {HomeNav, },
   data() {
     return {
       categories: categories,
       cartTotalQty: 0,
-
+      cart: {}
     }
   },
   mixins: [getCart],
+  provide() {
+    return {
+      dataCart: computed(() => this.cart)
+    };
+  },
   created() {
     this.getCart();
   },
   watch: {
     cart(newCart, oldCart) {
-      console.log("watch cart", newCart);
       if (newCart.carts) {
         newCart.carts.forEach(element => {
           this.cartTotalQty = this.cartTotalQty + element.qty
         });
       }
     }
-  }
+  },
 
 
 }
