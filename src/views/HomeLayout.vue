@@ -17,7 +17,7 @@
             <img src="@/assets/icons/save.svg" alt="save">
             <img src="@/assets/icons/split.svg" alt="split">
             <div class="d-flex gap-2 justify-content-center  align-items-center ">
-              <router-link to="/product/cart">
+              <router-link to="/product/cart" class="nav-link ">
                 <div class="d-flex gap-2 justify-content-center  align-items-center ">
                   <img src="@/assets/icons/cart.svg" alt="cart">
                   <div class="bg-black text-white px-2 py-0  rounded-1  ">

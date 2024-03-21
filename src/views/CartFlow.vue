@@ -28,23 +28,20 @@
           <ProductCart @go-next="goNextTab"></ProductCart>
         </div>
         <div class="tab-pane fade" :id="tabsInfo[1].id" role="tabpanel" :aria-labelledby="`${tabsInfo[1].id}-tab`">
-          <OrderInfo @go-next="goNextTab"></OrderInfo>
+          <OrderInfo @go-next="goNextTab" @order-create="updateOrderID"></OrderInfo>
         </div>
-        <div class="tab-pane fade" :id="tabsInfo[2].id" role="tabpanel" :aria-labelledby="`${tabsInfo[2].id}-tab`">...
+        <div class="tab-pane fade" :id="tabsInfo[2].id" role="tabpanel" :aria-labelledby="`${tabsInfo[2].id}-tab`">
+          <OrderByID :orderId="orderId"></OrderByID>
         </div>
       </div>
 
       <div class="d-flex justify-content-end " v-if="activeTab === 0">
 
-        <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all"> 繼續購物</router-link>
+        <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
+            繼續購物</router-link>
         </button>
       </div>
-      <div class="d-flex justify-content-between" v-if="activeTab === 1">
-        <div></div>
 
-        <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all"> 繼續購物</router-link>
-        </button>
-      </div>
 
     </div>
 
@@ -56,11 +53,14 @@
 import Tab from 'bootstrap/js/dist/tab';
 import ProductCart from '@/components/user/ProductCart.vue';
 import OrderInfo from '@/components/user/OrderInfo.vue';
+import OrderByID from '@/components/user/OrderByID.vue';
+
 export default {
   inject: ['httpMessageState'],
-  components: {ProductCart, OrderInfo},
+  components: {ProductCart, OrderInfo, OrderByID},
   data() {
     return {
+      orderId: "",
       products: [],
       activeTab: 0,
       tabsInfo: [{
@@ -81,6 +81,10 @@ export default {
       let nextSelector = `#${this.tabsInfo[this.activeTab + 1].id}`
       var triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${nextSelector}"]`)
       Tab.getInstance(triggerEl).show()
+
+    },
+    updateOrderID(orderID) {
+      this.orderId = orderID
     }
   },
 

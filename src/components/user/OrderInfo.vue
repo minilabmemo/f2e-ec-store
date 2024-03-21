@@ -68,9 +68,9 @@ export default {
       const order = this.form;
       this.$http.post(url, {data: order})
         .then((res) => {
-          console.log(res);//TODO
-          console.log(res.data.orderId);
+          this.$emit('order-create', res.data.orderId);
           this.$emit('go-next');
+
         });
     },
   },
