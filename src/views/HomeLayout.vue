@@ -17,19 +17,35 @@
             <img src="@/assets/icons/save.svg" alt="save">
             <img src="@/assets/icons/split.svg" alt="split">
             <div class="d-flex gap-2 justify-content-center  align-items-center ">
-              <img src="@/assets/icons/cart.svg" alt="cart">
-              <div class="bg-black text-white px-2 py-0  rounded-1  ">
-                <span v-if="!isGetCartLoading">{{ cartTotalQty }}</span>
+              <router-link to="/product/cart">
+                <div class="d-flex gap-2 justify-content-center  align-items-center ">
+                  <img src="@/assets/icons/cart.svg" alt="cart">
+                  <div class="bg-black text-white px-2 py-0  rounded-1  ">
+                    <span v-if="!isGetCartLoading">{{ cartTotalQty }}</span>
 
-                <div v-else class="spinner-border spinner-border-sm" role="status">
-                  <span class="visually-hidden">Loading...</span>
+                    <div v-else class="spinner-border spinner-border-sm" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <!-- TODO show tooltip-->
+              </router-link>
             </div>
+
+            <!-- TODO show tooltip-->
+
             <img src="@/assets/icons/split.svg" alt="split">
-            <img src="@/assets/icons/person.svg" alt="person">
+
+            <div class="dropdown">
+              <button class="btn      dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
+                <img src="@/assets/icons/person.svg" alt="person">
+              </button>
+              <div class="dropdown-menu dropdown-menu-dark " aria-labelledby="dropdownMenuButton">
+                <router-link class="dropdown-item" to="/user/orders">查詢訂單</router-link>
+                <li> <a class="dropdown-item" href="#">會員資料</a></li>
+
+              </div>
+            </div>
 
           </div>
         </div>
@@ -83,6 +99,7 @@ import HomeNav from '@/components/user/HomeNav.vue';
 import {computed} from 'vue'
 import emitter from "@/utils/methods/emitter";
 import ToastMessages from '@/components/ToastMessages.vue';
+import Dropdown from 'bootstrap/js/dist/Dropdown';
 export default {
   components: {HomeNav, ToastMessages},
   provide() {
@@ -95,6 +112,10 @@ export default {
     emitter.on('update-cartQty', () => {
       this.getCart();
     });
+    var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+    var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+      return new Dropdown(dropdownToggleEl)
+    })
   },
 
   data() {

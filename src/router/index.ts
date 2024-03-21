@@ -44,6 +44,12 @@ const router = createRouter({
           component: () => import('../views/CartFlow.vue'),
           meta: {icon:`../${shopFavIcon}` },
         }, 
+        {
+          name:"UserOrders",
+          path: 'user/orders',
+          component: () => import('../views/UserOrders.vue'),
+          meta: {icon:`../${shopFavIcon}` },
+        }, 
       ],
     },
     {

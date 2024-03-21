@@ -19,4 +19,5 @@ export const userProductApi=`${baseApi}product`;
 export const userCartApi=`${baseApi}cart`;
 export const userCouponApi=`${baseApi}coupon`;
 export const userOrderApi=`${baseApi}order`;
+export const userOrdersApi=`${baseApi}orders`;
 export const userOrderPayApi=`${baseApi}pay`;
