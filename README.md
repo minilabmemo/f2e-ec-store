@@ -6,7 +6,7 @@
 
 - 串接六角 API 進行商品購物管理
 
-  - 後臺管理（需登入）：http://localhost:5173/#/dashboard/products/
+  - 後臺管理（需登入）：http://localhost:5173/#/admin/dashboard/products/
   - 前台網站（免登入）：http://localhost:5173/
 
 - 功能請見：[Feature_Design](./Feature_Design.md)

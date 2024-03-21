@@ -2,7 +2,7 @@
 
 describe('Login Test', () => {
   it('visits the product,need login and check failed.', () => {
-    cy.visit('/dashboard/products')
+    cy.visit('/admin/dashboard/products')
     cy.url().should('contain', '/login');
     cy.get('#inputEmail').type('john_doe');
     cy.get('#inputPassword').type('password123');

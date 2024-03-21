@@ -43,7 +43,7 @@ export default {
           const {token, expired} = response.data;
           document.cookie = `defToken=${token}; expires=${new Date(expired)}`;
           console.log(response.data)
-          this.$router.push('/dashboard/products')
+          this.$router.push('/admin/dashboard/products')
         }
 
       })

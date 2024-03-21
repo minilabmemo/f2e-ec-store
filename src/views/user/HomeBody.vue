@@ -5,10 +5,10 @@
     <HomeBanner></HomeBanner>
     <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
 
-    <HomeItems section="NEW ARRIVAL" :CAT="categories.new.category" :products="products"></HomeItems>
+    <HomeItems section="NEW ARRIVAL" :CAT="categories.new.key" :products="products"></HomeItems>
 
     <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
-    <HomeItems section="JUST FOR YOU" :CAT="categories.hot.category" :products="products"></HomeItems>
+    <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products"></HomeItems>
     <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
     <div class="row g-5 ">
       <div class="col-4"><img src="@/assets/images/design/d1.png" alt="discount"></div>
@@ -38,7 +38,6 @@
 
 </template>
 
-<!-- TODO cart num-->
 
 <script>
 
@@ -52,11 +51,6 @@ export default {
     return {
       categories: categories,
       products: [],
-      status: {
-        isLoading: false,
-        error: ""
-      }
-
     }
   },
   provide() {
@@ -74,4 +68,4 @@ export default {
 .h-shadow {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
 }
-</style>@/utils/mixins/getAllProducts
+</style>

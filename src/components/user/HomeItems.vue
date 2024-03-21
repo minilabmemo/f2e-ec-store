@@ -32,23 +32,25 @@ export default {
       filterErr: "",
       showItems: {
         1: {
-          title: `${this.CAT === categories.new.name ? "韓國熱銷 ONLINE - 新品 12/25" : ""}`, src: coming1, color: "orange",
+          title: `${this.CAT === categories.new.key ? "韓國熱銷 ONLINE - 新品 12/25" : ""}`, src: coming1, color: "orange",
         },
         2: {
-          title: `${this.CAT === categories.new.name ? "秋冬時裝 - 最新流行色" : ""}`, src: coming2, color: "secondary",
+          title: `${this.CAT === categories.new.key ? "秋冬時裝 - 最新流行色" : ""}`, src: coming2, color: "secondary",
         },
-        3: {title: `${this.CAT === categories.new.name ? "針織罩衫系列 - 簡約氣質" : ""}`, src: coming3, color: "gray", },
+        3: {title: `${this.CAT === categories.new.key ? "針織罩衫系列 - 簡約氣質" : ""}`, src: coming3, color: "gray", },
       }
     }
   },
   watch: {
-    products(n, o) {
+    products(newProducts, o) {
+      console.log("watch newProducts", newProducts)
       let previewItem = [];
-      let newProducts = this.products.filter((item) => item.category === this.CAT)
-      if (newProducts.length >= 3) {
-        previewItem = newProducts.slice(0, 3);
+      let filterProducts = newProducts.filter((item) => item.category.toString().includes(this.CAT))
+
+      if (filterProducts.length >= 3) {
+        previewItem = filterProducts.slice(0, 3);
       }
-      console.log("products", previewItem)
+      console.log("watch products", previewItem)
       if (previewItem.length !== 0) {
         this.showItems = previewItem.map(item => ({
           title: item.title,

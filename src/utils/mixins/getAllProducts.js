@@ -4,8 +4,8 @@ export default {
   data() {
     return {
       products: {},
+      isLoading: false,
       status: {
-        isLoading: false,
         error: ""
       },
     };
@@ -13,18 +13,17 @@ export default {
   methods: {
     getAllData() {
       const url = userProductsApi;
-      this.status.isLoading = true;
+      this.isLoading = true;
       this.axios.get(url).then((response) => {
-        this.status.isLoading = false;
+        this.isLoading = false;
         if (response.data.success) {
           this.products = response.data.products
-          console.log("getAllData products", this.products)//TODO remove
         } else {
-          this.status.error = "取得資料失敗，請稍後再重新載入。";
+          this.error = "取得資料失敗，請稍後再重新載入。";
           console.log("err:", response.data)//TODO remove
         }
       }).catch((err) => {
-        this.status.isLoading = false;
+        this.isLoading = false;
         this.status.error = "取得資料錯誤，請稍後再重新載入。"; //TODO 錯誤集中
         console.log("err:", err)
 

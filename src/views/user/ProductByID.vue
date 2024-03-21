@@ -138,7 +138,7 @@ export default {
       //TODO
     },
     goToCart() {
-      this.$router.push('/product/cart');
+      this.$router.push('/user/cartflow');
     },
     checkQty(id, qty = 1) {
       let confirmAddCart = false;

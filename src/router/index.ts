@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeLayout from '../views/HomeLayout.vue'
+import HomeLayout from '../views/user/HomeLayout.vue'
 import { useFavicon } from "@vueuse/core";
 const icon = useFavicon();
 const shopFavIcon="logo_favicon.ico"
@@ -18,36 +18,36 @@ const router = createRouter({
         {
           name:"HomeBody",
           path: '',
-          component: () => import('../views/HomeBody.vue'),
+          component: () => import('../views/user/HomeBody.vue'),
           meta: {icon:`../${shopFavIcon}` },
         },  
         
         {
           path: 'product/:category/:subcategory',
-          component: () => import('../views/ProductsLayout.vue'),
+          component: () => import('../views/user/ProductsLayout.vue'),
           children:[
             {
               name:"ProductsByCAT",  
               path: '',
-              component: () => import('../views/ProductsByCAT.vue'),
+              component: () => import('../views/user/ProductsByCAT.vue'),
             },
             {
               name:"ProductsByID",
               path: 'id/:productId',
-              component: () => import('../views/ProductByID.vue'),
+              component: () => import('../views/user/ProductByID.vue'),
             }
           ]
         },
         {
-          name:"CartFlow",
-          path: 'product/cart',
-          component: () => import('../views/CartFlow.vue'),
+          name:"UserCartFlow",
+          path: 'user/cartflow',
+          component: () => import('../views/user/UserCartFlow.vue'),
           meta: {icon:`../${shopFavIcon}` },
         }, 
         {
           name:"UserOrders",
           path: 'user/orders',
-          component: () => import('../views/UserOrders.vue'),
+          component: () => import('../views/user/UserOrders.vue'),
           meta: {icon:`../${shopFavIcon}` },
         }, 
       ],
@@ -64,41 +64,28 @@ const router = createRouter({
       name: 'login',
       component: () => import('../views/Login.vue')
     },{
-      path: '/dashboard',
+      path: '/admin/dashboard',
       name: 'dashboard',
-      component: () => import('../views/Dashboard.vue'),
+      meta: {
+        title: '後台管理',
+       
+      },
+      component: () => import('../views/admin/Dashboard.vue'),
       children:[
         {
           path:'products',
-          component:()=>import('../views/Products.vue'),
+          component:()=>import('../views/admin/Products.vue'),
         } ,{
           path: 'orders',
-          component: () => import('../views/Orders.vue'),
+          component: () => import('../views/admin/Orders.vue'),
         },
         {
           path: 'coupons',
-          component: () => import('../views/Coupons.vue'),
+          component: () => import('../views/admin/Coupons.vue'),
         },
       ]
     },
-    {
-      path: '/user',
-      component: () => import('../views/Userboard.vue'),
-      children: [
-        {
-          path: 'cart',
-          component: () => import('../views/UserCart.vue'),
-        },
-        {
-          path: 'product/:productId',
-          component: () => import('../views/ProductByID.vue'),
-        },
-        {
-          path: 'checkout/:orderId',
-          component: () => import('../views/UserCheckout.vue'),
-        },
-      ],
-    },
+ 
   ]
 })
 router.afterEach((to) => {
