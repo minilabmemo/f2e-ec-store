@@ -15,7 +15,7 @@
 
 
 <script>
-import DataItem from '@/components/Front/DataItem.vue';
+import DataItem from '@/components/user/DataItem.vue';
 import coming1 from '@/assets/images/design/coming1.png';
 import coming2 from '@/assets/images/design/coming2.png';
 import coming3 from '@/assets/images/design/coming3.png';

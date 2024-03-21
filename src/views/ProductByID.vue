@@ -93,7 +93,7 @@
 <script>
 import {userProductApi, userCartApi} from '@/utils/const/path'
 import categories from '@/utils/const/categories'
-import AddCartConfirm from '@/components/Front/modal/AddCartConfirm.vue';
+import AddCartConfirm from '@/components/user/modal/AddCartConfirm.vue';
 export default {
   inject: ['httpMessageState', 'dataCart', 'emitter'],
   components: {AddCartConfirm},

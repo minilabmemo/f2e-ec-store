@@ -17,7 +17,7 @@
 <script>
 import getAllProducts from '@/utils/mixins/getAllProducts';
 import categories from '@/utils/const/categories'
-import CATNav from '@/components/Front/CATNav.vue'
+import CATNav from '@/components/user/CATNav.vue'
 
 export default {
   components: {CATNav},

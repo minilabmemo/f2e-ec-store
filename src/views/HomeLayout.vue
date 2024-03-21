@@ -79,7 +79,7 @@
 
 import categories from '@/utils/const/categories'
 import getCart from '@/utils/mixins/getCart';
-import HomeNav from '@/components/Front/HomeNav.vue';
+import HomeNav from '@/components/user/HomeNav.vue';
 import {computed} from 'vue'
 import emitter from "@/utils/methods/emitter";
 import ToastMessages from '@/components/ToastMessages.vue';

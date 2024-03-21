@@ -32,7 +32,7 @@
 <script>
 
 import Tab from 'bootstrap/js/dist/tab';
-import ProductCart from '@/components/Front/ProductCart.vue';
+import ProductCart from '@/components/user/ProductCart.vue';
 export default {
   inject: ['httpMessageState'],
   components: {ProductCart},

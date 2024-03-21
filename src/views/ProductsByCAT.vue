@@ -38,7 +38,7 @@
 <script>
 import getAllProducts from '@/utils/mixins/getAllProducts';
 import categories from '@/utils/const/categories'
-import SaleItem from '@/components/Front/SaleItem.vue';
+import SaleItem from '@/components/user/SaleItem.vue';
 export default {
   components: {SaleItem},
   data() {

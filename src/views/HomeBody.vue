@@ -43,8 +43,8 @@
 <script>
 
 import categories from '@/utils/const/categories'
-import HomeBanner from '@/components/Front/HomeBanner.vue';
-import HomeItems from '@/components/Front/HomeItems.vue';
+import HomeBanner from '@/components/user/HomeBanner.vue';
+import HomeItems from '@/components/user/HomeItems.vue';
 import getAllProducts from '@/utils/mixins/getAllProducts';
 export default {
   components: {HomeBanner, HomeItems},
