@@ -40,9 +40,9 @@
                 aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
                 <img src="@/assets/icons/person.svg" alt="person">
               </button>
-              <div class="dropdown-menu dropdown-menu-dark " aria-labelledby="dropdownMenuButton">
-                <router-link class="dropdown-item" to="/user/orders">查詢訂單</router-link>
-                <li> <a class="dropdown-item" href="#">會員資料</a></li>
+              <div class="dropdown-menu  " aria-labelledby="dropdownMenuButton">
+                <router-link class="dropdown-item text-800 " to="/user/orders">查詢訂單</router-link>
+                <li> <a class="dropdown-item text-800 " href="#">會員資料</a></li>
 
               </div>
             </div>
