@@ -1,8 +1,8 @@
 <template>
+  <!-- TODO 空間高度放大 -->
+  <div class="container ">
 
-  <div class="container">
-
-    <div class="row my-4">
+    <div class="row my-4 ">
       <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 
         <li class="nav-item" role="presentation">
@@ -25,24 +25,25 @@
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" :id="tabsInfo[0].id" role="tabpanel"
           :aria-labelledby="`${tabsInfo[0].id}-tab`">
-          <ProductCart></ProductCart>
+          <ProductCart @go-next="goNextTab"></ProductCart>
         </div>
         <div class="tab-pane fade" :id="tabsInfo[1].id" role="tabpanel" :aria-labelledby="`${tabsInfo[1].id}-tab`">
-          <UserCart></UserCart>
+          <OrderInfo @go-next="goNextTab"></OrderInfo>
         </div>
         <div class="tab-pane fade" :id="tabsInfo[2].id" role="tabpanel" :aria-labelledby="`${tabsInfo[2].id}-tab`">...
         </div>
       </div>
 
-      <div class="d-flex justify-content-between" v-if="activeTab === 0">
-        <div></div>
-        <button class="btn btn-primary text-white " type="button" @click="goOrder">確認，填寫訂單</button>
-        <button class="btn btn-outline-primary " type="button" @click="goOrder">繼續購物</button>
+      <div class="d-flex justify-content-end " v-if="activeTab === 0">
+
+        <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all"> 繼續購物</router-link>
+        </button>
       </div>
       <div class="d-flex justify-content-between" v-if="activeTab === 1">
         <div></div>
-        <button class="btn btn-primary text-white " type="button" @click="goOrder">送出訂單</button>
-        <button class="btn btn-outline-primary " type="button" @click="goOrder">繼續購物</button>
+
+        <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all"> 繼續購物</router-link>
+        </button>
       </div>
 
     </div>
@@ -54,10 +55,10 @@
 
 import Tab from 'bootstrap/js/dist/tab';
 import ProductCart from '@/components/user/ProductCart.vue';
-import UserCart from '@/components/user/OrderInfo.vue';
+import OrderInfo from '@/components/user/OrderInfo.vue';
 export default {
   inject: ['httpMessageState'],
-  components: {ProductCart, UserCart},
+  components: {ProductCart, OrderInfo},
   data() {
     return {
       products: [],
@@ -76,17 +77,15 @@ export default {
     setActiveTab(index) {
       this.activeTab = index;
     },
-    goOrder() {
+    goNextTab() {
       let nextSelector = `#${this.tabsInfo[this.activeTab + 1].id}`
       var triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${nextSelector}"]`)
-      console.log('goOrder', triggerEl);
-      console.log('nextSelector', nextSelector);
-      Tab.getInstance(triggerEl).show() // Select ta
+      Tab.getInstance(triggerEl).show()
     }
   },
 
   mounted() {
-    console.log('activeTab', this.activeTab);
+
     var triggerTabList = [].slice.call(document.querySelectorAll('#pills-tab button'))
     triggerTabList.forEach(function (triggerEl) {
       var tabTrigger = new Tab(triggerEl)
@@ -98,7 +97,7 @@ export default {
     // 監聽 show.bs.tab 事件
     document.querySelectorAll('.nav-link').forEach(tab => {
       tab.addEventListener('show.bs.tab', event => {
-        console.log('event:', event.target);
+
         const tabId = event.target.getAttribute('aria-controls');
         let tabIndex = 0;
         this.tabsInfo.forEach((e, index) => {
@@ -108,8 +107,7 @@ export default {
           }
         })
 
-        console.log('Active Tab ID:', tabId);
-        console.log('activeTab:', this.activeTab);
+
       });
     });
   },

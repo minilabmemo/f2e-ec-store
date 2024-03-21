@@ -1,6 +1,15 @@
 
 import {userProductsApi} from '@/utils/const/path'
 export default {
+  data() {
+    return {
+      products: {},
+      status: {
+        isLoading: false,
+        error: ""
+      },
+    };
+  },
   methods: {
     getAllData() {
       const url = userProductsApi;

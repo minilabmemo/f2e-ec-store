@@ -33,7 +33,7 @@
 
         <div class="mb-3">
           <label for="message" class="form-label">留言</label>
-          <textarea name="" id="message" class="form-control" cols="10" rows="10" v-model="form.message"></textarea>
+          <textarea name="" id="message" class="form-control" cols="5" rows="5" v-model="form.message"></textarea>
         </div>
         <div class="text-end">
           <button class="btn btn-danger">送出訂單</button>
@@ -44,16 +44,12 @@
 </template>
 
 <script>
-import {userProductsApi, userCartApi, userCouponApi, userOrderApi} from '@/utils/const/path'
+import {userOrderApi} from '@/utils/const/path'
 export default {
   inject: ['httpMessageState'],
+
   data() {
     return {
-      products: [],
-      product: {},
-      status: {
-        loadingItem: '',
-      },
       form: {
         user: {
           name: '',
@@ -63,25 +59,21 @@ export default {
         },
         message: '',
       },
-      cart: {},
-      coupon_code: '',
+
     };
   },
   methods: {
-
-
     createOrder() {
       const url = userOrderApi;
       const order = this.form;
       this.$http.post(url, {data: order})
         .then((res) => {
-          console.log(res);
+          console.log(res);//TODO
+          console.log(res.data.orderId);
+          this.$emit('go-next');
         });
     },
   },
-  created() {
 
-
-  },
 };
-</script>@/utils/const/path
+</script>@

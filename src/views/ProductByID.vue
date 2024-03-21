@@ -145,7 +145,6 @@ export default {
       if (this.dataCart.carts) {
         this.dataCart.carts.forEach(element => {
           if (element.product_id === this.id) {
-
             confirmAddCart = true;
           }
         });
@@ -156,17 +155,19 @@ export default {
         const confirmModal = this.$refs.AddCartConfirm;
         confirmModal.showModal();
       } else {
-        this.goToCart();
+        this.addToCart(id, qty, true);
       }
     },
-
+    updateUserCartQty() {
+      this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
+    },
     addToCart(id, qty = 1, redirect = false) {
       const url = `${userCartApi}`;
       const cart = {
         product_id: id,
         qty,
       };
-      console.log('this.isLoading', this.isLoading);
+
       this.isLoading = true;
       this.isCartLoading = true;
       this.$http.post(url, {data: cart}).then((response) => {
@@ -175,10 +176,9 @@ export default {
         this.httpMessageState(response, '加入購物車');
         if (redirect) {
           this.goToCart();
-        } else {
-          //觸發購物車數量更新
-          this.emitter.emit('update-cartQty');
         }
+        this.updateUserCartQty();
+
 
       });
     },
