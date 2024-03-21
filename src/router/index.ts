@@ -20,7 +20,8 @@ const router = createRouter({
           path: '',
           component: () => import('../views/HomeBody.vue'),
           meta: {icon:`../${shopFavIcon}` },
-        }, 
+        },  
+        
         {
           path: 'product/:category/:subcategory',
           component: () => import('../views/ProductsLayout.vue'),
@@ -37,7 +38,12 @@ const router = createRouter({
             }
           ]
         },
-        
+        {
+          name:"CartFlow",
+          path: 'product/cart',
+          component: () => import('../views/CartFlow.vue'),
+          meta: {icon:`../${shopFavIcon}` },
+        }, 
       ],
     },
     {

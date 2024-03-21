@@ -40,7 +40,7 @@
             </div>
             <div class="row mb-3">
               <div class="col-4">Free</div>
-              <div class="col-4">單一顏色</div>
+              <div class="col-4">單一色</div>
               <div class="col-4">
                 <div class="mb-3 col-4 ">
                   <input type="number" class="form-control form-control-sm" id="number" placeholder="1"
@@ -138,7 +138,7 @@ export default {
       //TODO
     },
     goToCart() {
-      this.$router.push('/user/cart');
+      this.$router.push('/product/cart');
     },
     checkQty(id, qty = 1) {
       let confirmAddCart = false;
