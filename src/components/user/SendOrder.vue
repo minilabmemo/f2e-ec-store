@@ -46,7 +46,7 @@
 <script>
 import {userOrderApi} from '@/utils/const/path'
 export default {
-  inject: ['httpMessageState'],
+  inject: ['httpMessageState', 'emitter'],
 
   data() {
     return {
@@ -70,7 +70,7 @@ export default {
         .then((res) => {
           this.$emit('order-create', res.data.orderId);
           this.$emit('go-next');
-
+          this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
         });
     },
   },

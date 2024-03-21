@@ -84,6 +84,9 @@ import {userProductsApi, userCartApi, userCouponApi, userOrderApi} from '@/utils
 export default {
   inject: ['httpMessageState', 'emitter'],
   emits: ['go-next'],
+  props: {
+    checkout: Boolean,
+  },
   data() {
     return {
       products: [],
@@ -199,9 +202,12 @@ export default {
   created() {
     this.getProducts();
     this.getCart();
-    console.log('cart', this.cart);
-
   },
+  watch: {
+    checkout() {
+      this.getCart();
+    }
+  }
 
 };
 </script>

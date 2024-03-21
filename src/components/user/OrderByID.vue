@@ -77,6 +77,9 @@ export default {
       this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
     },
     getOrder() {
+      if (this.orderId == "") {
+        return
+      }
       const url = `${userOrderApi}/${this.orderId}`;
       this.$http.get(url)
         .then((res) => {
@@ -109,4 +112,4 @@ export default {
     },
   },
 };
-</script>@/utils/const/path
+</script>

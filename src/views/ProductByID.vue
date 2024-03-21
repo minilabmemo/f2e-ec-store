@@ -151,7 +151,6 @@ export default {
 
       }
       if (confirmAddCart) {
-        console.error('已有相同物品。');
         const confirmModal = this.$refs.AddCartConfirm;
         confirmModal.showModal();
       } else {
