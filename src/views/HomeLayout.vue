@@ -1,4 +1,5 @@
 <template>
+  <ToastMessages></ToastMessages>
   <div class="tenor-sans-regular ">
     <header class="h-shadow mb-4">
 
@@ -38,6 +39,7 @@
     </header>
     <div class="container">
       <RouterView />
+
     </div>
     <footer class="bg-orange-100 container-fluid p-5 text-gray-500 ">
       <div class="container">
@@ -80,8 +82,9 @@ import getCart from '@/utils/mixins/getCart';
 import HomeNav from '@/components/Front/HomeNav.vue';
 import {computed} from 'vue'
 import emitter from "@/utils/methods/emitter";
+import ToastMessages from '@/components/ToastMessages.vue';
 export default {
-  components: {HomeNav, },
+  components: {HomeNav, ToastMessages},
   provide() {
     return {
       emitter,
