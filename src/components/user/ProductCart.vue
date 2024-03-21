@@ -53,6 +53,11 @@
             </tr>
           </tfoot>
         </table>
+        <div class="d-flex justify-content-end mb-5">
+          <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
+              新增其他商品</router-link>
+          </button>
+        </div>
         <div class="input-group mb-3 input-group-sm">
           <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
           <div class="input-group-append">
@@ -76,7 +81,13 @@
 
   </div>
 
-  <div v-else class="text-dark  "> 您的購物車是空的，請先將商品放入購物車。</div>
+  <div v-else class="text-dark  "> 您的購物車是空的，請先將商品放入購物車。
+    <div class="d-flex justify-content-end mb-5">
+      <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
+          繼續購物</router-link>
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>

@@ -35,11 +35,7 @@
         </div>
       </div>
 
-      <div class="d-flex justify-content-end " v-if="activeTab === 0">
-        <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
-            繼續購物</router-link>
-        </button>
-      </div>
+
 
 
     </div>

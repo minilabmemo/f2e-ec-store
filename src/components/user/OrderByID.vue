@@ -1,6 +1,6 @@
 <template>
   <div class="my-5 row justify-content-center">
-    <form class="col-md-6" @submit.prevent="payOrder" v-if="order">
+    <form class="col-md-6" @submit.prevent="confirmPay" v-if="order">
       <table class="table align-middle">
         <thead>
           <th>品名</th>
@@ -24,6 +24,10 @@
 
       <table class="table">
         <tbody>
+          <tr>
+            <th width="100">訂單編號</th>
+            <td>{{ order.id }}</td>
+          </tr>
           <tr>
             <th width="100">Email</th>
             <td>{{ order.user.email }}</td>
@@ -54,11 +58,15 @@
       </div>
     </form>
   </div>
+  <CheckoutConfirm :item="order" ref="CheckoutConfirm" @pay-order="payOrder">
+  </CheckoutConfirm>
 </template>
 
 <script>
 import {userOrderApi, userOrderPayApi} from '@/utils/const/path'
+import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 export default {
+  components: {CheckoutConfirm},
   props: {
     orderId: String,
   },
@@ -89,15 +97,20 @@ export default {
           }
         });
     },
+    confirmPay() {
+      const confirmModal = this.$refs.CheckoutConfirm;
+      confirmModal.showModal();
+    },
     payOrder() {
       const url = `${userOrderPayApi}/${this.orderId}`;
-      this.$http.post(url)
+      this.$http.post(url) //TODO ???是怎麼送出 body 的啊？自動送出？？
         .then((res) => {
-
           if (res.data.success) {
             this.getOrder();
             this.updateUserCartQty()
           }
+          const confirmModal = this.$refs.CheckoutConfirm;
+          confirmModal.hideModal();
         });
     },
   },
