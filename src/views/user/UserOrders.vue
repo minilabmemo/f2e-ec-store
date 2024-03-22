@@ -29,12 +29,17 @@
           <td class="text-right">{{ item.total }}</td>
           <td>
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" :id="`paidSwitch${item.id}`" v-model="item.is_paid"
-                @change="updatePaid(item)">
-              <label class="form-check-label" :for="`paidSwitch${item.id}`">
-                <span v-if="item.is_paid">已付款</span>
+
+              <div class="d-flex justify-content-center align-items-center  gap-1 ">
+                <div class="  rounded-circle " :class="{ 'bg-success ': item.is_paid, 'bg-primary': !item.is_paid }"
+                  style="height: 15px;width: 15px;">
+                </div>
+                <span v-if="item.is_paid">
+
+                  已付款
+                </span>
                 <span v-else>未付款</span>
-              </label>
+              </div>
             </div>
           </td>
           <td>
@@ -49,7 +54,7 @@
   </table>
   <OrderModal :order="tempOrder" ref="orderModal" @update-paid="updatePaid"></OrderModal>
   <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder"></DelModal>
-  <Pagination :pages="pagination" @emit-pages="getOrders"></Pagination>
+  <Pagination :pages="pagination" @change-page-num="getOrders"></Pagination>
 </template>
 
 <script>
@@ -98,18 +103,7 @@ export default {
       const delComponent = this.$refs.delModal;
       delComponent.showModal();
     },
-    updatePaid(item) {
-      this.isLoading = true;
-      const api = `${adminOrderApi}/${item.id}`;
-      const paid = {
-        is_paid: item.is_paid,
-      };
-      this.$http.put(api, {data: paid}).then((response) => {
-        this.isLoading = false;
-        this.getOrders(this.currentPage);
-        this.httpMessageState(response, '更新付款狀態');
-      });
-    },
+
     delOrder() {
       const url = `${adminOrderApi}/${this.tempOrder.id}`;
       this.isLoading = true;

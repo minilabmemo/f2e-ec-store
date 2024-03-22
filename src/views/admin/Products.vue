@@ -41,7 +41,7 @@
       </tbody>
     </table>
   </div>
-  <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
+  <Pagination :pages="pagination" @change-page-num="getProducts"></Pagination>
   <ProductModal ref="productModal" :product="tempProduct" @update-product="updateProduct"></ProductModal>
   <DelModal ref="delModal" :item="tempProduct" @del-item="deleteProduct"></DelModal>
 

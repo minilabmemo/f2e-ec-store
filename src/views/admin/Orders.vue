@@ -47,7 +47,7 @@
   </table>
   <OrderModal :order="tempOrder" ref="orderModal" @update-paid="updatePaid"></OrderModal>
   <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder"></DelModal>
-  <Pagination :pages="pagination" @emit-pages="getOrders"></Pagination>
+  <Pagination :pages="pagination" @change-page-num="getOrders"></Pagination>
 </template>
 
 <script>
