@@ -10,7 +10,7 @@
               <th></th>
               <th>品名</th>
               <th style="width: 110px">數量</th>
-              <th>單價</th>
+              <th style="width: 110px">單價</th>
             </tr>
           </thead>
           <tbody>
@@ -25,16 +25,22 @@
                 <td>
                   <div class="d-flex">
                     <div class="col-1"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image"></div>
-                    <div class="col d-flex  flex-column  align-items-start">
+                    <div class="col d-flex  flex-column  align-items-start text-start ">
                       <div> {{ item.product.title }}</div>
-                      <div class="text-500 ms-2 ">剩餘數量： {{ item.product.num }}</div>
+                      <div class="d-flex gap-2 justify-content-center  align-items-center ms-2">
+                        <span class="text-300"> <del>${{ item.product.origin_price }}</del></span>
+                        <span class="text-primary  me-4 ">${{ item.product.price }}</span>
+                        <div class="text-500  ">剩餘數量： {{ item.product.num }}</div>
+                      </div>
+
+                      <div class="text-success  ms-2" v-if="item.coupon">
+                        已套用優惠券
+                      </div>
                     </div>
 
                   </div>
 
-                  <div class="text-success" v-if="item.coupon">
-                    已套用優惠券
-                  </div>
+
                 </td>
                 <td>
                   <div class="input-group input-group-sm">
@@ -62,19 +68,29 @@
             </tr>
           </tfoot>
         </table>
-        <div class="d-flex justify-content-end mb-5">
-          <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
-              新增其他商品</router-link>
-          </button>
-        </div>
-        <div class="input-group mb-3 input-group-sm">
-          <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
-          <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" @click="addCouponCode">
-              套用優惠碼
+        <div class=" d-flex justify-content-end mb-5 gap-2 ">
+          <div class="">
+            <div class="input-group mb-3 input-group-sm">
+              <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
+              <div class="input-group-append ">
+                <button class="btn btn-secondary text-white" type="button" @click="addCouponCode">
+                  套用優惠碼
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+          <div class="">
+            <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all"
+                class="nav-link ">
+                新增其他商品</router-link>
             </button>
           </div>
         </div>
+
+
       </div>
 
     </div>
@@ -97,6 +113,7 @@
       </button>
     </div>
   </div>
+
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
+  <LoadingOverlay :active="isLoading"></LoadingOverlay>
 
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -19,7 +19,7 @@
     <SaleItem v-for="(item, index) in filterItems" :key="index" :item="item" class="col-4"
       :path="`${$route.params.category}/${$route.params.subcategory}`">
     </SaleItem>
-    <div class="col-6 " v-if="!filterItems.length && !status.isLoading">
+    <div class="col-6 " v-if="!filterItems.length && !isLoading">
       <img src="@/assets/images/design/empty200.png" alt="empty200" class="img-fluid ">
     </div>
 
@@ -45,10 +45,7 @@ export default {
     return {
       categories: categories,
       products: [],
-      status: {
-        isLoading: false,
-        error: ""
-      },
+
       filterErr: "",
     }
   },

@@ -3,8 +3,7 @@
   <div class="tenor-sans-regular ">
     <header class="h-shadow mb-4">
 
-      <div class="d-flex justify-content-center  mb-2 container  ">
-
+      <div class="d-flex justify-content-center  mb-2 container  position-relative ">
         <div class="mx-auto  ">
           <router-link to="/">
             <div class="img-fluid "><img src="@/assets/icons/logo_home.svg" alt="Logo"></div>
@@ -12,7 +11,7 @@
         </div>
 
 
-        <div class="align-self-end ">
+        <div class="position-absolute  end-0 bottom-0  ">
           <div class="d-flex">
             <img src="@/assets/icons/save.svg" alt="save">
             <img src="@/assets/icons/split.svg" alt="split">
