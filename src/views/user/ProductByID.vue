@@ -23,12 +23,12 @@
 
           <div class="col-10">
             <div class="d-flex gap-2 justify-content-center  align-items-baseline   ">
-              <div class="col-6">
+              <div class="col-7">
                 <span class="price " v-if="!product.origin_price"> 價格 ${{ product.origin_price }}</span>
                 <span class="text-300" v-if="product.origin_price"> <del>原價 ${{ product.origin_price }}</del></span>
                 <span class="price  " v-if="product.price"> 優惠價 ${{ product.price }}</span>
               </div>
-              <div class="col-6">
+              <div class="col-5">
                 <span class=" text-500 " v-if="product.num"> 商品數量 {{ product.num }} 件</span>
               </div>
             </div>
@@ -57,9 +57,7 @@
                 :class="{ disabled: isCartLoading }">
                 加到購物車
               </button>
-              <button type="button" class="col-3 btn btn-outline-dark " @click="saveProduct(product.id)">
-                加入收藏
-              </button>
+              <SaveButton :item="product" v-if="product.id"> </SaveButton>
             </div>
 
           </div>
@@ -94,9 +92,10 @@
 import {userProductApi, userCartApi} from '@/utils/const/path'
 import categories from '@/utils/const/categories'
 import AddCartConfirm from '@/components/user/modal/AddCartConfirm.vue';
+import SaveButton from '@/components/user/SaveButton.vue'
 export default {
   inject: ['httpMessageState', 'dataCart', 'emitter'],
-  components: {AddCartConfirm},
+  components: {AddCartConfirm, SaveButton},
   data() {
     return {
       product: {},
@@ -134,9 +133,7 @@ export default {
         }
       });
     },
-    saveProduct() {
-      //TODO
-    },
+
     goToCart() {
       this.$router.push('/user/cartflow');
     },
