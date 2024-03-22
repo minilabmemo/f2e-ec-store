@@ -53,7 +53,7 @@
       </template>
     </tbody>
   </table>
-  <OrderModal :order="tempOrder" ref="orderModal" @update-paid="updatePaid"></OrderModal>
+  <OrderModal :order="tempOrder" ref="orderModal"></OrderModal>
   <CheckoutConfirm :item="tempOrder" ref="CheckoutConfirm" @pay-order="payOrder"> </CheckoutConfirm>
   <Pagination :pages="pagination" @change-page-num="getOrders"></Pagination>
 </template>
@@ -62,7 +62,7 @@
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 import OrderModal from '@/components/orderModal.vue';
 import Pagination from '@/components/Pagination.vue';
-import {adminOrderApi, userOrdersApi} from '@/utils/const/path'
+import {userOrdersApi} from '@/utils/const/path'
 
 export default {
   inject: ['httpMessageState'],
@@ -99,18 +99,7 @@ export default {
       const orderComponent = this.$refs.orderModal;
       orderComponent.showModal();
     },
-    updatePaid(item) {
-      this.isLoading = true;
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${item.id}`;
-      const paid = {
-        is_paid: item.is_paid,
-      };
-      this.$http.put(api, {data: paid}).then((response) => {
-        this.isLoading = false;
-        this.getOrders(this.currentPage);
-        this.$httpMessageState(response, '更新付款狀態');
-      });
-    },
+
     confirmPay(item) {
       this.tempOrder = {...item};
       const confirmModal = this.$refs.CheckoutConfirm;
