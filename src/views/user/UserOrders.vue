@@ -5,18 +5,22 @@
       <tr>
         <th>訂單編號</th>
         <th>購買時間</th>
-        <th>Email</th>
+        <th>電子郵件</th>
         <th>購買款項</th>
         <th>應付金額</th>
         <th>是否付款</th>
-        <th>操作</th>
+
       </tr>
     </thead>
     <tbody>
       <template v-for="(item, key) in orders" :key="key">
 
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
-          <td>{{ item.id }}</td>
+          <td> <a href="#" class="link-opacity-100 link-opacity-75-hover" @click.prevent="openModal(false, item)"> <i
+                class="bi bi-search"></i>
+              {{
+    item.id
+  }} </a> </td>
           <td>{{ $filters.date(item.create_at) }}</td>
           <td><span v-text="item.user.email" v-if="item.user"></span></td>
           <td>
@@ -31,24 +35,19 @@
           <td>
             <div class="form-check form-switch">
 
-              <div class="d-flex justify-content-center align-items-center  gap-1 ">
+              <div class="d-flex justify-content-start align-items-center  gap-1 ">
                 <div class="  rounded-circle " :class="{ 'bg-success ': item.is_paid, 'bg-primary': !item.is_paid }"
                   style="height: 15px;width: 15px;">
                 </div>
                 <span v-if="item.is_paid">
-
                   已付款
                 </span>
-                <span v-else>未付款</span>
+                <span v-else>未付款 <button class="btn btn-outline-danger btn-sm" @click="confirmPay(item)"
+                    v-if="!item.is_paid">付款</button></span>
               </div>
             </div>
           </td>
-          <td>
-            <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">檢視</button>
-              <button class="btn btn-outline-danger btn-sm" @click="confirmPay(item)" v-if="!item.is_paid">付款</button>
-            </div>
-          </td>
+
         </tr>
       </template>
     </tbody>

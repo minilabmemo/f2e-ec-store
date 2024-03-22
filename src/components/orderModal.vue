@@ -119,9 +119,9 @@ export default {
       isPaid: false,
     };
   },
-  emits: ['update-product'],
+
   mixins: [modalMixin],
-  inject: ['emitter'],
+
   watch: {
     order() {
       this.tempOrder = this.order;
