@@ -9,11 +9,12 @@
         <th>購買款項</th>
         <th>應付金額</th>
         <th>是否付款</th>
-        <th>編輯</th>
+        <th>操作</th>
       </tr>
     </thead>
     <tbody>
       <template v-for="(item, key) in orders" :key="key">
+
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
           <td>{{ item.id }}</td>
           <td>{{ $filters.date(item.create_at) }}</td>
@@ -45,7 +46,7 @@
           <td>
             <div class="btn-group">
               <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">檢視</button>
-              <button class="btn btn-outline-danger btn-sm" @click="openDelOrderModal(item)">刪除</button>
+              <button class="btn btn-outline-danger btn-sm" @click="confirmPay(item)" v-if="!item.is_paid">付款</button>
             </div>
           </td>
         </tr>
@@ -53,12 +54,12 @@
     </tbody>
   </table>
   <OrderModal :order="tempOrder" ref="orderModal" @update-paid="updatePaid"></OrderModal>
-  <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder"></DelModal>
+  <CheckoutConfirm :item="tempOrder" ref="CheckoutConfirm" @pay-order="payOrder"> </CheckoutConfirm>
   <Pagination :pages="pagination" @change-page-num="getOrders"></Pagination>
 </template>
 
 <script>
-import DelModal from '@/components/DelModal.vue';
+import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 import OrderModal from '@/components/orderModal.vue';
 import Pagination from '@/components/Pagination.vue';
 import {adminOrderApi, userOrdersApi} from '@/utils/const/path'
@@ -77,7 +78,7 @@ export default {
   },
   components: {
     Pagination,
-    DelModal,
+    CheckoutConfirm,
     OrderModal,
   },
   methods: {
@@ -98,21 +99,34 @@ export default {
       const orderComponent = this.$refs.orderModal;
       orderComponent.showModal();
     },
-    openDelOrderModal(item) {
-      this.tempOrder = {...item};
-      const delComponent = this.$refs.delModal;
-      delComponent.showModal();
-    },
-
-    delOrder() {
-      const url = `${adminOrderApi}/${this.tempOrder.id}`;
+    updatePaid(item) {
       this.isLoading = true;
-      this.$http.delete(url).then((response) => {
-        console.log(response);
-        const delComponent = this.$refs.delModal;
-        delComponent.hideModal();
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${item.id}`;
+      const paid = {
+        is_paid: item.is_paid,
+      };
+      this.$http.put(api, {data: paid}).then((response) => {
+        this.isLoading = false;
         this.getOrders(this.currentPage);
+        this.$httpMessageState(response, '更新付款狀態');
       });
+    },
+    confirmPay(item) {
+      this.tempOrder = {...item};
+      const confirmModal = this.$refs.CheckoutConfirm;
+      confirmModal.showModal();
+    },
+    payOrder() {
+      const url = `${userOrderPayApi}/${this.orderId}`;
+      this.$http.post(url) //TODO ???是怎麼送出 body 的啊？自動送出？？
+        .then((res) => {
+          if (res.data.success) {
+            this.getOrder();
+            this.updateUserCartQty()
+          }
+          const confirmModal = this.$refs.CheckoutConfirm;
+          confirmModal.hideModal();
+        });
     },
   },
   created() {
