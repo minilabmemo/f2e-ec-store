@@ -3,7 +3,7 @@
   <div class="d-flex flex-column gap-3  ">
     <router-link :to="`/product/${path}/id/${item.id}`" class="nav-link   ">
       <div class="d-flex flex-column gap-3  ">
-        <img :src="item.src" alt="image" class="rwd-image">
+        <img :src="item.src" alt="image" class="flex-image">
         <div class="text-center ">
           <h4> {{ item.title }}</h4>
           <div class="d-flex gap-2 justify-content-center  align-items-center ">
@@ -59,7 +59,7 @@ export default {
 
 
 
-.rwd-image {
+.flex-image {
   object-fit: cover;
   aspect-ratio: 3/4;
   width: 100%;

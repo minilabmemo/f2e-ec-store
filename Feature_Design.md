@@ -15,6 +15,14 @@
 
 ### 全局效果
 
+- 主題顏色
+  - body-color
+  - font
+  - h1~h5 title size
+  - class 新增：image size flex setting
+- 客製組件
+  -
+  - minus-
 - network at 整體頁面
 
   - [ ] 如果出現後端錯誤 ex: 404 則彈出視窗告知，確定仍可繼續瀏覽。

@@ -82,24 +82,31 @@
                 <div class="mb-3 col-md-6">
                   <label for="num" class="form-label">數量</label>
                   <input type="number" class="form-control" id="num" placeholder="請輸入數量" v-model="tempProduct.num"
-                    min="0" max="100">
+                    :min="itemLimit.min_num" :max="itemLimit.max_num">
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="unit" class="form-label">單位</label>
-                  <input type="text" class="form-control" id="unit" placeholder="請輸入單位" v-model="tempProduct.unit">
+
+                  <select id="unit" class="form-select" v-model="tempProduct.unit">
+                    <!-- TODO 預設？？？-->
+                    <option value="件" selected>件</option>
+                    <option value="組">組</option>
+
+                  </select>
                 </div>
+
               </div>
 
               <div class="row gx-2">
                 <div class="mb-3 col-md-6">
                   <label for="origin_price" class="form-label">原價</label>
                   <input type="number" class="form-control" id="origin_price" placeholder="請輸入原價"
-                    v-model="tempProduct.origin_price" min="10" mix="5000">
+                    v-model="tempProduct.origin_price" :min="itemLimit.min_price" :max="itemLimit.max_price">
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="price" class="form-label">售價</label>
                   <input type="number" class="form-control" id="price" placeholder="請輸入售價" v-model="tempProduct.price"
-                    min="10" mix="5000">
+                    :min="itemLimit.min_price" :max="itemLimit.max_price">
                 </div>
               </div>
               <hr>
@@ -140,6 +147,7 @@
 
 import {adminUploadApi} from "@/utils/const/path"
 import modalMixin from "@/utils/mixins/modalMixin"
+import itemLimit from '@/utils/const/itemLimit'
 export default {
   inject: ['httpMessageState'],
   props: {
@@ -153,7 +161,7 @@ export default {
     return {
       modal: {},
       tempProduct: {},
-
+      itemLimit: itemLimit
     }
   },
   watch: {

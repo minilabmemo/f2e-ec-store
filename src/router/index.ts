@@ -74,7 +74,7 @@ const router = createRouter({
       children:[
         {
           path:'products',
-          component:()=>import('../views/admin/Products.vue'),
+          component:()=>import('../views/admin/ProductsManage.vue'),
         } ,{
           path: 'orders',
           component: () => import('../views/admin/Orders.vue'),

@@ -53,6 +53,7 @@ import ProductModal from "@/components/ProductModal.vue";
 import DelModal from "@/components/DelModal.vue";
 import {adminProductApi} from '@/utils/const/path'
 import Pagination from '@/components/Pagination.vue';
+
 export default {
   components: {ProductModal, DelModal, Pagination, },
   data() {
@@ -62,6 +63,7 @@ export default {
       tempProduct: {},
       isNew: false,
       isLoading: false,
+
     }
   },
   inject: ['emitter'],
@@ -146,4 +148,4 @@ export default {
   },
 }
 
-</script>@/utils/config@/utils/const/path
+</script>@/utils/config@/utils/const/path@/utils/const/itemLimit

@@ -4,7 +4,7 @@
 
     <div class="position-relative ">
 
-      <img :src="item.src" alt="image" class="rwd-image">
+      <img :src="item.src" alt="image" class="flex-image">
 
       <div class="photo-mix-text" :class="item.color" v-if="status.isLoading || status.error | filterErr !== ''">
         <h1>coming</h1>
@@ -158,7 +158,7 @@ export default {
   }
 }
 
-.rwd-image {
+.flex-image {
   object-fit: cover;
   aspect-ratio: 2/3;
   width: 100%;

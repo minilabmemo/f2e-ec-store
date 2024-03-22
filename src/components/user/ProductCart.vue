@@ -3,7 +3,7 @@
 
   <div class="row mt-4" v-if="cart && cart.carts && cart.carts.length !== 0">
     <div class="col-md-12 px-5">
-      <div class="sticky-top">
+      <div class="">
         <table class="table align-middle">
           <thead>
             <tr>
@@ -23,16 +23,25 @@
                   </button>
                 </td>
                 <td>
-                  {{ item.product.title }}
+                  <div class="d-flex">
+                    <div class="col-1"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image"></div>
+                    <div class="col d-flex  flex-column  align-items-start">
+                      <div> {{ item.product.title }}</div>
+                      <div class="text-500 ms-2 ">剩餘數量： {{ item.product.num }}</div>
+                    </div>
+
+                  </div>
+
                   <div class="text-success" v-if="item.coupon">
                     已套用優惠券
                   </div>
                 </td>
                 <td>
                   <div class="input-group input-group-sm">
-                    <input type="number" class="form-control" min="1" :disabled="item.id === status.loadingItem"
-                      @change="updateCart(item)" v-model.number="item.qty">
+                    <input type="number" class="form-control" min=1 :max="item.product.num"
+                      :disabled="item.id === status.loadingItem" @change="updateCart(item)" v-model.number="item.qty">
                     <div class="input-group-text">/ {{ item.product.unit }}</div>
+
                   </div>
                 </td>
                 <td class="text-end">
@@ -162,6 +171,11 @@ export default {
       this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
     },
     updateCart(item) {
+      if (item.qty > item.product.num) {
+        alert(`你輸入的數量大於可購買數量${item.product.num},自動更新為最大可購買數量。`)
+        item.qty = item.product.num;
+      }
+
       const url = `${userCartApi}/${item.id}`;
       this.isLoading = true;
       this.status.loadingItem = item.id;
@@ -222,3 +236,12 @@ export default {
 
 };
 </script>
+
+<style lang="css" scoped>
+.flex-image {
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  width: 100%;
+  height: auto;
+}
+</style>

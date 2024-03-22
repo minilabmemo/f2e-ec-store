@@ -85,25 +85,25 @@
     <h3>圖片</h3>
     <div class="row ">
       <div class="col-4 bg-danger ">
-        <img :src="image1" alt="image2" class="rwd-image">
+        <img :src="image1" alt="image2" class="flex-image">
       </div>
       <div class="col-4 bg-danger ">
-        <img :src="image2" alt="image2" class="rwd-image">
+        <img :src="image2" alt="image2" class="flex-image">
       </div>
       <div class="col-4 bg-danger ">
-        <img :src="image3" alt="image3" class="   rwd-image   ">
+        <img :src="image3" alt="image3" class="   flex-image   ">
       </div>
     </div>
 
     <div class="row ">
       <div class="col-4 bg-danger ">
-        <img :src="image1" alt="image2" class="rwd-image">
+        <img :src="image1" alt="image2" class="flex-image">
       </div>
       <div class="col-4 bg-danger ">
-        <img :src="image2" alt="image2" class="rwd-image">
+        <img :src="image2" alt="image2" class="flex-image">
       </div>
       <div class="col-4 bg-danger ">
-        <img :src="image3" alt="image3" class="   rwd-image   ">
+        <img :src="image3" alt="image3" class="   flex-image   ">
       </div>
     </div>
   </div>
@@ -123,7 +123,7 @@ export default {
 </script>
 
 <style scoped>
-.rwd-image {
+.flex-image {
   object-fit: cover;
   aspect-ratio: 2/3;
   width: 100%;
