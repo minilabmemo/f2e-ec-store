@@ -61,10 +61,10 @@
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 import OrderModal from '@/components/orderModal.vue';
 import Pagination from '@/components/Pagination.vue';
-import {userOrdersApi} from '@/utils/const/path'
+import {userOrdersApi, userOrderPayApi} from '@/utils/const/path'
 
 export default {
-  inject: ['httpMessageState'],
+  inject: ['httpMessageState', 'emitter'],
   data() {
     return {
       orders: {},
@@ -101,20 +101,28 @@ export default {
 
     confirmPay(item) {
       this.tempOrder = {...item};
+      this.orderId = item.id;
       const confirmModal = this.$refs.CheckoutConfirm;
       confirmModal.showModal();
     },
+    updateUserCartQty() {
+      this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
+    },
     payOrder() {
-      const url = `${userOrderPayApi}/${this.orderId}`;
-      this.$http.post(url) //TODO ???是怎麼送出 body 的啊？自動送出？？
-        .then((res) => {
-          if (res.data.success) {
-            this.getOrder();
-            this.updateUserCartQty()
-          }
-          const confirmModal = this.$refs.CheckoutConfirm;
-          confirmModal.hideModal();
-        });
+      if (this.orderId) {
+        const url = `${userOrderPayApi}/${this.orderId}`;
+        this.$http.post(url)
+          .then((res) => {
+            const confirmModal = this.$refs.CheckoutConfirm;
+            confirmModal.hideModal();
+            if (res.data.success) {
+              this.getOrders();
+              this.httpMessageState(res, `訂單編號${this.orderId} 付款`);
+              this.updateUserCartQty()
+            }
+
+          });
+      }
     },
   },
   created() {

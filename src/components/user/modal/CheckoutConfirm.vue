@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     productsNum() {
-      console.log('this.item', this.item);
+
       let cum = 0
       if (this.item.products) {
         for (const value of Object.values(this.item.products)) {

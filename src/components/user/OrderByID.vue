@@ -103,7 +103,7 @@ export default {
     },
     payOrder() {
       const url = `${userOrderPayApi}/${this.orderId}`;
-      this.$http.post(url) //TODO ???是怎麼送出 body 的啊？自動送出？？
+      this.$http.post(url)
         .then((res) => {
           if (res.data.success) {
             this.getOrder();

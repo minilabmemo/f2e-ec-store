@@ -52,7 +52,7 @@
                       <span v-if="tempOrder.paid_date">
                         {{ $filters.date(tempOrder.paid_date) }}
                       </span>
-                      <span v-else>時間不正確</span>
+                      <span v-else class="text-muted">尚未付款</span>
                     </td>
                   </tr>
                   <tr>
