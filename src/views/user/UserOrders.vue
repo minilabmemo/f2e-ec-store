@@ -59,7 +59,7 @@
 
 <script>
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
-import OrderModal from '@/components/orderModal.vue';
+import OrderModal from '@/components/admin/orderModal.vue';
 import Pagination from '@/components/Pagination.vue';
 import {userOrdersApi, userOrderPayApi} from '@/utils/const/path'
 

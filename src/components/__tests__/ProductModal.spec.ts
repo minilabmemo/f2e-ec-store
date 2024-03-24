@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import ProductModal from '../ProductModal.vue'
+import ProductModal from '../admin/ProductModal.vue'
 
 describe('ProductModal', () => {
   it('renders properly', () => {

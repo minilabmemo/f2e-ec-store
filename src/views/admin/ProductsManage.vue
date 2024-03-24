@@ -52,7 +52,7 @@
 
 
 <script>
-import ProductModal from "@/components/ProductModal.vue";
+import ProductModal from "@/components/admin/ProductModal.vue";
 import DelModal from "@/components/DelModal.vue";
 import {adminProductApi} from '@/utils/const/path'
 import Pagination from '@/components/Pagination.vue';

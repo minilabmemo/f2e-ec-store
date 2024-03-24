@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import CouponModal from '@/components/CouponModal.vue';
+import CouponModal from '@/components/admin/CouponModal.vue';
 import DelModal from '@/components/DelModal.vue';
 import {adminCouponsApi, adminCouponApi} from '@/utils/const/path'
 export default {
