@@ -19,19 +19,18 @@ export default {
         if (response.data.success) {
           this.products = response.data.products
         } else {
-          this.error = "取得資料失敗，請稍後再重新載入。";
-          console.log("err:", response.data)//TODO remove
+          // this.error = "取得資料失敗，請稍後再重新載入。";
         }
       }).catch((err) => {
         this.isLoading = false;
-        this.status.error = "取得資料錯誤，請稍後再重新載入。"; //TODO 錯誤集中
+        // this.status.error = "取得資料錯誤，請稍後再重新載入。"; //TODO 錯誤集中
         console.log("err:", err)
 
       });
     }
   },
   created() {
-    console.warn("created:getAllData") //TODO 個字觸發
+    console.warn("created:getAllData", this.products) //TODO 個字觸發
     this.getAllData();
 
   },

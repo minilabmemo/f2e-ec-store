@@ -45,10 +45,19 @@ const categories :Category= {
       name: "長袖",
     
     },  
+    short: {
+      key:"short",
+      name: "短袖",
+    },
     shirt: {
       key:"shirt",
       name: "襯衫",
-    }}
+    },
+      tank_top: {
+      key:"tank_top",
+      name: "無袖上衣",
+    }
+  },
   },
   skirt: {
     key:"skirt",
@@ -106,3 +115,4 @@ const categories :Category= {
 };
 
 export default categories;
+

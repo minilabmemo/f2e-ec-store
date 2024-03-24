@@ -10,7 +10,7 @@
           <th width="120">分類</th>
           <th>產品名稱</th>
           <th width="120">原價</th>
-          <th width="120">售價</th>
+          <th width="120">*售價</th>
           <th width="100">是否啟用</th>
           <th width="200">編輯</th>
         </tr>
@@ -20,7 +20,10 @@
         <tr v-for="item in products" :key="item.id">
 
           <td>{{ item.category }}</td>
-          <td>{{ item.title }}</td>
+          <td class="d-flex ">
+            <div class="col-1"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
+            {{ item.title }}
+          </td>
           <td class="text-right">
             {{ $filters.currency(item.origin_price) }}
           </td>
@@ -148,4 +151,13 @@ export default {
   },
 }
 
-</script>@/utils/config@/utils/const/path@/utils/const/itemLimit
+</script>
+
+<style lang="css" scoped>
+.flex-image {
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  width: 100%;
+  height: auto;
+}
+</style>

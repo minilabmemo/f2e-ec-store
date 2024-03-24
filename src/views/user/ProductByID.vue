@@ -57,7 +57,10 @@
                 :class="{ disabled: isCartLoading }">
                 加到購物車
               </button>
-              <SaveButton :item="product" v-if="product.id"> </SaveButton>
+              <SaveButton :item="{
+    title: product.title, id: product.id, imageUrl: product.imageUrl, on_stock: true
+  }" v-if="product.id">
+              </SaveButton>
             </div>
 
           </div>
@@ -73,7 +76,7 @@
       <div v-if="product.description">
         <div v-html="product.description.replace(/\n/g, '<br>')"></div>
       </div>
-      <div v-for="item in product.imagesUrl" :key="item">
+      <div v-for="  item   in   product.imagesUrl  " :key="item">
         <img :src="item" alt="" class="img-fluid  col-6">
       </div>
       <div v-if="product.content">
@@ -102,8 +105,7 @@ export default {
       id: '',
       categories: categories,
       itemQty: 1,
-      isCartLoading: false
-
+      isCartLoading: false,
     };
   },
   computed: {

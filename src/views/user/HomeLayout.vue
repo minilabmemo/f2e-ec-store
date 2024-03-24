@@ -12,8 +12,9 @@
 
 
         <div class="position-absolute  end-0 bottom-0  ">
-          <div class="d-flex">
-            <img src="@/assets/icons/save.svg" alt="save">
+          <div class="d-flex align-items-center ">
+
+            <router-link to="/user/saves"> <img src="@/assets/icons/save.svg" alt="save"> </router-link>
             <img src="@/assets/icons/split.svg" alt="split">
             <div class="d-flex gap-2 justify-content-center  align-items-center ">
               <router-link to="/user/cartflow" class="nav-link ">

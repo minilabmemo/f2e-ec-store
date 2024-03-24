@@ -15,7 +15,7 @@
 
 
 <script>
-import getAllProducts from '@/utils/mixins/getAllProducts';
+import getAllProducts from '@/utils/mixins/getProductsAll';
 import categories from '@/utils/const/categories'
 import CATNav from '@/components/user/CATNav.vue'
 
@@ -88,4 +88,4 @@ export default {
     }
   },
 }
-</script>
+</script>@/utils/mixins/getProductsAll
