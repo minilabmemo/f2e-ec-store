@@ -11,3 +11,18 @@
 
 - 功能請見：[Feature_Design](./Feature_Design.md)
 - 專案建立與開發筆記：[README_create](./README_create.md)
+
+## Start
+
+### NODE version
+
+```
+$ node -v
+v18.16.1
+```
+
+### test
+
+```
+npm run test:e2e:dev
+```
