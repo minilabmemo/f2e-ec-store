@@ -39,20 +39,20 @@ jobs:
   #       if: always()
   #       uses: davelosert/vitest-coverage-report-action@v2
 
-  # cypress-run:
-  #   runs-on: ubuntu-22.04
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #     # Install NPM dependencies, cache them correctly
-  #     # and run all Cypress tests
-  #     - name: Cypress run
-  #       uses: cypress-io/github-action@v6
-  #       with:
-  #         build: npm run build
-  #         browser: chrome
-  #         wait-on: http://localhost:4173
-  #         start: npm run test:e2e:dev
+   cypress-run:
+     runs-on: ubuntu-22.04
+     steps:
+       - name: Checkout
+         uses: actions/checkout@v4
+       # Install NPM dependencies, cache them correctly
+       # and run all Cypress tests
+       - name: Cypress run
+         uses: cypress-io/github-action@v6
+         with:
+           build: npm run build
+           browser: chrome
+           wait-on: http://localhost:4173
+           start: npm run test:e2e:dev
 
   # Single deploy job since we're just deploying
   deploy:
