@@ -12,18 +12,10 @@ export default defineConfig({
     vue(),
     vueJsx(),
   ],
-  optimizeDeps: {
-    include: ['bootstrap/js/dist/Dropdown']
-  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
    
     }
-  },
-    build: {
-    rollupOptions: {
-      external: ['bootstrap/js/dist/Dropdown']
-    },
   },
 })
