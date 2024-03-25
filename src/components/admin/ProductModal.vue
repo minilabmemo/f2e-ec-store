@@ -1,7 +1,6 @@
 <template>
 
   <div class="modal" tabindex="-1" ref="modal">
-    <!-- 請同學自行新增 v-model -->
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
@@ -84,25 +83,33 @@
             </div>
             <div class="col-6">
               <div class="row mb-3">
-                <label for="title" class="form-label">標題</label>
-                <input type="text" class="form-control" id="title" placeholder="請輸入標題" v-model="tempProduct.title">
+                <label for="title" class="form-label">*標題</label>
+                <input type="text" class="form-control " id="title" placeholder="請輸入標題" v-model="tempProduct.title"
+                  @blur="customCheck('title')" :class="{ 'is-invalid': invalidMap.get('title') }">
+                <div class="invalid-feedback">
+                  *標題必填
+                </div>
               </div>
 
               <div class="row gx-2">
                 <div class="mb-3 col-md-12">
-                  <label for="category" class="form-label">分類</label>
+                  <label for="category" class="form-label">*分類</label>
                   <select id="category" class="form-select" v-model.trim="tempProduct.category">
                     <option value="test">test</option>
                     <option :value="item" v-for="item in findCategoriesList()" :key="item.id">{{ item }}</option>
                   </select>
                 </div>
                 <div class="mb-3 col-md-6">
-                  <label for="num" class="form-label">數量</label>
+                  <label for="num" class="form-label">*數量</label>
                   <input type="number" class="form-control" id="num" placeholder="請輸入數量" v-model="tempProduct.num"
-                    :min="itemLimit.min_num" :max="itemLimit.max_num">
+                    :min="itemLimit.min_num" :max="itemLimit.max_num" @blur="customCheck('num')"
+                    :class="{ 'is-invalid': invalidMap.get('num') }">
+                  <div class="invalid-feedback">
+                    *數量必填
+                  </div>
                 </div>
                 <div class="mb-3 col-md-6">
-                  <label for="unit" class="form-label">單位</label>
+                  <label for="unit" class="form-label">*單位</label>
                   <select id="unit" class="form-select" v-model.trim="tempProduct.unit">
                     <option value="件">件</option>
                     <option value="組">組</option>
@@ -113,14 +120,22 @@
 
               <div class="row gx-2">
                 <div class="mb-3 col-md-6">
-                  <label for="origin_price" class="form-label">原價</label>
+                  <label for="origin_price" class="form-label">*原價</label>
                   <input type="number" class="form-control" id="origin_price" placeholder="請輸入原價"
-                    v-model="tempProduct.origin_price" :min="itemLimit.min_price" :max="itemLimit.max_price">
+                    v-model="tempProduct.origin_price" :min="itemLimit.min_price" :max="itemLimit.max_price"
+                    @blur="customCheck('origin_price')" :class="{ 'is-invalid': invalidMap.get('origin_price') }">
+                  <div class="invalid-feedback">
+                    *原價必填
+                  </div>
                 </div>
                 <div class="mb-3 col-md-6">
-                  <label for="price" class="form-label">售價</label>
+                  <label for="price" class="form-label">*售價</label>
                   <input type="number" class="form-control" id="price" placeholder="請輸入售價" v-model="tempProduct.price"
-                    :min="itemLimit.min_price" :max="itemLimit.max_price">
+                    :min="itemLimit.min_price" :max="itemLimit.max_price" @blur="customCheck('price')"
+                    :class="{ 'is-invalid': invalidMap.get('price') }">
+                  <div class="invalid-feedback">
+                    *售價必填
+                  </div>
                 </div>
               </div>
               <hr>
@@ -150,7 +165,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消
           </button>
-          <button type="button" class="btn btn-primary" @click="$emit('update-product', tempProduct)">確認</button>
+          <button type="submit" class="btn btn-primary" @click="confirmAction(tempProduct)">確認</button>
         </div>
       </div>
     </div>
@@ -163,6 +178,7 @@ import {adminUploadApi} from "@/utils/const/path"
 import modalMixin from "@/utils/mixins/modalMixin"
 import itemLimit from '@/utils/const/itemLimit'
 import categories from '@/utils/const/categories'
+
 export default {
   inject: ['httpMessageState'],
   props: {
@@ -178,19 +194,22 @@ export default {
       tempProduct: {unit: ""},
       itemLimit: itemLimit,
       categories: categories,
+      invalidMap: new Map(),
     }
   },
   watch: {
     product() { //NOTE 單向數據流 外層不能修改內層，但可以這樣改內容資料，當外層 prop 改變就監聽改內層 data
       this.tempProduct = this.product;
+      //設置選項預設值
       this.tempProduct.imagesUrl = this.tempProduct.imagesUrl ? this.tempProduct.imagesUrl : [];
+      this.tempProduct.category = this.product.category ? this.product.category : "test";
       this.tempProduct.unit = this.product.unit ? this.product.unit : "件";
+      this.tempProduct.num = this.product.num ? this.product.num : this.itemLimit.min_num;
+
     }
   },
   mixins: [modalMixin],
-  updated() {
-    console.log("refs", this.$refs)
-  },
+
   methods: {
     findCategoriesList() {
       let list = []
@@ -202,7 +221,6 @@ export default {
         } else {
           list.push(`${key}`)
         }
-        console.log(key, value);
       }
 
       return list
@@ -234,8 +252,24 @@ export default {
       });
     },
     addImages() {
-      console.log("addImages")
       this.tempProduct.imagesUrl.push([]);
+    },
+    customCheck(name) {
+      if (!this.tempProduct[name]) {
+        this.invalidMap.set(name, true);
+      } else {
+        this.invalidMap.delete(name);
+      }
+    },
+    confirmAction(tempProduct) {
+      this.customCheck('title');
+      this.customCheck('price');
+      this.customCheck('origin_price');
+
+      if (this.invalidMap.size === 0) {
+        this.$emit('update-product', tempProduct);
+      }
+
     }
   },
 
