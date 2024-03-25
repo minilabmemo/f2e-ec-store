@@ -12,42 +12,52 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-sm-6">
-              <div><span class="text-sm text-danger ">*圖片上傳限制 1MB</span></div>
-              <h5>主圖 </h5>
+            <div class="col-6">
               <div class="row">
-                <div class="mb-3 col-sm-6">
-                  <label for="image" class="form-label">輸入圖片網址</label>
-                  <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結"
-                    v-model="tempProduct.imageUrl">
-
-                </div>
-                <div class="mb-3 col-sm-6">
-                  <label for="customFile" class="form-label">或 上傳圖片
-                    <i class="fas fa-spinner fa-spin"></i>
-                  </label>
-                  <input type="file" id="customFile" class="form-control" @change="uploadFile(true)" ref="fileInput">
-                </div>
-              </div>
-
-              <div class="d-flex justify-content-center align-items-center w-25">
-                <img class="img-fluid " alt="main photo" :src="tempProduct.imageUrl">
-              </div>
-              <button type="button" class="btn btn-outline-danger">
-                移除
-              </button>
-
-              <!-- TODO B 移除圖片與整理 A 上傳動畫-->
-              <!-- TODO A 單位限制 B 分類選項 -->
-              <div class="mt-5">
-                <h5>副圖
-                  <button class="btn btn-outline-primary btn-sm d-block " @click="addImages">
-                    新增圖片
-                  </button>
-                </h5>
-                <div class="row" v-for="(item, index) in this.tempProduct.imagesUrl" :key="item">
+                <div><span class="text-sm text-danger ">*圖片上傳限制 1MB</span></div>
+                <h5>主圖 </h5>
+                <div class="row">
                   <div class="mb-3 col-sm-6">
+                    <label for="image" class="form-label">輸入圖片網址</label> <button type="button"
+                      class="btn btn-outline-danger btn-sm" @click="tempProduct.imageUrl = ''">
+                      移除
+                    </button>
+                    <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結"
+                      v-model="tempProduct.imageUrl">
+
+                  </div>
+                  <div class="mb-3 col-sm-6">
+                    <label for="customFile" class="form-label">或 上傳圖片
+                      <i class="fas fa-spinner fa-spin"></i>
+                    </label>
+                    <input type="file" id="customFile" class="form-control" @change="uploadFile(true)" ref="fileInput">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12  justify-content-center align-items-center w-25">
+                    <img class="img-fluid " alt="main photo" :src="tempProduct.imageUrl" v-if="tempProduct.imageUrl">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-5 ">
+                <div class="row ">
+                  <div class="d-flex gap-2  ">
+                    <h5>副圖</h5>
+                    <button class="btn btn-outline-primary btn-sm" @click="addImages">
+                      新增圖片
+                    </button>
+                  </div>
+                </div>
+
+
+                <div class="row g-2 " v-for="(item, index) in this.tempProduct.imagesUrl" :key="item">
+                  <div class="mb-3 col-8">
                     <label for="image" class="form-label">輸入圖片網址</label>
+                    <button type="button" class="ms-2 btn btn-outline-danger btn-sm"
+                      @click="tempProduct.imagesUrl[index] = ''">移除
+                    </button>
                     <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結"
                       v-model="tempProduct.imagesUrl[index]">
                     <label for="customFile" class="form-label">或 上傳圖片
@@ -55,20 +65,25 @@
                     </label>
                     <input type="file" id="customFile" class="form-control" @change="uploadFile(false, index)"
                       ref="filesInput">
+
                     <hr>
                   </div>
-                  <div class="mb-3 col-sm-6">
+                  <div class="mb-3 col-4">
 
-                    <div class="d-flex justify-content-center align-items-center object-fit-cover w-50">
-                      <img class="img-fluid" alt="images photo" :src="item">
+                    <div class="d-flex justify-content-center align-items-center object-fit-cover w-75 gap-2">
+                      <img class="img-fluid" alt="images photo" :src="tempProduct.imagesUrl[index]"
+                        v-if="tempProduct.imagesUrl[index]">
                     </div>
+
+
                   </div>
                 </div>
 
               </div>
+
             </div>
-            <div class="col-sm-6">
-              <div class="mb-3">
+            <div class="col-6">
+              <div class="row mb-3">
                 <label for="title" class="form-label">標題</label>
                 <input type="text" class="form-control" id="title" placeholder="請輸入標題" v-model="tempProduct.title">
               </div>
@@ -76,8 +91,10 @@
               <div class="row gx-2">
                 <div class="mb-3 col-md-12">
                   <label for="category" class="form-label">分類</label>
-                  <input type="text" class="form-control" id="category" placeholder="請輸入分類"
-                    v-model="tempProduct.category">
+                  <select id="category" class="form-select" v-model.trim="tempProduct.category">
+                    <option value="test">test</option>
+                    <option :value="item" v-for="item in findCategoriesList()" :key="item.id">{{ item }}</option>
+                  </select>
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="num" class="form-label">數量</label>
@@ -86,12 +103,9 @@
                 </div>
                 <div class="mb-3 col-md-6">
                   <label for="unit" class="form-label">單位</label>
-
-                  <select id="unit" class="form-select" v-model="tempProduct.unit">
-                    <!-- TODO 預設？？？-->
-                    <option value="件" selected>件</option>
+                  <select id="unit" class="form-select" v-model.trim="tempProduct.unit">
+                    <option value="件">件</option>
                     <option value="組">組</option>
-
                   </select>
                 </div>
 
@@ -148,6 +162,7 @@
 import {adminUploadApi} from "@/utils/const/path"
 import modalMixin from "@/utils/mixins/modalMixin"
 import itemLimit from '@/utils/const/itemLimit'
+import categories from '@/utils/const/categories'
 export default {
   inject: ['httpMessageState'],
   props: {
@@ -160,14 +175,16 @@ export default {
   data() {
     return {
       modal: {},
-      tempProduct: {},
-      itemLimit: itemLimit
+      tempProduct: {unit: ""},
+      itemLimit: itemLimit,
+      categories: categories,
     }
   },
   watch: {
     product() { //NOTE 單向數據流 外層不能修改內層，但可以這樣改內容資料，當外層 prop 改變就監聽改內層 data
       this.tempProduct = this.product;
       this.tempProduct.imagesUrl = this.tempProduct.imagesUrl ? this.tempProduct.imagesUrl : [];
+      this.tempProduct.unit = this.product.unit ? this.product.unit : "件";
     }
   },
   mixins: [modalMixin],
@@ -175,7 +192,21 @@ export default {
     console.log("refs", this.$refs)
   },
   methods: {
+    findCategoriesList() {
+      let list = []
+      for (const [key, value] of Object.entries(this.categories,)) {
+        if (value.sub_category) {
+          for (const subKey of Object.keys(value.sub_category)) {
+            list.push(`${key}/${subKey}`)
+          }
+        } else {
+          list.push(`${key}`)
+        }
+        console.log(key, value);
+      }
 
+      return list
+    },
     uploadFile(isMain, index) {
       let uploadedFile = null;
       if (isMain) {
@@ -209,4 +240,4 @@ export default {
   },
 
 }
-</script>@/utils/const/path
+</script>
