@@ -6,14 +6,13 @@
       <div class="d-flex justify-content-center  mb-2 container  position-relative ">
         <div class="mx-auto  ">
           <router-link to="/">
-            <div class="img-fluid "><img src="@/assets/icons/logo_home.svg" alt="Logo"></div>
+            <div class="img-fluid " id="logo"><img src="@/assets/icons/logo_home.svg" alt="Logo"></div>
           </router-link>
         </div>
 
 
         <div class="position-absolute  end-0 bottom-0  ">
           <div class="d-flex align-items-center ">
-
             <router-link to="/user/saves"> <img src="@/assets/icons/save.svg" alt="save"> </router-link>
             <img src="@/assets/icons/split.svg" alt="split">
             <div class="d-flex gap-2 justify-content-center  align-items-center ">
@@ -22,7 +21,6 @@
                   <img src="@/assets/icons/cart.svg" alt="cart">
                   <div class="bg-black text-white px-2 py-0  rounded-1  ">
                     <span v-if="!isGetCartLoading">{{ cartTotalQty }}</span>
-
                     <div v-else class="spinner-border spinner-border-sm" role="status">
                       <span class="visually-hidden">Loading...</span>
                     </div>

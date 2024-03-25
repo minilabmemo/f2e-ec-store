@@ -5,10 +5,10 @@
     <HomeBanner></HomeBanner>
     <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
 
-    <HomeItems section="NEW ARRIVAL" :CAT="categories.new.key" :products="products"></HomeItems>
+    <HomeItems section="NEW ARRIVAL" :CAT="categories.new.key" :products="products" id="news"></HomeItems>
 
     <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
-    <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products"></HomeItems>
+    <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products" id="special"></HomeItems>
     <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
     <div class="row g-5 ">
       <div class="col-4"><img src="@/assets/images/design/d1.png" alt="discount"></div>
@@ -18,7 +18,8 @@
     <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
     <h1 class="mb-5 ">COLLECTIONS</h1>
     <div class="d-flex flex-column gap-3  ">
-      <div class=" "><img src="@/assets/images/design/c1.png" alt="style" class="img-fluid"></div>
+      <div class=""><img src="@/assets/images/design/c1.png" alt="style" class="img-fluid"></div>
+
       <div class=""><img src="@/assets/images/design/c2.png" alt="style" class="img-fluid"></div>
     </div>
     <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>

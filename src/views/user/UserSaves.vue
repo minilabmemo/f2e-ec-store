@@ -1,7 +1,7 @@
 <template>
 
-  <div class="fs-3 fw-bold " v-if="saveItems.length === 0"> 無收藏商品。</div>
-  <table class="table mt-4" v-if="saveItems.length !== 0">
+  <div class="fs-3 fw-bold " v-if="!this.saveItems || Object.keys(saveItems).length === 0"> 無收藏商品。</div>
+  <table class="table mt-4" v-if="this.saveItems && saveItems.length !== 0">
     <thead>
       <tr>
         <th>商品</th>
@@ -46,7 +46,8 @@
     </tbody>
   </table>
 
-  <Pagination :pages="pagination" @change-page-num="filterItemsByPage" v-if="saveItems.length !== 0"></Pagination>
+  <Pagination :pages="pagination" @change-page-num="filterItemsByPage" v-if="this.saveItems && saveItems.length !== 0">
+  </Pagination>
 </template>
 
 <script>
@@ -59,18 +60,22 @@ export default {
   watch: {
     products: {
       handler: function (val, oldVal) {
-        for (const [key, item] of Object.entries(this.saveItems)) {
-          this.saveItems[key].on_stock = false
-          val.forEach(element => {
-            if (item.id === element.id) {
-              this.saveItems[key].origin_price = element.origin_price
-              this.saveItems[key].price = element.price
-              this.saveItems[key].on_stock = true
 
-            }
-          });
+        if (this.saveItems) {
+          for (const [key, item] of Object.entries(this.saveItems)) {
+            this.saveItems[key].on_stock = false
+            val.forEach(element => {
+              if (item.id === element.id) {
+                this.saveItems[key].origin_price = element.origin_price
+                this.saveItems[key].price = element.price
+                this.saveItems[key].on_stock = true
+
+              }
+            });
+          }
+          this.filterItemsByPage()
         }
-        this.filterItemsByPage()
+
 
       }
 
@@ -98,10 +103,16 @@ export default {
   methods: {
     getSaveItems() {
       this.saveItems = JSON.parse(localStorage.getItem(this.saveKey))
+      console.log('this.saveItems', typeof this.saveItems);
+
       this.filterItemsByPage()
     },
 
     filterItemsByPage(currentPage = 1) {
+      if (!this.saveItems) {
+        return
+      }
+
       this.pagination.current_page = currentPage
       this.pagination.total_pages = Math.ceil(Object.keys(this.saveItems).length / this.dataPerPage);
       this.pagination.has_pre = true;
