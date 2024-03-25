@@ -1,6 +1,6 @@
 <template>
   <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
-  <div class="row">
+  <div class="row products-layout py-5">
     <div class="col-3">
       <CATNav :products="products"></CATNav>
     </div>
@@ -88,4 +88,12 @@ export default {
     }
   },
 }
-</script>@/utils/mixins/getProductsAll
+</script>
+
+
+<style lang="css" scoped>
+.products-layout {
+  mix-height: 50vh;
+  overflow-y: auto;
+}
+</style>

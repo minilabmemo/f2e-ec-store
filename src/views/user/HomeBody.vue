@@ -46,6 +46,7 @@ import categories from '@/utils/const/categories'
 import HomeBanner from '@/components/user/HomeBanner.vue';
 import HomeItems from '@/components/user/HomeItems.vue';
 import getAllProducts from '@/utils/mixins/getProductsAll';
+
 export default {
   components: {HomeBanner, HomeItems},
   data() {
@@ -70,4 +71,3 @@ export default {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
 }
 </style>
-@/utils/mixins/getProductsAll

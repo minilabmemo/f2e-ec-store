@@ -1,7 +1,7 @@
 <template>
   <ToastMessages></ToastMessages>
-  <div class="tenor-sans-regular ">
-    <header class="h-shadow mb-4">
+  <div class="tenor-sans-regular   ">
+    <header class="h-shadow mb-4 col" id="header">
 
       <div class="d-flex justify-content-center  mb-2 container  position-relative ">
         <div class="mx-auto  ">
@@ -51,39 +51,10 @@
       <div class="  border-bottom   "></div>
       <HomeNav></HomeNav>
     </header>
-    <div class="container">
+    <div class="container " id="content">
       <RouterView />
-
     </div>
-    <footer class="bg-orange-100 container-fluid p-5 text-gray-500 ">
-      <div class="container">
-        <div class=" row d-flex justify-content-center ">
-          <div class="col-4 d-flex flex-column  gap-2 ">
-            <div class="row row-cols-2 g-1 gy-3 ">
-              <div class="col">公司資訊</div>
-              <div class="col">售後服務</div>
-              <div class="col">品牌介紹</div>
-              <div class="col">常見問題</div>
-            </div>
-
-
-          </div>
-          <div class="col-4">
-            <div class="w-75 ">客服時間：上午 10:30~12:00, 下午 13:30~18:00（例假日休息）</div>
-          </div>
-          <div class="col-4">
-            <div>星展區，時尚大道 88 號，韓星大樓 3 樓</div>
-            <div>(02) 888-5678</div>
-            <div>koringoffice@line.tw </div>
-          </div>
-
-        </div>
-      </div>
-
-
-
-
-    </footer>
+    <HomeFooter></HomeFooter>
   </div>
 </template>
 
@@ -97,9 +68,10 @@ import HomeNav from '@/components/user/HomeNav.vue';
 import {computed} from 'vue'
 import emitter from "@/utils/methods/emitter";
 import ToastMessages from '@/components/ToastMessages.vue';
-import Dropdown from 'bootstrap/js/dist/Dropdown';
+import HomeFooter from '@/components/HomeFooter.vue';
+import Dropdown from 'bootstrap/js/dist/dropdown.js';
 export default {
-  components: {HomeNav, ToastMessages},
+  components: {HomeNav, ToastMessages, HomeFooter},
   provide() {
     return {
       emitter,
@@ -147,5 +119,9 @@ export default {
 <style scoped>
 .h-shadow {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+#content {
+  min-height: 60vh;
 }
 </style>
