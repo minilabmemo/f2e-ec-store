@@ -10,7 +10,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div class="row">
+          <form class="row needs-validation" novalidate>
             <div class="col-6">
               <div class="row">
                 <div><span class="text-sm text-danger ">*圖片上傳限制 1MB</span></div>
@@ -85,7 +85,7 @@
               <div class="row mb-3">
                 <label for="title" class="form-label">*標題</label>
                 <input type="text" class="form-control " id="title" placeholder="請輸入標題" v-model="tempProduct.title"
-                  @blur="customCheck('title')" :class="{ 'is-invalid': invalidMap.get('title') }">
+                  required>
                 <div class="invalid-feedback">
                   *標題必填
                 </div>
@@ -102,8 +102,7 @@
                 <div class="mb-3 col-md-6">
                   <label for="num" class="form-label">*數量</label>
                   <input type="number" class="form-control" id="num" placeholder="請輸入數量" v-model="tempProduct.num"
-                    :min="itemLimit.min_num" :max="itemLimit.max_num" @blur="customCheck('num')"
-                    :class="{ 'is-invalid': invalidMap.get('num') }">
+                    :min="itemLimit.min_num" :max="itemLimit.max_num" @blur="customCheck('num')" required>
                   <div class="invalid-feedback">
                     *數量必填
                   </div>
@@ -122,8 +121,7 @@
                 <div class="mb-3 col-md-6">
                   <label for="origin_price" class="form-label">*原價</label>
                   <input type="number" class="form-control" id="origin_price" placeholder="請輸入原價"
-                    v-model="tempProduct.origin_price" :min="itemLimit.min_price" :max="itemLimit.max_price"
-                    @blur="customCheck('origin_price')" :class="{ 'is-invalid': invalidMap.get('origin_price') }">
+                    v-model="tempProduct.origin_price" :min="itemLimit.min_price" :max="itemLimit.max_price" required>
                   <div class="invalid-feedback">
                     *原價必填
                   </div>
@@ -131,8 +129,7 @@
                 <div class="mb-3 col-md-6">
                   <label for="price" class="form-label">*售價</label>
                   <input type="number" class="form-control" id="price" placeholder="請輸入售價" v-model="tempProduct.price"
-                    :min="itemLimit.min_price" :max="itemLimit.max_price" @blur="customCheck('price')"
-                    :class="{ 'is-invalid': invalidMap.get('price') }">
+                    :min="itemLimit.min_price" :max="itemLimit.max_price" @blur="customCheck('price')" required>
                   <div class="invalid-feedback">
                     *售價必填
                   </div>
@@ -160,12 +157,13 @@
                 </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消
           </button>
           <button type="submit" class="btn btn-primary" @click="confirmAction(tempProduct)">確認</button>
+
         </div>
       </div>
     </div>
@@ -194,7 +192,7 @@ export default {
       tempProduct: {unit: ""},
       itemLimit: itemLimit,
       categories: categories,
-      invalidMap: new Map(),
+
     }
   },
   watch: {
@@ -254,24 +252,38 @@ export default {
     addImages() {
       this.tempProduct.imagesUrl.push([]);
     },
-    customCheck(name) {
-      if (!this.tempProduct[name]) {
-        this.invalidMap.set(name, true);
-      } else {
-        this.invalidMap.delete(name);
-      }
-    },
-    confirmAction(tempProduct) {
-      this.customCheck('title');
-      this.customCheck('price');
-      this.customCheck('origin_price');
 
-      if (this.invalidMap.size === 0) {
+    confirmAction(tempProduct) {
+
+      const form = document.querySelector('.needs-validation');
+      if (form.checkValidity()) {
+        form.submit();
         this.$emit('update-product', tempProduct);
+      } else {
+        form.classList.add('was-validated');
       }
 
     }
   },
+  // mounted() {
+
+  //   var forms = document.querySelectorAll('.needs-validation')
+  //   // console.log("forms", forms)
+  //   // Loop over them and prevent submission
+  //   // Array.prototype.slice.call(forms)
+  //   //   .forEach(function (form) {
+  //   //     form.addEventListener('submit', function (event) {
+  //   //       console.log("submit", form)
+  //   //       if (!form.checkValidity()) {
+  //   //         event.preventDefault()
+  //   //         event.stopPropagation()
+  //   //         console.log("form.checkValidity", form.checkValidity)
+  //   //       }
+
+  //   //       form.classList.add('was-validated')
+  //   //     }, false)
+  //   //   })
+  // },
 
 }
 </script>
