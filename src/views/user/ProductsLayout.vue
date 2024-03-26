@@ -1,10 +1,10 @@
 <template>
 
   <div class="row products-layout py-5">
-    <div class="col-3 d-none d-sm-bloc">
+    <div class="col-lg-3 d-none d-lg-flex">
       <CATNav></CATNav>
     </div>
-    <div class="col-9">
+    <div class="col-12 col-lg-9">
       <router-view></router-view>
     </div>
 

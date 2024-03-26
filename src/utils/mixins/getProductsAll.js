@@ -3,11 +3,11 @@ import {userProductsApi} from '@/utils/const/path'
 export default {
   data() {
     return {
-      products: {},
+      products: [],
       isLoading: false,
-      status: {
-        error: ""
-      },
+      // status: {
+      //   error: ""
+      // },
     };
   },
   methods: {
@@ -30,8 +30,8 @@ export default {
     }
   },
   created() {
-    console.warn("created:getAllData", this.products) //TODO 個字觸發
-    this.getAllData();
+
+    this.getAllData();//TODO 個字觸發
 
   },
 

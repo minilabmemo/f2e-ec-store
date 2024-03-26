@@ -2,7 +2,7 @@
 
   <nav class="navbar navbar-expand-lg position-relative" aria-label="Offcanvas navbar large">
     <div class="container-fluid ">
-      <div class="d-flex d-lg-none  container-lg  row d-flex justify-content-center  align-items-center  ">
+      <div class="d-flex d-lg-none  container  row justify-content-center  align-items-center  ">
         <div class="col-4"> <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,7 +26,7 @@
           <button type="button" class="btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body container  ">
-          <CATNav :products="products" :isCollapsed="isCollapsed" v-if="isCollapsed"></CATNav>
+          <CATNav v-if="isCollapsed"></CATNav>
           <ul class="navbar-nav  mx-auto   d-flex  align-items-center   justify-content-center" v-else>
             <li class="nav-item mx-2 " v-for="(item, key) in categories" :key="item.name">
               <router-link :to="`/product/${key}/all`" class="nav-link "

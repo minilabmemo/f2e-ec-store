@@ -45,7 +45,8 @@ export default {
   provide() {
     return {
       emitter,
-      dataCart: computed(() => this.cart)
+      dataCart: computed(() => this.cart),
+      isGetCartLoading: computed(() => this.isGetCartLoading),
     };
   },
 
