@@ -42,13 +42,17 @@
 
 <script>
 import categories from '@/utils/const/categories'
+import getAllProducts from '@/utils/mixins/getProductsAll';
 export default {
   name: 'cat-nav',
   props: {
-    products: Array
+
+    isCollapsed: Boolean
   },
+  mixins: [getAllProducts],
   data() {
     return {
+      products: [],
       categories: categories,
       catNumMap: {}
     }
@@ -113,6 +117,8 @@ export default {
   watch: {
     products: {
       handler(newVal, oldVal) {
+        console.log('CATNAV', newVal);
+
         this.sumProductsCAT(newVal);
       },
       immediate: true // 立即執行一次
