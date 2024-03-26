@@ -5,7 +5,7 @@
     <div class="d-flex gap-2 justify-content-center  align-items-center ">
       <router-link to="/user/cartflow" class="nav-link ">
         <div class="d-flex gap-2 justify-content-center  align-items-center ">
-          <img src="@/assets/icons/cart.svg" alt="cart">
+          <img src="@/assets/icons/cart.svg" alt="cart" class="img-fluid ">
           <div class="bg-black text-white px-2 py-0  rounded-1  ">
             <span v-if="!isGetCartLoading">{{ cartTotalQty }}</span>
             <div v-else class="spinner-border spinner-border-sm" role="status">
@@ -37,25 +37,13 @@
 
 <script>
 
-import categories from '@/utils/const/categories'
-import getCart from '@/utils/mixins/getCart';
-
-import {computed} from 'vue'
-import emitter from "@/utils/methods/emitter";
 
 import Dropdown from 'bootstrap/js/dist/dropdown.js';
 export default {
+  inject: ['httpMessageState', 'dataCart',],
 
-  provide() {
-    return {
-      emitter,
-      dataCart: computed(() => this.cart)
-    };
-  },
   mounted() {
-    emitter.on('update-cartQty', () => {
-      this.getCart();
-    });
+
     var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
     var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
       return new Dropdown(dropdownToggleEl)
@@ -64,19 +52,13 @@ export default {
 
   data() {
     return {
-      categories: categories,
       cartTotalQty: 0,
       cart: {}
     }
   },
-  mixins: [getCart],
 
-  created() {
-    this.getCart();
-  },
   watch: {
-    cart(newCart, oldCart) {
-      console.log('watch newCart', newCart);
+    dataCart(newCart, oldCart) {
       this.cartTotalQty = 0;
       if (newCart.carts) {
         newCart.carts.forEach(element => {

@@ -1,15 +1,26 @@
 <template>
 
   <nav class="navbar navbar-expand-lg position-relative" aria-label="Offcanvas navbar large">
-    <div class="container-fluid">
+    <div class="container-fluid ">
+      <div class="d-flex d-lg-none  container-lg  row d-flex justify-content-center  align-items-center  ">
+        <div class="col-4"> <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button></div>
+        <div class="col-4">
+          <HomeLogo class="d-flex d-lg-none "></HomeLogo>
+        </div>
+        <div class="col-4">
+          <UserNav class="d-flex d-lg-none "></UserNav>
+        </div>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-        aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- <a class="navbar-brand" href="#">Navbar</a>
-      <div>test</div> -->
-      <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      </div>
+
+
+
+
+      <div class="row offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">登入/註冊</h5>
           <button type="button" class="btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -47,10 +58,12 @@
 import categories from '@/utils/const/categories'
 import Collapse from 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/offcanvas';
+import HomeLogo from '@/components/user/HomeLogo.vue';
 import CATNav from '@/components/user/CATNav.vue'
+import UserNav from '@/components/user/UserNav.vue';
 
 export default {
-  components: {CATNav},
+  components: {HomeLogo, CATNav, UserNav},
 
   data() {
     return {
@@ -86,13 +99,8 @@ export default {
       this.isCollapsed = true;
       console.log('this.isCollapsed', this.isCollapsed);
     });
-    console.log('this.isCollapsed', this.isCollapsed);
-    // var collapseElementList = [].slice.call(document.querySelectorAll('.collapse'))
-    // var collapseList = collapseElementList.map(function (collapseEl) {
-    //   return new Collapse(collapseEl, {
-    //     toggle: false
-    //   })
-    // })
+
+
   },
 }
 </script>

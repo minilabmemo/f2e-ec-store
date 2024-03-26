@@ -1,28 +1,28 @@
 <template>
 
-  <div class="  d-flex flex-column align-items-center ">
+  <div class="container-xl  d-flex flex-column align-items-center ">
 
     <HomeBanner></HomeBanner>
-    <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+    <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
 
     <HomeItems section="NEW ARRIVAL" :CAT="categories.new.key" :products="products" id="news"></HomeItems>
 
-    <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+    <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products" id="special"></HomeItems>
-    <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
-    <div class="row g-5 ">
+    <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
+    <div class="row  ">
       <div class="col-4"><img src="@/assets/images/design/d1.png" class="img-fluid" alt="discount"></div>
       <div class="col-4"><img src="@/assets/images/design/d2.png" class="img-fluid" alt="discount"></div>
       <div class="col-4"><img src="@/assets/images/design/d3.png" class="img-fluid" alt="discount"></div>
     </div>
-    <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+    <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <h1 class="mb-5 ">COLLECTIONS</h1>
     <div class="d-flex flex-column gap-3  ">
       <div class=""><img src="@/assets/images/design/c1.png" alt="style" class="img-fluid"></div>
 
       <div class=""><img src="@/assets/images/design/c2.png" alt="style" class="img-fluid"></div>
     </div>
-    <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
+    <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
 
     <div class="d-flex gap-5  ">
 
