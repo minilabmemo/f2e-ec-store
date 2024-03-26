@@ -1,6 +1,6 @@
 <template>
   <!-- TODO 空間高度放大 -->
-  <div class="container ">
+  <div class="container-xl ">
 
     <div class="row my-4 ">
       <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">

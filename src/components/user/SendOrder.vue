@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container">
+  <div class="container-xl">
     <div class="my-5 row justify-content-center">
       <Form class="col-md-6" v-slot="{ errors }" @submit="createOrder">
         <div class="mb-3">

@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="container-xl mt-5">
     <form class="row justify-content-center" @submit.prevent="login">
       <div class="col-md-6">
         <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>

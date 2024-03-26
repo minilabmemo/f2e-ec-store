@@ -1,6 +1,6 @@
 <template>
   <footer class="bg-orange-100 container-fluid p-5  text-gray-500   " id="footer">
-    <div class="container">
+    <div class="container-xl">
       <div class=" row d-flex justify-content-center g-3 ">
         <div class="col-12 col-sm-4  ">
           <div class="row row-cols-2 g-1 gy-3 ">

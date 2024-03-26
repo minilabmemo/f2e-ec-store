@@ -3,7 +3,7 @@
   <div class="tenor-sans-regular   ">
     <header class="h-shadow mb-4 col" id="header">
 
-      <div class="d-flex justify-content-center  mb-2 container  position-relative ">
+      <div class="container-xl d-flex justify-content-center  mb-2   position-relative ">
         <div class="mx-auto  ">
           <router-link to="/">
             <div class="img-fluid " id="logo"><img src="@/assets/icons/logo_home.svg" alt="Logo"></div>
@@ -51,7 +51,7 @@
       <div class="  border-bottom   "></div>
       <HomeNav></HomeNav>
     </header>
-    <div class="container " id="content">
+    <div class="container-xl " id="content">
       <RouterView />
     </div>
     <HomeFooter></HomeFooter>
@@ -69,9 +69,10 @@ import {computed} from 'vue'
 import emitter from "@/utils/methods/emitter";
 import ToastMessages from '@/components/ToastMessages.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
+import UserInfos from '@/components/user/UserInfos.vue';
 import Dropdown from 'bootstrap/js/dist/dropdown.js';
 export default {
-  components: {HomeNav, ToastMessages, HomeFooter},
+  components: {HomeNav, ToastMessages, HomeFooter, UserInfos},
   provide() {
     return {
       emitter,
