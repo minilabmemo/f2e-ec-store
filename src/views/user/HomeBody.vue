@@ -11,9 +11,9 @@
     <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products" id="special"></HomeItems>
     <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
     <div class="row g-5 ">
-      <div class="col-4"><img src="@/assets/images/design/d1.png" alt="discount"></div>
-      <div class="col-4"><img src="@/assets/images/design/d2.png" alt="discount"></div>
-      <div class="col-4"><img src="@/assets/images/design/d3.png" alt="discount"></div>
+      <div class="col-4"><img src="@/assets/images/design/d1.png" class="img-fluid" alt="discount"></div>
+      <div class="col-4"><img src="@/assets/images/design/d2.png" class="img-fluid" alt="discount"></div>
+      <div class="col-4"><img src="@/assets/images/design/d3.png" class="img-fluid" alt="discount"></div>
     </div>
     <div class="img-fluid  my-5"><img src="@/assets/icons/hr.svg" alt="hr"></div>
     <h1 class="mb-5 ">COLLECTIONS</h1>

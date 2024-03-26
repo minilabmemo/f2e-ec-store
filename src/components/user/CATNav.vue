@@ -1,48 +1,49 @@
 <template>
-  <div>
-    <ul class="nav flex-column mt-2 mb-5 ">
-      <li class="nav-item  lh-1   " v-for="(cat, key, index) in categories" :key="key">
-        <div class="d-flex align-items-center">
+
+  <ul class="navbar-nav flex-column mt-2 mb-5 ">
+    <li class="nav-item  lh-1   " v-for="(cat, key, index) in categories" :key="key">
+      <div class="d-flex align-items-center">
+        <img src="@/assets/icons/nav.svg" alt="nav"
+          v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/all`" width="12px" height="12px">
+        <router-link class="nav-link  fw-bold px-2 "
+          :class="{ 'text-300': !countByCAT(key), 'text-800': countByCAT(key) }" aria-current="page" href="#"
+          :to="`/product/${key}/all`">
+
+          {{ cat.name }} {{ key }} <span>({{ countByCAT(key) }})</span>
+        </router-link>
+      </div>
+
+
+      <ul class="navbar-nav flex-column px-4 " v-for="(item, subKey) in cat.sub_category" :key="subKey">
+        <li class="d-flex align-items-center  ">
           <img src="@/assets/icons/nav.svg" alt="nav"
-            v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/all`" width="12px" height="12px">
-          <router-link class="nav-link  fw-bold px-2 "
-            :class="{ 'text-300': !countByCAT(key), 'text-800': countByCAT(key) }" aria-current="page" href="#"
-            :to="`/product/${key}/all`">
+            v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/${subKey}`" width="12px"
+            height="12px">
+          <router-link class="nav-link   " :to="`/product/${key}/${subKey}`"
+            :class="{ 'text-300': !countByCAT(key, subKey), 'text-800': countByCAT(key, subKey) }">
+            {{ item.name }} {{ subKey }}
+            <span>
+              ({{ countByCAT(key, subKey) }})
+            </span>
 
-            {{ cat.name }} {{ key }} <span>({{ countByCAT(key) }})</span>
+
+
           </router-link>
-        </div>
+        </li>
+      </ul>
 
+      <hr class="my-2 w-75" v-if="index !== Object.keys(categories).length - 1">
+    </li>
 
-        <ul class="nav flex-column px-4 " v-for="(item, subKey) in cat.sub_category" :key="subKey">
-          <li class="d-flex align-items-center  ">
-            <img src="@/assets/icons/nav.svg" alt="nav"
-              v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/${subKey}`" width="12px"
-              height="12px">
-            <router-link class="nav-link   " :to="`/product/${key}/${subKey}`"
-              :class="{ 'text-300': !countByCAT(key, subKey), 'text-800': countByCAT(key, subKey) }">
-              {{ item.name }} {{ subKey }}
-              <span>
-                ({{ countByCAT(key, subKey) }})
-              </span>
+  </ul>
 
-
-
-            </router-link>
-          </li>
-        </ul>
-
-        <hr class="my-2 w-75" v-if="index !== Object.keys(categories).length - 1">
-      </li>
-
-    </ul>
-  </div>
 </template>
 
 
 <script>
 import categories from '@/utils/const/categories'
 export default {
+  name: 'cat-nav',
   props: {
     products: Array
   },
