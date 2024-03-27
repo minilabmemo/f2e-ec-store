@@ -2,19 +2,25 @@
 
   <nav class="navbar navbar-expand-lg position-relative" aria-label="Offcanvas navbar large">
     <div class="container-fluid ">
-      <div class="d-flex d-lg-none  container  row justify-content-center  align-items-center  ">
-        <div class="col-4"> <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button></div>
-        <div class="col-4">
-          <HomeLogo class="d-flex d-lg-none "></HomeLogo>
-        </div>
-        <div class="col-4">
-          <UserNav class="d-flex d-lg-none "></UserNav>
+      <div class="container-lg d-lg-none ">
+        <div class="row g-2    justify-content-center  align-items-center  ">
+          <div class="col-3 col-sm-2">
+            <button class="navbar-toggler btn-sm" type="button" data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+          <div class="col-9 col-sm-4 justify-content-center  align-items-center">
+            <HomeLogo></HomeLogo>
+          </div>
+
+          <div class="col-12 col-sm-5  justify-content-center  align-items-center">
+            <UserNav></UserNav>
+          </div>
         </div>
 
       </div>
+
 
 
 

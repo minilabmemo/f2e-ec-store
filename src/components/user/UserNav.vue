@@ -1,34 +1,46 @@
 <template>
-  <div class="d-flex justify-content-center  align-items-center">
-    <div class="">
-      <router-link to="/user/saves"> <img src="@/assets/icons/save.svg" alt="save" weight="24px"> </router-link>
+  <div class="row   w-100 justify-content-center  align-items-center">
+    <div class="col-1 col-md-2     d-flex justify-content-center  align-items-center">
+      <router-link to="/user/saves" class="nav-link "> <img src="@/assets/icons/save.svg" alt="save" width="24px"
+          height="24px">
+      </router-link>
     </div>
-    <div class="">
-      <img src="@/assets/icons/split.svg" alt="split">
+    <div class="col-1   d-flex justify-content-center  align-items-center">
+      <img src="@/assets/icons/split.svg" alt="split" width="24px" height="24px">
     </div>
-    <div class="d-flex justify-content-center  align-items-center">
+    <div class="col-3  col-md-2   ">
 
-      <router-link to="/user/cartflow" class="nav-link ">
-        <div class="d-flex gap-2 justify-content-center  align-items-center ">
-          <img src="@/assets/icons/cart.svg" alt="cart">
-          <div class="bg-black text-white px-2 py-0  rounded-1  ">
-            <span v-if="!isGetCartLoading" class=" ">{{ cartTotalQty }}</span>
-            <div v-else class="spinner-border spinner-border-sm" role="status">
-              <span class="visually-hidden">Loading...</span>
+      <div class="row  justify-content-center  align-items-center">
+        <router-link to="/user/cartflow" class="col-12 nav-link ">
+          <div class="row justify-content-center  align-items-center ">
+            <div class="col-3 col-md-4  d-flex justify-content-center  align-items-center"> <img
+                src="@/assets/icons/cart.svg" alt="cart" width="24px" height="24px"></div>
+
+            <div
+              class="col-3 col-md-4 bg-black text-white px-1 py-0  rounded-1  d-flex justify-content-center  align-items-center"
+              width="24px" height="24px">
+              <span v-if="!isGetCartLoading" class=" ">{{ cartTotalQty }}</span>
+              <div v-else class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
             </div>
           </div>
-        </div>
-      </router-link>
+        </router-link>
+      </div>
+
+
 
     </div>
-    <div class="">
-      <img src="@/assets/icons/split.svg" alt="split">
+    <div class="col-1   d-flex justify-content-center  align-items-center">
+      <img src="@/assets/icons/split.svg" alt="split" width="24px" height="24px">
     </div>
-    <div class="">
-      <div class="dropdown">
-        <button class="btn      dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+    <div class="col-1  col-md-2  d-flex justify-content-center  align-items-center">
+
+
+      <div class=" dropdown">
+        <button class="btn  btn-sm    dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
-          <img src="@/assets/icons/person.svg" alt="person">
+          <img src="@/assets/icons/person.svg" alt="person" width="24px" height="24px">
         </button>
         <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdownMenuButton">
           <router-link class="dropdown-item text-800 " to="/user/orders">查詢訂單</router-link>
@@ -36,6 +48,9 @@
 
         </div>
       </div>
+
+
+
     </div>
   </div>
   <!-- TODO show tooltip-->
