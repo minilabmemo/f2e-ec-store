@@ -26,10 +26,10 @@
 
     <div class="d-flex gap-5  ">
 
-      <div class="  my-5"><img src="@/assets/icons/facebook.svg" alt="facebook"></div>
-      <div class="my-5"><img src="@/assets/icons/Instagram.svg" alt="Instagram"></div>
-      <div class="my-5"><img src="@/assets/icons/YouTube.svg" alt="YouTube"></div>
-      <div class="my-5"><img src="@/assets/icons/line.svg" alt="line"></div>
+      <div class="my-5"><img src="@/assets/icons/facebook.svg" alt="facebook" class="img-fluid"></div>
+      <div class="my-5"><img src="@/assets/icons/Instagram.svg" alt="Instagram" class="img-fluid"></div>
+      <div class="my-5"><img src="@/assets/icons/YouTube.svg" alt="YouTube" class="img-fluid"></div>
+      <div class="my-5"><img src="@/assets/icons/line.svg" alt="line" class="img-fluid"></div>
     </div>
 
 

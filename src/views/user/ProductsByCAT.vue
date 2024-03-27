@@ -14,9 +14,9 @@
   </nav>
 
 
-  <div class="row">
+  <div class="row row-cols-2 row-cols-lg-3 ">
 
-    <SaleItem v-for="(item, index) in filterItems" :key="index" :item="item" class="col-4"
+    <SaleItem v-for="(item, index) in filterItems" :key="index" :item="item" class="col"
       :path="`${$route.params.category}/${$route.params.subcategory}`">
     </SaleItem>
     <div class="col-6 " v-if="!filterItems.length && !isLoading">
