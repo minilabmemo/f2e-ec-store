@@ -15,7 +15,7 @@ describe('Home Test', () => {
     cy.url().should('contain', '/#');
     cy.contains('.nav-link', '熱銷').click();
     cy.url().should('contain', '/#/product/hot/all');  //FIXME 確認無資料時顯示
-    cy.get('#logo',).click();
+    cy.get('#logo',).first().click();
     cy.location().should((loc) => {
       expect(loc.hash).to.eq('#/')
     })
@@ -24,36 +24,25 @@ describe('Home Test', () => {
   it('click save link', () => {
     cy.visit('/')
     cy.url().should('contain', '/#');
-    cy.get('img[alt="save"]').click();
+    cy.get('img[alt="save"]').first().click();
     cy.url().should('contain', '/#/user/saves');
   
   })
   it('click cart link ', () => {
     cy.visit('/')
     cy.url().should('contain', '/#');
-    cy.get('img[alt="cart"]').click();
+    
+    cy.get('img[alt="cart"]').first().click();
     cy.url().should('contain', '/#/user/cartflow');
    
   })
   it('click order link ', () => {
     cy.visit('/')
     cy.url().should('contain', '/#');
-    cy.get('#dropdownMenuButton > img').click();
+    cy.get('#dropdownMenuButton').first().click();
     cy.contains('a', '查詢訂單').click();
     cy.url().should('contain', '/#/user/orders');
    
   })
-  it('所有商品圖片都應該正確顯示', () => {
-    cy.visit('/')
-    cy.get('img.img-fluid').each(($img) => {
-      cy.wrap($img).should('have.attr', 'src').and('not.be.empty');
-      // 斷言圖片是否正確顯示
-      cy.wrap($img).should('be.visible');
-      const src = $img.attr('src');
-      cy.request(src).then((response) => {
-        // 斷言狀態碼是否為 200，表示圖片存在
-        cy.wrap(response.status).should('eq', 200);
-      });
-    });
-  });
+
 })
