@@ -1,6 +1,6 @@
 <template>
 
-  <button type="button" class="col-3 btn btn-outline-primary  " @click="removeItem()" @mouseover="hover = true"
+  <button type="button" class=" btn btn-outline-primary  " @click="removeItem()" @mouseover="hover = true"
     @mouseleave="hover = false" v-if="isSave">
     <div v-show="!hover">
       <div class="d-flex justify-content-center  align-items-center gap-1">
@@ -19,7 +19,7 @@
   </button>
 
 
-  <button type="button" class="col-3 btn " :class="{ 'btn-outline-800': !hover, 'btn-outline-primary': hover }"
+  <button type="button" class=" btn " :class="{ 'btn-outline-800': !hover, 'btn-outline-primary': hover }"
     @click="saveItem()" @mouseover="hover = true" @mouseleave="hover = false" v-else>
 
     <div v-show="!hover">

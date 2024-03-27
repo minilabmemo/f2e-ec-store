@@ -13,16 +13,17 @@
         <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
       </ol>
     </nav>
-    <div class="row">
-      <div class="col-4">
-        <img :src="product.imageUrl" alt="" class="img-fluid mb-3">
+    <div class="row  justify-content-center  align-items-start">
+      <div class="col-12 col-sm-4  d-flex justify-content-center  align-items-center">
+        <div style="max-width:300px"> <img :src="product.imageUrl" alt="" class="flex-image mb-3"></div>
+
       </div>
-      <div class="col-8">
-        <article class="row g-2 d-flex gap-2 justify-content-center  align-items-baseline py-3 ">
+      <div class="col-11 col-sm-8  d-flex justify-content-center  align-items-center">
+        <article class="row  justify-content-center  align-items-baseline py-3 ">
           <h3 class="col-12">{{ product.title }}</h3>
 
-          <div class="col-10">
-            <div class="d-flex gap-2 justify-content-center  align-items-baseline   ">
+          <div class="col-12 ">
+            <div class="row justify-content-center  align-items-baseline   ">
               <div class="col-7">
                 <span class="price " v-if="!product.origin_price"> 價格 ${{ product.origin_price }}</span>
                 <span class="text-300" v-if="product.origin_price"> <del>原價 ${{ product.origin_price }}</del></span>
@@ -33,34 +34,39 @@
               </div>
             </div>
             <hr>
-            <div class="row fw-bold ">
+            <div class="row fw-bold justify-content-center ">
               <div class="col-4">尺寸</div>
               <div class="col-4">顏色</div>
               <div class="col-4">數量</div>
             </div>
-            <div class="row mb-3">
+            <div class="row mb-3 justify-content-center ">
               <div class="col-4">Free</div>
               <div class="col-4">單一色</div>
               <div class="col-4">
-                <div class="mb-3 col-4 ">
-                  <input type="number" class="form-control form-control-sm" id="number" placeholder="1"
-                    v-model="itemQty" min="1" :max="product.num">
-                </div>
+
+                <input type="number" class=" form-control form-control-sm" id="number" placeholder="1" v-model="itemQty"
+                  min="1" :max="product.num">
+
 
               </div>
             </div>
-            <div class="row gap-3 ">
-              <button type="button" class="col-3 btn btn-outline-danger" @click="checkQty(product.id, itemQty)">
-                立即結帳
-              </button>
-              <button type="button" class="col-3 btn btn-outline-danger" @click="addToCart(product.id, itemQty, false)"
-                :class="{ disabled: isCartLoading }">
-                加到購物車
-              </button>
-              <SaveButton :item="{
+            <div class="row g-2 justify-content-center align-items-stretch ">
+              <div class="col-4  ">
+                <button type="button" class="h-100 btn btn-outline-danger" @click="checkQty(product.id, itemQty)">
+                  立即結帳
+                </button>
+              </div>
+              <div class="col-4 "> <button type="button" class="h-100 btn btn-outline-danger"
+                  @click="addToCart(product.id, itemQty, false)" :class="{ disabled: isCartLoading }">
+                  加到購物車
+                </button></div>
+              <div class="col-4">
+                <SaveButton class="h-100" :item="{
     title: product.title, id: product.id, imageUrl: product.imageUrl, on_stock: true
   }" v-if="product.id">
-              </SaveButton>
+                </SaveButton>
+              </div>
+
             </div>
 
           </div>
@@ -189,3 +195,13 @@ export default {
 
 };
 </script>
+
+
+<style lang="css" scoped>
+.flex-image {
+  object-fit: cover;
+  aspect-ratio: 2/3;
+  width: 100%;
+  height: auto;
+}
+</style>

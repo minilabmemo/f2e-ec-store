@@ -60,7 +60,7 @@
 <script>
 import categories from '@/utils/const/categories'
 import Collapse from 'bootstrap/js/dist/collapse';
-import 'bootstrap/js/dist/offcanvas';
+import Offcanvas from 'bootstrap/js/dist/offcanvas';
 import HomeLogo from '@/components/user/HomeLogo.vue';
 import CATNav from '@/components/user/CATNav.vue'
 import UserNav from '@/components/user/UserNav.vue';
@@ -100,13 +100,7 @@ export default {
 
 
   },
-  watch: {
-    $route(to, from) {
-      // 路由发生变化时的逻辑处理
-      console.log('to', to);
 
-    }
-  }
 }
 
 </script>
