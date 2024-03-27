@@ -13,8 +13,8 @@
   color:var(--bs-gray-500)
 }
 
-/* Small devices (landscape phones, 375px and up) */
-@media (min-width: 375px) {  
+/*Extra Small devices (landscape phones, 320px and up) */
+@media (min-width: 320px) {  
   h1 {font-size:1.125rem;} /*18px*/
   h3 {
     font-size:1rem;/*16px*/
@@ -29,6 +29,11 @@
     color: var(--bs-primary);
   }
   .q-btn{font-size:1rem}/*16px*/
+}
+
+/* Small devices (landscape phones, 375px and up) */
+@media (min-width: 375px) {  
+
 }
 /* Small devices (landscape phones, 544px and up) */
 @media (min-width: 544px) {  

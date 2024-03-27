@@ -3,7 +3,7 @@
   <nav class="navbar navbar-expand-lg position-relative" aria-label="Offcanvas navbar large">
     <div class="container-fluid ">
       <div class="container-lg d-lg-none ">
-        <div class="row g-2    justify-content-center  align-items-center  ">
+        <div class="row gy-2    justify-content-center  align-items-center  ">
           <div class="col-3 col-sm-2">
             <button class="navbar-toggler btn-sm" type="button" data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -25,13 +25,12 @@
 
 
 
-      <div class="row offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar"
-        aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
+      <div class=" offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header ">
           <h5 class="offcanvas-title" id="offcanvasNavbarLabel">登入/註冊</h5>
-          <button type="button" class="btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" class="btn btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body container  ">
+        <div class="offcanvas-body   ">
           <CATNav v-if="isCollapsed"></CATNav>
           <ul class="navbar-nav  mx-auto   d-flex  align-items-center   justify-content-center" v-else>
             <li class="nav-item mx-2 " v-for="(item, key) in categories" :key="item.name">
