@@ -93,7 +93,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.order = res.data.order;
-            console.log(this.order);
+       
           }
         });
     },

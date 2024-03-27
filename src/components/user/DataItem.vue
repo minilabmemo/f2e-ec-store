@@ -41,13 +41,7 @@ export default {
 
   },
   inject: ["status"],
-  created() {
-    console.log("product filterErr", this.filterErr)
-  },
-  update() {
-    console.log("product isLoading", this.status.isLoading)
 
-  },
 }
 </script>
 

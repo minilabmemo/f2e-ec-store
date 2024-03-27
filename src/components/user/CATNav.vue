@@ -109,15 +109,13 @@ export default {
       }
 
 
-      // console.log(typeof obj, obj)
       this.catNumMap = obj;
-      console.log("catNumMap obj", this.catNumMap)
+
     }
   },
   watch: {
     products: {
       handler(newVal, oldVal) {
-        console.log('CATNAV', newVal);
 
         this.sumProductsCAT(newVal);
       },

@@ -28,7 +28,7 @@ export default {
     const url = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/api/user/check`
     console.log("login", url)
     this.axios.post(url, this.user).then((response) => {
-      console.log(response.data)
+
       if (!response.data.success) {
         this.$router.push('/login')
       }

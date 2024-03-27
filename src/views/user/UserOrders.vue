@@ -89,7 +89,7 @@ export default {
         this.orders = response.data.orders;
         this.pagination = response.data.pagination;
         this.isLoading = false;
-        console.log(response);
+
       });
     },
     openModal(isNew, item) {

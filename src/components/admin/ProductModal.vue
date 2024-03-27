@@ -237,7 +237,7 @@ export default {
       const formData = new FormData();
       formData.append('file-to-upload', uploadedFile);
       this.$http.post(adminUploadApi, formData).then((response) => {
-        console.log(response.data);
+
         this.httpMessageState(response, '上傳圖片');
         if (response.data.success) {
           if (isMain) {
@@ -265,25 +265,6 @@ export default {
 
     }
   },
-  // mounted() {
-
-  //   var forms = document.querySelectorAll('.needs-validation')
-  //   // console.log("forms", forms)
-  //   // Loop over them and prevent submission
-  //   // Array.prototype.slice.call(forms)
-  //   //   .forEach(function (form) {
-  //   //     form.addEventListener('submit', function (event) {
-  //   //       console.log("submit", form)
-  //   //       if (!form.checkValidity()) {
-  //   //         event.preventDefault()
-  //   //         event.stopPropagation()
-  //   //         console.log("form.checkValidity", form.checkValidity)
-  //   //       }
-
-  //   //       form.classList.add('was-validated')
-  //   //     }, false)
-  //   //   })
-  // },
 
 }
 </script>

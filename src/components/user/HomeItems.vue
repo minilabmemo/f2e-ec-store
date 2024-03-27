@@ -43,14 +43,14 @@ export default {
   },
   watch: {
     products(newProducts, o) {
-      console.log("watch newProducts", newProducts)
+
       let previewItem = [];
       let filterProducts = newProducts.filter((item) => item.category.toString().includes(this.CAT))
 
       if (filterProducts.length >= 3) {
         previewItem = filterProducts.slice(0, 3);
       }
-      console.log("watch products", previewItem)
+   
       if (previewItem.length !== 0) {
         this.showItems = previewItem.map(item => ({
           title: item.title,

@@ -87,14 +87,14 @@ export default {
       this.$http.get(url, this.tempProduct).then((response) => {
         this.coupons = response.data.coupons;
         this.isLoading = false;
-        console.log(response);
+
       });
     },
     updateCoupon(tempCoupon) {
       if (this.isNew) {
         const url = `${adminCouponApi}`;
         this.$http.post(url, {data: tempCoupon}).then((response) => {
-          console.log(response, tempCoupon);
+
           this.httpMessageState(response, '新增優惠券');
           this.getCoupons();
           this.$refs.couponModal.hideModal();
@@ -102,7 +102,7 @@ export default {
       } else {
         const url = `${adminCouponApi}/${this.tempCoupon.id}`;
         this.$http.put(url, {data: this.tempCoupon}).then((response) => {
-          console.log(response);
+
           this.httpMessageState(response, '新增優惠券');
           this.getCoupons();
           this.$refs.couponModal.hideModal();
@@ -113,7 +113,7 @@ export default {
       const url = `${adminCouponApi}/${this.tempCoupon.id}`;
       this.isLoading = true;
       this.$http.delete(url).then((response) => {
-        console.log(response, this.tempCoupon);
+
         this.httpMessageState(response, '刪除優惠券');
         const delComponent = this.$refs.delModal;
         delComponent.hideModal();

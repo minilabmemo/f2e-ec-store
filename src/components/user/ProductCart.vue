@@ -150,7 +150,7 @@ export default {
       this.isLoading = true;
       this.$http.get(url).then((response) => {
         this.products = response.data.products;
-        console.log('products:', response);
+
         this.isLoading = false;
       });
     },
@@ -175,11 +175,11 @@ export default {
       const url = `${userCartApi}`;
       this.isLoading = true;
       this.$http.get(url).then((response) => {
-        console.log(response);
+
         this.isLoading = false;
-        console.log('response success', response.data.success);
+
         if (response.data.success) {
-          console.log('cart success', this.cart);
+
           this.cart = response.data.data;
         }
       });
@@ -201,7 +201,7 @@ export default {
         qty: item.qty,
       };
       this.$http.put(url, {data: cart}).then((res) => {
-        console.log(res);
+     
         this.status.loadingItem = '';
         this.updateUserCartQty();
         this.getCart();

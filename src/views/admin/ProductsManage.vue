@@ -78,7 +78,7 @@ export default {
       this.axios.get(url).then((response) => {
         this.isLoading = false;
         if (response.data.success) {
-          //console.log(response.data)
+
           this.products = response.data.products;
           this.pagination = response.data.pagination;
         }
@@ -86,7 +86,7 @@ export default {
       })
     },
     openModal(isNew, item) {
-      console.log(isNew, item)
+
       if (isNew) {
         this.tempProduct = {};
       } else {
@@ -100,8 +100,6 @@ export default {
 
       this.tempProduct = {...item};
       const delModal = this.$refs.delModal;
-      console.log(this.$refs)
-      console.log(delModal)
       delModal.showModal();
     },
     updateProduct(item) {
@@ -137,7 +135,7 @@ export default {
 
       let api = `${adminProductApi}/${this.tempProduct.id}`;
       this.$http.delete(api).then((response) => {
-        console.log(response.data);
+
         const delComponent = this.$refs.delModal;
         delComponent.hideModal();
         this.getProducts();

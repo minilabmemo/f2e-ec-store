@@ -89,7 +89,7 @@ export default {
   },
 
   mounted() {
-    console.log('mounted', this.stepRecord);
+
     var triggerTabList = [].slice.call(document.querySelectorAll('#pills-tab button'))
     triggerTabList.forEach(function (triggerEl) {
       var tabTrigger = new Tab(triggerEl)

@@ -103,7 +103,7 @@ export default {
   methods: {
     getSaveItems() {
       this.saveItems = JSON.parse(localStorage.getItem(this.saveKey))
-      console.log('this.saveItems', typeof this.saveItems);
+    
 
       this.filterItemsByPage()
     },

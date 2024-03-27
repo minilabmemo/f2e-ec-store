@@ -71,7 +71,7 @@ export default {
       switch (this.$route.params.category) {
         case 'all':
           itemByCAT = this.products.filter((item) => !item.category.toString().includes('test'));
-          console.log("all", itemByCAT)
+
           break;
         default:
           itemByCAT = this.products.filter((item) => item.category.toString().includes(this.$route.params.category));
@@ -86,7 +86,7 @@ export default {
           break;
       }
 
-      //  console.log("itemByCAT", itemByCAT)
+
       if (itemByCAT.length !== 0) {
         return itemByCAT.map(item => ({
           title: item.title,

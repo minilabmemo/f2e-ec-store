@@ -2,7 +2,7 @@ import emitter from '@/utils/methods/emitter';
 import type { AxiosResponse } from 'axios';
 
 export default function (response: AxiosResponse<any, any>, title = '更新') {
-  // console.log(typeof response)//object
+  
   if (response.data.success) {
     emitter.emit('push-message', {
       style: 'success',

@@ -15,7 +15,7 @@ export default {
         this.isGetCartLoading = false;
         if (response.data.success) {
           this.cart = response.data.data;
-          console.log("getCart cart", this.cart) //TODO remove
+
         } else {
           // this.status.error = "取得資料失敗，請稍後再重新載入。";
           console.log("err:", response.data)//TODO remove

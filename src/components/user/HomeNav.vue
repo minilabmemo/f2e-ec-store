@@ -85,11 +85,6 @@ export default {
       };
     }
   },
-  created() {
-    console.log('createdHomeNav', this.products);
-
-  },
-
   mounted() {
 
     var myOffcanvas = document.getElementById('offcanvasNavbar')
@@ -105,5 +100,13 @@ export default {
 
 
   },
+  watch: {
+    $route(to, from) {
+      // 路由发生变化时的逻辑处理
+      console.log('to', to);
+
+    }
+  }
 }
+
 </script>
