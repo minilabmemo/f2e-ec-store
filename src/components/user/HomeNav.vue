@@ -1,28 +1,26 @@
 <template>
 
   <nav class="navbar navbar-expand-lg position-relative" aria-label="Offcanvas navbar large">
-    <div class="container-fluid ">
-      <div class="container-lg d-lg-none ">
-        <div class="row gy-2    justify-content-center  align-items-center  ">
-          <div class="col-3 col-sm-2">
-            <button class="navbar-toggler btn-sm" type="button" data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+    <div class="container-fluid px-0 ">
+      <div class="container-lg d-lg-none p-0 ">
+        <div class="row gy-2    justify-content-between   align-items-center  ">
+          <div class="col-4 col-sm-3 d-flex  justify-content-start ">
+            <button class="navbar-toggler " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar" aria-label="Toggle navigation"
+              style="--bs-btn-padding-y: .10rem; --bs-btn-padding-x: .2rem; --bs-btn-font-size: .50rem;">
+              <span class="navbar-toggler-icon" style="height: 1.2rem;width: 1.2rem;"></span>
             </button>
           </div>
-          <div class="col-9 col-sm-4 justify-content-center  align-items-center">
+          <div class="col-4 col-sm-4 justify-content-center  align-items-center">
             <HomeLogo></HomeLogo>
           </div>
 
-          <div class="col-12 col-sm-5  justify-content-center  align-items-center">
+          <div class="col-4 col-sm-5  justify-content-center  align-items-center">
             <UserNav></UserNav>
           </div>
         </div>
 
       </div>
-
-
-
 
 
       <div class=" offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
