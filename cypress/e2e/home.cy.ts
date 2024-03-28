@@ -7,7 +7,7 @@ describe('Home Test', () => {
     cy.get('#logo').should('be.visible');
     cy.get('nav').should('be.visible');
     cy.get('#news').should('exist')
-    cy.get('#news > .row > :nth-child(1) > :nth-child(2) > h4').should('contain',"連身裙") //首頁先固定會顯示的內容，之後結合商品管理一起修正。
+    cy.get('#news  h4').should('contain',"連身裙") //首頁先固定會顯示的內容，之後結合商品管理一起修正。
     cy.get('#special').should('exist')
   })
   it('click nav link and back to home', () => {
