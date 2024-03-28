@@ -20,8 +20,7 @@
   - font
   - h1~h5 title size
   - class 新增：image size flex setting
-- 客製組件
-  -
+- ## 客製組件
   - minus-
 - network at 整體頁面
 
@@ -41,6 +40,7 @@
 - [x] New Arrival 顯示 New 分類商品，未獲取到資料則顯示 coming soon 圖示及預設商品名稱。
 - [x] Just For You 隨機顯示 Hot 分類商品，未獲取到資料則顯示 coming soon 圖示。
 - [x] 獲取資料中則商品名稱會顯示 Loading
+- [ ]關鍵字搜尋
 
 #### 商品列表
 

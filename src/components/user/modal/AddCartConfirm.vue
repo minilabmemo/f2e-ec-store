@@ -18,7 +18,7 @@
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
             @click="$emit('go-carts')">否，維持數量
           </button>
-          <button type="button" class="btn btn-primary text-white" @click="$emit('add-item')">是，新增商品
+          <button type="button" class="btn btn-primary " @click="$emit('add-item')">是，新增商品
           </button>
         </div>
       </div>

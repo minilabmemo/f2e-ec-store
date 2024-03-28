@@ -19,7 +19,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" @click="goOrderPage">稍後付款
           </button>
-          <button type="button" class="btn btn-primary text-white" @click="$emit('pay-order')">確認結帳
+          <button type="button" class="btn btn-primary" @click="$emit('pay-order')">確認結帳
           </button>
         </div>
       </div>

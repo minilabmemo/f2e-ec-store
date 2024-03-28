@@ -10,6 +10,16 @@
 
 
 /*button color redesign */
+.btn-primary {
+  --bs-btn-color: white;
+}
+
+.btn-primary:hover {
+  --bs-btn-hover-color: white;
+}
+.btn-outline-secondary:hover {
+  --bs-btn-hover-color: white;
+}
 
 .btn-outline-primary:hover {
   --bs-btn-hover-color: white;
