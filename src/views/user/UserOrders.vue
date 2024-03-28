@@ -1,6 +1,51 @@
 <template>
   <LoadingOverlay :active="isLoading"></LoadingOverlay>
-  <table class="table mt-4">
+  <table class="phone-table table table-sm align-middle d-table d-lg-none ">
+    <thead>
+      <tr>
+        <th>訂單日期／編號</th>
+        <th>付款狀況</th>
+      </tr>
+    </thead>
+    <tbody>
+      <template v-for="(item, key) in orders" :key="key">
+
+        <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
+          <td>
+            <div> {{ $filters.date(item.create_at) }}</div>
+            <a href="#" class="link-opacity-100 link-opacity-75-hover text-nowrap "
+              @click.prevent="openModal(false, item)"> <i class="bi bi-search"></i>
+              {{ item.id }} </a>
+
+          </td>
+          <td>
+
+
+
+
+            <div class="d-flex justify-content-start align-items-center  gap-1 flex-wrap ">
+              <div class="">$ {{ item.total }}</div>
+              <div class="d-flex justify-content-start align-items-center  gap-1  flex-wrap ">
+
+                <div class="rounded-circle" :class="{ 'bg-success ': item.is_paid, 'bg-primary': !item.is_paid }"
+                  style="height: 15px;width: 15px;">
+                </div>
+                <span v-if="item.is_paid">
+                  已付款
+                </span>
+                <span v-else>未付款 </span>
+                <button class="btn btn-outline-danger btn-sm text-nowrap " @click="confirmPay(item)"
+                  v-if="!item.is_paid">付款</button>
+              </div>
+
+            </div>
+
+          </td>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+  <table class="pc-table table align-middle d-none d-lg-table ">
     <thead>
       <tr>
         <th>訂單編號</th>
@@ -33,25 +78,29 @@
           </td>
           <td class="text-right">{{ item.total }}</td>
           <td>
-            <div class="form-check form-switch">
 
-              <div class="d-flex justify-content-start align-items-center  gap-1 ">
-                <div class="  rounded-circle " :class="{ 'bg-success ': item.is_paid, 'bg-primary': !item.is_paid }"
-                  style="height: 15px;width: 15px;">
-                </div>
-                <span v-if="item.is_paid">
-                  已付款
-                </span>
-                <span v-else>未付款 <button class="btn btn-outline-danger btn-sm" @click="confirmPay(item)"
-                    v-if="!item.is_paid">付款</button></span>
+
+            <div class="d-flex justify-content-start align-items-center  gap-1 flex-wrap ">
+              <div class="  rounded-circle " :class="{ 'bg-success ': item.is_paid, 'bg-primary': !item.is_paid }"
+                style="height: 15px;width: 15px;">
               </div>
+              <span v-if="item.is_paid">
+                已付款
+              </span>
+              <span v-else>未付款 </span>
+
             </div>
+            <button class="btn btn-outline-danger btn-sm text-nowrap " @click="confirmPay(item)"
+              v-if="!item.is_paid">付款</button>
+
           </td>
 
         </tr>
       </template>
     </tbody>
   </table>
+
+
   <OrderModal :order="tempOrder" ref="orderModal"></OrderModal>
   <CheckoutConfirm :item="tempOrder" ref="CheckoutConfirm" @pay-order="payOrder"> </CheckoutConfirm>
   <Pagination :pages="pagination" @change-page-num="getOrders"></Pagination>
@@ -59,7 +108,7 @@
 
 <script>
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
-import OrderModal from '@/components/admin/orderModal.vue';
+import OrderModal from '@/components/orderModal.vue';
 import Pagination from '@/components/Pagination.vue';
 import {userOrdersApi, userOrderPayApi} from '@/utils/const/path'
 

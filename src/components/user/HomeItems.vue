@@ -1,12 +1,17 @@
 <template>
   <section class="d-flex flex-column align-items-center ">
     <h1 class=" ">{{ section }}</h1>
-    <div class="row">
-      <DataItem v-for="(item, index) in showItems" :key="index" :item="item" class="col-4" :filter-err="filterErr">
-      </DataItem>
-    </div>
+    <router-link :to="`/product/${CAT}/all`" class="nav-link">
+      <div class="row">
+
+        <DataItem v-for="(item, index) in showItems" :key="index" :item="item" class="col-4" :filter-err="filterErr">
+        </DataItem>
+      </div>
+    </router-link>
     <div class="d-flex justify-content-center gap-3">
-      <button class="btn btn-black q-btn">Explore More <img src="@/assets/icons/next_arrow.svg" alt="Next Arrow">
+      <button class="btn btn-black q-btn">
+        <router-link :to="`/product/${CAT}/all`" class="nav-link">
+          Explore More <img src="@/assets/icons/next_arrow.svg" alt="Next Arrow"></router-link>
       </button>
     </div>
   </section>
@@ -43,14 +48,13 @@ export default {
   },
   watch: {
     products(newProducts, o) {
-
       let previewItem = [];
       let filterProducts = newProducts.filter((item) => item.category.toString().includes(this.CAT))
 
       if (filterProducts.length >= 3) {
         previewItem = filterProducts.slice(0, 3);
       }
-   
+
       if (previewItem.length !== 0) {
         this.showItems = previewItem.map(item => ({
           title: item.title,

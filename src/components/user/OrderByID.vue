@@ -1,6 +1,6 @@
 <template>
   <div class="my-5 row justify-content-center">
-    <form class="col-md-6" @submit.prevent="confirmPay" v-if="order">
+    <form class="" @submit.prevent="confirmPay" v-if="order">
       <table class="table align-middle">
         <thead>
           <th>品名</th>
@@ -9,15 +9,15 @@
         </thead>
         <tbody>
           <tr v-for="item in order.products" :key="item.id">
-            <td>{{ item.product.title }}</td>
+            <td style="width:60%">{{ item.product.title }}</td>
             <td>{{ item.qty }}/{{ item.product.unit }}</td>
-            <td class="text-end">{{ item.final_total }}</td>
+            <td>{{ item.final_total }}</td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
             <td colspan="2" class="text-end">總計</td>
-            <td class="text-end">{{ order.total }}</td>
+            <td>{{ order.total }}</td>
           </tr>
         </tfoot>
       </table>
@@ -93,7 +93,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.order = res.data.order;
-       
+
           }
         });
     },

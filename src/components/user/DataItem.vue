@@ -5,7 +5,6 @@
     <div class="position-relative ">
 
       <img :src="item.src" alt="image" class="flex-image">
-
       <div class="photo-mix-text" :class="item.color" v-if="status.isLoading || status.error | filterErr !== ''">
         <h1>coming</h1>
         <h1>soon</h1>
@@ -27,7 +26,7 @@
 
     </div>
 
-    <div class="price"></div>
+
   </div>
 </template>
 

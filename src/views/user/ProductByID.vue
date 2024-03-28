@@ -18,7 +18,7 @@
         <div style="max-width:300px"> <img :src="product.imageUrl" alt="" class="flex-image mb-3"></div>
 
       </div>
-      <div class="col-11 col-sm-8  d-flex justify-content-center  align-items-center">
+      <div class="col-11 col-sm-6  d-flex justify-content-center  align-items-center">
         <article class="row  justify-content-center  align-items-baseline py-3 ">
           <h3 class="col-12">{{ product.title }}</h3>
 

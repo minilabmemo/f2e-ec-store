@@ -20,11 +20,13 @@
                 </button>
               </td>
               <td>
+
                 <div class="d-flex  gap-2 ">
                   <div style="flex: 1;width: 100px"> <img :src="item.product.imageUrl" alt="imageUrl"
                       class="flex-image"></div>
                   <div style="flex: 2;" class=" d-flex   flex-column  align-items-start text-start gap-2">
-                    <div class=""> {{ item.product.title }}</div>
+                    <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
+                        }}</router-link></div>
                     <div class="d-flex   flex-column  align-items-start text-start gap-2 ">
                       <div>
                         <span class=" text-300"> <del>${{ item.product.origin_price }}</del></span>
@@ -51,6 +53,7 @@
                     </div>
                   </div>
                 </div>
+
               </td>
 
             </tr>
@@ -90,7 +93,8 @@
                 <div class="d-flex gap-2 ">
                   <div style="width: 100px"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image"></div>
                   <div class="d-flex   flex-column  align-items-start text-start ">
-                    <div class=""> {{ item.product.title }}</div>
+                    <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
+                        }}</router-link></div>
                     <div class="ms-2">
                       <span class=" text-300"> <del>${{ item.product.origin_price }}</del></span>
                       <span class=" text-primary  me-4 ">${{ item.product.price }}</span>

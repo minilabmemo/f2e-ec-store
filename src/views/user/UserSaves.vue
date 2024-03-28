@@ -3,20 +3,20 @@
   <div class="fs-3 fw-bold " v-if="!this.saveItems || Object.keys(saveItems).length === 0"> 無收藏商品。</div>
   <table class="table mt-4" v-if="this.saveItems && saveItems.length !== 0">
     <thead>
-      <tr>
-        <th>商品</th>
-        <th>操作</th>
+      <tr class="d-flex ">
+        <th style="flex:1">商品</th>
+        <th style="flex:1">操作</th>
       </tr>
     </thead>
     <tbody>
 
       <template v-for="(item, key) in displayItems" :key="key">
 
-        <tr class="">
-          <td class="col-6">
+        <tr class="d-flex ">
+          <td style="flex:1">
             <div class="d-flex ">
-              <div class="col-1"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
-              <div class="col-11 d-flex  flex-column  align-items-start text-start ms-2">
+              <div style="flex:1"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
+              <div style="flex:1" class="col-11 d-flex  flex-column  align-items-start text-start ms-2">
                 <div> {{ item.title }}</div>
                 <div class="d-flex gap-2 justify-content-center  align-items-center ms-2">
                   <span class="text-300" v-if="item.origin_price"> <del>${{ item.origin_price }}</del></span>
@@ -29,13 +29,13 @@
 
             </div>
           </td>
-          <td class="col-6">
-            <div class="col-6 btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="col-6 btn btn-outline-danger" :disabled="!item.on_stock">
+          <td style="flex:1">
+            <div class=" btn-group" role="group" aria-label="Basic example">
+              <button type="button" class=" btn btn-outline-danger" :disabled="!item.on_stock">
                 <router-link class="nav-link" :to="`/product/all/all/id/${item.id}`">前往商品頁</router-link>
 
               </button>
-              <button type="button" class="col-6 btn btn-outline-danger" @click="removeItem(item.id)">
+              <button type="button" class="btn btn-outline-danger" @click="removeItem(item.id)">
                 移出收藏
               </button>
             </div>
@@ -103,7 +103,7 @@ export default {
   methods: {
     getSaveItems() {
       this.saveItems = JSON.parse(localStorage.getItem(this.saveKey))
-    
+
 
       this.filterItemsByPage()
     },

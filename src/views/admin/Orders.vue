@@ -52,7 +52,7 @@
 
 <script>
 import DelModal from '@/components/DelModal.vue';
-import OrderModal from '@/components/admin/orderModal.vue';
+import OrderModal from '@/components/orderModal.vue';
 import Pagination from '@/components/Pagination.vue';
 import {adminOrderApi, adminOrdersApi} from '@/utils/const/path'
 
