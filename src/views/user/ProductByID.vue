@@ -45,7 +45,7 @@
               <div class="col-4">
 
                 <input type="number" class=" form-control form-control-sm" id="number" placeholder="1" v-model="itemQty"
-                  min="1" :max="product.num">
+                  min="1" :max="product.num" @change="checkMax(product, itemQty)">
 
 
               </div>
@@ -165,7 +165,14 @@ export default {
     updateUserCartQty() {
       this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
     },
+    checkMax(item, itemQty) {
+      if (itemQty > item.num) {
+        alert(`你輸入的數量大於可購買數量${item.num},自動更新為最大可購買數量。`)
+        this.itemQty = item.num;
+      }
+    },
     addToCart(id, qty = 1, redirect = false) {
+
       const url = `${userCartApi}`;
       const cart = {
         product_id: id,

@@ -32,7 +32,7 @@
 
 
 <script>
-//TODO <div class="text-primary ">[後端服務出現問題，請洽客服人員] </div>
+
 export default {
   props: {
     filterErr: String,
