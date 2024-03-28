@@ -35,6 +35,10 @@ const router = createRouter({
               name:"ProductsByID",
               path: 'id/:productId',
               component: () => import('../views/user/ProductByID.vue'),
+            }, {
+              name:"ProductByKey",
+              path: 'keyword/:keyword',
+              component: () => import('../views/user/ProductsByKey.vue'),
             }
           ]
         },

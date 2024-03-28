@@ -43,12 +43,14 @@
             </li>
 
           </ul>
-          <form class="row g-2 justify-content-center align-items-center " :class="formClasses" role="search">
+          <div class="row g-2 justify-content-center align-items-center " :class="searchClasses" role="search">
             <div class="col-9"> <input class="form-control form-control-sm   " type="search" placeholder="關鍵字搜尋"
-                aria-label="Search"></div>
-            <div class="col-auto"> <button class="btn btn-outline-primary btn-sm" type="submit"><i
-                  class="bi bi-search"></i></button></div>
-          </form>
+                aria-label="Search" v-model="keyword"></div>
+            <div class="col-auto">
+              <button class="btn btn-outline-primary btn-sm" type="button" @click="search"><i
+                  class="bi bi-search"></i></button>
+            </div>
+          </div>
 
         </div>
       </div>
@@ -70,13 +72,25 @@ export default {
 
   data() {
     return {
-
+      keyword: "",
       categories: categories,
       isCollapsed: false
     }
   },
+  methods: {
+    search() {
+      if (this.keyword == "") {
+        alert("請輸入關鍵字")
+      } else {
+        this.$router.push(`/product/all/all/keyword/${this.keyword}`)
+      }
+
+
+
+    }
+  },
   computed: {
-    formClasses() {
+    searchClasses() {
       return {
         'position-absolute': !this.isCollapsed,
         'end-0': !this.isCollapsed,
