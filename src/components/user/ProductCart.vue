@@ -2,99 +2,166 @@
   <LoadingOverlay :active="isLoading"></LoadingOverlay>
 
   <div class="row mt-4" v-if="cart && cart.carts && cart.carts.length !== 0">
-    <div class="col-md-12 px-5">
-      <div class="">
-        <table class="table align-middle">
-          <thead>
-            <tr>
-              <th></th>
-              <th>品名</th>
-              <th style="width: 110px">數量</th>
-              <th style="width: 110px">單價</th>
-            </tr>
-          </thead>
-          <tbody>
-            <template v-if="cart.carts">
-              <tr v-for="item in cart.carts" :key="item.id">
-                <td>
-                  <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.loadingItem === item.id"
-                    @click="removeCartItem(item.id)">
-                    <i class="bi bi-x"></i>
-                  </button>
-                </td>
-                <td>
-                  <div class="d-flex">
-                    <div class="col-1"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image"></div>
-                    <div class="col d-flex  flex-column  align-items-start text-start ">
-                      <div> {{ item.product.title }}</div>
-                      <div class="d-flex gap-2 justify-content-center  align-items-center ms-2">
-                        <span class="text-300"> <del>${{ item.product.origin_price }}</del></span>
-                        <span class="text-primary  me-4 ">${{ item.product.price }}</span>
-                        <div class="text-500  ">剩餘數量： {{ item.product.num }}</div>
+    <div class="col-12 ">
+      <table class="phone-table table align-middle d-table d-lg-none ">
+        <thead>
+          <tr>
+            <th></th>
+            <th>品名</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template v-if="cart.carts">
+            <tr v-for="item in cart.carts" :key="item.id">
+              <td>
+                <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.loadingItem === item.id"
+                  @click="removeCartItem(item.id)">
+                  <i class="bi bi-x"></i>
+                </button>
+              </td>
+              <td>
+                <div class="d-flex  gap-2 ">
+                  <div style="flex: 1;width: 100px"> <img :src="item.product.imageUrl" alt="imageUrl"
+                      class="flex-image"></div>
+                  <div style="flex: 2;" class=" d-flex   flex-column  align-items-start text-start gap-2">
+                    <div class=""> {{ item.product.title }}</div>
+                    <div class="d-flex   flex-column  align-items-start text-start gap-2 ">
+                      <div>
+                        <span class=" text-300"> <del>${{ item.product.origin_price }}</del></span>
+                        <span class=" text-primary  me-4 ">${{ item.product.price }}</span>
+                        <span class=" text-500  ">剩餘數量： {{ item.product.num }}</span>
                       </div>
 
-                      <div class="text-success  ms-2" v-if="item.coupon">
-                        已套用優惠券
+                      <div class="input-group input-group-sm ">
+                        <input type="number" class="form-control" min=1 :max="item.product.num"
+                          :disabled="item.id === status.loadingItem" @change="updateCart(item)"
+                          v-model.number="item.qty">
+                        <div class="input-group-text">/ {{ item.product.unit }}</div>
+
+
+                      </div>
+                      <div>
+                        <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
+                        ${{ $filters.currency(item.final_total) }}
                       </div>
                     </div>
 
+                    <div class="text-success  ms-2" v-if="item.coupon">
+                      已套用優惠券
+                    </div>
                   </div>
+                </div>
+              </td>
 
-
-                </td>
-                <td>
-                  <div class="input-group input-group-sm">
-                    <input type="number" class="form-control" min=1 :max="item.product.num"
-                      :disabled="item.id === status.loadingItem" @change="updateCart(item)" v-model.number="item.qty">
-                    <div class="input-group-text">/ {{ item.product.unit }}</div>
-
-                  </div>
-                </td>
-                <td class="text-end">
-                  <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
-                  {{ $filters.currency(item.final_total) }}
-                </td>
-              </tr>
-            </template>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3" class="text-end">總計</td>
-              <td class="text-end">{{ $filters.currency(cart.total) }}</td>
             </tr>
-            <tr v-if="cart.final_total !== cart.total">
-              <td colspan="3" class="text-end text-success">折扣價</td>
-              <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
-            </tr>
-          </tfoot>
-        </table>
-        <div class=" d-flex justify-content-end mb-5 gap-2 ">
-          <div class="">
-            <div class="input-group mb-3 input-group-sm">
-              <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
-              <div class="input-group-append ">
-                <button class="btn btn-secondary text-white" type="button" @click="addCouponCode">
-                  套用優惠碼
+          </template>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="text-end">總計</td>
+            <td class="text-end">{{ $filters.currency(cart.total) }}</td>
+          </tr>
+          <tr v-if="cart.final_total !== cart.total">
+            <td colspan="3" class="text-end text-success">折扣價</td>
+            <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <table class="pc-table table align-middle d-none d-lg-table ">
+        <thead>
+          <tr>
+            <th></th>
+            <th>品名</th>
+            <th style="width: 110px">數量</th>
+            <th style="width: 110px">單價</th>
+          </tr>
+        </thead>
+        <tbody>
+          <template v-if="cart.carts">
+            <tr v-for="item in cart.carts" :key="item.id">
+              <td>
+                <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.loadingItem === item.id"
+                  @click="removeCartItem(item.id)">
+                  <i class="bi bi-x"></i>
                 </button>
+              </td>
+              <td>
+                <div class="d-flex gap-2 ">
+                  <div style="width: 100px"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image"></div>
+                  <div class="d-flex   flex-column  align-items-start text-start ">
+                    <div class=""> {{ item.product.title }}</div>
+                    <div class="ms-2">
+                      <span class=" text-300"> <del>${{ item.product.origin_price }}</del></span>
+                      <span class=" text-primary  me-4 ">${{ item.product.price }}</span>
+                      <div class=" text-500  ">剩餘數量： {{ item.product.num }}</div>
+                    </div>
 
-              </div>
+                    <div class="text-success  ms-2" v-if="item.coupon">
+                      已套用優惠券
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </td>
+              <td>
+                <div class="input-group input-group-sm">
+                  <input type="number" class="form-control" min=1 :max="item.product.num"
+                    :disabled="item.id === status.loadingItem" @change="updateCart(item)" v-model.number="item.qty">
+                  <div class="input-group-text">/ {{ item.product.unit }}</div>
+
+                </div>
+              </td>
+              <td class="text-end">
+                <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
+                {{ $filters.currency(item.final_total) }}
+              </td>
+            </tr>
+          </template>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" class="text-end">總計</td>
+            <td class="text-end">{{ $filters.currency(cart.total) }}</td>
+          </tr>
+          <tr v-if="cart.final_total !== cart.total">
+            <td colspan="3" class="text-end text-success">折扣價</td>
+            <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+
+
+
+      <div class=" d-flex justify-content-end mb-5 gap-2 ">
+        <div class="">
+          <div class="input-group mb-3 input-group-sm">
+            <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
+            <div class="input-group-append ">
+              <button class="btn btn-secondary text-white" type="button" @click="addCouponCode">
+                套用優惠碼
+              </button>
 
             </div>
 
           </div>
-          <div class="">
-            <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all"
-                class="nav-link ">
-                新增其他商品</router-link>
-            </button>
-          </div>
+
         </div>
-
-
+        <div class="">
+          <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
+              新增其他商品</router-link>
+          </button>
+        </div>
       </div>
 
+
+
+
     </div>
-    <div class="row ">
+    <div class="col-12 ">
       <div class="col-12 ">
         <div class=" d-flex justify-content-center">
           <button class="btn btn-danger  text-white  " type="button" @click="$emit('go-next')">確認，填寫訂單</button>
@@ -201,7 +268,7 @@ export default {
         qty: item.qty,
       };
       this.$http.put(url, {data: cart}).then((res) => {
-     
+
         this.status.loadingItem = '';
         this.updateUserCartQty();
         this.getCart();
