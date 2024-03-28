@@ -15,6 +15,7 @@
         <div class="col-12 col-sm-4 text-center">
           <div class=" ">客服時間：上午 10:30~12:00, 下午 13:30~18:00</div>
           <div class=" ">（例假日休息）</div>
+
         </div>
         <div class="col-12 col-sm-4">
           <div class="text-center ">
@@ -31,7 +32,9 @@
     <hr>
     <div class="row mt-3 ">
       <div class="col-12  d-flex flex-column align-items-center  justify-content-center ">
-        <span>非商業練習用作品</span>
+        <span>非商業練習用作品，圖片來自 <a href="https://unsplash.com/" class="href">Unsplash</a> - <a
+            href="https://github.com/minilabmemo/f2e-ec-store/blob/main/img_source.md" class="href">來源</a> </span>
+
         <span class="text-center "> Copyright © 2024 Koring All rights reserved. </span>
 
 
