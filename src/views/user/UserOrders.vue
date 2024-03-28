@@ -170,6 +170,7 @@ export default {
         const url = `${userOrderPayApi}/${this.orderId}`;
         this.$http.post(url)
           .then((res) => {
+            this.httpMessageState(res, '付款');
             const confirmModal = this.$refs.CheckoutConfirm;
             confirmModal.hideModal();
             if (res.data.success) {

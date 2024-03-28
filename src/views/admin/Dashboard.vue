@@ -14,6 +14,7 @@ import Navbar from '@/components/admin/Navbar.vue';
 import emitter from "@/utils/methods/emitter";
 import ToastMessages from '@/components/ToastMessages.vue';
 export default {
+  inject: ['httpMessageState'],
   components: {Navbar, ToastMessages},
   provide() {
     return {emitter};
@@ -26,9 +27,9 @@ export default {
 
     this.axios.defaults.headers.common['Authorization'] = token
     const url = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/api/user/check`
-    console.log("login", url)
-    this.axios.post(url, this.user).then((response) => {
 
+    this.axios.post(url, this.user).then((response) => {
+      this.httpMessageState(response, '登入');
       if (!response.data.success) {
         this.$router.push('/login')
       }

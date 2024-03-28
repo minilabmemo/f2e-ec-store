@@ -110,12 +110,15 @@ export default {
       const url = `${userOrderPayApi}/${this.orderId}`;
       this.$http.post(url)
         .then((res) => {
+          this.httpMessageState(res, '付款');
           if (res.data.success) {
             this.getOrder();
             this.updateUserCartQty()
           }
           const confirmModal = this.$refs.CheckoutConfirm;
           confirmModal.hideModal();
+        }).catch((err) => {
+          catchErr(err)
         });
     },
   },
