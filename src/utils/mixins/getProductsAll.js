@@ -1,5 +1,6 @@
 
 import {userProductsApi} from '@/utils/const/path'
+import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 export default {
   data() {
     return {
@@ -14,25 +15,20 @@ export default {
     getAllData() {
       const url = userProductsApi;
       this.status.isLoading = true;
-      this.axios.get(url).then((response) => {
+      this.$http.get(url).then((response) => {
         this.status.isLoading = false;
         if (response.data.success) {
           this.products = response.data.products
         } else {
-          // this.error = "取得資料失敗，請稍後再重新載入。";
+          dataErr(response)
         }
       }).catch((err) => {
+        catchErr(err)
         this.status.isLoading = false;
-        // this.status.error = "取得資料錯誤，請稍後再重新載入。"; //TODO 錯誤集中
-        console.log("err:", err)
-
       });
     }
   },
   created() {
-
-    this.getAllData();//TODO 個字觸發
-
+    this.getAllData();
   },
-
 };

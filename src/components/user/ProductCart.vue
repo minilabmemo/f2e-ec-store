@@ -189,6 +189,7 @@
 
 <script>
 import {userProductsApi, userCartApi, userCouponApi, userOrderApi} from '@/utils/const/path'
+import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 export default {
   inject: ['httpMessageState', 'emitter'],
   emits: ['go-next'],
@@ -220,9 +221,16 @@ export default {
       const url = `${userProductsApi}`;
       this.isLoading = true;
       this.$http.get(url).then((response) => {
-        this.products = response.data.products;
-
         this.isLoading = false;
+        if (response.data.success) {
+          this.products = response.data.products;
+        } else {
+          dataErr(response)
+        }
+
+      }).catch((err) => {
+        catchErr(err)
+        this.status.isLoading = false;
       });
     },
     getProduct(id) {
@@ -246,13 +254,15 @@ export default {
       const url = `${userCartApi}`;
       this.isLoading = true;
       this.$http.get(url).then((response) => {
-
         this.isLoading = false;
-
         if (response.data.success) {
-
           this.cart = response.data.data;
+        } else {
+          dataErr(response)
         }
+      }).catch((err) => {
+        catchErr(err)
+
       });
     },
     updateUserCartQty() {

@@ -45,6 +45,7 @@
 import CouponModal from '@/components/admin/CouponModal.vue';
 import DelModal from '@/components/DelModal.vue';
 import {adminCouponsApi, adminCouponApi} from '@/utils/const/path'
+import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 export default {
   components: {CouponModal, DelModal},
   inject: ['httpMessageState'],
@@ -85,9 +86,17 @@ export default {
       this.isLoading = true;
       const url = `${adminCouponsApi}`;
       this.$http.get(url, this.tempProduct).then((response) => {
-        this.coupons = response.data.coupons;
         this.isLoading = false;
+        if (response.data.success) {
+          this.coupons = response.data.coupons;
+        } else {
+          dataErr(response)
+        }
 
+
+      }).catch((err) => {
+        catchErr(err)
+        this.status.isLoading = false;
       });
     },
     updateCoupon(tempCoupon) {

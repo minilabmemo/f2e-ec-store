@@ -1,5 +1,6 @@
 
 import {userCartApi} from '@/utils/const/path'
+import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 export default {
   data() {
     return {
@@ -17,13 +18,11 @@ export default {
           this.cart = response.data.data;
 
         } else {
-          // this.status.error = "取得資料失敗，請稍後再重新載入。";
-          console.log("err:", response.data)//TODO remove
+          dataErr(response)
         }
       }).catch((err) => {
         this.isGetCartLoading = false;
-        // this.status.error = "取得資料錯誤，請稍後再重新載入。"; //TODO 錯誤集中
-        console.log("err:", err)//TODO remove
+        catchErr(err)
 
       });
     },

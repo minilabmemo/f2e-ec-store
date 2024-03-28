@@ -55,7 +55,7 @@ import DelModal from '@/components/DelModal.vue';
 import OrderModal from '@/components/orderModal.vue';
 import Pagination from '@/components/Pagination.vue';
 import {adminOrderApi, adminOrdersApi} from '@/utils/const/path'
-
+import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 export default {
   inject: ['httpMessageState'],
   data() {
@@ -79,9 +79,17 @@ export default {
       const url = `${adminOrdersApi}?page=${currentPage}`;
       this.isLoading = true;
       this.$http.get(url, this.tempProduct).then((response) => {
-        this.orders = response.data.orders;
-        this.pagination = response.data.pagination;
         this.isLoading = false;
+        if (response.data.success) {
+          this.orders = response.data.orders;
+          this.pagination = response.data.pagination;
+        } else {
+          dataErr(response)
+        }
+
+
+      }).catch((err) => {
+        catchErr(err)
 
       });
     },

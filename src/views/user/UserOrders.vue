@@ -135,9 +135,17 @@ export default {
       const url = `${userOrdersApi}?page=${currentPage}`;
       this.isLoading = true;
       this.$http.get(url, this.tempProduct).then((response) => {
-        this.orders = response.data.orders;
-        this.pagination = response.data.pagination;
         this.isLoading = false;
+        if (response.data.success) {
+          this.orders = response.data.orders;
+          this.pagination = response.data.pagination;
+        } else {
+          dataErr(response)
+        }
+
+
+      }).catch((err) => {
+        catchErr(err)
 
       });
     },

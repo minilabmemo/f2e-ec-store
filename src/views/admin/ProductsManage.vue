@@ -1,6 +1,7 @@
 <template>
   <LoadingOverlay :active="isLoading"></LoadingOverlay>
-  <div>
+  <div class="pt-5">
+
     <div class="text-end">
       <button class="btn btn-primary " type="button" @click="openModal(true)"> 增加一個產品</button>
     </div>
@@ -9,6 +10,7 @@
         <tr>
           <th width="120">分類</th>
           <th>產品名稱</th>
+          <th width="120">數量</th>
           <th width="120">原價</th>
           <th width="120">*售價</th>
           <th width="100">是否啟用</th>
@@ -21,8 +23,13 @@
 
           <td>{{ item.category }}</td>
           <td class="d-flex ">
-            <div class="col-1"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
-            {{ item.title }}
+            <div style="flex:1"> <img style="width: 100px;" :src="item.imageUrl" alt="imageUrl" class="flex-image">
+            </div>
+            <div style="flex:2"> {{ item.title }}</div>
+
+          </td>
+          <td class="text-right">
+            {{ $filters.currency(item.num) }}
           </td>
           <td class="text-right">
             {{ $filters.currency(item.origin_price) }}
@@ -56,6 +63,7 @@ import ProductModal from "@/components/admin/ProductModal.vue";
 import DelModal from "@/components/DelModal.vue";
 import {adminProductApi} from '@/utils/const/path'
 import Pagination from '@/components/Pagination.vue';
+import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 
 export default {
   components: {ProductModal, DelModal, Pagination, },
@@ -75,15 +83,20 @@ export default {
     getProducts(page = 1) {
       const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${page}`
       this.isLoading = true;
-      this.axios.get(url).then((response) => {
+      this.$http.get(url).then((response) => {
         this.isLoading = false;
         if (response.data.success) {
 
           this.products = response.data.products;
           this.pagination = response.data.pagination;
+        } else {
+          dataErr(response)
         }
 
-      })
+      }).catch((err) => {
+        catchErr(err)
+
+      });
     },
     openModal(isNew, item) {
 

@@ -65,6 +65,7 @@
 <script>
 import {userOrderApi, userOrderPayApi} from '@/utils/const/path'
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
+import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 export default {
   components: {CheckoutConfirm},
   props: {
@@ -93,8 +94,12 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.order = res.data.order;
-
+          } else {
+            dataErr(response)
           }
+        }).catch((err) => {
+          catchErr(err)
+          this.status.isLoading = false;
         });
     },
     confirmPay() {
