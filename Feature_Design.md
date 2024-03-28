@@ -16,11 +16,13 @@
 ### 全局效果
 
 - 主題顏色
+
   - body-color
   - [x] font
   - [x] h1~h5 title size
   - [x] class 新增：image size flex setting
   - [x] 按鈕顏色調整
+
 - ## 客製組件
   - NA
 - network at 整體頁面
@@ -30,6 +32,7 @@
   - loading 效果調整
 
 - [x] RWD at 整體頁面
+  - [ ]注意整體 container 與橫軸
 
 ### 頁面細節
 

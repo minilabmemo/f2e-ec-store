@@ -9,7 +9,7 @@
   - 後臺管理（需登入）：http://localhost:5173/#/admin/dashboard/products/
   - 前台網站（免登入）：http://localhost:5173/
 
-- 功能請見：[Feature_Design](./Feature_Design.md)
+- 功能細節請見：[Feature_Design](./Feature_Design.md)
 - 專案建立與開發筆記：[README_create](./README_create.md)
 
 ## Start
