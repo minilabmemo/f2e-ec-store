@@ -1,15 +1,37 @@
+import './commands.cy'
 
+describe('Home Layout Test', () => {
 
-describe('Home Test', () => {
-  it('visits the landing page website.', () => {
+  it('visits the landing page website at 360px.', () => {
+    cy.viewport('samsung-s10')
     cy.visit('/')
-    cy.url().should('contain', '/#');
-    cy.get('#logo').should('be.visible');
-    cy.get('nav').should('be.visible');
-    cy.get('#news').should('exist')
-    cy.get('#news  h4').should('contain',"連身裙") //首頁先固定會顯示的內容，之後結合商品管理一起修正。
-    cy.get('#special').should('exist')
+    cy.get('.col-sm-3.justify-content-center > #logo').should('be.visible');
+    cy.visitAndCheckPage()
   })
+  it('visits the landing page website at 375px.', () => {
+    cy.viewport('iphone-6')
+    cy.visit('/')
+    cy.get('.col-sm-3.justify-content-center > #logo').should('be.visible');
+
+
+    cy.visitAndCheckPage()
+  })
+  it('visits the landing page website at 1440px.', () => {
+    cy.viewport('macbook-13')
+    cy.visit('/')
+    cy.get('.mx-auto #logo').should('be.visible');
+    cy.visitAndCheckPage()
+  })
+  it('visits the landing page website at 1536px.', () => {
+    cy.viewport('macbook-16')
+    cy.visit('/')
+    cy.get('.mx-auto #logo').should('be.visible');
+    cy.visitAndCheckPage()
+  })
+})
+
+describe('Home Action Test', () => {
+
   it('click nav link and back to home', () => {
     cy.visit('/')
     cy.url().should('contain', '/#');
@@ -26,15 +48,15 @@ describe('Home Test', () => {
     cy.url().should('contain', '/#');
     cy.get('img[alt="save"]').first().click();
     cy.url().should('contain', '/#/user/saves');
-  
+
   })
   it('click cart link ', () => {
     cy.visit('/')
     cy.url().should('contain', '/#');
-    
+
     cy.get('img[alt="cart"]').first().click();
     cy.url().should('contain', '/#/user/cartflow');
-   
+
   })
   it('click order link ', () => {
     cy.visit('/')
@@ -42,7 +64,7 @@ describe('Home Test', () => {
     cy.get('#dropdownMenuButton').first().click();
     cy.contains('a', '查詢訂單').click();
     cy.url().should('contain', '/#/user/orders');
-   
+
   })
 
 })
