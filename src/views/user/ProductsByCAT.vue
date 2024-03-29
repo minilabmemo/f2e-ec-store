@@ -16,10 +16,10 @@
 
   <div class="row row-cols-2 row-cols-lg-3 ">
 
-    <SaleItem v-for="(item, index) in filterItems" :key="index" :item="item" class="col"
+    <SaleItem v-for="(item, index) in showItems" :key="index" :item="item" class="col"
       :path="`${$route.params.category}/${$route.params.subcategory}`">
     </SaleItem>
-    <div class="col-6 " v-if="!filterItems.length && !status.isLoading">
+    <div class="col-6 " v-if="!showItems.length && !status.isLoading">
       <img src="@/assets/images/design/empty200.png" alt="empty200" class="img-fluid ">
     </div>
 
@@ -44,26 +44,13 @@ export default {
   data() {
     return {
       categories: categories,
-      products: [],
-
+      products: [], // all items
+      showItems: [],//filter by category & page
       filterErr: "",
     }
   },
-  mixins: [getAllProducts],//TODO layout & cat get twice?? 
-  computed: {
-
-    category_name() {
-      return categories[this.$route.params.category] ? categories[this.$route.params.category].name : ''
-    },
-    sub_category_name() {
-      if (
-        categories[this.$route.params.category]?.sub_category &&
-        categories[this.$route.params.category].sub_category[this.$route.params.subcategory]
-      ) {
-        return categories[this.$route.params.category].sub_category[this.$route.params.subcategory].name
-      }
-      return ""
-    },
+  mixins: [getAllProducts],
+  methods: {
     filterItems() {
 
       let itemByCAT = []
@@ -87,22 +74,37 @@ export default {
       }
 
 
-      if (itemByCAT.length !== 0) {
-        return itemByCAT.map(item => ({
-          title: item.title,
-          src: item.imageUrl,
-          ...item
 
-        }));
-      }
-      return itemByCAT
+      this.showItems = itemByCAT
     }
+  },
+  computed: {
+
+    category_name() {
+      return categories[this.$route.params.category] ? categories[this.$route.params.category].name : ''
+    },
+    sub_category_name() {
+      if (
+        categories[this.$route.params.category]?.sub_category &&
+        categories[this.$route.params.category].sub_category[this.$route.params.subcategory]
+      ) {
+        return categories[this.$route.params.category].sub_category[this.$route.params.subcategory].name
+      }
+      return ""
+    },
+
 
   },
   watch: {
-    sub_category_name() {
-      this.getAllData()
+    '$route'(to, from) {
+      if (to.path !== from.path) {
+        this.getAllData()
+      }
+    },
+    products() {
+      this.filterItems()
+
     }
   },
 }
-</script>@/utils/mixins/getProductsAll
+</script>

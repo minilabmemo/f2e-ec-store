@@ -103,8 +103,6 @@ export default {
   methods: {
     getSaveItems() {
       this.saveItems = JSON.parse(localStorage.getItem(this.saveKey))
-
-
       this.filterItemsByPage()
     },
 
@@ -122,9 +120,7 @@ export default {
       }
 
       if (this.pagination.current_page === this.pagination.total_pages) {
-
         this.pagination.has_next = false;
-
       }
       const startIndex = (this.pagination.current_page - 1) * this.dataPerPage;
       const endIndex = startIndex + this.dataPerPage;
