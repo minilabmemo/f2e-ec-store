@@ -6,6 +6,7 @@ const shopFavIcon="logo_favicon.ico"
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
+   
     {
       path: '/',
       name: 'home',
@@ -21,7 +22,13 @@ const router = createRouter({
           component: () => import('../views/user/HomeBody.vue'),
           meta: {icon:`../${shopFavIcon}` },
         },  
-        
+        {
+          name:"NoMatchRoute",
+          path:  '/:pathMatch(.*)*',
+          redirect: { name: 'HomeBody' } 
+        }
+          
+        ,  
         {
           path: 'product/:category/:subcategory',
           component: () => import('../views/user/ProductsLayout.vue'),
