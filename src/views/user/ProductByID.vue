@@ -1,6 +1,7 @@
 <template>
   <LoadingOverlay :active="isLoading"></LoadingOverlay>
-  <div class="">
+  <div v-if="!isLoading && !product.title" class="text-primary "> 該商品已下架。</div>
+  <div class="" v-else>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><router-link :to="`/product/${$route.params.category}/all`"> {{ category_name
@@ -113,6 +114,7 @@ export default {
       categories: categories,
       itemQty: 1,
       isCartLoading: false,
+      isLoading: false,
     };
   },
   computed: {
@@ -135,7 +137,6 @@ export default {
       const api = `${userProductApi}/${this.id}`;
       this.isLoading = true;
       this.$http.get(api).then((response) => {
-
         this.isLoading = false;
         if (response.data.success) {
           this.product = response.data.product;
