@@ -15,7 +15,7 @@
             <div> {{ $filters.date(item.create_at) }}</div>
             <a href="#" class="link-opacity-100 link-opacity-75-hover text-nowrap "
               @click.prevent="openModal(false, item)"> <i class="bi bi-search"></i>
-              {{ item.id }} </a>
+              <small> {{ item.id }}</small> </a>
 
           </td>
           <td>

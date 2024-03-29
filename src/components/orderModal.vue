@@ -78,8 +78,8 @@
                 </thead>
                 <tbody>
                   <tr v-for="item in tempOrder.products" :key="item.id">
-                    <th style="width: 70%">
-                      {{ item.product.title }}
+                    <th style="width: 60%">
+                      <small>{{ item.product.title }}</small>
                     </th>
                     <td>
                       {{ item.qty }} / {{ item.product.unit }}

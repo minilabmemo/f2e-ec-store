@@ -30,10 +30,10 @@
                     <div class="d-flex   flex-column  align-items-start text-start gap-2 ">
                       <div>
                         <span class=" text-300"> <del>${{ item.product.origin_price }}</del></span>
-                        <span class=" text-primary  me-4 ">${{ item.product.price }}</span>
-                        <span class=" text-500  ">剩餘數量： {{ item.product.num }}</span>
-                      </div>
+                        <span class=" text-primary  me-1 ">${{ item.product.price }}</span>
 
+                      </div>
+                      <span class=" text-500  ">剩餘數量： {{ item.product.num }}</span>
                       <div class="input-group input-group-sm ">
                         <input type="number" class="form-control" min=1 :max="item.product.num"
                           :disabled="item.id === status.loadingItem" @change="updateCart(item)"
@@ -48,9 +48,9 @@
                       </div>
                     </div>
 
-                    <div class="text-success  ms-2" v-if="item.coupon">
+                    <small class="text-success  ms-1" v-if="item.coupon">
                       已套用優惠券
-                    </div>
+                    </small>
                   </div>
                 </div>
 
@@ -61,11 +61,11 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="3" class="text-end">總計</td>
+            <td class="text-end">總計</td>
             <td class="text-end">{{ $filters.currency(cart.total) }}</td>
           </tr>
           <tr v-if="cart.final_total !== cart.total">
-            <td colspan="3" class="text-end text-success">折扣價</td>
+            <td class="text-end text-success text-nowrap "><small>折扣價</small></td>
             <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
           </tr>
         </tfoot>
