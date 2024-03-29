@@ -102,7 +102,7 @@
                 <div class="mb-3 col-md-6">
                   <label for="num" class="form-label">*數量</label>
                   <input type="number" class="form-control" id="num" placeholder="請輸入數量" v-model="tempProduct.num"
-                    :min="itemLimit.min_num" :max="itemLimit.max_num" @blur="customCheck('num')" required>
+                    :min="itemLimit.min_num" :max="itemLimit.max_num" required>
                   <div class="invalid-feedback">
                     *數量必填
                   </div>
@@ -129,7 +129,7 @@
                 <div class="mb-3 col-md-6">
                   <label for="price" class="form-label">*售價</label>
                   <input type="number" class="form-control" id="price" placeholder="請輸入售價" v-model="tempProduct.price"
-                    :min="itemLimit.min_price" :max="itemLimit.max_price" @blur="customCheck('price')" required>
+                    :min="itemLimit.min_price" :max="itemLimit.max_price" required>
                   <div class="invalid-feedback">
                     *售價必填
                   </div>

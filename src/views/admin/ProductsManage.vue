@@ -89,8 +89,6 @@ export default {
 
           this.products = response.data.products;
           this.pagination = response.data.pagination;
-        } else {
-          dataErr(response)
         }
 
       }).catch((err) => {
