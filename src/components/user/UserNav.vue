@@ -1,6 +1,6 @@
 <template>
 
-  <div class="row   w-100 justify-content-center  align-items-center">
+  <div class="row   justify-content-center  align-items-center">
     <div class="col-1 col-md-2     d-flex justify-content-center  align-items-center">
       <router-link to="/user/saves" class="nav-link " data-bs-toggle="tooltip" data-bs-placement="top" title="前往收藏清單">
         <img src="@/assets/icons/save.svg" alt="save" width="24px" height="24px">
@@ -9,16 +9,16 @@
     <div class="col-1   d-flex justify-content-center  align-items-center">
       <img src="@/assets/icons/split.svg" alt="split" width="24px" height="24px">
     </div>
-    <div class="col-3  col-md-2   ">
+    <div class="col-4  col-xl-4   ">
 
       <div class="row  justify-content-center  align-items-center">
         <router-link to="/user/cartflow" class="col-12 nav-link " data-bs-toggle="tooltip" data-bs-placement="top"
           title="前往購物車">
           <div class="row justify-content-center  align-items-center ">
-            <div class="col-3 col-md-4  d-flex justify-content-center  align-items-center"> <img
-                src="@/assets/icons/cart.svg" alt="cart" width="24px" height="24px"></div>
+            <div class="col-4  d-flex justify-content-center  align-items-center"> <img src="@/assets/icons/cart.svg"
+                alt="cart" width="24px" height="24px"></div>
 
-            <div class="col-3 col-md-4 d-flex justify-content-center  align-items-center">
+            <div class="col-4 d-flex justify-content-center  align-items-center">
               <div class=" bg-black text-white  px-2 py-0  rounded-1 " width="20px" height="20px">
                 <span v-if="!isGetCartLoading" class=" ">{{ cartTotalQty }}</span>
                 <div v-else class="spinner-border spinner-border-sm" role="status">
@@ -37,7 +37,7 @@
     <div class="col-1   d-flex justify-content-center  align-items-center">
       <img src="@/assets/icons/split.svg" alt="split" width="24px" height="24px">
     </div>
-    <div class="col-1  col-md-2  d-flex justify-content-center  align-items-center">
+    <div class="col-1  col-xl-2  d-flex justify-content-center  align-items-center">
 
 
       <div class=" dropdown">
@@ -54,9 +54,9 @@
 
 
 
+
     </div>
   </div>
-
 
 </template>
 
