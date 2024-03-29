@@ -19,7 +19,7 @@
                 src="@/assets/icons/cart.svg" alt="cart" width="24px" height="24px"></div>
 
             <div class="col-3 col-md-4 d-flex justify-content-center  align-items-center">
-              <div class=" bg-black text-white  px-2 py-0  rounded-1 " width="24px" height="24px">
+              <div class=" bg-black text-white  px-2 py-0  rounded-1 " width="20px" height="20px">
                 <span v-if="!isGetCartLoading" class=" ">{{ cartTotalQty }}</span>
                 <div v-else class="spinner-border spinner-border-sm" role="status">
                   <span class="visually-hidden">Loading...</span>

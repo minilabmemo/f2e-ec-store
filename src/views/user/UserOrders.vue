@@ -71,8 +71,9 @@
           <td>
             <ul class="list-unstyled">
               <li v-for="(product, i) in item.products" :key="i">
-                {{ product.product.title }} 數量：{{ product.qty }}
-                {{ product.product.unit }}
+                <small> {{ product.product.title }} 數量：{{ product.qty }}
+                  {{ product.product.unit }}</small>
+
               </li>
             </ul>
           </td>

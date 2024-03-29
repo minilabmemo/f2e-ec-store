@@ -12,7 +12,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-4">
-              <h3>用戶資料</h3>
+              <h3 class="fw-bold text-primary ">用戶資料</h3>
               <table class="table">
                 <tbody v-if="tempOrder.user">
                   <tr>
@@ -35,7 +35,7 @@
               </table>
             </div>
             <div class="col-md-8">
-              <h3>訂單細節</h3>
+              <h3 class="fw-bold text-primary ">訂單細節</h3>
               <table class="table">
                 <tbody>
                   <tr>
@@ -70,7 +70,7 @@
                   </tr>
                 </tbody>
               </table>
-              <h3 class="fw-bold">選購商品</h3>
+              <h3 class="fw-bold text-primary ">選購商品</h3>
               <table class="table">
                 <thead>
                   <tr>
@@ -85,7 +85,7 @@
                       {{ item.qty }} / {{ item.product.unit }}
                     </td>
                     <td class="text-end">
-                      {{ $filters.currency(item.final_total) }}
+                      $ {{ $filters.currency(item.final_total) }}
                     </td>
                   </tr>
                 </tbody>
