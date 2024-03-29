@@ -44,10 +44,9 @@
               <div class="col-4">Free</div>
               <div class="col-4">單一色</div>
               <div class="col-4">
-
-                <input type="number" class=" form-control form-control-sm" id="number" placeholder="1" v-model="itemQty"
-                  min="1" :max="product.num" @change="checkMax(product, itemQty)">
-
+                <select id="qty" class="form-select" v-model="itemQty">
+                  <option :value="item" v-for="item in product.num" :key="item">{{ item }}</option>
+                </select>
 
               </div>
             </div>
@@ -147,6 +146,7 @@ export default {
     goToCart() {
       this.$router.push('/user/cartflow');
     },
+
     checkQty(id, qty = 1) {
       let confirmAddCart = false;
       if (this.dataCart.carts) {
@@ -167,13 +167,27 @@ export default {
     updateUserCartQty() {
       this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
     },
-    checkMax(item, itemQty) {
-      if (itemQty > item.num) {
-        alert(`你輸入的數量大於可購買數量${item.num},自動更新為最大可購買數量。`)
-        this.itemQty = item.num;
-      }
-    },
+
     addToCart(id, qty = 1, redirect = false) {
+      let isMaxNum = false;
+
+      this.dataCart.carts.forEach(element => {
+        if (element.product_id === this.id) {
+          if (element.qty >= element.product.num) {
+            alert(`無法加入購物車，購物車數量${element.qty}已達最大可購買量 ${element.product.num}件商品。`)
+            isMaxNum = true
+            return
+          }
+
+          if (qty + element.qty > element.product.num) {
+            alert(`無法加入購物車，購物車數量已有${element.qty}件，只可再購買 ${element.product.num - element.qty}件商品。`)
+            isMaxNum = true
+          }
+        }
+      });
+      if (isMaxNum) {
+        return
+      }
 
       const url = `${userCartApi}`;
       const cart = {

@@ -34,14 +34,12 @@
 
                       </div>
                       <span class=" text-500  ">剩餘數量： {{ item.product.num }}</span>
-                      <div class="input-group input-group-sm ">
-                        <input type="number" class="form-control" min=1 :max="item.product.num"
-                          :disabled="item.id === status.loadingItem" @change="updateCart(item)"
-                          v-model.number="item.qty">
-                        <div class="input-group-text">/ {{ item.product.unit }}</div>
 
+                      <select id="qty" class="form-select" v-model="item.qty" :disabled="item.id === status.loadingItem"
+                        @change="updateCart(item)">
 
-                      </div>
+                        <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
+                      </select>
                       <div>
                         <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
                         ${{ $filters.currency(item.final_total) }}
