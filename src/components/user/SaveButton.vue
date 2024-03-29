@@ -1,40 +1,26 @@
 <template>
 
-  <button type="button" class=" btn btn-outline-primary  " @click="removeItem()" @mouseover="hover = true"
-    @mouseleave="hover = false" v-if="isSave">
-    <div v-show="!hover">
+  <button type="button" class=" btn btn-outline-primary  " @click="removeItem()" v-if="isSave">
+    <div>
       <div class="d-flex justify-content-center  align-items-center gap-1">
         <img src="@/assets/icons/save-full.svg" alt="save" weight="20px" height="20px">
         <span>已收藏</span>
       </div>
     </div>
 
-    <div v-show="hover">
-      <div class="d-flex justify-content-center  align-items-center gap-1">
-        <img src="@/assets/icons/save-full-hover.svg" alt="save" weight="20px" height="20px">
-        <span class="text-white ">移除收藏</span>
-      </div>
-    </div>
 
   </button>
 
 
-  <button type="button" class=" btn " :class="{ 'btn-outline-800': !hover, 'btn-outline-primary': hover }"
-    @click="saveItem()" @mouseover="hover = true" @mouseleave="hover = false" v-else>
+  <button type="button" class=" btn btn-outline-800   " @click="saveItem()" v-else>
 
-    <div v-show="!hover">
+    <div>
       <div class="d-flex justify-content-center  align-items-center gap-1 ">
         <img src="@/assets/icons/save.svg" alt="save" weight="20px" height="20px">
-
         <span class="text-800"> 加入收藏</span>
       </div>
     </div>
-    <div v-show="hover">
-      <div class="d-flex justify-content-center  align-items-center gap-1 ">
-        <img src="@/assets/icons/save-full-hover.svg" alt="save" weight="20px" height="20px">
-        <span class="text-white"> 加入收藏</span>
-      </div>
-    </div>
+
 
   </button>
 
@@ -49,8 +35,7 @@ export default {
     return {
       saveKey: "favorite",
       isSave: false,
-      hover: false,
-      addHover: false
+
     }
   },
   created() {

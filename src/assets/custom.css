@@ -22,8 +22,14 @@
 }
 
 .btn-outline-primary:hover {
-  --bs-btn-hover-color: white;
+  --bs-btn-hover-color: var(--bs-primary);
+  --bs-btn-hover-bg: var(--bs-orange-100);
 }
+
+.btn-outline-800:hover {
+  --bs-btn-hover-bg: var(--bs-100);
+}
+
 
 
 /* RWD setting*/
