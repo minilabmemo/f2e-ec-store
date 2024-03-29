@@ -1,7 +1,7 @@
 <template>
 
-  <div class="fs-3 fw-bold " v-if="!this.saveItems || Object.keys(saveItems).length === 0"> 無收藏商品。</div>
-  <table class="table mt-4" v-if="this.saveItems && saveItems.length !== 0">
+  <div class="fs-3 fw-bold " v-if="!saveItems || Object.keys(saveItems).length === 0"> 無收藏商品。</div>
+  <table class="table mt-4" v-if="saveItems && saveItems.length !== 0">
     <thead>
       <tr class="d-flex ">
         <th style="flex:1">商品</th>
@@ -16,7 +16,7 @@
           <td style="flex:1">
             <div class="d-flex ">
               <div style="flex:1"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
-              <div style="flex:1" class="col-11 d-flex  flex-column  align-items-start text-start ms-2">
+              <div style="flex:2" class="col-11 d-flex  flex-column  align-items-start text-start ms-2">
                 <div> {{ item.title }}</div>
                 <div class="d-flex gap-2 justify-content-center  align-items-center ms-2">
                   <span class="text-300" v-if="item.origin_price"> <del>${{ item.origin_price }}</del></span>
@@ -46,7 +46,7 @@
     </tbody>
   </table>
 
-  <Pagination :pages="pagination" @change-page-num="filterItemsByPage" v-if="this.saveItems && saveItems.length !== 0">
+  <Pagination :pages="pagination" @change-page-num="filterItemsByPage" v-if="saveItems && saveItems.length !== 0">
   </Pagination>
 </template>
 
