@@ -74,7 +74,8 @@ export default {
     return {
       keyword: "",
       categories: categories,
-      isCollapsed: false
+      isCollapsed: false,
+      bsOffcanvas: {},
     }
   },
   methods: {
@@ -102,6 +103,9 @@ export default {
   mounted() {
 
     var myOffcanvas = document.getElementById('offcanvasNavbar')
+    this.bsOffcanvas = new Offcanvas(myOffcanvas, {
+      toggle: false
+    })
     myOffcanvas.addEventListener('hide.bs.offcanvas', () => {
       this.isCollapsed = false;
       console.log('this.isCollapsed', this.isCollapsed);
@@ -114,7 +118,13 @@ export default {
 
 
   },
-
+  watch: {
+    '$route'(to, from) {
+      if (to.path !== from.path) {
+        this.bsOffcanvas.hide()
+      }
+    }
+  }
 }
 
 </script>
