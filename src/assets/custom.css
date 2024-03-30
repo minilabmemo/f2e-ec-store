@@ -23,14 +23,32 @@
 
 .btn-outline-primary:hover {
   --bs-btn-hover-color: var(--bs-primary);
-  --bs-btn-hover-bg: var(--bs-orange-100);
+  --bs-btn-hover-bg: white;
+  opacity: .8;
 }
 
 .btn-outline-800:hover {
-  --bs-btn-hover-bg: var(--bs-100);
+  --bs-btn-hover-bg: white;
+  opacity: .8;
 }
 
+.btn-outline-primary.btn.active,.btn-outline-primary.btn:first-child:active{
+  --bs-btn-active-color: var(--bs-primary);
+  --bs-btn-active-bg:white;
+}
 
+.btn-outline-800.btn.active,.btn-outline-800.btn:first-child:active{
+  --bs-btn-active-bg:white;
+}
+
+.btn-outline-800.btn:focus-visible {
+  --bs-btn-hover-bg:white;
+}
+
+.btn-outline-primary.btn:focus-visible {
+  --bs-btn-hover-color: var(--bs-primary);
+  --bs-btn-hover-bg:white;
+}
 
 /* RWD setting*/
 
