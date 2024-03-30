@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeLayout from '../views/user/HomeLayout.vue'
 import { useFavicon } from "@vueuse/core";
+
 const icon = useFavicon();
 const shopFavIcon="logo_favicon.ico"
 const router = createRouter({
@@ -104,6 +105,16 @@ const router = createRouter({
     },
  
   ]
+})
+router.beforeEach((to, from, next) => {
+  //clear modal-backdrop 
+  document.body.classList.remove('modal-open');
+  document.body.removeAttribute('style');
+  const backdrop = document.querySelector('.modal-backdrop.fade.show');
+  if (backdrop&&backdrop.parentNode) {
+      backdrop.parentNode.removeChild(backdrop);
+  }
+  next()
 })
 router.afterEach((to) => {
   if (to.meta.title) {
