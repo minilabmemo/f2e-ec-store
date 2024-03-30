@@ -52,7 +52,7 @@
 
 <script>
 import DelModal from '@/components/DelModal.vue';
-import OrderModal from '@/components/orderModal.vue';
+import OrderModal from '@/components/ProductModal.vue';
 import Pagination from '@/components/Pagination.vue';
 import {adminOrderApi, adminOrdersApi} from '@/utils/const/path'
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
@@ -132,4 +132,4 @@ export default {
 
   },
 };
-</script>@/utils/const/path
+</script>

@@ -134,4 +134,4 @@ export default {
     this.getCoupons();
   },
 };
-</script>@/utils/const/path
+</script>
