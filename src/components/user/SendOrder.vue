@@ -20,9 +20,7 @@
         <div class="mb-3">
           <label for="tel" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人電話</label>
           <Field id="tel" name="電話" type="tel" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
-            placeholder="請輸入電話" :rules="{
-        required: true, numeric: true,
-      }" v-model="form.user.tel"></Field>
+            placeholder="請輸入電話 Ex:0912345678" :rules="isPhone" v-model="form.user.tel"></Field>
           <ErrorMessage name="電話" class="invalid-feedback"></ErrorMessage>
         </div>
 
@@ -75,6 +73,10 @@ export default {
           this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
         });
     },
+    isPhone(value) {
+      const phoneNumber = /^(09)[0-9]{8}$/
+      return phoneNumber.test(value) ? true : '請填寫台灣手機號碼，以 09 開頭加上 8 位數字之格式。'
+    }
   },
 
 };
