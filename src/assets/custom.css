@@ -13,42 +13,23 @@
 .btn-primary {
   --bs-btn-color: white;
 }
-
 .btn-primary:hover {
-  --bs-btn-hover-color: white;
-}
-.btn-outline-secondary:hover {
   --bs-btn-hover-color: white;
 }
 
 .btn-outline-primary:hover {
-  --bs-btn-hover-color: var(--bs-primary);
-  --bs-btn-hover-bg: white;
-  opacity: .8;
+  --bs-btn-hover-color: white;
 }
+
 
 .btn-outline-800:hover {
-  --bs-btn-hover-bg: white;
-  opacity: .8;
+  --bs-btn-hover-color: white;
 }
-
 .btn-outline-primary.btn.active,.btn-outline-primary.btn:first-child:active{
-  --bs-btn-active-color: var(--bs-primary);
-  --bs-btn-active-bg:white;
+  --bs-btn-active-color: white;
+ 
 }
 
-.btn-outline-800.btn.active,.btn-outline-800.btn:first-child:active{
-  --bs-btn-active-bg:white;
-}
-
-.btn-outline-800.btn:focus-visible {
-  --bs-btn-hover-bg:white;
-}
-
-.btn-outline-primary.btn:focus-visible {
-  --bs-btn-hover-color: var(--bs-primary);
-  --bs-btn-hover-bg:white;
-}
 
 /* RWD setting*/
 
