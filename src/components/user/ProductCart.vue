@@ -15,7 +15,7 @@
             <tr v-for="item in cart.carts" :key="item.id">
               <td>
                 <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.loadingItem === item.id"
-                  @click="removeCartItem(item.id)">
+                  @click="removeConfirm(item)">
                   <i class="bi bi-x"></i>
                 </button>
               </td>
@@ -83,7 +83,7 @@
             <tr v-for="item in cart.carts" :key="item.id">
               <td>
                 <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.loadingItem === item.id"
-                  @click="removeCartItem(item.id)">
+                  @click="removeConfirm(item)">
                   <i class="bi bi-x"></i>
                 </button>
               </td>
@@ -121,6 +121,7 @@
                 {{ $filters.currency(item.final_total) }}
               </td>
             </tr>
+
           </template>
         </tbody>
         <tfoot>
@@ -182,13 +183,17 @@
       </button>
     </div>
   </div>
-
+  <RemoveCartConfirm :item="tempItem" ref="RemoveCartConfirm" @remove-item="removeCartItem(tempItem.id)">
+  </RemoveCartConfirm>
 </template>
 
 <script>
 import {userProductsApi, userCartApi, userCouponApi, userOrderApi} from '@/utils/const/path'
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
+import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
+
 export default {
+  components: {RemoveCartConfirm},
   inject: ['httpMessageState', 'emitter'],
   emits: ['go-next'],
   props: {
@@ -212,6 +217,7 @@ export default {
       },
       cart: {},
       coupon_code: '',
+      tempItem: {},
     };
   },
   methods: {
@@ -286,6 +292,12 @@ export default {
         this.getCart();
       });
     },
+    removeConfirm(item) {
+      this.tempItem = {...item};
+
+      const confirmModal = this.$refs.RemoveCartConfirm;
+      confirmModal.showModal();
+    },
     removeCartItem(id) {
       this.status.loadingItem = id;
       const url = `${userCartApi}/${id}`;
@@ -296,6 +308,8 @@ export default {
         this.updateUserCartQty();
         this.getCart();
         this.isLoading = false;
+        const confirmModal = this.$refs.RemoveCartConfirm;
+        confirmModal.hideModal();
       });
     },
     addCouponCode() {
