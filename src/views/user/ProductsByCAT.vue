@@ -20,9 +20,9 @@
     </nav>
 
 
-    <div class="row row-cols-2 row-cols-lg-3 ">
+    <div class="row row-cols-2 row-cols-lg-3 " data-testid="products">
 
-      <SaleItem v-for="(item, index) in showItems" :key="index" :item="item" class="col"
+      <SaleItem v-for="(item, index) in showItems" :key="index" :item="item" class="col" data-testid="item"
         :path="`${$route.params.category}/${$route.params.subcategory}`">
       </SaleItem>
       <div class="col-6 " v-if="!showItems.length && !status.isLoading">
