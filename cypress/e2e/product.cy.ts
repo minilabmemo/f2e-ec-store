@@ -1,0 +1,36 @@
+// https://on.cypress.io/api
+
+describe('Product By ID Test', () => {
+  it('navbar visible.', () => {
+    cy.viewport('samsung-s10')
+    cy.visit('/#/product/all/all')
+    cy.get('.col-sm-3.justify-content-center > #logo').should('be.visible')
+    cy.get('.navbar-toggler').should('be.visible')
+
+    cy.viewport(992, 768)
+    cy.get('.navbar-toggler').should('not.be.visible')
+  })
+
+  it('user save item and save page test.', () => {
+    cy.visit('/#/product/all/all')
+    cy.get('[data-testid="item"]').first().click()
+    // save action can re-work
+    cy.contains('button', '加入收藏').click()
+    cy.contains('button', '已收藏').should('be.visible')
+    cy.get("img[alt='save']").first().click()
+    cy.url().should('contain', '/#/user/saves')
+    cy.get("[data-testid='item']").should('exist')
+    cy.contains('button', '前往商品頁').click()
+    cy.url().should('contain', '/#/product/all/all/id')
+
+    cy.visit('/#/user/saves')
+    cy.contains('button', '移出收藏').click()
+    cy.contains('div', '無收藏商品').should('exist')
+  })
+
+  // it('user check out.', () => {
+  //   cy.visit('/#/product/all/all')
+  //   cy.get('[data-testid="item"]').first().click()
+  //   cy.contains('button', '立即結帳').click()
+  // })
+})

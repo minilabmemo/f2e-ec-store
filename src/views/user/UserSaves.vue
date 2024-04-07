@@ -12,7 +12,7 @@
 
       <template v-for="(item, key) in displayItems" :key="key">
 
-        <tr class="d-flex ">
+        <tr class="d-flex " data-testid="item">
           <td style="flex:1">
             <div class="d-flex ">
               <div style="flex:1"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
