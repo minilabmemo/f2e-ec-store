@@ -17,12 +17,18 @@
     </div>
     <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <h1 class="mb-5 ">COLLECTIONS</h1>
-    <div class="d-flex flex-column gap-3  ">
+    <div class="d-flex flex-column gap-3  justify-content-center align-items-center ">
       <div class=""><img src="@/assets/images/design/c1.png" alt="style" class="img-fluid"></div>
 
       <div class=""><img src="@/assets/images/design/c2.png" alt="style" class="img-fluid"></div>
+      <div class="d-flex justify-content-center gap-5">
+        <button class="btn btn-black q-btn">
+          <router-link :to="`/style`" class="nav-link">
+            Go Styles Book<img src="@/assets/icons/next_arrow.svg" alt="Next Arrow"></router-link>
+        </button>
+      </div>
     </div>
-    <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
+    <div class="my-3"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
 
     <div class="d-flex gap-5  ">
 
