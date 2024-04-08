@@ -13,13 +13,13 @@ describe('Product By ID Test', () => {
 
   it('user save item and save page test.', () => {
     cy.visit('/#/product/all/all')
-    cy.get('[data-testid="item"]').first().click()
+    cy.get('[data-cy="item"]').first().click()
     // save action can re-work
     cy.contains('button', '加入收藏').click()
     cy.contains('button', '已收藏').should('be.visible')
     cy.get("img[alt='save']").first().click()
     cy.url().should('contain', '/#/user/saves')
-    cy.get("[data-testid='item']").should('exist')
+    cy.get("[data-cy='item']").should('exist')
     cy.contains('button', '前往商品頁').click()
     cy.url().should('contain', '/#/product/all/all/id')
 
@@ -30,7 +30,7 @@ describe('Product By ID Test', () => {
 
   // it('user check out.', () => {
   //   cy.visit('/#/product/all/all')
-  //   cy.get('[data-testid="item"]').first().click()
+  //   cy.get('[data-cy="item"]').first().click()
   //   cy.contains('button', '立即結帳').click()
   // })
 })

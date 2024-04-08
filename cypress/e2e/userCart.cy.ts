@@ -14,7 +14,7 @@ describe('user cartflow Page Test', () => {
     cy.visit('/#/user/cartflow')
 
     let itemCount = 0
-    cy.get('[data-testid="item"]')
+    cy.get('[data-cy="item"]')
       .should('be.visible')
       .its('length')
       .then((length) => {
@@ -35,7 +35,7 @@ describe('user cartflow Page Test', () => {
     cy.visit('/#/user/cartflow')
 
     let itemCount = 0
-    cy.get('[data-testid="item"]')
+    cy.get('[data-cy="item"]')
       .should('be.visible')
       .its('length')
       .then((length) => {

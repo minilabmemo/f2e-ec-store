@@ -12,7 +12,7 @@
         </thead>
         <tbody>
           <template v-if="cart.carts">
-            <tr v-for="item in cart.carts" :key="item.id" data-testid="item">
+            <tr v-for="item in cart.carts" :key="item.id" data-cy="item">
               <td>
                 <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.loadingItem === item.id"
                   @click="removeConfirm(item)">
@@ -80,7 +80,7 @@
         </thead>
         <tbody>
           <template v-if="cart.carts">
-            <tr v-for="item in cart.carts" :key="item.id" data-testid="item">
+            <tr v-for="item in cart.carts" :key="item.id" data-cy="item">
               <td>
                 <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.loadingItem === item.id"
                   @click="removeConfirm(item)">
