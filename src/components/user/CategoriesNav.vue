@@ -40,14 +40,13 @@
 </template>
 
 <script setup>
-import {defineProps, ref, watch, computed} from 'vue';
+import {defineProps, ref, computed} from 'vue';
 import categoriesConfig from '@/utils/const/categories';
 import {useProductStore} from '@/stores/productStore.js';
 import {storeToRefs} from 'pinia'
 const productStore = useProductStore();
 const {getProducts, } = productStore;
 const {products} = storeToRefs(productStore);
-
 getProducts();
 
 defineProps({

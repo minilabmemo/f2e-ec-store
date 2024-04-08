@@ -103,20 +103,28 @@ export default {
   mounted() {
 
     var myOffcanvas = document.getElementById('offcanvasNavbar')
-    this.bsOffcanvas = new Offcanvas(myOffcanvas, {
-      toggle: false
-    })
-    myOffcanvas.addEventListener('hide.bs.offcanvas', () => {
-      this.isCollapsed = false;
-      console.log('this.isCollapsed', this.isCollapsed);
-    });
+    if (myOffcanvas) {
+      this.bsOffcanvas = new Offcanvas(myOffcanvas, {
+        toggle: false
+      })
+      myOffcanvas.addEventListener('hide.bs.offcanvas', () => {
+        this.isCollapsed = false;
+        console.log('this.isCollapsed', this.isCollapsed);
+      });
 
-    myOffcanvas.addEventListener('show.bs.offcanvas', () => {
-      this.isCollapsed = true;
-      console.log('this.isCollapsed', this.isCollapsed);
-    });
+      myOffcanvas.addEventListener('show.bs.offcanvas', () => {
+        this.isCollapsed = true;
+        console.log('this.isCollapsed', this.isCollapsed);
+      });
+    }
 
-
+  },
+  unmounted() {
+    const myOffcanvas = document.getElementById('offcanvasNavbar');
+    if (myOffcanvas) {
+      myOffcanvas.removeEventListener('hide.bs.offcanvas', onHide);
+      myOffcanvas.removeEventListener('show.bs.offcanvas', onShow);
+    }
   },
   watch: {
     '$route'(to, from) {

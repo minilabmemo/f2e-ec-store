@@ -46,31 +46,24 @@
 </template>
 
 
-<script>
-
-import categories from '@/utils/const/categories'
+<script setup>
+import {ref} from 'vue';
 import HomeBanner from '@/components/user/HomeBanner.vue';
 import HomeItems from '@/components/user/HomeItems.vue';
-import getAllProducts from '@/utils/mixins/getProductsAll';
-
-export default {
-  components: {HomeBanner, HomeItems},
-  data() {
-    return {
-      categories: categories,
-      products: [],
-    }
-  },
-  provide() {
-    return {
-      status: this.status
-    };
-  },
-  mixins: [getAllProducts],
+import categoriesConfig from '@/utils/const/categories';
+import {storeToRefs} from 'pinia'
+const categories = ref(categoriesConfig);
+import {useProductStore} from '@/stores/productStore.js';
+const productStore = useProductStore();
+const {getProducts, } = productStore;
+const {products} = storeToRefs(productStore);
+getProducts();
 
 
-}
+
 </script>
+
+
 
 <style scoped>
 .h-shadow {

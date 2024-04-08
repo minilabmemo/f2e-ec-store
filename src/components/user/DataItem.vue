@@ -5,7 +5,7 @@
     <div class="position-relative ">
 
       <img :src="item.src" alt="image" class="flex-image">
-      <div class="photo-mix-text" :class="item.color" v-if="status.isLoading || status.error | filterErr !== ''">
+      <div class="photo-mix-text" :class="item.color" v-if="isLoading">
         <h1>coming</h1>
         <h1>soon</h1>
       </div>
@@ -13,7 +13,7 @@
     </div>
 
     <div>
-      <div class="lds-ellipsis" v-if="status.isLoading">
+      <div class="lds-ellipsis" v-if="isLoading">
         <div></div>
         <div></div>
         <div></div>
@@ -31,18 +31,23 @@
 </template>
 
 
-<script>
+<script setup lang="ts">
 
-export default {
-  props: {
-    filterErr: String,
-    item: {title: "no name"},
 
-  },
-  inject: ["status"],
+import { defineProps } from 'vue';
+import statusStore from '@/stores/statusStore';
+const { isLoading } = statusStore();
+console.log('isLoading', isLoading);
 
-}
+defineProps({
+  filterErr: String,
+  item: { title: "no name" },
+});
+
+
 </script>
+
+
 
 <style scoped>
 .primary {
