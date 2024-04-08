@@ -39,7 +39,7 @@ const items = computed(() => {
 
 </script>
 
-<!-- <script>
+<!-- <script> //FIXME
 export default {
   data() {
     return {

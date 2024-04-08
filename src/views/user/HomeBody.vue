@@ -24,7 +24,7 @@
       <div class="d-flex justify-content-center gap-5">
         <button class="btn btn-black q-btn">
           <router-link :to="`/style`" class="nav-link">
-            Go Styles Book<img src="@/assets/icons/next_arrow.svg" alt="Next Arrow"></router-link>
+            Styles Book<img src="@/assets/icons/next_arrow.svg" alt="Next Arrow"></router-link>
         </button>
       </div>
     </div>
