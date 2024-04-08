@@ -17,7 +17,7 @@
 <script>
 
 
-import CATNav from '@/components/user/CATNav.vue'
+import CATNav from '@/components/user/CategoriesNav.vue'
 
 export default {
   components: {CATNav},
