@@ -1,5 +1,7 @@
 <template>
   <div class="container p-5 ">
+    <h3 class="text-center ">STYLING BOOK</h3>
+    <div class="text-center text-500 "> 時尚顧問穿搭牆，給你穿搭靈感。</div>
     <div class="waterfall  w-full m-auto  gap-10">
       <HomeStyleContent />
     </div>
@@ -8,7 +10,7 @@
 
 <script>
 
-import HomeStyleContent from './HomeStyleContent.vue';
+import HomeStyleContent from '@/components/user/HomeStyleContent.vue';
 
 export default {
   components: {

@@ -3,6 +3,7 @@ export interface Category {
 }
 
 export interface CategoryItem {
+  path?: string
   key: string
   name: string
   sub_category?: SubCategory
@@ -95,10 +96,6 @@ const categories: Category = {
   accessories: {
     key: 'accessories',
     name: '配件'
-  },
-  styles: {
-    key: 'styles',
-    name: 'Style'
   }
 }
 

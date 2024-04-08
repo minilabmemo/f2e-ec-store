@@ -30,11 +30,14 @@
 
           </router-link>
         </li>
+
       </ul>
 
       <hr class="my-2 w-75" v-if="index !== Object.keys(categories).length - 1">
     </li>
-
+    <li class="nav-item">
+      <router-link to="/style" class="nav-link">時尚穿搭 Styles Book</router-link>
+    </li>
   </ul>
 
 </template>
@@ -129,5 +132,7 @@ function sumProductsCAT(products) {
   return catNumMap
 
 }
+
+
 
 </script>
