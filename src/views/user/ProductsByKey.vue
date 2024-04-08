@@ -14,43 +14,36 @@
 
 </template>
 
-
-<script>
-import getAllProducts from '@/utils/mixins/getProductsAll';
-import categories from '@/utils/const/categories'
+<script setup>
+import {computed} from 'vue';
 import SaleItem from '@/components/user/SaleItem.vue';
-export default {
-  components: {SaleItem},
-  data() {
-    return {
-      categories: categories,
-      products: [],
 
-      filterErr: "",
-    }
-  },
-  mixins: [getAllProducts],//TODO layout & cat get twice?? 
-  computed: {
-    filterItems() {
+import {useProductStore} from '@/stores/productStore.js';
+const productStore = useProductStore();
+import {storeToRefs} from 'pinia'
+const {getProducts, } = productStore;
+const {products, status} = storeToRefs(productStore);
+getProducts();
 
-      let itemByCAT = []
-      itemByCAT = this.products.filter((item) => !item.category.toString().includes('test'));
-      itemByCAT = this.products.filter((item) => item.title.toString().includes(this.$route.params.keyword));
+import {useRoute} from 'vue-router'
 
+const route = useRoute()
+const filterItems = computed(() => {
+  let itemsBYSearch = []
+  let items = products.value ? products.value : []
+  itemsBYSearch = items.filter((item) => !item.category.toString().includes('test'));
+  itemsBYSearch = items.filter((item) => item.title.toString().includes(route.params.keyword));
 
 
-      if (itemByCAT.length !== 0) {
-        return itemByCAT.map(item => ({
-          title: item.title,
-          src: item.imageUrl,
-          ...item
 
-        }));
-      }
-      return itemByCAT
-    }
+  if (itemsBYSearch.length !== 0) {
+    return itemsBYSearch.map(item => ({
+      title: item.title,
+      src: item.imageUrl,
+      ...item
 
-  },
-
-}
+    }));
+  }
+  return itemsBYSearch
+})
 </script>
