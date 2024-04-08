@@ -1,31 +1,39 @@
 <template>
   <footer class="bg-orange-100 container-fluid p-5  text-gray-500   " id="footer">
     <div class="container-xl">
-      <div class=" row d-flex justify-content-center  gy-2 ">
-        <div class="col-12 col-sm-4 text-center  ">
-          <div class="row row-cols-2  g-0 ">
-            <div class="col">公司資訊</div>
-            <div class="col">售後服務</div>
-            <div class="col">品牌介紹</div>
-            <div class="col">常見問題</div>
+      <div class=" row d-flex justify-content-center  gy-3 ">
+        <div class="col-12 col-sm-4   ">
+          <div class="row   gy-2 ">
+            <div class="col-12 fw-semibold  noto-font">About</div>
+            <div class="col-12"> <router-link to="./" class="nav-link">品牌介紹</router-link></div>
+
+            <div class="col-12"><router-link to="./" class="nav-link">購物流程</router-link></div>
+            <div class="col-12"><router-link to="./" class="nav-link">常見問題</router-link></div>
+
           </div>
 
 
         </div>
-        <div class="col-12 col-sm-4 text-center">
+        <div class="col-12 col-sm-4 ">
+          <div class="row     gy-2 ">
+            <div class="col-12 fw-semibold  noto-font ">Service</div>
+            <div class="col-12"><router-link to="./" class="nav-link">付款方式</router-link></div>
+            <div class="ol-12"><router-link to="./" class="nav-link">運送服務</router-link></div>
+            <div class="ol-12"><router-link to="./" class="nav-link">退換政策</router-link></div>
 
-          <div class="d-flex flex-wrap justify-content-center">
-            <div>客服時間：</div>
-            <div> 上午 10:30~12:00, 下午 13:30~18:00</div>
           </div>
-          <div class=" ">（例假日休息）</div>
-
         </div>
         <div class="col-12 col-sm-4">
-          <div class="text-center ">
-            <div>星展區，時尚大道 88 號，韓星大樓 3 樓</div>
-            <div>(02) 888-5678</div>
-            <div>koringoffice@line.tw </div>
+          <div class=" row  gy-2 ">
+            <div class="col-12 fw-semibold  noto-font ">Contact</div>
+            <div>地址：星展區，時尚大道 88 號，韓星大樓 3 樓</div>
+            <div>電話：(02) 888-5678</div>
+            <div>客服信箱：koringoffice@line.tw </div>
+            <div class="d-flex flex-wrap ">
+              <div>客服時間：</div>
+              <div> 週一至週五 10:30 ~ 18:00，例假日休息</div>
+
+            </div>
           </div>
 
         </div>
@@ -36,8 +44,7 @@
     <hr>
     <div class="row mt-3 text-center ">
       <div class="col-12  d-flex flex-column align-items-center  justify-content-center ">
-        <span>非商業練習用作品，圖片來自 <a href="https://unsplash.com/" class="href">Unsplash</a> - <a
-            href="https://github.com/minilabmemo/f2e-ec-store/blob/main/img_source.md" class="href">來源</a> </span>
+        <span>非商業練習用作品</span>
 
         <span> Copyright © 2024 Koring All rights reserved. </span>
 
