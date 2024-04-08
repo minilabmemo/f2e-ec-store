@@ -94,7 +94,7 @@
               <div class="row gx-2">
                 <div class="mb-3 col-md-12">
                   <label for="category" class="form-label">*分類</label>
-                  <select id="category" class="form-select" v-model.trim="tempProduct.category">
+                  <select id="category" class="form-select" v-model.trim="selectCategories" multiple>
                     <option value="test">test</option>
                     <option :value="item" v-for="item in findCategoriesList()" :key="item.id">{{ item }}</option>
                   </select>
@@ -192,7 +192,7 @@ export default {
       tempProduct: {unit: ""},
       itemLimit: itemLimit,
       categories: categories,
-
+      selectCategories: ['test'],
     }
   },
   watch: {
@@ -201,8 +201,13 @@ export default {
       //設置選項預設值
       this.tempProduct.imagesUrl = this.tempProduct.imagesUrl ? this.tempProduct.imagesUrl : [];
       this.tempProduct.category = this.product.category ? this.product.category : "test";
+      this.selectCategories = this.tempProduct.category.split(",");
       this.tempProduct.unit = this.product.unit ? this.product.unit : "件";
       this.tempProduct.num = this.product.num ? this.product.num : this.itemLimit.min_num;
+
+    },
+    selectCategories() {
+      this.tempProduct.category = this.selectCategories.join(',');
 
     }
   },
@@ -263,7 +268,8 @@ export default {
         form.classList.add('was-validated');
       }
 
-    }
+    },
+
   },
 
 }
