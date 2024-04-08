@@ -38,110 +38,109 @@
   </div>
 
 </template>
-
-
-<script>
-import getAllProducts from '@/utils/mixins/getProductsAll';
-import categories from '@/utils/const/categories'
+<script setup>
+import {ref, computed, watch, reactive, watchEffect} from 'vue';
 import SaleItem from '@/components/user/SaleItem.vue';
 import Pagination from '@/components/Pagination.vue';
-export default {
-  components: {SaleItem, Pagination},
-  data() {
-    return {
-      categories: categories,
-      products: [], // all items
-      catItems: [],//filter by category
-      showItems: [],//filter  page
-      filterErr: "",
-      pagination: {
-        total_pages: 1,
-        current_page: 1,
-        has_pre: true,
-        has_next: true,
-      },
-      dataPerPage: 12,
-    }
-  },
-  mixins: [getAllProducts],
-  methods: {
-    filterItems() {
+import categoriesConfig from '@/utils/const/categories';
+import {storeToRefs} from 'pinia'
+const categories = categoriesConfig;
 
-      let itemByCAT = []
 
-      switch (this.$route.params.category) {
-        case 'all':
-          itemByCAT = this.products.filter((item) => !item.category.toString().includes('test'));
+import {useProductStore} from '@/stores/productStore.js';
+const productStore = useProductStore();
+const {getProducts, } = productStore;
+const {products, status} = storeToRefs(productStore);
 
-          break;
-        default:
-          itemByCAT = this.products.filter((item) => item.category.toString().includes(this.$route.params.category));
-          break;
-      }
-      switch (this.$route.params.subcategory) {
-        case 'all':
-          break;
-        default:
-          itemByCAT = this.products.filter((item) => item.category.toString().includes(this.$route.params.category));
-          itemByCAT = itemByCAT.filter((item) => item.category.toString().includes(this.$route.params.subcategory));
-          break;
-      }
+getProducts();
+
+const catItems = ref([]);
+const showItems = ref([]);
+const filterErr = ref("");
+let pagination = reactive({
+  total_pages: 1,
+  current_page: 1,
+  has_pre: true,
+  has_next: true,
+})
+const dataPerPage = 12;
+import {useRoute} from 'vue-router'
+
+const route = useRoute()
 
 
 
-      this.catItems = itemByCAT
-      this.filterItemsByPage()
-    },
+function filterItems() {
+  let itemByCAT = [];
+  if (!products.value) {
+    return
+  }
 
-    filterItemsByPage(currentPage = 1) {
-      if (!this.catItems) {
-        return
-      }
+  switch (route.params.category) {
+    case 'all':
+      itemByCAT = products.value.filter((item) => !item.category.toString().includes('test'));
+      break;
+    default:
+      itemByCAT = products.value.filter((item) => item.category.toString().includes(route.params.category));
+      break;
+  }
 
-      this.pagination.current_page = currentPage
-      this.pagination.total_pages = Math.ceil(Object.keys(this.catItems).length / this.dataPerPage);
+  switch (route.params.subcategory) {
+    case 'all':
+      break;
+    default:
+      itemByCAT = products.value.filter((item) => item.category.toString().includes(route.params.category));
+      itemByCAT = itemByCAT.filter((item) => item.category.toString().includes(route.params.subcategory));
+      break;
+  }
 
-      this.pagination.has_pre = true;
-      this.pagination.has_next = true;
-      if (this.pagination.current_page === 1) {
-        this.pagination.has_pre = false;
-      }
-
-      if (this.pagination.current_page === this.pagination.total_pages) {
-        this.pagination.has_next = false;
-      }
-      const startIndex = (this.pagination.current_page - 1) * this.dataPerPage;
-      const endIndex = startIndex + this.dataPerPage;
-      this.showItems = this.catItems.slice(startIndex, endIndex);
-    },
-  },
-  computed: {
-
-    category_name() {
-      return categories[this.$route.params.category] ? categories[this.$route.params.category].name : ''
-    },
-    sub_category_name() {
-      if (
-        categories[this.$route.params.category]?.sub_category &&
-        categories[this.$route.params.category].sub_category[this.$route.params.subcategory]
-      ) {
-        return categories[this.$route.params.category].sub_category[this.$route.params.subcategory].name
-      }
-      return ""
-    },
-
-
-  },
-  watch: {
-    '$route'(to, from) {
-      if (to.path !== from.path) {
-        this.getAllData()
-      }
-    },
-    products() {
-      this.filterItems()
-
-    }
-  },
+  catItems.value = itemByCAT;
+  filterItemsByPage();
 }
+
+
+
+function filterItemsByPage(currentPage = 1) {
+  if (!catItems.value) {
+    return;
+  }
+
+  pagination.current_page = currentPage;
+  pagination.total_pages = Math.ceil(Object.keys(catItems.value).length / dataPerPage);
+
+  pagination.has_pre = true;
+  pagination.has_next = true;
+  if (pagination.current_page === 1) {
+    pagination.has_pre = false;
+  }
+
+  if (pagination.current_page === pagination.total_pages) {
+    pagination.has_next = false;
+  }
+  const startIndex = (pagination.current_page - 1) * dataPerPage;
+  const endIndex = startIndex + dataPerPage;
+  showItems.value = catItems.value.slice(startIndex, endIndex);
+}
+
+
+const category_name = computed(() => categories[route.params.category] ? categories[route.params.category].name : '')
+const sub_category_name = computed(() => {
+  if (
+    categories[route.params.category]?.sub_category &&
+    categories[route.params.category].sub_category[route.params.subcategory]
+  ) {
+
+    return categories[route.params.category].sub_category[route.params.subcategory].name
+  }
+  return ""
+})
+
+
+
+watchEffect(() => {
+  filterItems();
+});
+
+
+
 </script>

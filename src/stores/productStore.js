@@ -13,10 +13,8 @@ export const useProductStore = defineStore('productStore', () => {
     status.isLoading = true;
     axios.get(url).then((response) => {
       products.value = response.data.products;
-      console.log('get products store:', response);
-      console.log('get products :', products);
       status.isLoading = false;
-    });
+    })
   }
 
   return {products, status, getProducts}
