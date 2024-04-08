@@ -39,91 +39,96 @@
 
 </template>
 
+<script setup>
+import {defineProps, ref, watch, computed} from 'vue';
+import categoriesConfig from '@/utils/const/categories';
+import {useProductStore} from '@/stores/productStore.js';
+import {storeToRefs} from 'pinia'
+const productStore = useProductStore();
+const {getProducts, } = productStore;
+const {products} = storeToRefs(productStore);
 
-<script>
-import categories from '@/utils/const/categories'
-import getAllProducts from '@/utils/mixins/getProductsAll';
-export default {
-  name: 'cat-nav',
-  props: {
+getProducts();
 
-    isCollapsed: Boolean
-  },
-  mixins: [getAllProducts],
-  data() {
-    return {
-      products: [],
-      categories: categories,
-      catNumMap: {}
+defineProps({
+  isCollapsed: Boolean
+});
+
+const categories = ref(categoriesConfig);
+let catNumMap = computed(() => {
+  let sum = sumProductsCAT(products.value);
+  return sum
+})
+
+
+function countByCAT(cat, subCat) {
+  if (!catNumMap.value) {
+    return 0
+  }
+  let myMap = catNumMap.value
+  if (cat && subCat) {
+    if (myMap[cat]?.sub_category[subCat]?.num) {
+      return myMap[cat].sub_category[subCat].num;
+    } else {
+      return 0;
     }
-  },
-  methods: {
-    countByCAT(cat, subCat) {
+  }
+  if (cat) {
 
-      if (cat && subCat) {
-        if (this.catNumMap[cat].sub_category[subCat] && this.catNumMap[cat].sub_category[subCat].num) {
-          return this.catNumMap[cat].sub_category[subCat].num
-        } else {
-          return 0;
-        }
-      }
-      if (cat) {
-        if (this.catNumMap[cat] && this.catNumMap[cat].num) {
-          return this.catNumMap[cat].num
-        }
-      }
-      return 0
-    },
-    sumProductsCAT(products) {
-      this.catNumMap = {};
-      let obj = JSON.parse(JSON.stringify(categories))
-      let realProducts = this.products.filter((item) => !item.category.toString().includes('test'));
-      obj.all.num = realProducts.length;
+    if (myMap[cat]?.num) {
 
-      if (products) {
-        products.forEach(item => {
-          let cats = item.category.toString().split(',').flatMap(subStr => subStr.split('|'));
-          cats.forEach(cat => {
-            if (!cat.includes('/')) {
-              if (obj[cat]) {
-                obj[cat].num = (obj[cat].num ? obj[cat].num : 0) + 1
-              }
-            } else {
-              let catArr = cat.split('/')
-              if (catArr.length == 2) {
-                let cat = catArr[0];
-                if (obj[cat]) {
-                  obj[cat].num = (obj[cat].num ? obj[cat].num : 0) + 1
-                }
-                let subCat = catArr[1];
-                if (obj[cat].sub_category[subCat]) {
-                  obj[cat].sub_category[subCat].num = (obj[cat].sub_category[subCat].num ? obj[cat].sub_category[subCat].num : 0) + 1
-                }
-              }
-
-            }
-
-          })
-
-        });
-      }
-
-
-      this.catNumMap = obj;
-
+      return myMap[cat].num;
     }
-  },
-  watch: {
-    products: {
-      handler(newVal, oldVal) {
-
-        this.sumProductsCAT(newVal);
-      },
-      immediate: true // 立即執行一次
-    }
-  },
-
+  }
+  return 0;
 }
 
+
+function sumProductsCAT(products) {
+
+  if (!products) {
+    console.log('products empty', products);
+    return;
+  }
+
+  let catNumMap = {};
+
+  let obj = JSON.parse(JSON.stringify(categories.value));
+
+  let realProducts = products.filter(item => !item.category.toString().includes('test'));
+  obj.all.num = realProducts.length;
+
+  if (products) {
+
+    products.forEach(item => {
+
+      let cats = item.category.toString().split(',').flatMap(subStr => subStr.split('|'));
+      cats.forEach(cat => {
+        if (!cat.includes('/')) {
+
+          if (obj[cat]) {
+            obj[cat].num = (obj[cat].num ? obj[cat].num : 0) + 1;
+          }
+        } else {
+
+          let catArr = cat.split('/');
+          if (catArr.length === 2) {
+            let cat = catArr[0];
+            if (obj[cat]) {
+              obj[cat].num = (obj[cat].num ? obj[cat].num : 0) + 1;
+            }
+            let subCat = catArr[1];
+            if (obj[cat].sub_category[subCat]) {
+              obj[cat].sub_category[subCat].num = (obj[cat].sub_category[subCat].num ? obj[cat].sub_category[subCat].num : 0) + 1;
+            }
+          }
+        }
+      });
+    });
+  }
+  catNumMap = obj;
+  return catNumMap
+
+}
 
 </script>
