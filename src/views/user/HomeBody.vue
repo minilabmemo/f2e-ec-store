@@ -9,12 +9,7 @@
 
     <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products" id="special"></HomeItems>
-    <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
-    <div class="row  ">
-      <div class="col-4"><img src="@/assets/images/design/d1.png" class="img-fluid" alt="discount"></div>
-      <div class="col-4"><img src="@/assets/images/design/d2.png" class="img-fluid" alt="discount"></div>
-      <div class="col-4"><img src="@/assets/images/design/d3.png" class="img-fluid" alt="discount"></div>
-    </div>
+
     <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <h1 class="mb-5 ">COLLECTIONS</h1>
     <div class="d-flex flex-column gap-3  justify-content-center align-items-center ">
