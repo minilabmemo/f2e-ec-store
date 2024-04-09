@@ -188,10 +188,11 @@
 </template>
 
 <script>
-import {userProductsApi, userCartApi, userCouponApi, userOrderApi} from '@/utils/const/path'
-import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
+import {userCartApi, userCouponApi, userOrderApi} from '@/utils/const/path'
+
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
 import {useCartStore} from '@/stores/cartStore';
+import {useProductStore} from '@/stores/productStore';
 import {mapState, mapActions} from 'pinia'
 export default {
   components: {RemoveCartConfirm},
@@ -201,12 +202,13 @@ export default {
     checkout: Boolean,
   },
   computed: {
-    ...mapState(useCartStore, ['cart', 'status'])
+    ...mapState(useCartStore, ['cart', 'status']),
+    ...mapState(useProductStore, ['products', 'status'])
   },
 
   data() {
     return {
-      products: [],
+
       product: {},
 
       form: {
@@ -224,27 +226,8 @@ export default {
     };
   },
   methods: {
-    ...mapActions(useCartStore, ['getCart', 'addCart', "updateCart"]),
-    getProducts() {
-      const url = `${userProductsApi}`;
-      this.isLoading = true;
-      this.$http.get(url).then((response) => {
-        this.isLoading = false;
-        if (response.data.success) {
-          this.products = response.data.products;
-        } else {
-          dataErr(response)
-        }
-
-      }).catch((err) => {
-        catchErr(err)
-        this.status.isLoading = false;
-      });
-    },
-    getProduct(id) {
-      this.$router.push(`/user/product/${id}`);
-    },
-
+    ...mapActions(useCartStore, ['getCart', 'addCart', "updateCart", "removeCartByID"]),
+    ...mapActions(useProductStore, ['getProducts']),
 
     removeConfirm(item) {
       this.tempItem = {...item};
@@ -252,19 +235,11 @@ export default {
       const confirmModal = this.$refs.RemoveCartConfirm;
       confirmModal.showModal();
     },
+
     removeCartItem(id) {
-      this.status.loadingItem = id;
-      const url = `${userCartApi}/${id}`;
-      this.isLoading = true;
-      this.$http.delete(url).then((response) => {
-        this.httpMessageState(response, '移除購物車品項');
-        this.status.loadingItem = '';
-        this.updateUserCartQty();
-        this.getCart();
-        this.isLoading = false;
-        const confirmModal = this.$refs.RemoveCartConfirm;
-        confirmModal.hideModal();
-      });
+      this.removeCartByID(id);
+      const confirmModal = this.$refs.RemoveCartConfirm;
+      confirmModal.hideModal();
     },
     addCouponCode() {
       const url = userCouponApi;

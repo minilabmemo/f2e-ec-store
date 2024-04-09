@@ -49,10 +49,22 @@ export const useCartStore = defineStore('cartStore', () => {
     axios.post(url, {data: cart})
       .then((res) => {
         status.cartLoadingItem = '';
-
         this.getCart();
       });
   }
+
+  function addCartByItem(cart) {
+    const url = `${userCartApi}`;
+    status.isLoading = true;
+
+    axios.post(url, {data: cart}).then((response) => {
+      status.isLoading = false;
+      status.pushMessage({title: '加入購物車', response: response});
+      this.getCart();
+    });
+
+  }
+
   function updateCart(item) {
     if (item.qty > item.product.num) {
       alert(`你輸入的數量大於可購買數量${item.product.num},自動更新為最大可購買數量。`)
@@ -73,6 +85,21 @@ export const useCartStore = defineStore('cartStore', () => {
     });
   }
 
-  return {cart, status, getCart, addCart, cartTotalQty, updateCart}
+  function removeCartByID(id) {
+    status.loadingItem = id;
+    const url = `${userCartApi}/${id}`;
+    status.isLoading = true;
+    axios.delete(url).then((response) => {
+      status.isLoading = false;
+      status.pushMessage(response, '移除購物車品項');
+      status.loadingItem = '';
+      this.getCart();
+    });
+  }
+
+  return {
+    cart, status, cartTotalQty,
+    getCart, addCart, addCartByItem, updateCart, removeCartByID,
+  }
 })
 

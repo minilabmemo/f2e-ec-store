@@ -1,7 +1,7 @@
 <template>
 
   <div class="tenor-sans-regular   ">
-    <!-- <ToastMessages></ToastMessages> -->
+    <ToastMessages></ToastMessages>
     <header class="h-shadow mb-4 col" id="header">
 
       <div class="container-xl justify-content-center  mb-2   position-relative d-none d-lg-flex  ">
@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import HomeNav from '@/components/user/HomeNav.vue';
 import HomeLogo from '@/components/user/HomeLogo.vue';
-// import ToastMessages from '@/components/ToastMessages.vue';
+import ToastMessages from '@/components/ToastMessages.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import UserNav from '@/components/user/UserNav.vue';
 import { storeToRefs } from 'pinia';
@@ -43,50 +43,12 @@ const { cart, status } = storeToRefs(cartStore);
 getCart()
 
 
-import { provide } from 'vue'
+// import { provide } from 'vue'
 
-provide(/* 注入名 */ 'dataCart', /* 值 */ cart)
-provide(/* 注入名 */ 'isGetCartLoading', /* 值 */ status.isGetCartLoading)
+// provide(/* 注入名 */ 'dataCart', /* 值 */ cart)
+// provide(/* 注入名 */ 'isGetCartLoading', /* 值 */ status.isGetCartLoading)
 </script>
-<!-- <script>
 
-
-import HomeNav from '@/components/user/HomeNav.vue';
-import HomeLogo from '@/components/user/HomeLogo.vue';
-import emitter from "@/utils/methods/emitter";
-import ToastMessages from '@/components/ToastMessages.vue';
-import HomeFooter from '@/components/HomeFooter.vue';
-import UserNav from '@/components/user/UserNav.vue';
-import getCart from '@/utils/mixins/getCart';
-import {computed} from 'vue'
-export default {
-  components: {HomeNav, HomeLogo, ToastMessages, HomeFooter, UserNav},
-  provide() {
-    return {
-      emitter,
-      dataCart: computed(() => this.cart),
-      isGetCartLoading: computed(() => this.isGetCartLoading),
-    };
-  },
-
-  mounted() {
-    emitter.on('update-cartQty', () => {
-      this.getCart();
-    });
-
-  },
-
-  mixins: [getCart],
-
-  created() {
-    this.getCart();
-  },
-
-
-
-
-}
-</script> -->
 
 <style scoped>
 .h-shadow {
@@ -97,4 +59,3 @@ export default {
   min-height: 60vh;
 }
 </style>
-@/stores/cartStorex.js

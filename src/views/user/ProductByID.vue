@@ -58,7 +58,7 @@
                 </button>
               </div>
               <div class="col-4  "> <button type="button" class="h-100 w-100  btn btn-outline-danger "
-                  @click="addToCart(product.id, itemQty, false)" :class="{ disabled: isCartLoading }">
+                  @click="addCartCheck(product.id, itemQty, false)" :class="{ disabled: isCartLoading }">
                   加到購物車
                 </button></div>
               <div class="col-4  ">
@@ -95,17 +95,21 @@
     </div>
   </div>
   <AddCartConfirm :item="{ title: product.title, qty: itemQty }" ref="AddCartConfirm"
-    @add-item="addToCart(product.id, itemQty, true)" @go-carts="goToCart"></AddCartConfirm>
+    @add-item="addCartCheck(product.id, itemQty, true)" @go-carts="goToCart"></AddCartConfirm>
 </template>
 
 <script>
-import {userProductApi, userCartApi} from '@/utils/const/path'
+import {userProductApi} from '@/utils/const/path'
 import categories from '@/utils/const/categories'
 import AddCartConfirm from '@/components/user/modal/AddCartConfirm.vue';
 import SaveButton from '@/components/user/SaveButton.vue'
+import {useCartStore} from '@/stores/cartStore';
+import {useProductStore} from '@/stores/productStore';
+import {mapState, mapActions} from 'pinia'
 export default {
-  inject: ['httpMessageState', 'dataCart', 'emitter'],
+
   components: {AddCartConfirm, SaveButton},
+
   data() {
     return {
       product: {},
@@ -117,6 +121,8 @@ export default {
     };
   },
   computed: {
+    ...mapState(useCartStore, ['cart', 'status']),
+    ...mapState(useProductStore, ['products', 'status']),
     category_name() {
       return categories[this.$route.params.category] ? categories[this.$route.params.category].name : ''
     },
@@ -132,8 +138,9 @@ export default {
   },
 
   methods: {
-    getProduct() {
-      const api = `${userProductApi}/${this.id}`;
+    ...mapActions(useCartStore, ['addCartByItem']),
+    getProductByID(id) {
+      const api = `${userProductApi}/${id}`;
       this.isLoading = true;
       this.$http.get(api).then((response) => {
         this.isLoading = false;
@@ -143,14 +150,15 @@ export default {
       });
     },
 
+
     goToCart() {
       this.$router.push('/user/cartflow');
     },
 
     checkQty(id, qty = 1) {
       let confirmAddCart = false;
-      if (this.dataCart.carts) {
-        this.dataCart.carts.forEach(element => {
+      if (this.cart.carts) {
+        this.cart.carts.forEach(element => {
           if (element.product_id === this.id) {
             confirmAddCart = true;
           }
@@ -161,17 +169,17 @@ export default {
         const confirmModal = this.$refs.AddCartConfirm;
         confirmModal.showModal();
       } else {
-        this.addToCart(id, qty, true);
+        this.addCartCheck(id, qty, true);
       }
     },
-    updateUserCartQty() {
-      this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
-    },
 
-    addToCart(id, qty = 1, redirect = false) {
+
+    addCartCheck(id, qty = 1, redirect = false) {
       let isMaxNum = false;
+      let cartValue = this.cart;
 
-      this.dataCart.carts.forEach(element => {
+
+      cartValue.carts.forEach(element => {
         if (element.product_id === this.id) {
           if (element.qty >= element.product.num) {
             alert(`無法加入購物車，購物車數量${element.qty}已達最大可購買量 ${element.product.num}件商品。`)
@@ -189,30 +197,23 @@ export default {
         return
       }
 
-      const url = `${userCartApi}`;
+
       const cart = {
         product_id: id,
         qty,
       };
 
-      this.isLoading = true;
-      this.isCartLoading = true;
-      this.$http.post(url, {data: cart}).then((response) => {
-        this.isLoading = false;
-        this.isCartLoading = false;
-        this.httpMessageState(response, '加入購物車');
-        if (redirect) {
-          this.goToCart();
-        }
-        this.updateUserCartQty();
-
-
-      });
+      this.addCartByItem(cart);
+      if (redirect) {
+        this.goToCart();
+      }
     },
+
+
   },
   created() {
     this.id = this.$route.params.productId;
-    this.getProduct();
+    this.getProduct(this.id);
 
   },
 
