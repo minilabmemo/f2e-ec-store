@@ -176,9 +176,10 @@ import {adminUploadApi} from "@/utils/const/path"
 import modalMixin from "@/utils/mixins/modalMixin"
 import itemLimit from '@/utils/const/itemLimit'
 import categories from '@/utils/const/categories'
-
+import statusStore from '@/stores/statusStore';
+import {mapActions} from 'pinia'
 export default {
-  inject: ['httpMessageState'],
+
   props: {
     product: {
       type: Object,
@@ -214,6 +215,8 @@ export default {
   mixins: [modalMixin],
 
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
+
     findCategoriesList() {
       let list = []
       for (const [key, value] of Object.entries(this.categories,)) {
@@ -243,7 +246,8 @@ export default {
       formData.append('file-to-upload', uploadedFile);
       this.$http.post(adminUploadApi, formData).then((response) => {
 
-        this.httpMessageState(response, '上傳圖片');
+
+        this.pushMessage({title: '上傳圖片', response: response});
         if (response.data.success) {
           if (isMain) {
             this.tempProduct.imageUrl = response.data.imageUrl;

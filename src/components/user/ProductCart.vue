@@ -188,6 +188,7 @@
 
 <script>
 import {userCouponApi} from '@/utils/const/path'
+import statusStore from '@/stores/statusStore';
 
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
 import {useCartStore} from '@/stores/cartStore';
@@ -195,7 +196,6 @@ import {useProductStore} from '@/stores/productStore';
 import {mapState, mapActions} from 'pinia'
 export default {
   components: {RemoveCartConfirm},
-  inject: ['httpMessageState'],
   emits: ['go-next'],
   props: {
     checkout: Boolean,
@@ -227,6 +227,7 @@ export default {
   methods: {
     ...mapActions(useCartStore, ['getCart', 'addCart', "updateCart", "removeCartByID"]),
     ...mapActions(useProductStore, ['getProducts']),
+    ...mapActions(statusStore, ['pushMessage']),
 
     removeConfirm(item) {
       this.tempItem = {...item};
@@ -247,7 +248,8 @@ export default {
       };
       this.isLoading = true;
       this.$http.post(url, {data: coupon}).then((response) => {
-        this.httpMessageState(response, '加入優惠券');
+     
+        this.pushMessage({title: '加入優惠券', response: response});
         this.getCart();
         this.isLoading = false;
       });

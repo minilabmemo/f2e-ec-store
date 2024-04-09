@@ -63,8 +63,7 @@
       </div>
     </form>
   </div>
-  <CheckoutConfirm :item="order" ref="CheckoutConfirm" @pay-order="payOrder" v-if="order">
-  </CheckoutConfirm>
+  <CheckoutConfirm :item="order" ref="CheckoutConfirm" @pay-order="payOrder" v-if="order" />
 </template>
 
 <script>

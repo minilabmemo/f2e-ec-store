@@ -56,8 +56,10 @@ import OrderModal from '@/components/OrderModal.vue';
 import Pagination from '@/components/Pagination.vue';
 import {adminOrderApi, adminOrdersApi} from '@/utils/const/path'
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
+import statusStore from '@/stores/statusStore';
+import {mapActions} from 'pinia'
 export default {
-  inject: ['httpMessageState'],
+
   data() {
     return {
       orders: {},
@@ -74,6 +76,7 @@ export default {
     OrderModal,
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     getOrders(currentPage = 1) {
       this.currentPage = currentPage;
       const url = `${adminOrdersApi}?page=${currentPage}`;
@@ -113,14 +116,16 @@ export default {
       this.$http.put(api, {data: paid}).then((response) => {
         this.isLoading = false;
         this.getOrders(this.currentPage);
-        this.httpMessageState(response, '更新付款狀態');
+        this.pushMessage({title: '更新付款狀態', response: response});
+
+
       });
     },
     delOrder() {
       const url = `${adminOrderApi}/${this.tempOrder.id}`;
       this.isLoading = true;
       this.$http.delete(url).then((response) => {
-
+        this.pushMessage({title: '刪除訂單', response: response});
         const delComponent = this.$refs.delModal;
         delComponent.hideModal();
         this.getOrders(this.currentPage);

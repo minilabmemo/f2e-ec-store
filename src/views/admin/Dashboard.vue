@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Navbar></Navbar>
+    <Navbar />
     <div class="container-fluid ">
-      <ToastMessages></ToastMessages>
+      <ToastMessages />
       <RouterView />
     </div>
 
@@ -13,11 +13,16 @@
 import Navbar from '@/components/admin/Navbar.vue';
 import emitter from "@/utils/methods/emitter";
 import ToastMessages from '@/components/ToastMessages.vue';
+import statusStore from '@/stores/statusStore';
+import {mapActions} from 'pinia'
 export default {
-  inject: ['httpMessageState'],
+
   components: {Navbar, ToastMessages},
   provide() {
     return {emitter};
+  },
+  methods: {
+    ...mapActions(statusStore, ['pushMessage']),
   },
   created() {
     const token = document.cookie.replace(
@@ -29,7 +34,8 @@ export default {
     const url = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/api/user/check`
 
     this.axios.post(url, this.user).then((response) => {
-      this.httpMessageState(response, '登入');
+      this.pushMessage({title: '登入', response: response});
+
       if (!response.data.success) {
         this.$router.push('/login')
       }

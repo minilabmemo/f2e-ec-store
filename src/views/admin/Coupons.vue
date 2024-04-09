@@ -46,9 +46,11 @@ import CouponModal from '@/components/admin/CouponModal.vue';
 import DelModal from '@/components/DelModal.vue';
 import {adminCouponsApi, adminCouponApi} from '@/utils/const/path'
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
+import statusStore from '@/stores/statusStore';
+import {mapActions} from 'pinia'
 export default {
   components: {CouponModal, DelModal},
-  inject: ['httpMessageState'],
+
   props: {
     config: Object,
   },
@@ -66,6 +68,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     openCouponModal(isNew, item) {
       this.isNew = isNew;
       if (this.isNew) {
@@ -103,16 +106,17 @@ export default {
       if (this.isNew) {
         const url = `${adminCouponApi}`;
         this.$http.post(url, {data: tempCoupon}).then((response) => {
+          this.pushMessage({title: '新增優惠券', response: response});
 
-          this.httpMessageState(response, '新增優惠券');
           this.getCoupons();
           this.$refs.couponModal.hideModal();
         });
       } else {
         const url = `${adminCouponApi}/${this.tempCoupon.id}`;
         this.$http.put(url, {data: this.tempCoupon}).then((response) => {
+          this.pushMessage({title: '修改優惠券', response: response});
 
-          this.httpMessageState(response, '新增優惠券');
+
           this.getCoupons();
           this.$refs.couponModal.hideModal();
         });
@@ -122,8 +126,9 @@ export default {
       const url = `${adminCouponApi}/${this.tempCoupon.id}`;
       this.isLoading = true;
       this.$http.delete(url).then((response) => {
+        this.pushMessage({title: '刪除優惠券', response: response});
 
-        this.httpMessageState(response, '刪除優惠券');
+
         const delComponent = this.$refs.delModal;
         delComponent.hideModal();
         this.getCoupons();

@@ -28,7 +28,6 @@
 - network at 整體頁面
 
   - [x] 如果出現後端錯誤 ex: 404 則彈出視窗告知，確定仍可繼續瀏覽。
-  - [x] httpMessageState 處理
   - loading 效果調整
 
 - [x] RWD at 整體頁面
