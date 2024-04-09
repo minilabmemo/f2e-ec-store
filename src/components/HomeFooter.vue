@@ -5,10 +5,11 @@
         <div class="col-12 col-sm-4   ">
           <div class="row   gy-2 ">
             <div class="col-12 fw-semibold  noto-font">About</div>
-            <div class="col-12"> <router-link to="./" class="nav-link">品牌介紹</router-link></div>
-
-            <div class="col-12"><router-link to="./" class="nav-link">購物流程</router-link></div>
-            <div class="col-12"><router-link to="./" class="nav-link">常見問題</router-link></div>
+            <div class="col-12"> <router-link :to="`/about#${sectionIds.brand}`" class="nav-link">品牌介紹</router-link>
+            </div>
+            <div class="col-12"><router-link :to="`/about#${sectionIds.shoppingProcess}`"
+                class="nav-link">購物流程</router-link></div>
+            <div class="col-12"><router-link :to="`/about#${sectionIds.faqs}`" class="nav-link">常見問題</router-link></div>
 
           </div>
 
@@ -17,9 +18,12 @@
         <div class="col-12 col-sm-4 ">
           <div class="row     gy-2 ">
             <div class="col-12 fw-semibold  noto-font ">Service</div>
-            <div class="col-12"><router-link to="./" class="nav-link">付款方式</router-link></div>
-            <div class="ol-12"><router-link to="./" class="nav-link">運送服務</router-link></div>
-            <div class="ol-12"><router-link to="./" class="nav-link">退換政策</router-link></div>
+            <div class="col-12"><router-link :to="`/about#${sectionIds.paymentMethods}`"
+                class="nav-link">付款方式</router-link></div>
+            <div class="ol-12"><router-link :to="`/about#${sectionIds.shippingService}`"
+                class="nav-link">運送服務</router-link></div>
+            <div class="ol-12"><router-link :to="`/about#${sectionIds.returnPolicy}`"
+                class="nav-link">退換政策</router-link></div>
 
           </div>
         </div>
@@ -57,3 +61,15 @@
 
   </footer>
 </template>
+
+<script>
+import sectionIds from '@/utils/const/sectionIds.js';
+
+export default {
+  data() {
+    return {
+      sectionIds: sectionIds
+    }
+  }
+}
+</script>

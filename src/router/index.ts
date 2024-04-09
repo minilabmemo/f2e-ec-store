@@ -6,6 +6,13 @@ const icon = useFavicon()
 const shopFavIcon = 'logo_favicon.ico'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
+  scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash
+      }
+    }
+  },
   routes: [
     {
       path: '/',
@@ -26,6 +33,11 @@ const router = createRouter({
           name: 'HomeStyle',
           path: 'style',
           component: () => import('../views/user/HomeStyle.vue')
+        },
+        {
+          name: 'HomeAbout',
+          path: 'about',
+          component: () => import('../views/user/HomeAbout.vue')
         },
         {
           name: 'NoMatchRoute',
