@@ -52,14 +52,15 @@
 <script>
 
 import Pagination from '@/components/Pagination.vue';
-import getProductsAll from '@/utils/mixins/getProductsAll'
-
+import {useProductStore} from '@/stores/productStore';
+import {mapState, mapActions} from 'pinia'
 export default {
-  mixins: [getProductsAll],
+  computed: {
+    ...mapState(useProductStore, ['products', 'status'])
+  },
   watch: {
     products: {
       handler: function (val, oldVal) {
-
         if (this.saveItems) {
           for (const [key, item] of Object.entries(this.saveItems)) {
             this.saveItems[key].on_stock = false
@@ -100,6 +101,7 @@ export default {
     Pagination,
   },
   methods: {
+    ...mapActions(useProductStore, ['getProducts']),
     getSaveItems() {
       this.saveItems = JSON.parse(localStorage.getItem(this.saveKey))
       this.filterItemsByPage()
@@ -142,6 +144,7 @@ export default {
   },
   created() {
     this.getSaveItems();
+    this.getProducts();
 
   },
 

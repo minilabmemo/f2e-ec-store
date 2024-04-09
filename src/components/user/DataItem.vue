@@ -37,11 +37,14 @@
 import { defineProps } from 'vue';
 import statusStore from '@/stores/statusStore';
 const { isLoading } = statusStore();
-console.log('isLoading', isLoading);
+
 
 defineProps({
   filterErr: String,
-  item: { title: "no name" },
+  item: {
+    type: Object,
+    default: () => ({ title: "no name" })
+  }
 });
 
 
