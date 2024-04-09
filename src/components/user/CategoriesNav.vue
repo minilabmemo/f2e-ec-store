@@ -52,6 +52,7 @@ const {getProducts, } = productStore;
 const {products} = storeToRefs(productStore);
 getProducts();
 
+
 defineProps({
   isCollapsed: Boolean
 });

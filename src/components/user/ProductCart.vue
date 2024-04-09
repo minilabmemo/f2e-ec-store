@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="isLoading"></LoadingOverlay>
+  <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
 
   <div class="row mt-4" v-if="cart && cart.carts && cart.carts.length !== 0">
     <div class="col-12 ">
@@ -191,21 +191,24 @@
 import {userProductsApi, userCartApi, userCouponApi, userOrderApi} from '@/utils/const/path'
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
-
+import {useCartStore} from '@/stores/cartStore';
+import {mapState, mapActions} from 'pinia'
 export default {
   components: {RemoveCartConfirm},
-  inject: ['httpMessageState', 'emitter'],
+  inject: ['httpMessageState'],
   emits: ['go-next'],
   props: {
     checkout: Boolean,
   },
+  computed: {
+    ...mapState(useCartStore, ['cart', 'status'])
+  },
+
   data() {
     return {
       products: [],
       product: {},
-      status: {
-        loadingItem: '',
-      },
+
       form: {
         user: {
           name: '',
@@ -215,12 +218,13 @@ export default {
         },
         message: '',
       },
-      cart: {},
+
       coupon_code: '',
       tempItem: {},
     };
   },
   methods: {
+    ...mapActions(useCartStore, ['getCart', 'addCart', "updateCart"]),
     getProducts() {
       const url = `${userProductsApi}`;
       this.isLoading = true;
@@ -240,58 +244,8 @@ export default {
     getProduct(id) {
       this.$router.push(`/user/product/${id}`);
     },
-    addCart(id) {
-      const url = `${userCartApi}`;
-      this.status.loadingItem = id;
-      const cart = {
-        product_id: id,
-        qty: 1,
-      };
-      this.$http.post(url, {data: cart})
-        .then((res) => {
-          this.status.loadingItem = '';
 
-          this.getCart();
-        });
-    },
-    getCart() {
-      const url = `${userCartApi}`;
-      this.isLoading = true;
-      this.$http.get(url).then((response) => {
-        this.isLoading = false;
-        if (response.data.success) {
-          this.cart = response.data.data;
-        } else {
-          dataErr(response)
-        }
-      }).catch((err) => {
-        catchErr(err)
 
-      });
-    },
-    updateUserCartQty() {
-      this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
-    },
-    updateCart(item) {
-      if (item.qty > item.product.num) {
-        alert(`你輸入的數量大於可購買數量${item.product.num},自動更新為最大可購買數量。`)
-        item.qty = item.product.num;
-      }
-
-      const url = `${userCartApi}/${item.id}`;
-      this.isLoading = true;
-      this.status.loadingItem = item.id;
-      const cart = {
-        product_id: item.product_id,
-        qty: item.qty,
-      };
-      this.$http.put(url, {data: cart}).then((res) => {
-
-        this.status.loadingItem = '';
-        this.updateUserCartQty();
-        this.getCart();
-      });
-    },
     removeConfirm(item) {
       this.tempItem = {...item};
 

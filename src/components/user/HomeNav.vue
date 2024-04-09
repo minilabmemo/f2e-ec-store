@@ -119,12 +119,12 @@ export default {
     }
 
   },
-  unmounted() {
-    const myOffcanvas = document.getElementById('offcanvasNavbar');
-    if (myOffcanvas) {
-      myOffcanvas.removeEventListener('hide.bs.offcanvas', onHide);
-      myOffcanvas.removeEventListener('show.bs.offcanvas', onShow);
-    }
+  unmounted() { //FIXME
+    // const myOffcanvas = document.getElementById('offcanvasNavbar');
+    // if (myOffcanvas) {
+    //   myOffcanvas.removeEventListener('hide.bs.offcanvas');
+    //   myOffcanvas.removeEventListener('show.bs.offcanvas');
+    // }
   },
   watch: {
     '$route'(to, from) {

@@ -20,7 +20,7 @@
 
             <div class="col-4 d-flex justify-content-center  align-items-center">
               <div class=" bg-black text-white  px-2 py-0  rounded-1 " width="20px" height="20px">
-                <span v-if="!isGetCartLoading" class=" ">{{ cartTotalQty }}</span>
+                <span v-if="!status.isGetCartLoading" class=" ">{{ cartTotalQty }}</span>
                 <div v-else class="spinner-border spinner-border-sm" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
@@ -60,6 +60,33 @@
 
 </template>
 
+
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import Dropdown from 'bootstrap/js/dist/dropdown.js';
+import Tooltip from 'bootstrap/js/dist/tooltip.js';
+import { storeToRefs } from 'pinia'
+import { useCartStore } from '@/stores/cartStore.js'
+const cartStore = useCartStore();
+const { getCart } = cartStore;
+const { cart, status, cartTotalQty } = storeToRefs(cartStore);
+getCart()
+onMounted(() => {
+  var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+  var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+    return new Dropdown(dropdownToggleEl)
+  })
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new Tooltip(tooltipTriggerEl)
+  })
+})
+
+
+</script>
+
+
+<!-- 
 <script>
 
 
@@ -101,4 +128,4 @@ export default {
 
 
 }
-</script>
+</script> -->

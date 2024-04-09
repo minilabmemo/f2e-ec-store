@@ -56,7 +56,7 @@ getProducts();
 
 const catItems = ref([]);
 const showItems = ref([]);
-const filterErr = ref("");
+const filterErr = ref(""); //FIXME
 let pagination = reactive({
   total_pages: 1,
   current_page: 1,
@@ -65,11 +65,7 @@ let pagination = reactive({
 })
 const dataPerPage = 12;
 import {useRoute} from 'vue-router'
-
 const route = useRoute()
-
-
-
 function filterItems() {
   let itemByCAT = [];
   if (!products.value) {

@@ -1,7 +1,7 @@
 <template>
 
   <div class="tenor-sans-regular   ">
-    <ToastMessages></ToastMessages>
+    <!-- <ToastMessages></ToastMessages> -->
     <header class="h-shadow mb-4 col" id="header">
 
       <div class="container-xl justify-content-center  mb-2   position-relative d-none d-lg-flex  ">
@@ -28,8 +28,27 @@
 </template>
 
 
+<script setup lang="ts">
+import HomeNav from '@/components/user/HomeNav.vue';
+import HomeLogo from '@/components/user/HomeLogo.vue';
+// import ToastMessages from '@/components/ToastMessages.vue';
+import HomeFooter from '@/components/HomeFooter.vue';
+import UserNav from '@/components/user/UserNav.vue';
+import { storeToRefs } from 'pinia';
 
-<script>
+import { useCartStore } from '@/stores/cartStore.js'
+const cartStore = useCartStore();
+const { getCart } = cartStore;
+const { cart, status } = storeToRefs(cartStore);
+getCart()
+
+
+import { provide } from 'vue'
+
+provide(/* 注入名 */ 'dataCart', /* 值 */ cart)
+provide(/* 注入名 */ 'isGetCartLoading', /* 值 */ status.isGetCartLoading)
+</script>
+<!-- <script>
 
 
 import HomeNav from '@/components/user/HomeNav.vue';
@@ -67,7 +86,7 @@ export default {
 
 
 }
-</script>
+</script> -->
 
 <style scoped>
 .h-shadow {
@@ -78,3 +97,4 @@ export default {
   min-height: 60vh;
 }
 </style>
+@/stores/cartStorex.js
