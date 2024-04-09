@@ -188,7 +188,7 @@
 </template>
 
 <script>
-import {userCartApi, userCouponApi, userOrderApi} from '@/utils/const/path'
+import {userCouponApi} from '@/utils/const/path'
 
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
 import {useCartStore} from '@/stores/cartStore';
@@ -253,14 +253,7 @@ export default {
         this.isLoading = false;
       });
     },
-    createOrder() {
-      const url = userOrderApi;
-      const order = this.form;
-      this.$http.post(url, {data: order})
-        .then((res) => {
-          console.log(res);
-        });
-    },
+
 
   },
   created() {

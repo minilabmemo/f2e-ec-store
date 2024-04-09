@@ -91,7 +91,7 @@ export const useCartStore = defineStore('cartStore', () => {
     status.isLoading = true;
     axios.delete(url).then((response) => {
       status.isLoading = false;
-      status.pushMessage(response, '移除購物車品項');
+      status.pushMessage({title: '移除購物車品項', response: response});
       status.loadingItem = '';
       this.getCart();
     });

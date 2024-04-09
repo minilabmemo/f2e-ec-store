@@ -73,9 +73,10 @@ export const useOrderStore = defineStore('orderStore', () => {
   function createOrder(body) {
     const url = userOrderApi;
     status.orderTemp.paySuccess = false;
-
+    status.isLoading = true;
     axios.post(url, {data: body})
       .then((res) => {
+        status.isLoading = false;
         status.pushMessage({
           title: `訂單送出`,
           response: res

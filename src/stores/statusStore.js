@@ -14,6 +14,16 @@ export default defineStore('statusStore', {
   actions: {
     pushMessage(data) {
       const {title, content, style = 'success', response} = data;
+      if (!response.data) {
+        let message = {
+          style: 'info',
+          title: `${title}`,
+          content: content,
+        };
+        this.messages.push(message);
+        return
+      }
+
       if (response.data.success) {
         let message = {
           style,

@@ -1,4 +1,5 @@
 <template>
+  <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
 
   <div class="container-xl">
     <div class="my-5 row justify-content-center">
@@ -46,13 +47,13 @@
 
 <script setup>
 import {ref, watch} from 'vue';
-
+import {storeToRefs} from 'pinia'
 import {useOrderStore} from '@/stores/orderStore'
 import {useCartStore} from '@/stores/cartStore';
 const orderStore = useOrderStore();
 const {getCart} = useCartStore();
 const {createOrder, } = orderStore;
-
+const {status} = storeToRefs(orderStore);
 
 const form = ref({
   user: {
