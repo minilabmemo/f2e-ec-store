@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="isLoading"></LoadingOverlay>
+  <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
   <table class="phone-table table table-sm align-middle d-table d-lg-none ">
     <thead>
       <tr>
@@ -111,19 +111,21 @@
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 import OrderModal from '@/components/OrderModal.vue';
 import Pagination from '@/components/Pagination.vue';
-import {userOrdersApi, userOrderPayApi} from '@/utils/const/path'
 
+import {useOrderStore} from '@/stores/orderStore'
+import {mapState, mapActions} from 'pinia'
 export default {
-  inject: ['httpMessageState', 'emitter'],
+
   data() {
     return {
-      orders: {},
       isNew: false,
-      pagination: {},
-      isLoading: false,
       tempOrder: {},
       currentPage: 1,
     };
+  },
+  computed: {
+    ...mapState(useOrderStore, ['orders', 'status', 'pagination']),
+
   },
   components: {
     Pagination,
@@ -131,25 +133,8 @@ export default {
     OrderModal,
   },
   methods: {
-    getOrders(currentPage = 1) {
-      this.currentPage = currentPage;
-      const url = `${userOrdersApi}?page=${currentPage}`;
-      this.isLoading = true;
-      this.$http.get(url, this.tempProduct).then((response) => {
-        this.isLoading = false;
-        if (response.data.success) {
-          this.orders = response.data.orders;
-          this.pagination = response.data.pagination;
-        } else {
-          dataErr(response)
-        }
+    ...mapActions(useOrderStore, ['getOrders', 'payOderByID']),
 
-
-      }).catch((err) => {
-        catchErr(err)
-
-      });
-    },
     openModal(isNew, item) {
       this.tempOrder = {...item};
       this.isNew = false;
@@ -163,24 +148,13 @@ export default {
       const confirmModal = this.$refs.CheckoutConfirm;
       confirmModal.showModal();
     },
-    updateUserCartQty() {
-      this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
-    },
-    payOrder() {
-      if (this.orderId) {
-        const url = `${userOrderPayApi}/${this.orderId}`;
-        this.$http.post(url)
-          .then((res) => {
-            this.httpMessageState(res, '付款');
-            const confirmModal = this.$refs.CheckoutConfirm;
-            confirmModal.hideModal();
-            if (res.data.success) {
-              this.getOrders();
-              this.httpMessageState(res, `訂單編號${this.orderId} 付款`);
-              this.updateUserCartQty()
-            }
 
-          });
+    payOrder() {
+      const confirmModal = this.$refs.CheckoutConfirm;
+      confirmModal.hideModal();
+      if (this.orderId) {
+        this.payOderByID(this.orderId)
+
       }
     },
   },

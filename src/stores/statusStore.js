@@ -6,6 +6,10 @@ export default defineStore('statusStore', {
     cartLoadingItem: '',
     messages: [],
     isGetCartLoading: false,
+    orderTemp: {
+      paySuccess: false,
+      orderId: ""
+    }
   }),
   actions: {
     pushMessage(data) {

@@ -2,7 +2,7 @@
 
   <div class="container-xl">
     <div class="my-5 row justify-content-center">
-      <Form class="col-md-6" v-slot="{ errors }" @submit="createOrder">
+      <Form class="col-md-6" v-slot="{ errors }" @submit="sendOrder">
         <div class="mb-3">
           <label for="email" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>Email</label>
           <Field id="email" name="email" type="email" class="form-control" :class="{ 'is-invalid': errors['email'] }"
@@ -43,41 +43,45 @@
   </div>
 </template>
 
-<script>
-import {userOrderApi} from '@/utils/const/path'
-export default {
-  inject: ['httpMessageState', 'emitter'],
 
-  data() {
-    return {
-      form: {
-        user: {
-          name: '',
-          email: '',
-          tel: '',
-          address: '',
-        },
-        message: '',
-      },
+<script setup>
+import {ref, watch} from 'vue';
 
-    };
+import {useOrderStore} from '@/stores/orderStore'
+import {useCartStore} from '@/stores/cartStore';
+const orderStore = useOrderStore();
+const {getCart} = useCartStore();
+const {createOrder, } = orderStore;
+
+
+const form = ref({
+  user: {
+    name: '',
+    email: '',
+    tel: '',
+    address: '',
   },
-  methods: {
-    createOrder() {
-      const url = userOrderApi;
-      const order = this.form;
-      this.$http.post(url, {data: order})
-        .then((res) => {
-          this.$emit('order-create', res.data.orderId);
-          this.$emit('go-next');
-          this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
-        });
-    },
-    isPhone(value) {
-      const phoneNumber = /^(09)[0-9]{8}$/
-      return phoneNumber.test(value) ? true : '請填寫台灣手機號碼，以 09 開頭加上 8 位數字之格式。'
+  message: '',
+})
+function sendOrder() {
+  const body = form.value;
+  createOrder(body)
+}
+function isPhone(value) {
+  const phoneNumber = /^(09)[0-9]{8}$/
+  return phoneNumber.test(value) ? true : '請填寫台灣手機號碼，以 09 開頭加上 8 位數字之格式。'
+}
+const emit = defineEmits(['order-create', 'go-next'])
+
+watch(
+  () => orderStore.status.orderTemp,
+  (newVal) => {
+    if (newVal.paySuccess) {
+      emit('order-create', newVal.orderId);
+      emit('go-next');
+
     }
-  },
+    getCart();
+  }, {deep: true})
 
-};
-</script>@
+</script>

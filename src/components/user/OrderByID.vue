@@ -58,73 +58,49 @@
       </div>
     </form>
   </div>
-  <CheckoutConfirm :item="order" ref="CheckoutConfirm" @pay-order="payOrder">
+  <CheckoutConfirm :item="order" ref="CheckoutConfirm" @pay-order="payOrder" v-if="order">
   </CheckoutConfirm>
 </template>
 
 <script>
-import {userOrderApi, userOrderPayApi} from '@/utils/const/path'
+
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
-import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
+
+import {useOrderStore} from '@/stores/orderStore'
+import {mapState, mapActions} from 'pinia'
 export default {
   components: {CheckoutConfirm},
   props: {
     orderId: String,
   },
-  inject: ['httpMessageState', 'emitter'],
-  data() {
-    return {
-      order: {
-        user: {},
-      },
+  computed: {
+    ...mapState(useOrderStore, ['order', 'status']),
 
-      isLoading: false,
-    };
   },
+
   methods: {
-    updateUserCartQty() {
-      this.emitter.emit('update-cartQty'); //觸發首頁購物車數量更新
-    },
+    ...mapActions(useOrderStore, ['getOrderByID', 'payOderByID']),
+
     getOrder() {
       if (this.orderId == "") {
         return
       }
-      const url = `${userOrderApi}/${this.orderId}`;
-      this.$http.get(url)
-        .then((res) => {
-          if (res.data.success) {
-            this.order = res.data.order;
-          } else {
-            dataErr(response)
-          }
-        }).catch((err) => {
-          catchErr(err)
-          this.status.isLoading = false;
-        });
+      this.getOrderByID(this.orderId)
     },
     confirmPay() {
       const confirmModal = this.$refs.CheckoutConfirm;
       confirmModal.showModal();
     },
     payOrder() {
-      const url = `${userOrderPayApi}/${this.orderId}`;
-      this.$http.post(url)
-        .then((res) => {
-          this.httpMessageState(res, '付款');
-          if (res.data.success) {
-            this.getOrder();
-            this.updateUserCartQty()
-          }
-          const confirmModal = this.$refs.CheckoutConfirm;
-          confirmModal.hideModal();
-        }).catch((err) => {
-          catchErr(err)
-        });
+      this.payOderByID(this.orderId)
+      const confirmModal = this.$refs.CheckoutConfirm;
+      confirmModal.hideModal();
     },
   },
 
   created() {
     this.getOrder();
+
 
   },
   watch: {

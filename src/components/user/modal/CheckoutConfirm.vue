@@ -31,7 +31,7 @@
 import modalMixin from "@/utils/mixins/modalMixin"
 export default {
   props: {
-    item: {},
+    item: {total: 0},
 
   },
   data() {
@@ -50,7 +50,7 @@ export default {
     productsNum() {
 
       let cum = 0
-      if (this.item.products) {
+      if (this.item && this.item.products) {
         for (const value of Object.values(this.item.products)) {
           cum = cum + value.qty
         }

@@ -1,6 +1,6 @@
 <template>
-  <LoadingOverlay :active="isLoading"></LoadingOverlay>
-  <div v-if="!isLoading && !product.title" class="text-primary "> 該商品已下架。</div>
+  <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
+  <div v-if="!status.isLoading && !product.title" class="text-primary "> 該商品已下架。</div>
   <div class="" v-else>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -213,7 +213,7 @@ export default {
   },
   created() {
     this.id = this.$route.params.productId;
-    this.getProduct(this.id);
+    this.getProductByID(this.id);
 
   },
 

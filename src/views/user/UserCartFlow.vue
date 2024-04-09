@@ -51,7 +51,7 @@ import OrderInfo from '@/components/user/SendOrder.vue';
 import OrderByID from '@/components/user/OrderByID.vue';
 
 export default {
-  inject: ['httpMessageState'],
+
   components: {ProductCart, OrderInfo, OrderByID},
   data() {
     return {
@@ -76,6 +76,8 @@ export default {
     },
     goNextTab() {
       this.stepRecord = this.activeTab + 1;
+
+
       let nextSelector = `#${this.tabsInfo[this.activeTab + 1].id}`
       var triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${nextSelector}"]`)
       Tab.getInstance(triggerEl).show()
