@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="isLoading"></LoadingOverlay>
+  <LoadingOverlay :active="isLoading" />
   <table class="table mt-4">
     <thead>
       <tr>
@@ -45,9 +45,9 @@
       </template>
     </tbody>
   </table>
-  <OrderModal :order="tempOrder" ref="orderModal"></OrderModal>
-  <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder"></DelModal>
-  <Pagination :pages="pagination" @change-page-num="getOrders"></Pagination>
+  <OrderModal :order="tempOrder" ref="orderModal" />
+  <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder" />
+  <Pagination :pages="pagination" @change-page-num="getOrders" />
 </template>
 
 <script>

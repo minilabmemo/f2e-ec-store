@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
+  <LoadingOverlay :active="status.isLoading" />
   <div v-if="!status.isLoading && !product.title" class="text-primary "> 該商品已下架。</div>
   <div class="" v-else>
     <nav aria-label="breadcrumb">
@@ -64,8 +64,7 @@
               <div class="col-4  ">
                 <SaveButton class="h-100 w-100 " :item="{
     title: product.title, id: product.id, imageUrl: product.imageUrl, on_stock: true
-  }" v-if="product.id">
-                </SaveButton>
+  }" v-if="product.id" />
               </div>
 
             </div>
@@ -95,7 +94,7 @@
     </div>
   </div>
   <AddCartConfirm :item="{ title: product.title, qty: itemQty }" ref="AddCartConfirm"
-    @add-item="addCartCheck(product.id, itemQty, true)" @go-carts="goToCart"></AddCartConfirm>
+    @add-item="addCartCheck(product.id, itemQty, true)" @go-carts="goToCart" />
 </template>
 
 <script>

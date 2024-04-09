@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
+  <LoadingOverlay :active="status.isLoading" />
   <table class="phone-table table table-sm align-middle d-table d-lg-none ">
     <thead>
       <tr>
@@ -102,9 +102,9 @@
   </table>
 
 
-  <OrderModal :order="tempOrder" ref="orderModal"></OrderModal>
-  <CheckoutConfirm :item="tempOrder" ref="CheckoutConfirm" @pay-order="payOrder"> </CheckoutConfirm>
-  <Pagination :pages="pagination" @change-page-num="getOrders"></Pagination>
+  <OrderModal :order="tempOrder" ref="orderModal" />
+  <CheckoutConfirm :item="tempOrder" ref="CheckoutConfirm" @pay-order="payOrder" />
+  <Pagination :pages="pagination" @change-page-num="getOrders" />
 </template>
 
 <script>

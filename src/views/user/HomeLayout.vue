@@ -1,29 +1,29 @@
 <template>
 
   <div class="tenor-sans-regular   ">
-    <ToastMessages></ToastMessages>
+    <ToastMessages />
     <header class="h-shadow mb-4 col" id="header">
 
       <div class="container-xl justify-content-center  mb-2   position-relative d-none d-lg-flex  ">
         <div class="mx-auto  ">
-          <HomeLogo></HomeLogo>
+          <HomeLogo />
         </div>
 
 
         <div class="position-absolute  end-0 bottom-0  ">
-          <UserNav></UserNav>
+          <UserNav />
         </div>
       </div>
       <div class="  border-bottom  d-none d-lg-flex  "></div>
       <div class="container-xl">
-        <HomeNav></HomeNav>
+        <HomeNav />
       </div>
 
     </header>
     <div class="container-xl " id="content">
       <RouterView />
     </div>
-    <HomeFooter></HomeFooter>
+    <HomeFooter />
   </div>
 </template>
 

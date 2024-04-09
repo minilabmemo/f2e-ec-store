@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
+  <LoadingOverlay :active="status.isLoading" />
 
   <div class="row mt-4" v-if="cart && cart.carts && cart.carts.length !== 0">
     <div class="col-12 ">
@@ -183,8 +183,7 @@
       </button>
     </div>
   </div>
-  <RemoveCartConfirm :item="tempItem" ref="RemoveCartConfirm" @remove-item="removeCartItem(tempItem.id)">
-  </RemoveCartConfirm>
+  <RemoveCartConfirm :item="tempItem" ref="RemoveCartConfirm" @remove-item="removeCartItem(tempItem.id)" />
 </template>
 
 <script>

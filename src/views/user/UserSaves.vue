@@ -46,8 +46,7 @@
     </tbody>
   </table>
 
-  <Pagination :pages="pagination" @change-page-num="filterItemsByPage" v-if="saveItems && saveItems.length !== 0">
-  </Pagination>
+  <Pagination :pages="pagination" @change-page-num="filterItemsByPage" v-if="saveItems && saveItems.length !== 0" />
 </template>
 
 <script>

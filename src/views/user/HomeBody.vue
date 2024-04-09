@@ -2,13 +2,13 @@
 
   <div class="container-lg  d-flex flex-column align-items-center ">
 
-    <HomeBanner></HomeBanner>
+    <HomeBanner />
     <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
 
-    <HomeItems section="NEW ARRIVAL" :CAT="categories.new.key" :products="products" id="news"></HomeItems>
+    <HomeItems section="NEW ARRIVAL" :CAT="categories.new.key" :products="products" id="news" />
 
     <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
-    <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products" id="special"></HomeItems>
+    <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products" id="special" />
 
     <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <h1 class="mb-5 ">COLLECTIONS</h1>

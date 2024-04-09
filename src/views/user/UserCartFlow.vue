@@ -25,13 +25,13 @@
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" :id="tabsInfo[0].id" role="tabpanel"
           :aria-labelledby="`${tabsInfo[0].id}-tab`">
-          <ProductCart @go-next="goNextTab" :checkout="checkout"></ProductCart>
+          <ProductCart @go-next="goNextTab" :checkout="checkout" />
         </div>
         <div class="tab-pane fade" :id="tabsInfo[1].id" role="tabpanel" :aria-labelledby="`${tabsInfo[1].id}-tab`">
-          <OrderInfo @go-next="goNextTab" @order-create="updateOrderID"></OrderInfo>
+          <OrderInfo @go-next="goNextTab" @order-create="updateOrderID" />
         </div>
         <div class="tab-pane fade" :id="tabsInfo[2].id" role="tabpanel" :aria-labelledby="`${tabsInfo[2].id}-tab`">
-          <OrderByID :orderId="orderId"></OrderByID>
+          <OrderByID :orderId="orderId" />
         </div>
       </div>
 

@@ -22,5 +22,17 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
+  } ,
+  rules: {
+    "vue/html-self-closing": ["error", {
+      "html": {
+        "void": "never",
+        "normal": "any",
+        "component": "always"
+      },
+      "svg": "always",
+      "math": "always"
+    }]
   }
+
 }

@@ -1,13 +1,12 @@
 <template>
-  <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
+  <LoadingOverlay :active="status.isLoading" />
   <div class="text-primary " v-if="!filterItems.length && !status.isLoading">
     <div> 你搜尋的關鍵字找不到對應商品，請試試其他關鍵字（Ex:上衣）。</div>
   </div>
   <div class="row row-cols-2 row-cols-lg-3 ">
 
     <SaleItem v-for="(item, index) in filterItems" :key="index" :item="item" class="col"
-      :path="`${$route.params.category}/${$route.params.subcategory}`">
-    </SaleItem>
+      :path="`${$route.params.category}/${$route.params.subcategory}`" />
 
 
   </div>

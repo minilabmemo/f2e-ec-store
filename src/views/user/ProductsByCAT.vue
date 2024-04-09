@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="status.isLoading"></LoadingOverlay>
+  <LoadingOverlay :active="status.isLoading" />
 
   <div class="d-flex flex-column gap-4  ">
 
@@ -23,8 +23,7 @@
     <div class="row row-cols-2 row-cols-lg-3 " data-cy="products">
 
       <SaleItem v-for="(item, index) in showItems" :key="index" :item="item" class="col" data-cy="item"
-        :path="`${$route.params.category}/${$route.params.subcategory}`">
-      </SaleItem>
+        :path="`${$route.params.category}/${$route.params.subcategory}`" />
       <div class="col-6 " v-if="!showItems.length && !status.isLoading">
         <img src="@/assets/images/design/empty200.png" alt="empty200" class="img-fluid ">
       </div>
@@ -32,8 +31,7 @@
     </div>
 
 
-    <Pagination :pages="pagination" @change-page-num="filterItemsByPage" v-if="showItems.length !== 0">
-    </Pagination>
+    <Pagination :pages="pagination" @change-page-num="filterItemsByPage" v-if="showItems.length !== 0" />
 
   </div>
 
