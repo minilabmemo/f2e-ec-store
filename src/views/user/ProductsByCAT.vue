@@ -20,7 +20,7 @@
     </nav>
 
 
-    <div class="row row-cols-2 row-cols-lg-3 " data-cy="products">
+    <div class="row row-cols-2 row-cols-lg-3 gy-5" data-cy="products">
 
       <SaleItem v-for="(item, index) in showItems" :key="index" :item="item" class="col" data-cy="item"
         :path="`${$route.params.category}/${$route.params.subcategory}`" />
@@ -54,7 +54,7 @@ getProducts();
 
 const catItems = ref([]);
 const showItems = ref([]);
-const filterErr = ref(""); //FIXME
+
 let pagination = ref({
   total_pages: 1,
   current_page: 1,
