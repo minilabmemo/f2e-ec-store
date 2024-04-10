@@ -261,7 +261,7 @@ export default {
   },
   created() {
     this.getProducts();
-    this.getCart();
+
 
 
   },
