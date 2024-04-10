@@ -15,6 +15,7 @@
 
 - 功能細節請見：[Feature_Design](./Feature_Design.md)
 - 專案建立與開發筆記：[README_create](./README_create.md)
+- 版本與修正紀錄：[CHANGELOG](./CHANGELOG.md)
 
 ## Start
 
@@ -32,3 +33,9 @@ v18.16.1
 ```
 npm run test:e2e:dev
 ```
+
+### 圖片版權
+
+本專案非商業使用，圖片為網路搜尋。
+
+- 圖片版權來自 Unsplash 所有，可點選 [這裡查看圖片來源](./img_source.md)。

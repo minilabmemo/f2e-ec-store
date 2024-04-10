@@ -1,3 +1,13 @@
+## 0.3.0 (2024-04-10)
+
+### Features
+
+- 新增 footer 連結 About 頁面與樣式牆
+
+### Fix
+
+- 前台 重構使用 Pinia-store 與 composition API 管理
+
 ## 0.2.0 (2024-03-31)
 
 ### Features
