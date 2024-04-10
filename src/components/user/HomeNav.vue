@@ -30,8 +30,8 @@
         </div>
         <div class="offcanvas-body   ">
           <CATNav v-if="isCollapsed" />
-          <ul class="navbar-nav  mx-auto   d-flex  align-items-center   justify-content-center" v-else>
-            <li class="nav-item mx-2 " v-for="(item, key) in categories" :key="item.name">
+          <ul class="navbar-nav  mx-auto   d-flex  align-items-center   justify-content-center  " v-else>
+            <li class="nav-item mx-1 mx-xl-2   " v-for="(item, key) in categories" :key="item.name">
               <router-link :to="`/product/${key}/all`" class="nav-link "
                 :class="{ active: $route.params.category === key }" aria-current="page">
                 <div class="d-flex flex-column  align-items-center ">
@@ -41,7 +41,7 @@
                 </div>
               </router-link>
             </li>
-            <li class="nav-item mx-2 ">
+            <li class="nav-item mx-1 mx-xl-2  ">
               <router-link :to="`/style`" class="nav-link " :class="{ active: $route.path === '/style' }"
                 aria-current="page">
                 <div class="d-flex flex-column  align-items-center ">
@@ -53,8 +53,8 @@
             </li>
           </ul>
           <div class="row g-2 justify-content-center align-items-center " :class="searchClasses" role="search">
-            <div class="col-9"> <input class="form-control form-control-sm   " type="search" placeholder="關鍵字搜尋"
-                aria-label="Search" v-model="keyword" @keyup.enter="search"></div>
+            <div class="col-6 col-mg-9"> <input class="form-control form-control-sm   " type="search"
+                placeholder="關鍵字搜尋" aria-label="Search" v-model="keyword" @keyup.enter="search"></div>
             <div class="col-auto">
               <button class="btn btn-outline-primary btn-sm" type="button" @click="search"><i
                   class="bi bi-search"></i></button>
