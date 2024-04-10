@@ -23,7 +23,9 @@
 .btn-outline-primary:hover {
   --bs-btn-hover-color: white;
 }
-
+.btn-outline-secondary:hover {
+  --bs-btn-hover-color: white;
+}
 
 .btn-outline-800:hover {
   --bs-btn-hover-color: white;
