@@ -92,7 +92,31 @@
 
 
       <img :src="product.imageUrl" alt="" class="img-fluid  col-6">
+
+      <div class="my-5">
+        <img src="@/assets/images/design/shopping_note.png" alt="split" class="img-fluid  col-9">
+      </div>
+
+      <div v-if="product && product.category && product.category.includes('dress')" class="my-5">
+        <img src="@/assets/images/design/size_dress.png" alt="split" class="img-fluid  col-6">
+      </div>
+      <div
+        v-if="product && product.category && (product.category.includes('upper') || product.category.includes('coat'))"
+        class="my-5">
+        <img src="@/assets/images/design/size_upper.png" alt="split" class="img-fluid  col-6">
+      </div>
+      <div v-if="product && product.category && product.category.includes('pants')" class="my-5">
+        <img src="@/assets/images/design/size_pants.png" alt="split" class="img-fluid  col-6">
+      </div>
+      <div v-if="product && product.category && product.category.includes('skirt')" class="my-5">
+        <img src="@/assets/images/design/size_skirt.png" alt="split" class="img-fluid  col-6">
+      </div>
     </div>
+
+
+
+
+
   </div>
   <AddCartConfirm v-if="product" :item="{ title: product.title, qty: itemQty }" ref="AddCartConfirm"
     @add-item="addCartCheck(product.id, itemQty, true)" @go-carts="goToCart" />

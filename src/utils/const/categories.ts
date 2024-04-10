@@ -65,8 +65,8 @@ const categories: Category = {
       }
     }
   },
-  pant: {
-    key: 'pant',
+  pants: {
+    key: 'pants',
     name: '褲子',
     sub_category: {
       long: {

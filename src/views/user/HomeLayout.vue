@@ -21,6 +21,7 @@
 
     </header>
     <div class="container-xl " id="content">
+
       <RouterView />
     </div>
     <HomeFooter />
