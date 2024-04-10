@@ -10,8 +10,8 @@
         </div>
 
 
-        <div class="position-absolute  end-0 bottom-0  ">
-          <UserNav />
+        <div class="position-absolute  end-0 bottom-0  " id="device-lg-location">
+          <!-- <for teleport> -->
         </div>
       </div>
       <div class="  border-bottom  d-none d-lg-flex  "></div>
@@ -25,6 +25,10 @@
     </div>
     <HomeFooter />
   </div>
+
+  <Teleport :to="userNavLoc">
+    <UserNav />
+  </Teleport>
 </template>
 
 
@@ -34,19 +38,24 @@ import HomeLogo from '@/components/user/HomeLogo.vue';
 import ToastMessages from '@/components/ToastMessages.vue';
 import HomeFooter from '@/components/HomeFooter.vue';
 import UserNav from '@/components/user/UserNav.vue';
-import { storeToRefs } from 'pinia';
+import { useWindowSize } from '@vueuse/core'
+import { ref, watchEffect } from 'vue';
 
-import { useCartStore } from '@/stores/cartStore.js'
-const cartStore = useCartStore();
-const { getCart } = cartStore;
-const { cart, status } = storeToRefs(cartStore);
-getCart()
+const { width, height } = useWindowSize()
+const isLargeDevice = ref(false);
+const userNavLoc = ref("#device-lg-location");
 
+watchEffect(() => {
+  let newWidth = width.value
+  if (newWidth >= 992) {
+    isLargeDevice.value = true;
+    userNavLoc.value = "#device-lg-location"
+  } else {
+    isLargeDevice.value = false;
+    userNavLoc.value = "#device-sm-location"
 
-// import { provide } from 'vue'
-
-// provide(/* 注入名 */ 'dataCart', /* 值 */ cart)
-// provide(/* 注入名 */ 'isGetCartLoading', /* 值 */ status.isGetCartLoading)
+  }
+});
 </script>
 
 

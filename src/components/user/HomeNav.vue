@@ -11,12 +11,12 @@
               <span class="navbar-toggler-icon" style="height: 1.2rem;width: 1.2rem;"></span>
             </button>
           </div>
-          <div class="col-3 col-sm-3 d-flex justify-content-center  align-items-center">
+          <div class="col-3 col-sm-3 d-flex justify-content-center  align-items-center ">
             <HomeLogo />
           </div>
 
-          <div class="col-6 col-sm-6  d-flex justify-content-end  align-items-center">
-            <UserNav />
+          <div class="col-6 col-sm-6  d-flex justify-content-end  align-items-center" id="device-sm-location">
+            <!-- <for teleport> -->
           </div>
         </div>
 

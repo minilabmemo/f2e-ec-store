@@ -262,10 +262,13 @@ export default {
   created() {
     this.getProducts();
     this.getCart();
+
+
   },
   watch: {
     checkout() {
       this.getCart();
+
     }
   }
 

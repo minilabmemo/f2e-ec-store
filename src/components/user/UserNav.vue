@@ -69,8 +69,9 @@ import { storeToRefs } from 'pinia'
 import { useCartStore } from '@/stores/cartStore.js'
 const cartStore = useCartStore();
 const { getCart } = cartStore;
-const { cart, status, cartTotalQty } = storeToRefs(cartStore);
+const { status, cartTotalQty } = storeToRefs(cartStore);
 getCart()
+
 onMounted(() => {
   var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
   var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
