@@ -7,7 +7,7 @@ import { catchErr, dataErr } from '@/utils/methods/handleErr.js'
 export const useProductStore = defineStore('productStore', () => {
   const products = ref()
   const status = statusStore()
-  const product = ref()
+  const product = ref({})
   function getProducts() {
     const url = `${userProductsApi}`
     status.isLoading = true

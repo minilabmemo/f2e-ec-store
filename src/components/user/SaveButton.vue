@@ -51,10 +51,21 @@ export default {
     }
   },
   created() {
+
     this.syncSaveStatus();
+  },
+  watch: {
+    item: {
+      handler() {
+        this.syncSaveStatus();
+      },
+      deep: true,
+    },
   },
   methods: {
     syncSaveStatus() {
+
+
       this.isSave = false;
       let saveItems = JSON.parse(localStorage.getItem(this.saveKey))
       if (saveItems) {

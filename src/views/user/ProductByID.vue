@@ -1,7 +1,7 @@
 <template>
   <LoadingOverlay :active="status.isLoading" />
   <div v-if="!status.isLoading && !product" class="text-primary "> 該商品已下架。</div>
-  <div class="" v-if="product">
+  <div class="" v-if="!status.isLoading">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><router-link :to="`/product/${$route.params.category}/all`"> {{ category_name
@@ -65,9 +65,7 @@
                   加到購物車
                 </button></div>
               <div class="col-4  ">
-                <SaveButton class="h-100 w-100 " :item="{
-    title: product.title, id: product.id, imageUrl: product.imageUrl, on_stock: true
-  }" v-if="product.id" />
+                <SaveButton class="h-100 w-100 " :item="saveButtonItem" />
               </div>
 
             </div>
@@ -118,7 +116,7 @@ export default {
       id: '',
       categories: categories,
       itemQty: 1,
-
+      saveButtonItem: {}
 
     };
   },
@@ -138,7 +136,19 @@ export default {
       return ""
     },
   },
+  watch: {
+    product: {
+      handler: function (val, oldVal) {
+        this.saveButtonItem = {
+          title: val.title,
+          id: val.id,
+          imageUrl: val.imageUrl,
+          on_stock: true
+        };
+      }
 
+    },
+  },
   methods: {
     ...mapActions(useCartStore, ['addCartByItem']),
 
@@ -206,7 +216,10 @@ export default {
 
   },
   created() {
+
     this.id = this.$route.params.productId;
+
+
     this.getProductByID(this.id);
 
   },
