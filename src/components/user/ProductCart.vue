@@ -29,7 +29,8 @@
                         }}</router-link></div>
                     <div class="d-flex   flex-column  align-items-start text-start gap-2 ">
                       <div>
-                        <span class=" text-300"> <del>${{ item.product.origin_price }}</del></span>
+                        <span class=" text-300" v-show="item.product.price !== item.product.origin_price"> <del>${{
+    item.product.origin_price }}</del></span>
                         <span class=" text-primary  me-1 ">${{ item.product.price }}</span>
 
                       </div>
@@ -94,7 +95,8 @@
                     <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
                         }}</router-link></div>
                     <div class="ms-2">
-                      <span class=" text-300"> <del>${{ item.product.origin_price }}</del></span>
+                      <span class=" text-300  me-4" v-show="item.product.price !== item.product.origin_price"> <del>${{
+    item.product.origin_price }}</del></span>
                       <span class=" text-primary  me-4 ">${{ item.product.price }}</span>
                       <div class=" text-500  ">剩餘數量： {{ item.product.num }}</div>
                     </div>
@@ -248,7 +250,7 @@ export default {
       };
       this.isLoading = true;
       this.$http.post(url, {data: coupon}).then((response) => {
-     
+
         this.pushMessage({title: '加入優惠券', response: response});
         this.getCart();
         this.isLoading = false;

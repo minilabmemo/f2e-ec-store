@@ -7,7 +7,8 @@
         <div class="text-center ">
           <h4> {{ item.title }}</h4>
           <div class="d-flex gap-2 justify-content-center  align-items-center ">
-            <span class="text-300"> <del>${{ item.origin_price }}</del></span>
+            <span class="text-300" v-show="item.price !== item.origin_price"> <del>${{ item.origin_price
+                }}</del></span>
             <span class="price me-4 ">${{ item.price }}</span>
           </div>
         </div>

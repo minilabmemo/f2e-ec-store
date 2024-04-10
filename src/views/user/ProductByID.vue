@@ -25,12 +25,15 @@
 
           <div class="col-12 ">
             <div class="row justify-content-center  align-items-baseline   ">
-              <div class="col-7">
+              <div class="col-8">
                 <span class="price " v-if="!product.origin_price"> 價格 ${{ product.origin_price }}</span>
-                <span class="text-300" v-if="product.origin_price"> <del>原價 ${{ product.origin_price }}</del></span>
-                <span class="price  " v-if="product.price"> 優惠價 ${{ product.price }}</span>
+                <span class="price" v-show="product.price === product.origin_price"> 特惠價 ${{
+    product.origin_price }}</span>
+                <span class="text-300" v-show="product.price !== product.origin_price"> <del>原價 ${{
+    product.origin_price }}</del></span>
+                <span class="price  " v-show="product.price !== product.origin_price"> 優惠價 ${{ product.price }}</span>
               </div>
-              <div class="col-5">
+              <div class="col-4">
                 <span class=" text-500 " v-if="product.num"> 商品數量 {{ product.num }} 件</span>
               </div>
             </div>
