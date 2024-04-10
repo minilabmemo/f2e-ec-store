@@ -45,6 +45,10 @@
             <td>{{ order.user.address }}</td>
           </tr>
           <tr>
+            <th>留言</th>
+            <td>{{ order.message }}</td>
+          </tr>
+          <tr>
             <th>付款狀態</th>
             <td>
               <span v-if="!order.is_paid">尚未付款</span>
