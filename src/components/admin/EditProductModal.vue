@@ -96,7 +96,10 @@
                   <label for="category" class="form-label">*分類</label>
                   <select id="category" class="form-select" v-model.trim="selectCategories" multiple>
                     <option value="test">test</option>
-                    <option :value="item" v-for="item in findCategoriesList()" :key="item.id">{{ item }}</option>
+                    <option value="styles">styles</option>
+                    <option :value="item.key" v-for="item in findCategoriesList()" :key="item.id">{{ item.key }} -{{
+                        item.name }}
+                    </option>
                   </select>
                 </div>
                 <div class="mb-3 col-md-6">
@@ -218,18 +221,20 @@ export default {
     ...mapActions(statusStore, ['pushMessage']),
 
     findCategoriesList() {
-      let list = []
+      let lists = []
       for (const [key, value] of Object.entries(this.categories,)) {
         if (value.sub_category) {
-          for (const subKey of Object.keys(value.sub_category)) {
-            list.push(`${key}/${subKey}`)
+          for (const [subKey, sub] of Object.entries(value.sub_category)) {
+            let item = {key: `${key}/${subKey}`, name: `${value.name}/${sub.name}`}
+            lists.push(item)
           }
         } else {
-          list.push(`${key}`)
+          let item = {key: `${key}`, name: value.name}
+          lists.push(item)
         }
       }
 
-      return list
+      return lists
     },
     uploadFile(isMain, index) {
       let uploadedFile = null;

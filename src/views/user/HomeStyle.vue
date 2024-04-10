@@ -1,10 +1,10 @@
 <template>
   <div class="container p-5 ">
     <h3 class="text-center ">STYLING BOOK</h3>
-    <div class="text-center text-500 "> 時尚顧問穿搭牆，給你穿搭靈感。</div>
-    <div class="waterfall  w-full m-auto  gap-10">
-      <HomeStyleContent />
-    </div>
+    <div class="text-center text-500 mb-5 "> 時尚顧問穿搭牆，提供給您滿滿穿搭靈感。</div>
+
+    <HomeStyleContent />
+
   </div>
 </template>
 
@@ -20,11 +20,6 @@ export default {
 </script>
 
 <style scoped>
-.waterfall {
-  columns: 4;
-  gap: 2.5rem;
-}
-
 .bg-cyan-100 {
   background-color: #f0f5f5;
 }

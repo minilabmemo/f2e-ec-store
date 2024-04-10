@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="isLoading"></LoadingOverlay>
+  <LoadingOverlay :active="isLoading" />
   <div class="pt-5">
 
     <div class="text-end">
@@ -51,9 +51,9 @@
       </tbody>
     </table>
   </div>
-  <Pagination :pages="pagination" @change-page-num="getProducts"></Pagination>
-  <ProductModal ref="productModal" :product="tempProduct" @update-product="updateProduct"></ProductModal>
-  <DelModal ref="delModal" :item="tempProduct" @del-item="deleteProduct"></DelModal>
+  <Pagination :pages="pagination" @change-page-num="getProducts" />
+  <ProductModal ref="productModal" :product="tempProduct" @update-product="updateProduct" />
+  <DelModal ref="delModal" :item="tempProduct" @del-item="deleteProduct" />
 
 </template>
 
@@ -64,7 +64,8 @@ import DelModal from "@/components/DelModal.vue";
 import {adminProductApi} from '@/utils/const/path'
 import Pagination from '@/components/Pagination.vue';
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
-
+import statusStore from '@/stores/statusStore';
+import {mapActions} from 'pinia'
 export default {
   components: {ProductModal, DelModal, Pagination, },
   data() {
@@ -77,13 +78,14 @@ export default {
 
     }
   },
-  inject: ['emitter'],
-  methods: {
 
+  methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     getProducts(page = 1) {
       const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${page}`
       this.isLoading = true;
       this.$http.get(url).then((response) => {
+        this.pushMessage({title: '新增產品', response: response})
         this.isLoading = false;
         if (response.data.success) {
 
@@ -126,19 +128,9 @@ export default {
       this.$http[httpMethod](api, {data: this.tempProduct}).then((response) => {
 
         productComponent.hideModal();
-        if (response.data.success) {
-          this.getProducts();
-          this.emitter.emit('push-message', {
-            style: 'success',
-            title: '更新成功',
-          });
-        } else {
-          this.emitter.emit('push-message', {
-            style: 'danger',
-            title: '更新失敗',
-            content: response.data.message.join('、'),
-          });
-        }
+
+        this.pushMessage({title: '更新產品', response: response})
+        this.getProducts();
       });
 
     },
@@ -146,7 +138,7 @@ export default {
 
       let api = `${adminProductApi}/${this.tempProduct.id}`;
       this.$http.delete(api).then((response) => {
-
+        this.pushMessage({title: '刪除產品', response: response})
         const delComponent = this.$refs.delModal;
         delComponent.hideModal();
         this.getProducts();

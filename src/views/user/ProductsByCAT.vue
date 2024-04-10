@@ -45,7 +45,7 @@ import {storeToRefs} from 'pinia'
 const categories = categoriesConfig;
 
 
-import {useProductStore} from '@/stores/productStore.js';
+import {useProductStore} from '@/stores/productStore';
 const productStore = useProductStore();
 const {getProducts, } = productStore;
 const {products, status} = storeToRefs(productStore);
@@ -55,7 +55,7 @@ getProducts();
 const catItems = ref([]);
 const showItems = ref([]);
 const filterErr = ref(""); //FIXME
-let pagination = reactive({
+let pagination = ref({
   total_pages: 1,
   current_page: 1,
   has_pre: true,
@@ -89,29 +89,30 @@ function filterItems() {
   }
 
   catItems.value = itemByCAT;
-  filterItemsByPage();
+  filterItemsByPage(pagination.value.current_page);
 }
 
 
 
 function filterItemsByPage(currentPage = 1) {
+
   if (!catItems.value) {
     return;
   }
 
-  pagination.current_page = currentPage;
-  pagination.total_pages = Math.ceil(Object.keys(catItems.value).length / dataPerPage);
+  pagination.value.current_page = currentPage;
+  pagination.value.total_pages = Math.ceil(Object.keys(catItems.value).length / dataPerPage);
 
-  pagination.has_pre = true;
-  pagination.has_next = true;
-  if (pagination.current_page === 1) {
-    pagination.has_pre = false;
+  pagination.value.has_pre = true;
+  pagination.value.has_next = true;
+  if (pagination.value.current_page === 1) {
+    pagination.value.has_pre = false;
   }
 
-  if (pagination.current_page === pagination.total_pages) {
-    pagination.has_next = false;
+  if (pagination.value.current_page === pagination.value.total_pages) {
+    pagination.value.has_next = false;
   }
-  const startIndex = (pagination.current_page - 1) * dataPerPage;
+  const startIndex = (pagination.value.current_page - 1) * dataPerPage;
   const endIndex = startIndex + dataPerPage;
   showItems.value = catItems.value.slice(startIndex, endIndex);
 }

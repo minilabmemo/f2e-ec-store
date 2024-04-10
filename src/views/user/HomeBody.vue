@@ -48,7 +48,7 @@ import HomeItems from '@/components/user/HomeItems.vue';
 import categoriesConfig from '@/utils/const/categories';
 import {storeToRefs} from 'pinia'
 const categories = ref(categoriesConfig);
-import {useProductStore} from '@/stores/productStore.js';
+import {useProductStore} from '@/stores/productStore';
 const productStore = useProductStore();
 const {getProducts, } = productStore;
 const {products} = storeToRefs(productStore);

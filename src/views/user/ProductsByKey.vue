@@ -17,7 +17,7 @@
 import {computed} from 'vue';
 import SaleItem from '@/components/user/SaleItem.vue';
 
-import {useProductStore} from '@/stores/productStore.js';
+import {useProductStore} from '@/stores/productStore';
 const productStore = useProductStore();
 import {storeToRefs} from 'pinia'
 const {getProducts, } = productStore;

@@ -65,8 +65,8 @@ const categories: Category = {
       }
     }
   },
-  pants: {
-    key: 'pants',
+  pant: {
+    key: 'pant',
     name: '褲子',
     sub_category: {
       long: {
@@ -78,6 +78,10 @@ const categories: Category = {
         name: '短褲'
       }
     }
+  },
+  dress: {
+    key: 'dress',
+    name: '洋裝'
   },
   coat: {
     key: 'coat',

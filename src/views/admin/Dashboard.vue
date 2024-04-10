@@ -11,16 +11,14 @@
 
 <script>
 import Navbar from '@/components/admin/Navbar.vue';
-import emitter from "@/utils/methods/emitter";
+
 import ToastMessages from '@/components/ToastMessages.vue';
 import statusStore from '@/stores/statusStore';
 import {mapActions} from 'pinia'
 export default {
 
   components: {Navbar, ToastMessages},
-  provide() {
-    return {emitter};
-  },
+
   methods: {
     ...mapActions(statusStore, ['pushMessage']),
   },

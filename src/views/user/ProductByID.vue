@@ -1,7 +1,7 @@
 <template>
   <LoadingOverlay :active="status.isLoading" />
-  <div v-if="!status.isLoading && !product.title" class="text-primary "> 該商品已下架。</div>
-  <div class="" v-else>
+  <div v-if="!status.isLoading && !product" class="text-primary "> 該商品已下架。</div>
+  <div class="" v-if="product">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><router-link :to="`/product/${$route.params.category}/all`"> {{ category_name
@@ -58,7 +58,7 @@
                 </button>
               </div>
               <div class="col-4  "> <button type="button" class="h-100 w-100  btn btn-outline-danger "
-                  @click="addCartCheck(product.id, itemQty, false)" :class="{ disabled: isCartLoading }">
+                  @click="addCartCheck(product.id, itemQty, false)" :class="{ disabled: status.isCartLoading }">
                   加到購物車
                 </button></div>
               <div class="col-4  ">
@@ -93,12 +93,12 @@
       <img :src="product.imageUrl" alt="" class="img-fluid  col-6">
     </div>
   </div>
-  <AddCartConfirm :item="{ title: product.title, qty: itemQty }" ref="AddCartConfirm"
+  <AddCartConfirm v-if="product" :item="{ title: product.title, qty: itemQty }" ref="AddCartConfirm"
     @add-item="addCartCheck(product.id, itemQty, true)" @go-carts="goToCart" />
 </template>
 
 <script>
-import {userProductApi} from '@/utils/const/path'
+
 import categories from '@/utils/const/categories'
 import AddCartConfirm from '@/components/user/modal/AddCartConfirm.vue';
 import SaveButton from '@/components/user/SaveButton.vue'
@@ -111,17 +111,17 @@ export default {
 
   data() {
     return {
-      product: {},
+
       id: '',
       categories: categories,
       itemQty: 1,
-      isCartLoading: false,
-      isLoading: false,
+
+
     };
   },
   computed: {
     ...mapState(useCartStore, ['cart', 'status']),
-    ...mapState(useProductStore, ['products', 'status']),
+    ...mapState(useProductStore, ['product', 'products', 'status']),
     category_name() {
       return categories[this.$route.params.category] ? categories[this.$route.params.category].name : ''
     },
@@ -138,16 +138,8 @@ export default {
 
   methods: {
     ...mapActions(useCartStore, ['addCartByItem']),
-    getProductByID(id) {
-      const api = `${userProductApi}/${id}`;
-      this.isLoading = true;
-      this.$http.get(api).then((response) => {
-        this.isLoading = false;
-        if (response.data.success) {
-          this.product = response.data.product;
-        }
-      });
-    },
+
+    ...mapActions(useProductStore, ['getProductByID']),
 
 
     goToCart() {

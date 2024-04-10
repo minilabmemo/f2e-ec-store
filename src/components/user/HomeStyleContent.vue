@@ -1,10 +1,11 @@
 <template>
-  <div class="container-lg ">
+  <div class=" d-flex flex-wrap gap-5 align-items-center justify-content-start ">
 
     <div v-for="(item, index) in items" :key="index"
-      class="item bg-cyan-100 box-border text-center m-1 p-5 break-inside-avoid">
+      class="item bg-cyan-100 box-border text-center  break-inside-avoid">
+      <router-link :to="`/product/all/all/id/${item.id}`"> <img class="w-full object-cover object-center"
+          :src="item.imageUrl" alt="style" width="250"></router-link>
 
-      <img class="w-full object-cover object-center" :src="item.imageUrl" alt="style" width="200" />
 
     </div>
   </div>
@@ -13,12 +14,12 @@
 
 <script setup lang="ts">
 
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 
 
 import { storeToRefs } from 'pinia'
 
-import { useProductStore } from '@/stores/productStore.js';
+import { useProductStore } from '@/stores/productStore';
 const productStore = useProductStore();
 const { getProducts, } = productStore;
 const { products } = storeToRefs(productStore);
@@ -30,25 +31,12 @@ const items = computed(() => {
     return []
   }
 
-  let filterProducts = products.value.filter((item) => item.category.toString().includes("styles"))
+  let filterProducts = products.value.filter((item: { category: { toString: () => string | string[]; }; }) => item.category.toString().includes("styles"))
+  let selectedProducts = filterProducts.length >= 8 ? filterProducts.slice(0, 8) : filterProducts;
 
-  return filterProducts
+  return selectedProducts
 })
 
 
 
 </script>
-
-<!-- <script> //FIXME
-export default {
-  data() {
-    return {
-      repeatedContent: Array.from({length: 20}, (_, index) => {
-        const width = 200;
-        const height = Math.floor(Math.random() * (500 - 100 + 1)) + 100; //100~500
-        return {width, height};
-      })
-    };
-  }
-};
-</script> -->

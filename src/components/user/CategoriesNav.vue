@@ -45,7 +45,7 @@
 <script setup>
 import {defineProps, ref, computed} from 'vue';
 import categoriesConfig from '@/utils/const/categories';
-import {useProductStore} from '@/stores/productStore.js';
+import {useProductStore} from '@/stores/productStore';
 import {storeToRefs} from 'pinia'
 const productStore = useProductStore();
 const {getProducts, } = productStore;
@@ -59,6 +59,7 @@ defineProps({
 
 const categories = ref(categoriesConfig);
 let catNumMap = computed(() => {
+
   let sum = sumProductsCAT(products.value);
   return sum
 })
@@ -90,7 +91,7 @@ function countByCAT(cat, subCat) {
 function sumProductsCAT(products) {
 
   if (!products) {
-    console.log('products empty', products);
+
     return;
   }
 
@@ -121,7 +122,7 @@ function sumProductsCAT(products) {
               obj[cat].num = (obj[cat].num ? obj[cat].num : 0) + 1;
             }
             let subCat = catArr[1];
-            if (obj[cat].sub_category[subCat]) {
+            if (obj[cat] && obj[cat].sub_category && obj[cat].sub_category[subCat]) {
               obj[cat].sub_category[subCat].num = (obj[cat].sub_category[subCat].num ? obj[cat].sub_category[subCat].num : 0) + 1;
             }
           }

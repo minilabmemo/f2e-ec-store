@@ -12,11 +12,11 @@
             </button>
           </div>
           <div class="col-3 col-sm-3 d-flex justify-content-center  align-items-center">
-            <HomeLogo></HomeLogo>
+            <HomeLogo />
           </div>
 
           <div class="col-6 col-sm-6  d-flex justify-content-end  align-items-center">
-            <UserNav></UserNav>
+            <UserNav />
           </div>
         </div>
 
@@ -29,7 +29,7 @@
           <button type="button" class="btn btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body   ">
-          <CATNav v-if="isCollapsed"></CATNav>
+          <CATNav v-if="isCollapsed" />
           <ul class="navbar-nav  mx-auto   d-flex  align-items-center   justify-content-center" v-else>
             <li class="nav-item mx-2 " v-for="(item, key) in categories" :key="item.name">
               <router-link :to="`/product/${key}/all`" class="nav-link "
@@ -41,7 +41,16 @@
                 </div>
               </router-link>
             </li>
-
+            <li class="nav-item mx-2 ">
+              <router-link :to="`/style`" class="nav-link " :class="{ active: $route.path === '/style' }"
+                aria-current="page">
+                <div class="d-flex flex-column  align-items-center ">
+                  <div class=""> Styles</div>
+                  <img src="@/assets/icons/nav.svg" alt="nav" v-if="$route.path === '/style'" width="12px"
+                    height="12px">
+                </div>
+              </router-link>
+            </li>
           </ul>
           <div class="row g-2 justify-content-center align-items-center " :class="searchClasses" role="search">
             <div class="col-9"> <input class="form-control form-control-sm   " type="search" placeholder="關鍵字搜尋"
@@ -88,6 +97,14 @@ export default {
 
 
 
+    },
+    handleOffcanvasHide() {
+      this.isCollapsed = false;
+      console.log('this.isCollapsed', this.isCollapsed);
+    },
+    handleOffcanvasShow() {
+      this.isCollapsed = true;
+      console.log('this.isCollapsed', this.isCollapsed);
     }
   },
   computed: {
@@ -102,30 +119,26 @@ export default {
   },
   mounted() {
 
+
     var myOffcanvas = document.getElementById('offcanvasNavbar')
     if (myOffcanvas) {
       this.bsOffcanvas = new Offcanvas(myOffcanvas, {
         toggle: false
       })
-      myOffcanvas.addEventListener('hide.bs.offcanvas', () => {
-        this.isCollapsed = false;
-        console.log('this.isCollapsed', this.isCollapsed);
-      });
+      myOffcanvas.addEventListener('hide.bs.offcanvas', this.handleOffcanvasHide);
 
-      myOffcanvas.addEventListener('show.bs.offcanvas', () => {
-        this.isCollapsed = true;
-        console.log('this.isCollapsed', this.isCollapsed);
-      });
+      myOffcanvas.addEventListener('show.bs.offcanvas', this.handleOffcanvasShow);
     }
 
   },
-  unmounted() { //FIXME
-    // const myOffcanvas = document.getElementById('offcanvasNavbar');
-    // if (myOffcanvas) {
-    //   myOffcanvas.removeEventListener('hide.bs.offcanvas');
-    //   myOffcanvas.removeEventListener('show.bs.offcanvas');
-    // }
+  unmounted() {
+    const myOffcanvas = document.getElementById('offcanvasNavbar');
+    if (myOffcanvas) {
+      myOffcanvas.removeEventListener('hide.bs.offcanvas', this.handleOffcanvasHide);
+      myOffcanvas.removeEventListener('show.bs.offcanvas', this.handleOffcanvasShow);
+    }
   },
+
   watch: {
     '$route'(to, from) {
       if (to.path !== from.path) {
