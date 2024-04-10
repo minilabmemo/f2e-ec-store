@@ -1,5 +1,5 @@
 <template>
-  <div class="container p-5 ">
+  <div class="container p-5 d-flex flex-column align-items-center ">
     <h3 class="text-center ">STYLING BOOK</h3>
     <div class="text-center text-500 mb-5 "> 時尚顧問穿搭牆，提供給您滿滿穿搭靈感。</div>
 

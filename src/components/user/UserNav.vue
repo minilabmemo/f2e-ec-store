@@ -1,7 +1,7 @@
 <template>
 
-  <div class="row   justify-content-center  align-items-center">
-    <div class="col-1 col-md-2     d-flex justify-content-center  align-items-center">
+  <div class="w-100 row   justify-content-center  align-items-center">
+    <div class="col-1 col-xl-2     d-flex justify-content-center  align-items-center">
       <router-link to="/user/saves" class="nav-link " data-bs-toggle="tooltip" data-bs-placement="top" title="前往收藏清單">
         <img src="@/assets/icons/save.svg" alt="save" width="24px" height="24px">
       </router-link>

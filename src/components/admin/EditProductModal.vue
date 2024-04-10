@@ -200,7 +200,7 @@ export default {
     }
   },
   watch: {
-    product() { //NOTE 單向數據流 外層不能修改內層，但可以這樣改內容資料，當外層 prop 改變就監聽改內層 data
+    product() { 
       this.tempProduct = this.product;
       //設置選項預設值
       this.tempProduct.imagesUrl = this.tempProduct.imagesUrl ? this.tempProduct.imagesUrl : [];

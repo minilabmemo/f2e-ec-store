@@ -1,8 +1,7 @@
 <template>
-  <div class=" d-flex flex-wrap gap-5 align-items-center justify-content-start ">
+  <div class=" d-flex flex-wrap gap-5 align-items-center justify-content-center align-content-center ">
 
-    <div v-for="(item, index) in items" :key="index"
-      class="item bg-cyan-100 box-border text-center  break-inside-avoid">
+    <div v-for="(item, index) in items" :key="index" class="item  ">
       <router-link :to="`/product/all/all/id/${item.id}`"> <img class="w-full object-cover object-center"
           :src="item.imageUrl" alt="style" width="250"></router-link>
 
