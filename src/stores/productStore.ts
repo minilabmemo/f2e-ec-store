@@ -23,7 +23,7 @@ export const useProductStore = defineStore('productStore', () => {
       })
       .catch((err) => {
         catchErr(err)
-        status.status.isLoading = false
+        status.isLoading = false
       })
   }
   function getProductByID(id: string) {

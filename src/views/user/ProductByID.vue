@@ -162,7 +162,7 @@ export default {
   },
   watch: {
     product: {
-      handler: function (val, oldVal) {
+      handler: function (val) {
         this.saveButtonItem = {
           title: val.title,
           id: val.id,

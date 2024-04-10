@@ -37,7 +37,7 @@
 
 </template>
 <script setup>
-import {ref, computed, watch, reactive, watchEffect} from 'vue';
+import {ref, computed, watchEffect} from 'vue';
 import SaleItem from '@/components/user/SaleItem.vue';
 import Pagination from '@/components/Pagination.vue';
 import categoriesConfig from '@/utils/const/categories';
