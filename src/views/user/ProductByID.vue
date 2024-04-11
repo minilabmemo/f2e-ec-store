@@ -118,12 +118,12 @@
     </div>
 
 
-    <div class="row" v-if="recommendItems().length > 0">
+    <div class="row" v-if="recommendItems.length > 0">
 
       <div class="col-12">
         <h4>您可能也喜歡</h4>
         <div class="row overflow-x-auto  flex-nowrap">
-          <SaleItem v-for="(item, index) in recommendItems()" :key="index" :item="item" class="col-3" data-cy="item" />
+          <SaleItem v-for="(item, index) in recommendItems" :key="index" :item="item" class="col-3" data-cy="item" />
         </div>
 
       </div>
@@ -174,6 +174,12 @@ export default {
       }
       return ""
     },
+    recommendItems() {
+      let items = [];
+      let removeID = this.id;
+      items = this.productsByCAT.filter((item) => item.id != removeID)
+      return items
+    },
   },
   watch: {
     product: {
@@ -189,6 +195,7 @@ export default {
     },
     products: {
       handler: function (val) {
+        console.log('products', this.products);
 
         this.filterByCategory(this.$route.params.category)
       }
@@ -259,26 +266,14 @@ export default {
       }
     },
 
-    recommendItems() {//you might like items
 
-      let items = [];
-      let removeID = this.id;
-      items = this.productsByCAT.filter((item) => item.id != removeID)
-
-
-      return items
-    }
 
   },
   created() {
-
     this.id = this.$route.params.productId;
-
-
     this.getProductByID(this.id);
-    this.getProducts()
-
-
+    //this.getProducts()
+    // this.filterByCategory(this.$route.params.category)
   },
 
 };
