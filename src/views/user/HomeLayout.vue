@@ -4,13 +4,13 @@
     <ToastMessages />
     <header class="h-shadow mb-4 col" id="header">
 
-      <div class="container-xl justify-content-center  mb-2   position-relative d-none d-lg-flex  ">
+      <div class="container-xl justify-content-center  mb-2  align-items-end   d-none d-lg-flex  ">
         <div class="mx-auto  ">
           <HomeLogo />
         </div>
 
 
-        <div class="position-absolute  end-0 bottom-0  " id="device-lg-location">
+        <div class=" " id="device-lg-location">
           <!-- <for teleport> -->
         </div>
       </div>
