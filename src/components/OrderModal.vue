@@ -33,7 +33,7 @@
 
                   </tr>
                   <tr>
-                    <th>留言</th>
+                    <th>收貨備註</th>
                     <td>{{ tempOrder.message }} </td>
 
                   </tr>

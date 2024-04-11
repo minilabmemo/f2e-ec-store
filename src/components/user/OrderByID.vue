@@ -45,7 +45,7 @@
             <td>{{ order.user.address }}</td>
           </tr>
           <tr>
-            <th>留言</th>
+            <th>收貨備註</th>
             <td>{{ order.message }}</td>
           </tr>
           <tr>

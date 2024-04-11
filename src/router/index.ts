@@ -80,6 +80,12 @@ const router = createRouter({
           meta: { icon: `../${shopFavIcon}` }
         },
         {
+          name: 'UserInfo',
+          path: 'user/info',
+          component: () => import('../views/user/UserInfo.vue'),
+          meta: { icon: `../${shopFavIcon}` }
+        },
+        {
           name: 'UserSaves',
           path: 'user/saves',
           component: () => import('../views/user/UserSaves.vue'),

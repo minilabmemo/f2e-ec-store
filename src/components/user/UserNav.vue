@@ -47,7 +47,9 @@
         </button>
         <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdownMenuButton">
           <router-link class="dropdown-item text-800 " to="/user/orders">查詢訂單</router-link>
-          <li> <a class="dropdown-item text-800 " href="#">會員資料</a></li>
+
+          <router-link class="dropdown-item text-800 " to="/user/info">會員資料</router-link>
+
         </div>
       </div>
     </div>

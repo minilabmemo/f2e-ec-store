@@ -14,9 +14,9 @@ export default defineStore('statusStore', {
   actions: {
     pushMessage(data) {
       const {title, content, style = 'success', response} = data;
-      if (!response.data) {
+      if (!response || !response.data) {
         let message = {
-          style: 'info',
+          style: style ? style : 'info',
           title: `${title}`,
           content: content,
         };
