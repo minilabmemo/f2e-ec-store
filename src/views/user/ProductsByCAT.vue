@@ -37,7 +37,7 @@
 
 </template>
 <script setup>
-import {ref, computed, watchEffect} from 'vue';
+import {ref, computed, watchEffect, watch} from 'vue';
 import SaleItem from '@/components/user/SaleItem.vue';
 import Pagination from '@/components/Pagination.vue';
 import categoriesConfig from '@/utils/const/categories';
@@ -131,7 +131,9 @@ const sub_category_name = computed(() => {
 })
 
 
-
+watch(() => pagination.value.current_page, (newValue, oldValue) => {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+});
 watchEffect(() => {
   filterItems();
 });
