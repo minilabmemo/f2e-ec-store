@@ -1,12 +1,13 @@
 <template>
 
-  <div class="d-flex flex-column gap-3   align-items-baseline  ">
-    <router-link :to="`/product/${path}/id/${item.id}`" class="nav-link   ">
-      <div class="d-flex flex-column gap-4     ">
+  <div class=" ">
+    <router-link :to="`/product/${path}/id/${item.id}`" class="nav-link h-100 ">
+      <div class="d-flex flex-column gap-4   align-self-center  h-100">
         <img :src="item.imageUrl" alt="image" class="flex-image">
-        <div class="text-center ">
-          <h4 style="height: 2.5rem"> {{ item.title }}</h4>
-          <div class="d-flex gap-2 justify-content-center  align-items-baseline mb-3">
+        <div class="text-center d-flex flex-column    justify-content-between   h-100">
+          <h4 style="" class=" "> {{ item.title }}</h4>
+          <div class="d-flex gap-2 justify-content-center  align-items-baseline mb-3 mt-auto ">
+
             <span class="text-300" v-show="item.price !== item.origin_price"> <del>${{ item.origin_price
                 }}</del></span>
             <span class="price me-4 ">${{ item.price }}</span>

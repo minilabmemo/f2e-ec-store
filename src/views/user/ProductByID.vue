@@ -122,8 +122,8 @@
 
       <div class="col-12">
         <h4>您可能也喜歡</h4>
-        <div class="row overflow-x-auto  flex-nowrap">
-          <SaleItem v-for="(item, index) in recommendItems" :key="index" :item="item" class="col-3" data-cy="item" />
+        <div class="row overflow-x-auto  flex-nowrap align-items-stretch  ">
+          <SaleItem v-for="(item, index) in recommendItems" :key="index" :item="item" class="col-3 " data-cy="item" />
         </div>
 
       </div>
@@ -282,6 +282,7 @@ export default {
   created() {
     this.id = this.$route.params.productId;
     this.getProductByID(this.id);
+    this.getProducts()
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
