@@ -4,16 +4,18 @@
     <ToastMessages />
     <header class="h-shadow mb-4 col" id="header">
 
-      <div class="container-xl justify-content-center  mb-2  align-items-end   d-none d-lg-flex  ">
+      <div class="container-xl justify-content-center  mb-2  align-items-end   d-none d-lg-flex position-relative  ">
+
         <div class="mx-auto  ">
           <HomeLogo />
         </div>
-
-
-        <div class=" " id="device-lg-location">
+        <div class="position-absolute bottom-0 end-0  " id="device-lg-location">
           <!-- <for teleport> -->
         </div>
       </div>
+
+
+
       <div class="  border-bottom  d-none d-lg-flex  "></div>
       <div class="container-xl">
         <HomeNav />
