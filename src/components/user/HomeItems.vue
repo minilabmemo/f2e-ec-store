@@ -4,8 +4,7 @@
     <router-link :to="`/product/${CAT}/all`" class="nav-link">
       <div class="row">
 
-        <DataItem v-for="(item, index) in showItems" :key="index" :item="item" class="col-4" :filter-err="filterErr">
-        </DataItem>
+        <DataItem v-for="(item, index) in showItems" :key="index" :item="item" class="col-4" :filter-err="filterErr" />
       </div>
     </router-link>
     <div class="d-flex justify-content-center gap-3">

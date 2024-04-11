@@ -6,6 +6,7 @@ import statusStore from './statusStore'
 import { catchErr, dataErr } from '@/utils/methods/handleErr.js'
 export const useProductStore = defineStore('productStore', () => {
   const products = ref()
+  const productsByCAT = ref()
   const status = statusStore()
   const product = ref({})
   function getProducts() {
@@ -40,6 +41,46 @@ export const useProductStore = defineStore('productStore', () => {
       }
     })
   }
+  function filterByCategory(category: string, subcategory: string) {
+    let itemsByCAT = []
+    if (!products.value) {
+      return
+    }
 
-  return { product, products, status, getProducts, getProductByID }
+    switch (category) {
+      case 'all':
+        itemsByCAT = products.value.filter(
+          (item: { category: { toString: () => string | string[] } }) =>
+            !item.category.toString().includes('test')
+        )
+
+        break
+      default:
+        itemsByCAT = products.value.filter(
+          (item: { category: { toString: () => string | any[] } }) =>
+            item.category.toString().includes(category)
+        )
+
+        break
+    }
+    if (subcategory) {
+      switch (subcategory) {
+        case 'all':
+          break
+        default:
+          itemsByCAT = products.value.filter(
+            (item: { category: { toString: () => string | any[] } }) =>
+              item.category.toString().includes(category)
+          )
+          itemsByCAT = itemsByCAT.filter(
+            (item: { category: { toString: () => string | string[] } }) =>
+              item.category.toString().includes(subcategory)
+          )
+          break
+      }
+    }
+
+    productsByCAT.value = itemsByCAT
+  }
+  return { product, products, status, productsByCAT, getProducts, getProductByID, filterByCategory }
 })

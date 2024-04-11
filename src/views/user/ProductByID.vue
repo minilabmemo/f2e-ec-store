@@ -93,28 +93,42 @@
 
       <img :src="product.imageUrl" alt="" class="img-fluid  col-6">
 
-      <div class="my-5">
-        <img src="@/assets/images/design/shopping_note.png" alt="split" class="img-fluid  col-9">
+
+    </div>
+
+
+    <div class="row flex-column  justify-content-center  align-items-center">
+      <div class="my-5 col-9">
+        <img src="@/assets/images/design/shopping_note.png" alt="split" class="img-fluid  ">
       </div>
 
-      <div v-if="product && product.category && product.category.includes('dress')" class="my-5">
-        <img src="@/assets/images/design/size_dress.png" alt="split" class="img-fluid  col-6">
+      <div v-if="product && product.category && product.category.includes('dress')" class="my-5 col-6">
+        <img src="@/assets/images/design/size_dress.png" alt="split" class="img-fluid ">
       </div>
-      <div
-        v-if="product && product.category && (product.category.includes('upper') || product.category.includes('coat'))"
-        class="my-5">
-        <img src="@/assets/images/design/size_upper.png" alt="split" class="img-fluid  col-6">
+      <div v-if="product && product.category
+    && (product.category.includes('upper') || product.category.includes('coat'))" class="my-5 col-6">
+        <img src="@/assets/images/design/size_upper.png" alt="split" class="img-fluid  ">
       </div>
-      <div v-if="product && product.category && product.category.includes('pants')" class="my-5">
-        <img src="@/assets/images/design/size_pants.png" alt="split" class="img-fluid  col-6">
+      <div v-if="product && product.category && product.category.includes('pants')" class="my-5 col-6">
+        <img src="@/assets/images/design/size_pants.png" alt="split" class="img-fluid  ">
       </div>
-      <div v-if="product && product.category && product.category.includes('skirt')" class="my-5">
-        <img src="@/assets/images/design/size_skirt.png" alt="split" class="img-fluid  col-6">
+      <div v-if="product && product.category && product.category.includes('skirt')" class="my-5 col-6">
+        <img src="@/assets/images/design/size_skirt.png" alt="split" class="img-fluid  ">
       </div>
     </div>
 
 
+    <div class="row" v-if="recommendItems().length > 0">
 
+      <div class="col-12">
+        <h4>您可能也喜歡</h4>
+        <div class="row overflow-x-auto  flex-nowrap">
+          <SaleItem v-for="(item, index) in recommendItems()" :key="index" :item="item" class="col-3" data-cy="item" />
+        </div>
+
+      </div>
+
+    </div>
 
 
   </div>
@@ -130,9 +144,10 @@ import SaveButton from '@/components/user/SaveButton.vue'
 import {useCartStore} from '@/stores/cartStore';
 import {useProductStore} from '@/stores/productStore';
 import {mapState, mapActions} from 'pinia'
+import SaleItem from '@/components/user/SaleItem.vue';
 export default {
 
-  components: {AddCartConfirm, SaveButton},
+  components: {AddCartConfirm, SaveButton, SaleItem},
 
   data() {
     return {
@@ -146,7 +161,7 @@ export default {
   },
   computed: {
     ...mapState(useCartStore, ['cart', 'status']),
-    ...mapState(useProductStore, ['product', 'products', 'status']),
+    ...mapState(useProductStore, ['product', 'products', 'status', 'productsByCAT']),
     category_name() {
       return categories[this.$route.params.category] ? categories[this.$route.params.category].name : ''
     },
@@ -172,11 +187,18 @@ export default {
       }
 
     },
+    products: {
+      handler: function (val) {
+
+        this.filterByCategory(this.$route.params.category)
+      }
+
+    },
   },
   methods: {
     ...mapActions(useCartStore, ['addCartByItem']),
 
-    ...mapActions(useProductStore, ['getProductByID']),
+    ...mapActions(useProductStore, ['getProductByID', 'getProducts', 'filterByCategory']),
 
 
     goToCart() {
@@ -237,6 +259,15 @@ export default {
       }
     },
 
+    recommendItems() {//you might like items
+
+      let items = [];
+      let removeID = this.id;
+      items = this.productsByCAT.filter((item) => item.id != removeID)
+
+
+      return items
+    }
 
   },
   created() {
@@ -245,6 +276,8 @@ export default {
 
 
     this.getProductByID(this.id);
+    this.getProducts()
+
 
   },
 
