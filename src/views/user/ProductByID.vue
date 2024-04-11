@@ -118,7 +118,7 @@
     </div>
 
 
-    <div class="row" v-if="recommendItems.length > 0">
+    <div class="row py-5" v-if="recommendItems.length > 0">
 
       <div class="col-12">
         <h4>您可能也喜歡</h4>
@@ -134,6 +134,12 @@
   </div>
   <AddCartConfirm v-if="product" :item="{ title: product.title, qty: itemQty }" ref="AddCartConfirm"
     @add-item="addCartCheck(product.id, itemQty, true)" @go-carts="goToCart" />
+
+  <button @click="scrollToTop" class="btn bg-primary   rounded-circle  "
+    :class="{ 'scroll-to-top-button': true, 'show': showScrollToTopButton }">
+    <i class="bi bi-arrow-bar-up text-white "></i>
+
+  </button>
 </template>
 
 <script>
@@ -155,8 +161,8 @@ export default {
       id: '',
       categories: categories,
       itemQty: 1,
-      saveButtonItem: {}
-
+      saveButtonItem: {},
+      showScrollToTopButton: false,
     };
   },
   computed: {
@@ -177,7 +183,9 @@ export default {
     recommendItems() {
       let items = [];
       let removeID = this.id;
-      items = this.productsByCAT.filter((item) => item.id != removeID)
+      if (this.productsByCAT) {
+        items = this.productsByCAT.filter((item) => item.id != removeID)
+      }
       return items
     },
   },
@@ -195,8 +203,6 @@ export default {
     },
     products: {
       handler: function (val) {
-        console.log('products', this.products);
-
         this.filterByCategory(this.$route.params.category)
       }
 
@@ -265,16 +271,24 @@ export default {
         this.goToCart();
       }
     },
-
-
+    handleScroll() {
+      this.showScrollToTopButton = window.pageYOffset > window.innerHeight / 2;
+    },
+    scrollToTop() {
+      window.scrollTo({top: 0, behavior: "smooth"});
+    },
 
   },
   created() {
     this.id = this.$route.params.productId;
     this.getProductByID(this.id);
-    //this.getProducts()
-    // this.filterByCategory(this.$route.params.category)
   },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
 
 };
 </script>
@@ -286,5 +300,22 @@ export default {
   aspect-ratio: 2/3;
   width: 100%;
   height: auto;
+}
+
+.scroll-to-top-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: transform 0.3s ease-in-out;
+  border: none;
+
+}
+
+
+.scroll-to-top-button.show {
+  opacity: 1;
+  transform: translateY(0px);
 }
 </style>
