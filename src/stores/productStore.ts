@@ -6,6 +6,7 @@ import statusStore from './statusStore'
 import { catchErr, dataErr } from '@/utils/methods/handleErr.js'
 export const useProductStore = defineStore('productStore', () => {
   const products = ref()
+  const defaultProductsSort = ref()
   const productsByCAT = ref()
   const status = statusStore()
   const product = ref({})
@@ -18,6 +19,7 @@ export const useProductStore = defineStore('productStore', () => {
         status.isLoading = false
         if (response.data.success) {
           products.value = response.data.products
+          defaultProductsSort.value = response.data.products
         } else {
           dataErr(response)
         }
@@ -82,5 +84,47 @@ export const useProductStore = defineStore('productStore', () => {
 
     productsByCAT.value = itemsByCAT
   }
-  return { product, products, status, productsByCAT, getProducts, getProductByID, filterByCategory }
+  function sortProductsBy(field: string, order: 'asc' | 'desc') {
+    if (!products.value || !Array.isArray(products.value)) {
+      console.error('Products array is empty or invalid.')
+      return
+    }
+
+    if (field === 'default') {
+      products.value = defaultProductsSort.value
+      return
+    }
+
+    const sortedProducts = [...products.value]
+
+    sortedProducts.sort((a, b) => {
+      if (!a[field] || !b[field]) {
+        console.error(`Field "${field}" does not exist in products.`)
+        return 0
+      }
+
+      if (order === 'asc') {
+        if (a[field] < b[field]) return -1
+        if (a[field] > b[field]) return 1
+        return 0
+      } else {
+        if (a[field] < b[field]) return 1
+        if (a[field] > b[field]) return -1
+        return 0
+      }
+    })
+
+    products.value = sortedProducts
+  }
+
+  return {
+    product,
+    products,
+    status,
+    productsByCAT,
+    getProducts,
+    getProductByID,
+    filterByCategory,
+    sortProductsBy
+  }
 })
