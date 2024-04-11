@@ -49,6 +49,7 @@ const router = createRouter({
         {
           path: 'product/:category/:subcategory',
           component: () => import('../views/user/ProductsLayout.vue'),
+          meta: { icon: `../${shopFavIcon}` },
           children: [
             {
               name: 'ProductsByCAT',

@@ -1,6 +1,12 @@
 <template>
 
-  <div class="fs-3 fw-bold " v-if="!saveItems || Object.keys(saveItems).length === 0"> 無收藏商品。</div>
+  <div class="fs-3 fw-bold " v-if="!saveItems || Object.keys(saveItems).length === 0"> 無收藏商品。
+    <div class="mt-3 ">
+      <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
+          探索更多商品</router-link>
+      </button>
+    </div>
+  </div>
   <table class="table mt-4" v-if="saveItems && saveItems.length !== 0">
     <thead>
       <tr class="d-flex ">
