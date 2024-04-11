@@ -3,11 +3,11 @@
   <div class=" row   justify-content-center  align-items-center">
     <div class="col-1 col-xl-2     d-flex justify-content-center  align-items-center">
       <router-link to="/user/saves" class="nav-link " data-bs-toggle="tooltip" data-bs-placement="top" title="前往收藏清單">
-        <img src="@/assets/icons/save.svg" alt="save" width="24px" height="24px">
+        <img src="@/assets/icons/save.svg" alt="save" class="icon-size">
       </router-link>
     </div>
-    <div class="col-1   d-flex justify-content-center  align-items-center">
-      <img src="@/assets/icons/split.svg" alt="split" width="24px" height="24px">
+    <div class="col-1   d-flex justify-content-center  align-items-center p-0 ">
+      <img src="@/assets/icons/split.svg" alt="split" class="icon-size">
     </div>
     <div class="col-4  col-xl-4   ">
 
@@ -15,13 +15,15 @@
         <router-link to="/user/cartflow" class="col-12 nav-link " data-bs-toggle="tooltip" data-bs-placement="top"
           title="前往購物車">
           <div class="row justify-content-center  align-items-center ">
-            <div class="col-4  d-flex justify-content-center  align-items-center"> <img src="@/assets/icons/cart.svg"
-                alt="cart" width="24px" height="24px"></div>
+            <div class="col-4  d-flex justify-content-center  align-items-center">
+              <img src="@/assets/icons/cart.svg" class="icon-size" alt="cart">
+            </div>
 
             <div class="col-4 d-flex justify-content-center  align-items-center">
-              <div class=" bg-black text-white  px-2 py-0  rounded-1 " width="20px" height="20px">
-                <span v-if="!status.isGetCartLoading" class=" ">{{ cartTotalQty }}</span>
-                <div v-else class="spinner-border spinner-border-sm" role="status">
+              <div
+                class=" bg-black text-white  py-1  rounded-1 icon-size d-flex justify-content-center  align-items-center">
+                <span v-if="!status.isGetCartLoading" class="icon-font-size mx-2 ">{{ cartTotalQty }}</span>
+                <div v-else class="spinner-border spinner-border-sm mx-1" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
               </div>
@@ -34,27 +36,20 @@
 
 
     </div>
-    <div class="col-1   d-flex justify-content-center  align-items-center">
-      <img src="@/assets/icons/split.svg" alt="split" width="24px" height="24px">
+    <div class="col-1   d-flex justify-content-center  align-items-center  p-0 ">
+      <img src="@/assets/icons/split.svg" alt="split" class="icon-size">
     </div>
     <div class="col-1  col-xl-2  d-flex justify-content-center  align-items-center">
-
-
       <div class=" dropdown">
         <button class="btn  btn-sm    dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
-          <img src="@/assets/icons/person.svg" alt="person" width="24px" height="24px">
+          <img src="@/assets/icons/person.svg" alt="person" class="icon-size">
         </button>
         <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdownMenuButton">
           <router-link class="dropdown-item text-800 " to="/user/orders">查詢訂單</router-link>
           <li> <a class="dropdown-item text-800 " href="#">會員資料</a></li>
-
         </div>
       </div>
-
-
-
-
     </div>
   </div>
 
