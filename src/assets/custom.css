@@ -37,21 +37,23 @@
 
 
 /* RWD setting*/
-
-  h1 {font-size:1.125rem;} /*18px*/
+/*1rem = 16px*/
+/* 1.125rem;18px */
+/* 0.875rem;14px */
+  h1 {font-size:1.125rem;}
   h3 {
-    font-size:1rem;/*16px*/
+    font-size:1rem;
     color: var(--bs-gray-800);
   } 
   h4 {
-    font-size:0.875rem;/*14px*/
+    font-size:0.875rem;
     color: var(--bs-gray-800);
   } 
   .price{
-    font-size:0.875rem;/*14px*/
+    font-size:0.875rem;
     color: var(--bs-primary);
   }
-  .q-btn{font-size:1rem}/*16px*/
+  .q-btn{font-size:1rem}
   .icon-size{
     width: 1.2rem;
     height: 1.2rem;
@@ -59,26 +61,30 @@
   .icon-font-size{
     font-size: 1rem;
   }
-
+  .font-small {
+    font-size: 0.875rem;
+  }
 /* Small devices (landscape phones, 375px and up) */
 @media (min-width: 375px) {  
+ 
 
 }
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {  
-  h1 {font-size:1.5rem;} /*1rem = 16px*/
+  h1 {font-size:1.5rem;} 
   .icon-size{
     width: 24px;
     height: 24px;
   }
   .icon-font-size{
-    font-size: 18px;
+    font-size: 1.125rem;
   }
+  
 }
  
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {  
-  h1 {font-size:2rem;} /*1rem = 16px*/
+  h1 {font-size:2rem;} 
 }
  
 /* Large devices (desktops, 992px and up) */

@@ -3,8 +3,8 @@
 
   <div class="d-flex flex-column gap-4  ">
 
-    <div class="d-flex justify-content-between ">
-      <nav aria-label="breadcrumb ">
+    <div class="row  gy-2">
+      <nav a class="col-12 col-xs-6  " ria-label="breadcrumb ">
         <ol class="breadcrumb mb-0 ">
           <li class="breadcrumb-item" v-if="$route.params.category !== 'all'"><router-link :to="`/product/all/all`"> 全部
             </router-link>
@@ -19,20 +19,23 @@
         </ol>
       </nav>
 
-      <div class="d-flex justify-content-between gap-3 ">
-        <button type="button" @click="sortByButton(0, 'default')" class="btn  btn-sm "
-          :class="{ 'btn-primary': sortByID === 0, 'btn-outline-primary': sortByID !== 0 }">
-          綜合排序</button>
-        <button type="button" @click="sortByButton(1, 'price', 'asc')" class="btn  btn-sm "
-          :class="{ 'btn-primary': sortByID === 1, 'btn-outline-primary': sortByID !== 1 }">售價由低到高</button>
-        <button type="button" @click="sortByButton(2, 'price', 'desc')" class="btn  btn-sm "
-          :class="{ 'btn-primary': sortByID === 2, 'btn-outline-primary': sortByID !== 2 }">售價由高到低</button>
+      <div class="col-12 col-xs-6  d-flex justify-content-end  ">
+        <div class="btn-group  ">
+          <button type="button" @click="sortByButton(0, 'default')" class="btn  btn-sm  "
+            :class="{ 'btn-primary': sortByID === 0, 'btn-outline-primary': sortByID !== 0 }">
+            綜合排序</button>
+          <button type="button" @click="sortByButton(1, 'price', 'asc')" class="btn  btn-sm "
+            :class="{ 'btn-primary': sortByID === 1, 'btn-outline-primary': sortByID !== 1 }">售價由低到高</button>
+          <button type="button" @click="sortByButton(2, 'price', 'desc')" class=" btn  btn-sm "
+            :class="{ 'btn-primary': sortByID === 2, 'btn-outline-primary': sortByID !== 2 }">售價由高到低</button>
+        </div>
+
       </div>
     </div>
 
 
 
-    <div class="row row-cols-2 row-cols-lg-3 " data-cy="products">
+    <div class="row row-cols-2 row-cols-md-3 " data-cy="products">
 
       <SaleItem v-for="(item, index) in showItems" :key="index" :item="item" class="col d-flex  " data-cy="item"
         :path="`${$route.params.category}/${$route.params.subcategory}`" />
