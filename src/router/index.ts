@@ -6,7 +6,7 @@ const icon = useFavicon()
 const shopFavIcon = 'logo_favicon.ico'
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to) {
     if (to.hash) {
       return {
         el: to.hash
@@ -113,7 +113,7 @@ const router = createRouter({
       meta: {
         title: '後台管理'
       },
-      component: () => import('../views/admin/Dashboard.vue'),
+      component: () => import('../views/admin/DashboardLayout.vue'),
       children: [
         {
           path: 'products',
@@ -121,11 +121,11 @@ const router = createRouter({
         },
         {
           path: 'orders',
-          component: () => import('../views/admin/Orders.vue')
+          component: () => import('../views/admin/OrdersList.vue')
         },
         {
           path: 'coupons',
-          component: () => import('../views/admin/Coupons.vue')
+          component: () => import('../views/admin/CouponsList.vue')
         }
       ]
     }

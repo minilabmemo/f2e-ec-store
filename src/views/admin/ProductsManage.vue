@@ -63,7 +63,7 @@ import ProductModal from "@/components/admin/EditProductModal.vue";
 import DelModal from "@/components/DelModal.vue";
 import {adminProductApi} from '@/utils/const/path'
 import Pagination from '@/components/Pagination.vue';
-import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
+import {catchErr} from '@/utils/methods/handleErr.js'
 import statusStore from '@/stores/statusStore';
 import {mapActions} from 'pinia'
 export default {
