@@ -3,8 +3,9 @@
   <div class="d-flex flex-column gap-3  ">
 
     <div class="position-relative ">
-
-      <img :src="item.src" alt="image" class="flex-image">
+      <router-link :to="`/product/all/all/id/${item.id}`" class="nav-link">
+        <img :src="item.src" alt="image" class="flex-image">
+      </router-link>
       <div class="photo-mix-text" :class="item.color" v-if="isLoading">
         <h1>coming</h1>
         <h1>soon</h1>
@@ -21,13 +22,16 @@
       </div>
 
       <h4 v-else>
-        {{ item.title }}
+        <router-link :to="`/product/all/all/id/${item.id}`" class="nav-link">
+          {{ item.title }}
+        </router-link>
       </h4>
 
     </div>
 
 
   </div>
+
 </template>
 
 

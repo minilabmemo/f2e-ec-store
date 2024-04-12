@@ -124,7 +124,7 @@
         <h4>您可能也喜歡</h4>
         <div class="row overflow-x-auto  flex-nowrap align-items-stretch  ">
           <SaleItem v-for="(item, index) in recommendItems" :key="index" :item="item" class="col-5 col-xs-4 col-md-3 "
-            data-cy="item" />
+            data-cy="item" :path="`${$route.params.category}/${$route.params.subcategory}`" />
         </div>
 
       </div>
@@ -206,8 +206,14 @@ export default {
       handler: function (val) {
         this.filterByCategory(this.$route.params.category)
       }
-
     },
+    $route(to, from) {
+      if (to.path !== from.path) {
+        this.id = this.$route.params.productId;
+        this.getProductByID(this.id);
+        this.getProducts()
+      }
+    }
   },
   methods: {
     ...mapActions(useCartStore, ['addCartByItem']),

@@ -1,12 +1,12 @@
 <template>
   <section class="d-flex flex-column align-items-center ">
     <h1 class=" ">{{ section }}</h1>
-    <router-link :to="`/product/${CAT}/all`" class="nav-link">
-      <div class="row">
 
-        <DataItem v-for="(item, index) in showItems" :key="index" :item="item" class="col-4" :filter-err="filterErr" />
-      </div>
-    </router-link>
+    <div class="row">
+
+      <DataItem v-for="(item, index) in showItems" :key="index" :item="item" class="col-4" :filter-err="filterErr" />
+    </div>
+
     <div class="d-flex justify-content-center gap-3">
       <button class="btn btn-black q-btn">
         <router-link :to="`/product/${CAT}/all`" class="nav-link">
@@ -58,6 +58,7 @@ export default {
         this.showItems = previewItem.map(item => ({
           title: item.title,
           src: item.imageUrl,
+          id: item.id,
 
         }));
       } else {
