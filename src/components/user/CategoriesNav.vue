@@ -21,7 +21,7 @@
             height="12px">
           <router-link class="nav-link   " :to="`/product/${key}/${subKey}`"
             :class="{ 'text-300': !countByCAT(key, subKey), 'text-800': countByCAT(key, subKey) }">
-            {{ item.name }} {{ subKey }}
+            {{ item.name }} {{ item.key }}
             <span>
               ({{ countByCAT(key, subKey) }})
             </span>

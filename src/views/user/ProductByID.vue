@@ -187,6 +187,11 @@ export default {
       if (this.productsByCAT) {
         items = this.productsByCAT.filter((item) => item.id != removeID)
       }
+      if (items.length === 0) {
+        items = this.products.slice(0, 3)
+      }
+
+
       return items
     },
   },

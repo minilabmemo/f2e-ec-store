@@ -81,7 +81,21 @@ const categories: Category = {
   },
   dress: {
     key: 'dress',
-    name: '洋裝'
+    name: '洋裝',
+    sub_category: {
+      long_sleeves: {
+        key: 'long sleeves',
+        name: '長袖'
+      },
+      short_sleeves: {
+        key: 'short sleeves',
+        name: '短袖'
+      },
+      sleeveless: {
+        key: 'sleeveless',
+        name: '無袖'
+      }
+    }
   },
   coat: {
     key: 'coat',

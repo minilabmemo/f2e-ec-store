@@ -1,9 +1,9 @@
 <template>
-  <div class=" d-flex flex-wrap gap-5 align-items-center justify-content-center align-content-center ">
+  <div class=" row row-cols-2  row-cols-md-4 gy-4 align-items-center  ">
 
-    <div v-for="(item, index) in items" :key="index" class="item  ">
-      <router-link :to="`/product/all/all/id/${item.id}`"> <img class="w-full object-cover object-center"
-          :src="item.imageUrl" alt="style" width="250"></router-link>
+    <div v-for="(item, index) in items" :key="index" class="col  ">
+      <router-link :to="`/product/all/all/id/${item.id}`"> <img class="flex-image" :src="item.imageUrl"
+          alt="style"></router-link>
 
 
     </div>
@@ -39,3 +39,13 @@ const items = computed(() => {
 
 
 </script>
+
+
+<style lang="css" scoped>
+.flex-image {
+  object-fit: cover;
+
+  width: 100%;
+  height: auto;
+}
+</style>

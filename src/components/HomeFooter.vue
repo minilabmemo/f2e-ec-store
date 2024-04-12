@@ -2,7 +2,7 @@
   <footer class="bg-orange-100 container-fluid p-5  text-gray-500   " id="footer">
     <div class="container-xl">
       <div class=" row d-flex justify-content-center  gy-3 ">
-        <div class="col-12 col-sm-4   ">
+        <div class="col-6 col-sm-4   ">
           <div class="row   gy-2 ">
             <div class="col-12 fw-semibold  noto-font">About</div>
             <div class="col-12"> <router-link :to="`/about#${sectionIds.brand}`" class="nav-link">品牌介紹</router-link>
@@ -15,7 +15,7 @@
 
 
         </div>
-        <div class="col-12 col-sm-4 ">
+        <div class="col-6 col-sm-4 ">
           <div class="row     gy-2 ">
             <div class="col-12 fw-semibold  noto-font ">Service</div>
             <div class="col-12"><router-link :to="`/about#${sectionIds.paymentMethods}`"
