@@ -23,10 +23,12 @@
       </div>
 
 
-      <div class=" offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class=" offcanvas offcanvas-start " tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header ">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">登入/註冊</h5>
-          <button type="button" class="btn btn-close " data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" class="btn btn-close m-0  " data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <h5 class="offcanvas-title ms-auto " id="offcanvasNavbarLabel">登入/註冊</h5>
+
         </div>
         <div class="offcanvas-body   ">
           <CATNav v-if="isCollapsed" />
