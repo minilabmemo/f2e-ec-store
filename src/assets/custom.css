@@ -40,6 +40,10 @@
 /*1rem = 16px*/
 /* 1.125rem;18px */
 /* 0.875rem;14px */
+/* 1.25rem 20px */
+/* 1.5rem 24px */
+/* 2rem 32px */
+/* 4rem; 64px */
   h1 {font-size:1.125rem;}
   h3 {
     font-size:1rem;
@@ -79,26 +83,28 @@
   .icon-font-size{
     font-size: 1.125rem;
   }
-  
+  .price{font-size:1.125rem};
 }
  
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media (min-width: 768px) {  
   h1 {font-size:2rem;} 
+
 }
  
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) { 
-  h1 {font-size:4rem;} /*64px*/
-  h3 {font-size:1.5rem}/*24px*/
-  h4 {font-size:1.25rem}/*20px*/
+  h1 {font-size:4rem;} 
+  h3 {font-size:1.5rem}
+  h4 {font-size:1.25rem}
+  .price{font-size:1.5rem}
 
 }
  
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {  
-  .price{font-size:2rem}/*32px*/
-  .q-btn{font-size:1.5rem}/*24px*/
+  .price{font-size:2rem}
+  .q-btn{font-size:1.5rem}
 }
  
 

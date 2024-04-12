@@ -24,8 +24,8 @@
           <h3 class="col-12">{{ product.title }}</h3>
 
           <div class="col-12 ">
-            <div class="row justify-content-center  align-items-baseline   ">
-              <div class="col-8">
+            <div class="row justify-content-start  align-items-baseline   ">
+              <div class="col-12 col-md-8 col-lg-auto">
                 <span class="price " v-if="!product.origin_price"> 價格 ${{ $filters.currency(product.origin_price)
                   }}</span>
                 <span class="price" v-show="product.price === product.origin_price"> 特惠價 ${{
@@ -35,7 +35,7 @@
                 <span class="price  " v-show="product.price !== product.origin_price"> 優惠價 ${{
     $filters.currency(product.price) }}</span>
               </div>
-              <div class="col-4">
+              <div class="col-12 col-md-4">
                 <span class=" text-500 " v-if="product.num"> 商品數量 {{ product.num }} 件</span>
               </div>
             </div>
