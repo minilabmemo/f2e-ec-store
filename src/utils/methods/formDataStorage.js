@@ -1,7 +1,6 @@
-import {ref} from 'vue';
 
 import statusStore from '@/stores/statusStore';
-export function useFormDataStorage() {
+export function formDataStorage() {
   const saveFormData = (data) => {
     localStorage.setItem('formData', JSON.stringify(data));
     status.pushMessage({

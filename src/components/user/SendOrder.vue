@@ -61,8 +61,8 @@ const {getCart} = useCartStore();
 const {createOrder, } = orderStore;
 const {status} = storeToRefs(orderStore);
 
-import {useFormDataStorage} from '@/utils/methods/formDataStorage';
-const {getFormData} = useFormDataStorage();
+import {formDataStorage} from '@/utils/methods/formDataStorage';
+const {getFormData} = formDataStorage();
 
 function importDataCheckbox() {
 

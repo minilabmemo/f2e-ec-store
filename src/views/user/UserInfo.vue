@@ -47,8 +47,8 @@
 
 <script setup>
 import {ref} from 'vue';
-import {useFormDataStorage} from '@/utils/methods/formDataStorage';
-const {saveFormData, getFormData} = useFormDataStorage();
+import {formDataStorage} from '@/utils/methods/formDataStorage';
+const {saveFormData, getFormData} = formDataStorage();
 
 
 const formDataFromLocalStorage = getFormData();
