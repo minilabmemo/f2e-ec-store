@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container-lg  d-flex flex-column align-items-center ">
+  <div class="container-lg  d-flex flex-column align-items-center my-5">
 
     <HomeBanner />
     <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
@@ -9,6 +9,12 @@
 
     <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products" id="special" />
+    <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
+    <div class="row   align-items-end ">
+      <div class="col-4"><img src="@/assets/images/design/news1.png" class="img-fluid" alt="discount"></div>
+      <div class="col-4"><img src="@/assets/images/design/news2.png" class="img-fluid" alt="discount"></div>
+      <div class="col-4"><img src="@/assets/images/design/news3.png" class="img-fluid" alt="discount"></div>
+    </div>
 
     <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <h1 class="mb-5 ">COLLECTIONS</h1>
@@ -25,27 +31,9 @@
     </div>
     <div class="my-3"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
 
-    <div class="d-flex gap-5  ">
 
-      <div class="my-5">
-        <router-link :to="`/`" class="nav-link">
-          <img src="@/assets/icons/facebook.svg" alt="facebook" class="img-fluid"></router-link>
-      </div>
-      <div class="my-5">
-        <router-link :to="`/`" class="nav-link"> <img src="@/assets/icons/Instagram.svg" alt="Instagram"
-            class="img-fluid"></router-link>
-      </div>
-      <div class="my-5">
-        <router-link :to="`/`" class="nav-link"> <img src="@/assets/icons/YouTube.svg" alt="YouTube"
-            class="img-fluid"></router-link>
 
-      </div>
-      <div class="my-5">
-        <router-link :to="`/`" class="nav-link"> <img src="@/assets/icons/line.svg" alt="line"
-            class="img-fluid"></router-link>
 
-      </div>
-    </div>
 
 
   </div>
