@@ -39,7 +39,7 @@
 import HomeNav from '@/components/user/HomeNav.vue';
 import HomeLogo from '@/components/user/HomeLogo.vue';
 import ToastMessages from '@/components/ToastMessages.vue';
-import HomeFooter from '@/components/HomeFooter.vue';
+import HomeFooter from '@/components/user/HomeFooter.vue';
 import UserNav from '@/components/user/UserNav.vue';
 import { useWindowSize } from '@vueuse/core'
 import { ref, watchEffect } from 'vue';
