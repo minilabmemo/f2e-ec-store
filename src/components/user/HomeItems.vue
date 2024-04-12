@@ -23,7 +23,7 @@ import DataItem from '@/components/user/DataItem.vue';
 import coming1 from '@/assets/images/design/coming1.png';
 import coming2 from '@/assets/images/design/coming2.png';
 import coming3 from '@/assets/images/design/coming3.png';
-import categories from '@/utils/const/categories'
+import categories from '@/utils/config/categories'
 export default {
   components: {DataItem},
   props: {
@@ -70,4 +70,4 @@ export default {
 
 
 }
-</script>
+</script>@/utils/config/categories

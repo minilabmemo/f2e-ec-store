@@ -72,7 +72,7 @@
 </template>
 
 <script>
-import categories from '@/utils/const/categories'
+import categories from '@/utils/config/categories'
 import 'bootstrap/js/dist/collapse';
 import Offcanvas from 'bootstrap/js/dist/offcanvas';
 import HomeLogo from '@/components/user/HomeLogo.vue';
@@ -152,3 +152,4 @@ export default {
 }
 
 </script>
+@/utils/config/categories

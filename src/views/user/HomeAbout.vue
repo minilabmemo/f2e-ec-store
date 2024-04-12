@@ -67,7 +67,7 @@
 
 </template>
 <script>
-import sectionIds from '@/utils/const/sectionIds.js';
+import sectionIds from '@/utils/config/sectionIds.js';
 
 export default {
   data() {
@@ -93,3 +93,4 @@ export default {
 
 }
 </style>
+@/utils/config/sectionIds.js

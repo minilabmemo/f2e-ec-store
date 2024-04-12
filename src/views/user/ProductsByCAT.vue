@@ -56,7 +56,7 @@
 import {ref, computed, watchEffect, watch} from 'vue';
 import SaleItem from '@/components/user/SaleItem.vue';
 import Pagination from '@/components/PaginationAct.vue';
-import categoriesConfig from '@/utils/const/categories';
+import categoriesConfig from '@/utils/config/categories';
 import {storeToRefs} from 'pinia'
 const categories = categoriesConfig;
 
@@ -169,3 +169,4 @@ watchEffect(() => {
 
 
 </script>
+@/utils/config/categories

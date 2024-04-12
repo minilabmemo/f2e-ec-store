@@ -44,7 +44,7 @@
 
 <script setup>
 import {ref, computed} from 'vue';
-import categoriesConfig from '@/utils/const/categories';
+import categoriesConfig from '@/utils/config/categories';
 import {useProductStore} from '@/stores/productStore';
 import {storeToRefs} from 'pinia'
 const productStore = useProductStore();
@@ -138,3 +138,4 @@ function sumProductsCAT(products) {
 
 
 </script>
+@/utils/config/categories

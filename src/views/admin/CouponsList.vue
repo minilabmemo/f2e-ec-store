@@ -44,7 +44,7 @@
 <script>
 import CouponModal from '@/components/admin/CouponModal.vue';
 import DelModal from '@/components/DelModal.vue';
-import {adminCouponsApi, adminCouponApi} from '@/utils/const/path'
+import {adminCouponsApi, adminCouponApi} from '@/utils/config/path'
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 import statusStore from '@/stores/statusStore';
 import {mapActions} from 'pinia'
@@ -139,4 +139,4 @@ export default {
     this.getCoupons();
   },
 };
-</script>
+</script>@/utils/config/path

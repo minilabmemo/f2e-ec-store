@@ -54,7 +54,7 @@
 import DelModal from '@/components/DelModal.vue';
 import OrderModal from '@/components/OrderModal.vue';
 import Pagination from '@/components/PaginationAct.vue';
-import {adminOrderApi, adminOrdersApi} from '@/utils/const/path'
+import {adminOrderApi, adminOrdersApi} from '@/utils/config/path'
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 import statusStore from '@/stores/statusStore';
 import {mapActions} from 'pinia'
@@ -137,4 +137,4 @@ export default {
 
   },
 };
-</script>
+</script>@/utils/config/path

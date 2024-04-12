@@ -3,7 +3,7 @@ import {defineStore} from 'pinia';
 import {computed, ref} from 'vue'
 
 import statusStore from './statusStore';
-import {userCartApi} from '@/utils/const/path'
+import {userCartApi} from '@/utils/config/path'
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 export const useCartStore = defineStore('cartStore', () => {
   const cart = ref();

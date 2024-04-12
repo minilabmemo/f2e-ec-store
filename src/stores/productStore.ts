@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { userProductsApi, userProductApi } from '@/utils/const/path'
+import { userProductsApi, userProductApi } from '@/utils/config/path'
 import statusStore from './statusStore'
 import { catchErr, dataErr } from '@/utils/methods/handleErr.js'
 export const useProductStore = defineStore('productStore', () => {

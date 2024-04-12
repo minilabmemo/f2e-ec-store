@@ -147,7 +147,7 @@
 
 <script>
 
-import categories from '@/utils/const/categories'
+import categories from '@/utils/config/categories'
 import AddCartConfirm from '@/components/user/modal/AddCartConfirm.vue';
 import SaveButton from '@/components/user/SaveButton.vue'
 import {useCartStore} from '@/stores/cartStore';
@@ -333,4 +333,4 @@ export default {
   opacity: 1;
   transform: translateY(0px);
 }
-</style>
+</style>@/utils/config/categories

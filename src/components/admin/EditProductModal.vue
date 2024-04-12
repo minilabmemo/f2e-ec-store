@@ -175,10 +175,10 @@
 
 <script>
 
-import {adminUploadApi} from "@/utils/const/path"
+import {adminUploadApi} from "@/utils/config/path"
 import modalMixin from "@/utils/mixins/modalMixin"
-import itemLimit from '@/utils/const/itemLimit'
-import categories from '@/utils/const/categories'
+import itemLimit from '@/utils/config/itemLimit'
+import categories from '@/utils/config/categories'
 import statusStore from '@/stores/statusStore';
 import {mapActions} from 'pinia'
 export default {
@@ -282,4 +282,4 @@ export default {
   },
 
 }
-</script>
+</script>@/utils/config/path@/utils/config/itemLimit@/utils/config/categories

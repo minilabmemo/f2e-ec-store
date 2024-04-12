@@ -191,7 +191,7 @@
 </template>
 
 <script>
-import {userCouponApi} from '@/utils/const/path'
+import {userCouponApi} from '@/utils/config/path'
 import statusStore from '@/stores/statusStore';
 
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
@@ -284,4 +284,4 @@ export default {
   width: 100%;
   height: auto;
 }
-</style>
+</style>@/utils/config/path

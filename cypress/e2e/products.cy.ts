@@ -1,5 +1,5 @@
 // https://on.cypress.io/api
-// import {userProductsApi} from '@/utils/const/path' //FIXME import can't work
+// import {userProductsApi} from '@/utils/config/path' //FIXME import can't work
 describe('Product List Test', () => {
   it('navbar visible.', () => {
     cy.viewport('samsung-s10')

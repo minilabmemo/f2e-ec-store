@@ -47,7 +47,7 @@
 import {ref} from 'vue';
 import HomeBanner from '@/components/user/HomeBanner.vue';
 import HomeItems from '@/components/user/HomeItems.vue';
-import categoriesConfig from '@/utils/const/categories';
+import categoriesConfig from '@/utils/config/categories';
 import {storeToRefs} from 'pinia'
 const categories = ref(categoriesConfig);
 import {useProductStore} from '@/stores/productStore';
@@ -67,3 +67,4 @@ getProducts();
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
 }
 </style>
+@/utils/config/categories

@@ -61,7 +61,7 @@
 <script>
 import ProductModal from "@/components/admin/EditProductModal.vue";
 import DelModal from "@/components/DelModal.vue";
-import {adminProductApi} from '@/utils/const/path'
+import {adminProductApi} from '@/utils/config/path'
 import Pagination from '@/components/PaginationAct.vue';
 import {catchErr} from '@/utils/methods/handleErr.js'
 import statusStore from '@/stores/statusStore';
@@ -161,4 +161,4 @@ export default {
   width: 100%;
   height: auto;
 }
-</style>
+</style>@/utils/config/path
