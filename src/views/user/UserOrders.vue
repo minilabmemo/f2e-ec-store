@@ -77,7 +77,7 @@
               </li>
             </ul>
           </td>
-          <td class="text-right">{{ item.total }}</td>
+          <td class="text-right">{{ $filters.currency(item.total) }}</td>
           <td>
 
 

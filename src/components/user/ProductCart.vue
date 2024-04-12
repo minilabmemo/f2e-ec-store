@@ -29,9 +29,11 @@
                         }}</router-link></div>
                     <div class="d-flex   flex-column  align-items-start text-start gap-2 ">
                       <div>
-                        <span class=" text-300" v-show="item.product.price !== item.product.origin_price"> <del>${{
-    item.product.origin_price }}</del></span>
-                        <span class=" text-primary  me-1 ">${{ item.product.price }}</span>
+                        <span class=" text-300" v-show="item.product.price !== item.product.origin_price"> <del>
+
+                            ${{
+    $filters.currency(item.product.origin_price) }}</del></span>
+                        <span class=" text-primary  me-1 ">${{ $filters.currency(item.product.price) }}</span>
 
                       </div>
                       <span class=" text-500  ">剩餘數量： {{ item.product.num }}</span>
@@ -96,8 +98,8 @@
                         }}</router-link></div>
                     <div class="ms-2">
                       <span class=" text-300  me-4" v-show="item.product.price !== item.product.origin_price"> <del>${{
-    item.product.origin_price }}</del></span>
-                      <span class=" text-primary  me-4 ">${{ item.product.price }}</span>
+    $filters.currency(item.product.origin_price) }}</del></span>
+                      <span class=" text-primary  me-4 ">${{ $filters.currency(item.product.price) }}</span>
                       <div class=" text-500  ">剩餘數量： {{ item.product.num }}</div>
                     </div>
 

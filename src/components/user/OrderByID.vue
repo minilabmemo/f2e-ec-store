@@ -11,13 +11,13 @@
           <tr v-for="item in order.products" :key="item.id">
             <td style="width:60%">{{ item.product.title }}</td>
             <td>{{ item.qty }}/{{ item.product.unit }}</td>
-            <td>{{ item.final_total }}</td>
+            <td>{{ $filters.currency(item.final_total) }}</td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
             <td colspan="2" class="text-end">總計</td>
-            <td>{{ order.total }}</td>
+            <td>{{ $filters.currency(order.total) }}</td>
           </tr>
         </tfoot>
       </table>
@@ -58,7 +58,7 @@
         </tbody>
       </table>
       <div class="text-end" v-if="order.is_paid === false">
-        <button class="btn btn-danger" type="button">確認付款去</button>
+        <button class="btn btn-danger">確認付款去</button>
       </div>
       <div class="text-center " v-else>
         <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
