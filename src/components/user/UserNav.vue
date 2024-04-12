@@ -71,11 +71,11 @@ getCart()
 
 onMounted(() => {
   var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
-  var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+  dropdownElementList.map(function (dropdownToggleEl) {
     return new Dropdown(dropdownToggleEl)
   })
   var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new Tooltip(tooltipTriggerEl)
   })
 })

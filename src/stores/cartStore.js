@@ -48,8 +48,15 @@ export const useCartStore = defineStore('cartStore', () => {
     };
     axios.post(url, {data: cart})
       .then((res) => {
-        status.cartLoadingItem = '';
         this.getCart();
+        if (res.data.success) {
+          status.cartLoadingItem = '';
+        } else {
+          dataErr(res)
+        }
+      }).catch((err) => {
+        catchErr(err)
+        status.cartLoadingItem = '';
       });
   }
 
@@ -61,6 +68,9 @@ export const useCartStore = defineStore('cartStore', () => {
       status.isLoading = false;
       status.pushMessage({title: '加入購物車', response: response});
       this.getCart();
+    }).catch((err) => {
+      catchErr(err)
+      status.isLoading = false;
     });
 
   }
@@ -82,6 +92,13 @@ export const useCartStore = defineStore('cartStore', () => {
       status.isLoading = false;
       status.loadingItem = '';
       this.getCart();
+      if (!res.data.success) {
+        dataErr(res)
+      }
+
+    }).catch((err) => {
+      catchErr(err)
+      status.isLoading = false;
     });
   }
 
@@ -94,6 +111,8 @@ export const useCartStore = defineStore('cartStore', () => {
       status.pushMessage({title: '移除購物車品項', response: response});
       status.loadingItem = '';
       this.getCart();
+    }).catch((err) => {
+      catchErr(err)
     });
   }
 

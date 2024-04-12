@@ -49,6 +49,7 @@ export const useOrderStore = defineStore('orderStore', () => {
 
 
     }).catch((err) => {
+      status.isLoading = false;
       catchErr(err)
 
     });
@@ -68,6 +69,10 @@ export const useOrderStore = defineStore('orderStore', () => {
           this.getOrderByID(orderId);
         }
 
+      }).catch((err) => {
+        status.isLoading = false;
+        catchErr(err)
+
       });
   }
   function createOrder(body) {
@@ -85,6 +90,10 @@ export const useOrderStore = defineStore('orderStore', () => {
           status.orderTemp.paySuccess = true;
           status.orderTemp.orderId = res.data.orderId;
         }
+
+      }).catch((err) => {
+        status.isLoading = false;
+        catchErr(err)
 
       });
   }

@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import {defineProps, ref, computed} from 'vue';
+import {ref, computed} from 'vue';
 import categoriesConfig from '@/utils/const/categories';
 import {useProductStore} from '@/stores/productStore';
 import {storeToRefs} from 'pinia'

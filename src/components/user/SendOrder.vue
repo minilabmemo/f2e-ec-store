@@ -3,7 +3,7 @@
 
   <div class="container-xl">
     <div class="my-5 row justify-content-center">
-      <Form class="col-md-6" v-slot="{ errors, validate }" @submit="sendOrder">
+      <Form class="col-md-6" v-slot="{ errors }" @submit="sendOrder">
         <div>
           <input type="checkbox" id="importDataCheckbox" @change="importDataCheckbox()" class="me-2">
           <label for="importDataCheckbox"> 從會員資料中匯入（<router-link class=" "
