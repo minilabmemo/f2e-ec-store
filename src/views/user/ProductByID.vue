@@ -229,7 +229,7 @@ export default {
 
 
     goToCart() {
-      this.$router.push('/user/cartflow');
+      this.$router.push('/user/cart/flow');
     },
 
     checkQty(id, qty = 1) {

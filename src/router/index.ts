@@ -70,7 +70,7 @@ const router = createRouter({
         },
         {
           name: 'UserCartFlow',
-          path: 'user/cartflow',
+          path: 'user/cart/flow',
           component: () => import('../views/user/UserCartFlow.vue'),
           meta: { icon: `../${shopFavIcon}` }
         },

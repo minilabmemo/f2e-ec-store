@@ -12,7 +12,7 @@
     <div class="col-4  col-xl-4   ">
 
       <div class="row  justify-content-center  align-items-center">
-        <router-link to="/user/cartflow" class="col-12 nav-link " data-bs-toggle="tooltip" data-bs-placement="top"
+        <router-link to="/user/cart/flow" class="col-12 nav-link " data-bs-toggle="tooltip" data-bs-placement="top"
           title="前往購物車">
           <div class="row justify-content-center  align-items-center ">
             <div class="col-4  d-flex justify-content-center  align-items-center">

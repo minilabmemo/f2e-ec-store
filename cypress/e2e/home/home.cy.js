@@ -55,7 +55,7 @@ describe('Home Action Test', () => {
     cy.url().should('contain', '/#');
 
     cy.get('img[alt="cart"]').first().click();
-    cy.url().should('contain', '/#/user/cartflow');
+    cy.url().should('contain', '/#/user/cart/flow');
 
   })
   it('click order link ', () => {
