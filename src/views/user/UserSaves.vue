@@ -58,7 +58,7 @@
 
 <script>
 
-import Pagination from '@/components/Pagination.vue';
+import Pagination from '@/components/PaginationAct.vue';
 import {useProductStore} from '@/stores/productStore';
 import {mapState, mapActions} from 'pinia'
 export default {
@@ -67,7 +67,7 @@ export default {
   },
   watch: {
     products: {
-      handler: function (val, oldVal) {
+      handler: function (val) {
         if (this.saveItems) {
           for (const [key, item] of Object.entries(this.saveItems)) {
             this.saveItems[key].on_stock = false

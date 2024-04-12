@@ -35,10 +35,10 @@ export const useOrderStore = defineStore('orderStore', () => {
       });
   }
   function getOrders(currentPage = 1) {
-    this.currentPage = currentPage;
+    pagination.value.currentPage = currentPage;
     const url = `${userOrdersApi}?page=${currentPage}`;
     status.isLoading = true;
-    axios.get(url, this.tempProduct).then((response) => {
+    axios.get(url).then((response) => {
       status.isLoading = false;
       if (response.data.success) {
         orders.value = response.data.orders;

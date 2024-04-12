@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Toast from '@/components/Toast.vue';
+import Toast from '@/components/ToastCard.vue';
 import statusStore from '@/stores/statusStore';
 import {mapState} from 'pinia';
 export default {

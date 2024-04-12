@@ -208,7 +208,7 @@ export default {
 
     },
     products: {
-      handler: function (val) {
+      handler: function () {
         this.filterByCategory(this.$route.params.category)
       }
     },

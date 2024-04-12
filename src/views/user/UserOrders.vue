@@ -110,7 +110,7 @@
 <script>
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 import OrderModal from '@/components/OrderModal.vue';
-import Pagination from '@/components/Pagination.vue';
+import Pagination from '@/components/PaginationAct.vue';
 
 import {useOrderStore} from '@/stores/orderStore'
 import {mapState, mapActions} from 'pinia'

@@ -6,12 +6,12 @@
         <div class="mb-2">
           <label for="inputEmail" class="sr-only">Email address</label>
           <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus
-            v-model="user.username" />
+            v-model="user.username">
         </div>
         <div class="mb-2">
           <label for="inputPassword" class="sr-only">Password</label>
           <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
-            v-model="user.password" />
+            v-model="user.password">
         </div>
 
         <div class="text-end mt-4">

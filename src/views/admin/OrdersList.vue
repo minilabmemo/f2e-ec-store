@@ -53,7 +53,7 @@
 <script>
 import DelModal from '@/components/DelModal.vue';
 import OrderModal from '@/components/OrderModal.vue';
-import Pagination from '@/components/Pagination.vue';
+import Pagination from '@/components/PaginationAct.vue';
 import {adminOrderApi, adminOrdersApi} from '@/utils/const/path'
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 import statusStore from '@/stores/statusStore';

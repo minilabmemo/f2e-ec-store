@@ -55,7 +55,7 @@
 <script setup>
 import {ref, computed, watchEffect, watch} from 'vue';
 import SaleItem from '@/components/user/SaleItem.vue';
-import Pagination from '@/components/Pagination.vue';
+import Pagination from '@/components/PaginationAct.vue';
 import categoriesConfig from '@/utils/const/categories';
 import {storeToRefs} from 'pinia'
 const categories = categoriesConfig;
@@ -157,7 +157,10 @@ const sub_category_name = computed(() => {
 
 
 watch(() => pagination.value.current_page, (newValue, oldValue) => {
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  if (newValue != oldValue) {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
 });
 watchEffect(() => {
   filterItems();
