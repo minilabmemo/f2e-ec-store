@@ -73,14 +73,14 @@
 
 <script>
 import categories from '@/utils/const/categories'
-import Collapse from 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/collapse';
 import Offcanvas from 'bootstrap/js/dist/offcanvas';
 import HomeLogo from '@/components/user/HomeLogo.vue';
 import CATNav from '@/components/user/CategoriesNav.vue'
-import UserNav from '@/components/user/UserNav.vue';
+
 
 export default {
-  components: {HomeLogo, CATNav, UserNav},
+  components: {HomeLogo, CATNav},
 
   data() {
     return {

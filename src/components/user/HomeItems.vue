@@ -8,7 +8,7 @@
     </div>
 
     <div class="d-flex justify-content-center gap-3">
-      <button class="btn btn-black q-btn">
+      <button class="btn btn-black q-btn" type="button">
         <router-link :to="`/product/${CAT}/all`" class="nav-link">
           Explore More <img src="@/assets/icons/next_arrow.svg" alt="Next Arrow"></router-link>
       </button>
@@ -46,7 +46,7 @@ export default {
     }
   },
   watch: {
-    products(newProducts, o) {
+    products(newProducts) {
       let previewItem = [];
       let filterProducts = newProducts.filter((item) => item.category.toString().includes(this.CAT))
 

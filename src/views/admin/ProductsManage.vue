@@ -85,7 +85,7 @@ export default {
       const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${page}`
       this.isLoading = true;
       this.$http.get(url).then((response) => {
-        this.pushMessage({title: '新增產品', response: response})
+
         this.isLoading = false;
         if (response.data.success) {
 

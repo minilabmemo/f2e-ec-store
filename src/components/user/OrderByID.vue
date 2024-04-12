@@ -58,7 +58,7 @@
         </tbody>
       </table>
       <div class="text-end" v-if="order.is_paid === false">
-        <button class="btn btn-danger">確認付款去</button>
+        <button class="btn btn-danger" type="button">確認付款去</button>
       </div>
       <div class="text-center " v-else>
         <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
@@ -72,10 +72,11 @@
 
 <script>
 
-import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 
 import {useOrderStore} from '@/stores/orderStore'
 import {mapState, mapActions} from 'pinia'
+import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
+
 export default {
   components: {CheckoutConfirm},
   props: {

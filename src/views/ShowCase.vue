@@ -73,7 +73,7 @@
 
         </td>
         <td>
-          <button class="btn btn-black q-btn">Explore More <img src="@/assets/icons/next_arrow.svg" alt="Next Arrow">
+          <button  type="button" class="btn btn-black q-btn">Explore More <img src="@/assets/icons/next_arrow.svg" alt="Next Arrow">
           </button>
 
 

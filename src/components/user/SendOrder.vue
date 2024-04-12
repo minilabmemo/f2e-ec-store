@@ -43,7 +43,7 @@
         </div>
 
         <div class="text-end">
-          <button class="btn btn-danger">送出訂單</button>
+          <button class="btn btn-danger" type="button">送出訂單</button>
         </div>
       </Form>
     </div>

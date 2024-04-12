@@ -44,7 +44,7 @@ import UserNav from '@/components/user/UserNav.vue';
 import { useWindowSize } from '@vueuse/core'
 import { ref, watchEffect } from 'vue';
 
-const { width, height } = useWindowSize()
+const { width } = useWindowSize()
 const isLargeDevice = ref(false);
 const userNavLoc = ref("#device-lg-location");
 
