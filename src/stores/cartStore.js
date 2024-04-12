@@ -40,6 +40,10 @@ export const useCartStore = defineStore('cartStore', () => {
   }
 
   function addCart(id) {
+    if (!id) {
+      console.error('params is empty or invalid.')
+      return
+    }
     const url = `${userCartApi}`;
     status.cartLoadingItem = id;
     const cart = {
@@ -103,6 +107,10 @@ export const useCartStore = defineStore('cartStore', () => {
   }
 
   function removeCartByID(id) {
+    if (!id) {
+      console.error('params is empty or invalid.')
+      return
+    }
     status.loadingItem = id;
     const url = `${userCartApi}/${id}`;
     status.isLoading = true;

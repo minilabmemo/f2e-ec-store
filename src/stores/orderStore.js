@@ -17,7 +17,10 @@ export const useOrderStore = defineStore('orderStore', () => {
   });
   const status = statusStore();
   function getOrderByID(orderId) {
-
+    if (!orderId) {
+      console.error('params is empty or invalid.')
+      return
+    }
     const url = `${userOrderApi}/${orderId}`;
     status.isLoading = true;
     axios.get(url)
@@ -55,6 +58,10 @@ export const useOrderStore = defineStore('orderStore', () => {
     });
   }
   function payOderByID(orderId) {
+    if (!orderId) {
+      console.error('params is empty or invalid.')
+      return
+    }
     const url = `${userOrderPayApi}/${orderId}`;
     status.isLoading = true;
     axios.post(url)
