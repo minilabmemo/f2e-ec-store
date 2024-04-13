@@ -5,6 +5,8 @@ import {userOrdersApi, userOrderPayApi, userOrderApi} from '@/utils/config/path'
 
 import statusStore from './statusStore';
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
+import {fetchData} from '@/utils/methods/fetchHandle'
+
 export const useOrderStore = defineStore('orderStore', () => {
   const orders = ref();
   const order = ref();
@@ -40,23 +42,14 @@ export const useOrderStore = defineStore('orderStore', () => {
   function getOrders(currentPage = 1) {
     pagination.value.currentPage = currentPage;
     const url = `${userOrdersApi}?page=${currentPage}`;
-    status.isLoading = true;
-    axios.get(url).then((response) => {
-      status.isLoading = false;
-      if (response.data.success) {
-        orders.value = response.data.orders;
-        pagination.value = response.data.pagination;
-      } else {
-        dataErr(response)
-      }
+    fetchData(url).then((data) => {
 
-
-    }).catch((err) => {
-      status.isLoading = false;
-      catchErr(err)
-
-    });
+      orders.value = data.orders;
+      pagination.value = data.pagination;
+    })
   }
+
+
   function payOderByID(orderId) {
     if (!orderId) {
       console.error('params is empty or invalid.')
