@@ -24,7 +24,7 @@ export default {
   },
   created() {
     const token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)defToken\s*\=\s*([^;]*).*$)|^.*$/,
+      /(?:(?:^|.*;\s*)defToken\s*=\s*([^;]*).*$)|^.*$/,
       "$1",
     );
 

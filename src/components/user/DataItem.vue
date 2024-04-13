@@ -38,7 +38,7 @@
 <script setup lang="ts">
 
 
-import { defineProps } from 'vue';
+
 import statusStore from '@/stores/statusStore';
 const { isLoading } = statusStore();
 
