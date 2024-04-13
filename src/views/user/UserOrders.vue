@@ -4,6 +4,7 @@
     <thead>
       <tr>
         <th>訂單資訊</th>
+        <th>總金額</th>
         <th>付款狀況</th>
       </tr>
     </thead>
@@ -18,13 +19,16 @@
 
           </td>
           <td>
+            <div class=" ">${{ $filters.currency(item.total) }}</div>
+          </td>
+          <td>
 
 
 
 
             <div class="d-flex justify-content-start align-items-center  gap-1  ">
-              <div class="flex-grow-1 ">${{ $filters.currency(item.total) }}</div>
-              <div class="flex-grow-1 d-flex justify-content-start align-items-center  gap-1  flex-wrap ">
+
+              <div class=" d-flex justify-content-start align-items-center  gap-1  flex-wrap ">
 
 
                 <div class="d-flex  " v-if="item.is_paid">
