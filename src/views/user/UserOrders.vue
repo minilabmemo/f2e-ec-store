@@ -140,7 +140,7 @@ export default {
     OrderModal,
   },
   methods: {
-    ...mapActions(useOrderStore, ['getOrders', 'payOderByID']),
+    ...mapActions(useOrderStore, ['getOrders', 'payOrderByID']),
 
     openModal(isNew, item) {
       this.tempOrder = {...item};
@@ -160,7 +160,7 @@ export default {
       const confirmModal = this.$refs.CheckoutConfirm;
       confirmModal.hideModal();
       if (this.orderId) {
-        this.payOderByID(this.orderId)
+        this.payOrderByID(this.orderId)
 
       }
     },

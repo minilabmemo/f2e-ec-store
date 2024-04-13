@@ -37,7 +37,7 @@ export default {
     login() {
 
       const url = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/admin/signin`
-      console.log("login", url)
+
       this.axios.post(url, this.user).then((response) => {
         if (response.data.success) {
           const {token, expired} = response.data;

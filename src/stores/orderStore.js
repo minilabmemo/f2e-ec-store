@@ -38,7 +38,7 @@ export const useOrderStore = defineStore('orderStore', () => {
   }
 
 
-  function payOderByID(orderId) {
+  function payOrderByID(orderId) {
     if (!orderId) {
       console.error(' pay order params is empty or invalid.')
       return
@@ -63,6 +63,6 @@ export const useOrderStore = defineStore('orderStore', () => {
   }
   return {
     orders, status, pagination, order,
-    getOrders, payOderByID, createOrder, getOrderByID
+    getOrders, payOrderByID, createOrder, getOrderByID
   }
 })

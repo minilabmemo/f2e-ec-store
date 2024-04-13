@@ -88,7 +88,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(useOrderStore, ['getOrderByID', 'payOderByID']),
+    ...mapActions(useOrderStore, ['getOrderByID', 'payOrderByID']),
 
     getOrder() {
       if (this.orderId == "") {
@@ -101,7 +101,7 @@ export default {
       confirmModal.showModal();
     },
     payOrder() {
-      this.payOderByID(this.orderId)
+      this.payOrderByID(this.orderId)
       const confirmModal = this.$refs.CheckoutConfirm;
       confirmModal.hideModal();
     },
