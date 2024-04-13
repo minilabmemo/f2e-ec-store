@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="status.isLoading" />
+
 
   <div class="row mt-4" v-if="cart && cart.carts && cart.carts.length !== 0">
     <div class="col-12 ">
@@ -229,7 +229,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(useCartStore, ['getCart', 'addCart', "updateCart", "removeCartByID"]),
+    ...mapActions(useCartStore, ['getCart', "updateCart", "removeCartByID"]),
     ...mapActions(useProductStore, ['getProducts']),
     ...mapActions(statusStore, ['pushMessage']),
 

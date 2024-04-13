@@ -35,25 +35,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
   }
 
-  function addCart(id) {
-    if (!id) {
-      console.error('params is empty or invalid.')
-      return
-    }
-    const url = `${userCartApi}`;
-    status.cartLoadingItem = id;
-    const cart = {
-      product_id: id,
-      qty: 1,
-    };
-    status.cartLoadingItem = id;
-    fetchAct.post(url, {data: cart}, `品項加一`)
-      .then(data => {
 
-        status.cartLoadingItem = '';
-      })
-
-  }
 
   function addCartByItem(cart) {
     const url = `${userCartApi}`;
@@ -101,7 +83,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
     const url = `${userCartApi}/${id}`;
     status.loadingItem = id;
-    fetchAct.delete(url, null, `移除購物車品項`)
+    fetchAct.delete(url, `移除購物車品項`)
       .then(() => {
         status.loadingItem = '';
         this.getCart();
@@ -111,7 +93,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
   return {
     cart, status, cartTotalQty,
-    getCart, addCart, addCartByItem, updateCart, removeCartByID,
+    getCart, addCartByItem, updateCart, removeCartByID,
   }
 })
 
