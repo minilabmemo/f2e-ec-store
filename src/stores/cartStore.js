@@ -1,10 +1,12 @@
-import axios from 'axios';
+
 import {defineStore} from 'pinia';
 import {computed, ref} from 'vue'
 
 import statusStore from './statusStore';
 import {userCartApi} from '@/utils/config/path'
-import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
+
+import fetchAct from '@/utils/methods/fetchAct';
+
 export const useCartStore = defineStore('cartStore', () => {
   const cart = ref();
   const status = statusStore();
@@ -24,19 +26,13 @@ export const useCartStore = defineStore('cartStore', () => {
   function getCart() {
     const url = `${userCartApi}`;
     status.isGetCartLoading = true;
-    axios.get(url).then((response) => {
-      status.isGetCartLoading = false;
-      if (response.data.success) {
-        cart.value = response.data.data;
+    fetchAct.get(url)
+      .then(data => {
 
-      } else {
-        dataErr(response)
-      }
-    }).catch((err) => {
-      status.isGetCartLoading = false;
-      catchErr(err)
+        status.isGetCartLoading = false;
+        cart.value = data.data;
+      })
 
-    });
   }
 
   function addCart(id) {
@@ -50,32 +46,23 @@ export const useCartStore = defineStore('cartStore', () => {
       product_id: id,
       qty: 1,
     };
-    axios.post(url, {data: cart})
-      .then((res) => {
-        this.getCart();
-        if (res.data.success) {
-          status.cartLoadingItem = '';
-        } else {
-          dataErr(res)
-        }
-      }).catch((err) => {
-        catchErr(err)
+    status.cartLoadingItem = id;
+    fetchAct.post(url, {data: cart}, `品項加一`)
+      .then(data => {
+        console.log("addCart", data);
         status.cartLoadingItem = '';
-      });
+      })
+
   }
 
   function addCartByItem(cart) {
     const url = `${userCartApi}`;
-    status.isLoading = true;
 
-    axios.post(url, {data: cart}).then((response) => {
-      status.isLoading = false;
-      status.pushMessage({title: '加入購物車', response: response});
-      this.getCart();
-    }).catch((err) => {
-      catchErr(err)
-      status.isLoading = false;
-    });
+    fetchAct.post(url, {data: cart}, `加入購物車`)
+      .then(data => {
+        console.log("addCartByItem", data);
+        this.getCart();
+      })
 
   }
 
@@ -86,24 +73,20 @@ export const useCartStore = defineStore('cartStore', () => {
     }
 
     const url = `${userCartApi}/${item.id}`;
-    status.isLoading = true;
-    status.loadingItem = item.id;
+
+
     const cart = {
       product_id: item.product_id,
       qty: item.qty,
     };
-    axios.put(url, {data: cart}).then((res) => {
-      status.isLoading = false;
-      status.loadingItem = '';
-      this.getCart();
-      if (!res.data.success) {
-        dataErr(res)
-      }
+    status.loadingItem = item.id;
+    fetchAct.put(url, {data: cart}, "")
+      .then(data => {
+        console.log("updateCart", data);
+        status.loadingItem = '';
+        this.getCart();
+      })
 
-    }).catch((err) => {
-      catchErr(err)
-      status.isLoading = false;
-    });
   }
 
   function removeCartByID(id) {
@@ -111,17 +94,16 @@ export const useCartStore = defineStore('cartStore', () => {
       console.error('params is empty or invalid.')
       return
     }
-    status.loadingItem = id;
+
     const url = `${userCartApi}/${id}`;
-    status.isLoading = true;
-    axios.delete(url).then((response) => {
-      status.isLoading = false;
-      status.pushMessage({title: '移除購物車品項', response: response});
-      status.loadingItem = '';
-      this.getCart();
-    }).catch((err) => {
-      catchErr(err)
-    });
+    status.loadingItem = id;
+    fetchAct.put(url, {data: cart}, `移除購物車品項`)
+      .then(data => {
+        console.log("removeCartByID", data);
+        status.loadingItem = '';
+        this.getCart();
+      })
+
   }
 
   return {

@@ -24,7 +24,6 @@ export const useOrderStore = defineStore('orderStore', () => {
     const url = `${userOrderApi}/${orderId}`;
     fetchAct.get(url)
       .then(data => {
-        console.log("getOrderByID", data);
         order.value = data.order;
       })
   }
@@ -33,7 +32,6 @@ export const useOrderStore = defineStore('orderStore', () => {
     const url = `${userOrdersApi}?page=${currentPage}`;
     fetchAct.get(url)
       .then(data => {
-        console.log("getOrders", data);
         orders.value = data.orders;
         pagination.value = data.pagination;
       })
@@ -42,13 +40,12 @@ export const useOrderStore = defineStore('orderStore', () => {
 
   function payOderByID(orderId) {
     if (!orderId) {
-      console.error('params is empty or invalid.')
+      console.error(' pay order params is empty or invalid.')
       return
     }
     const url = `${userOrderPayApi}/${orderId}`;
     fetchAct.post(url, null, `訂單編號${orderId} 付款`)
-      .then(data => {
-        console.log("payOderByID", data);
+      .then(() => {
         this.getOrders();
         this.getOrderByID(orderId);
       })
@@ -59,7 +56,7 @@ export const useOrderStore = defineStore('orderStore', () => {
     status.orderTemp.paySuccess = false;
     fetchAct.post(url, {data: body}, `訂單送出`)
       .then(data => {
-        console.log("createOrder", data);
+
         status.orderTemp.paySuccess = true;
         status.orderTemp.orderId = data.orderId;
       })

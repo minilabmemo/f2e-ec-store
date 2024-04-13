@@ -1,7 +1,7 @@
 import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 import statusStore from '@/stores/statusStore.js';
 import axios from 'axios';
-const status = statusStore();
+
 class FetchAct {
   constructor() {
     if (FetchAct.instance) {
@@ -12,6 +12,7 @@ class FetchAct {
 
   get(url) {
     return new Promise((resolve) => {
+      const status = statusStore();
       status.isLoading = true;
       axios.get(url)
         .then((response) => {
@@ -31,6 +32,7 @@ class FetchAct {
 
   post(url, body, msgTitle) {
     return new Promise((resolve) => {
+      const status = statusStore();
       status.isLoading = true;
       axios.post(url, body)
         .then((response) => {
@@ -57,6 +59,7 @@ class FetchAct {
   }
   put(url, body, msgTitle) {
     return new Promise((resolve) => {
+      const status = statusStore();
       status.isLoading = true;
       axios.put(url, body)
         .then((response) => {
@@ -83,6 +86,7 @@ class FetchAct {
   }
   delete(url, msgTitle) {
     return new Promise((resolve) => {
+      const status = statusStore();
       status.isLoading = true;
       axios.get(url)
         .then((response) => {
