@@ -55,7 +55,7 @@
                   <div class="mb-3 col-8">
                     <label for="image" class="form-label">輸入圖片網址</label>
                     <button type="button" class="ms-2 btn btn-outline-danger btn-sm"
-                      @click="tempProduct.imagesUrl[index] = ''">移除
+                      @click="tempProduct.imagesUrl.splice(index, 1);">移除
                     </button>
                     <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結"
                       v-model="tempProduct.imagesUrl[index]">
