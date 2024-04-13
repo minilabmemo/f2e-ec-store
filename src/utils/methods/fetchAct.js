@@ -88,7 +88,7 @@ class FetchAct {
     return new Promise((resolve) => {
       const status = statusStore();
       status.isLoading = true;
-      axios.get(url)
+      axios.delete(url)
         .then((response) => {
           status.isLoading = false;
           if (msgTitle && status.pushMessage) {
