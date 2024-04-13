@@ -3,7 +3,7 @@
   <table class="phone-table table table-sm align-middle d-table d-lg-none ">
     <thead>
       <tr>
-        <th>訂單日期／編號</th>
+        <th>訂單資訊</th>
         <th>付款狀況</th>
       </tr>
     </thead>
@@ -13,9 +13,8 @@
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
           <td>
             <div> {{ $filters.date(item.create_at) }}</div>
-            <a href="#" class="link-opacity-100 link-opacity-75-hover text-nowrap "
-              @click.prevent="openModal(false, item)"> <i class="bi bi-search"></i>
-              <small> {{ item.id }}</small> </a>
+            <a href="#" class=" " @click.prevent="openModal(false, item)"> <i class="bi bi-search me-2"></i>
+              <small>查看訂單</small> </a>
 
           </td>
           <td>
@@ -23,19 +22,30 @@
 
 
 
-            <div class="d-flex justify-content-start align-items-center  gap-1 flex-wrap ">
-              <div class="">$ {{ item.total }}</div>
-              <div class="d-flex justify-content-start align-items-center  gap-1  flex-wrap ">
+            <div class="d-flex justify-content-start align-items-center  gap-1  ">
+              <div class="flex-grow-1 ">${{ $filters.currency(item.total) }}</div>
+              <div class="flex-grow-1 d-flex justify-content-start align-items-center  gap-1  flex-wrap ">
 
-                <div class="rounded-circle" :class="{ 'bg-success ': item.is_paid, 'bg-primary': !item.is_paid }"
-                  style="height: 15px;width: 15px;">
+
+                <div class="d-flex  " v-if="item.is_paid">
+                  <div class="rounded-circle bg-success me-1 " style="height: 15px;width: 15px;"> </div>
+                  <span> 已付款 </span>
                 </div>
-                <span v-if="item.is_paid">
-                  已付款
-                </span>
-                <span v-else>未付款 </span>
-                <button class="btn btn-outline-danger btn-sm text-nowrap " @click="confirmPay(item)"
-                  v-if="!item.is_paid">付款</button>
+
+
+                <div class="d-flex flex-column " v-else>
+                  <div class="d-flex  ">
+                    <div class="rounded-circle bg-primary me-1 " style="height: 15px;width: 15px;"> </div>
+                    <span> 未付款 </span>
+                  </div>
+
+                  <button class="btn btn-outline-danger btn-sm text-nowrap " @click="confirmPay(item)"
+                    v-if="!item.is_paid">付款</button>
+                </div>
+
+
+
+
               </div>
 
             </div>
@@ -48,7 +58,7 @@
   <table class="pc-table table align-middle d-none d-lg-table ">
     <thead>
       <tr>
-        <th>訂單編號</th>
+        <th>訂單資訊</th>
         <th>購買時間</th>
         <th>電子郵件</th>
         <th>購買款項</th>
@@ -61,11 +71,8 @@
       <template v-for="(item, key) in orders" :key="key">
 
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
-          <td> <a href="#" class="link-opacity-100 link-opacity-75-hover" @click.prevent="openModal(false, item)"> <i
-                class="bi bi-search"></i>
-              {{
-    item.id
-  }} </a> </td>
+          <td> <a href="#" class=" " @click.prevent="openModal(false, item)"> <i class="bi bi-search me-2"></i>
+              <small>查看訂單內容</small> </a> </td>
           <td>{{ $filters.date(item.create_at) }}</td>
           <td><span v-text="item.user.email" v-if="item.user"></span></td>
           <td>
