@@ -1,0 +1,62 @@
+import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
+import statusStore from '@/stores/statusStore.js';
+import axios from 'axios';
+class FetchAct {
+  constructor() {
+
+  }
+
+  get(url) {
+    return new Promise((resolve) => {
+      const status = statusStore();
+      status.isLoading = true;
+      axios.get(url)
+        .then((response) => {
+          status.isLoading = false;
+          if (response.data.success) {
+            resolve(response.data);
+          } else {
+            dataErr(response)
+          }
+        })
+        .catch((error) => {
+          status.isLoading = false;
+          catchErr(error)
+        });
+    });
+  }
+
+  post(url, body, msgTitle) {
+    return new Promise((resolve) => {
+      const status = statusStore();
+      status.isLoading = true;
+      axios.post(url, body)
+        .then((response) => {
+          status.isLoading = false;
+          if (msgTitle) {
+            status.pushMessage({
+              title: msgTitle,
+              response: response
+            });
+          }
+
+          if (response.data.success) {
+            resolve(response.data);
+          } else {
+            dataErr(response)
+          }
+
+        }).catch((err) => {
+          status.isLoading = false;
+          catchErr(err)
+
+        });
+    });
+  }
+
+
+
+}
+
+// 创建并导出一个已实例化的 FetchAct 对象
+export default new FetchAct();

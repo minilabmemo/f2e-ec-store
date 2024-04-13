@@ -1,11 +1,9 @@
-import axios from 'axios';
+
 import {defineStore} from 'pinia';
 import {ref} from 'vue'
 import {userOrdersApi, userOrderPayApi, userOrderApi} from '@/utils/config/path'
-
 import statusStore from './statusStore';
-import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
-import {fetchData} from '@/utils/methods/fetchHandle'
+import fetchAct from '@/utils/methods/fetchAct';
 
 export const useOrderStore = defineStore('orderStore', () => {
   const orders = ref();
@@ -24,29 +22,21 @@ export const useOrderStore = defineStore('orderStore', () => {
       return
     }
     const url = `${userOrderApi}/${orderId}`;
-    status.isLoading = true;
-    axios.get(url)
-      .then((res) => {
-        status.isLoading = false;
-        if (res.data.success) {
-
-          order.value = res.data.order;
-        } else {
-          dataErr(res)
-        }
-      }).catch((err) => {
-        catchErr(err)
-        status.isLoading = false;
-      });
+    fetchAct.get(url)
+      .then(data => {
+        console.log("getOrderByID", data);
+        order.value = data.order;
+      })
   }
   function getOrders(currentPage = 1) {
     pagination.value.currentPage = currentPage;
     const url = `${userOrdersApi}?page=${currentPage}`;
-    fetchData(url).then((data) => {
-
-      orders.value = data.orders;
-      pagination.value = data.pagination;
-    })
+    fetchAct.get(url)
+      .then(data => {
+        console.log("getOrders", data);
+        orders.value = data.orders;
+        pagination.value = data.pagination;
+      })
   }
 
 
@@ -56,46 +46,62 @@ export const useOrderStore = defineStore('orderStore', () => {
       return
     }
     const url = `${userOrderPayApi}/${orderId}`;
-    status.isLoading = true;
-    axios.post(url)
-      .then((res) => {
-        status.isLoading = false;
-        status.pushMessage({
-          title: `訂單編號${orderId} 付款`,
-          response: res
-        });
-        if (res.data.success) {
-          this.getOrders();
-          this.getOrderByID(orderId);
-        }
+    // status.isLoading = true;
 
-      }).catch((err) => {
-        status.isLoading = false;
-        catchErr(err)
+    fetchAct.post(url, null, `訂單編號${orderId} 付款`)
+      .then(data => {
+        console.log("payOderByID", data);
+        this.getOrders();
+        this.getOrderByID(orderId);
+      })
 
-      });
+    // axios.post(url)
+    //   .then((res) => {
+
+    //     status.isLoading = false;
+    //     status.pushMessage({
+    //       title: `訂單編號${orderId} 付款`,
+    //       response: res
+    //     });
+    //     if (res.data.success) {
+    //       this.getOrders();
+    //       this.getOrderByID(orderId);
+    //     }
+
+    //   }).catch((err) => {
+    //     status.isLoading = false;
+    //     catchErr(err)
+
+    //   });
   }
   function createOrder(body) {
     const url = userOrderApi;
     status.orderTemp.paySuccess = false;
-    status.isLoading = true;
-    axios.post(url, {data: body})
-      .then((res) => {
-        status.isLoading = false;
-        status.pushMessage({
-          title: `訂單送出`,
-          response: res
-        });
-        if (res.data.success) {
-          status.orderTemp.paySuccess = true;
-          status.orderTemp.orderId = res.data.orderId;
-        }
+    fetchAct.post(url, {data: body}, `訂單送出`)
+      .then(data => {
+        console.log("createOrder", data);
+        status.orderTemp.paySuccess = true;
+        status.orderTemp.orderId = data.orderId;
+      })
 
-      }).catch((err) => {
-        status.isLoading = false;
-        catchErr(err)
+    // status.isLoading = true;
+    // axios.post(url, {data: body})
+    //   .then((res) => {
+    //     status.isLoading = false;
+    //     status.pushMessage({
+    //       title: `訂單送出`,
+    //       response: res
+    //     });
+    //     if (res.data.success) {
+    //       status.orderTemp.paySuccess = true;
+    //       status.orderTemp.orderId = res.data.orderId;
+    //     }
 
-      });
+    //   }).catch((err) => {
+    //     status.isLoading = false;
+    //     catchErr(err)
+
+    //   });
   }
   return {
     orders, status, pagination, order,
