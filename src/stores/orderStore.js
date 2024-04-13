@@ -46,8 +46,6 @@ export const useOrderStore = defineStore('orderStore', () => {
       return
     }
     const url = `${userOrderPayApi}/${orderId}`;
-    // status.isLoading = true;
-
     fetchAct.post(url, null, `訂單編號${orderId} 付款`)
       .then(data => {
         console.log("payOderByID", data);
@@ -55,24 +53,6 @@ export const useOrderStore = defineStore('orderStore', () => {
         this.getOrderByID(orderId);
       })
 
-    // axios.post(url)
-    //   .then((res) => {
-
-    //     status.isLoading = false;
-    //     status.pushMessage({
-    //       title: `訂單編號${orderId} 付款`,
-    //       response: res
-    //     });
-    //     if (res.data.success) {
-    //       this.getOrders();
-    //       this.getOrderByID(orderId);
-    //     }
-
-    //   }).catch((err) => {
-    //     status.isLoading = false;
-    //     catchErr(err)
-
-    //   });
   }
   function createOrder(body) {
     const url = userOrderApi;
@@ -83,25 +63,6 @@ export const useOrderStore = defineStore('orderStore', () => {
         status.orderTemp.paySuccess = true;
         status.orderTemp.orderId = data.orderId;
       })
-
-    // status.isLoading = true;
-    // axios.post(url, {data: body})
-    //   .then((res) => {
-    //     status.isLoading = false;
-    //     status.pushMessage({
-    //       title: `訂單送出`,
-    //       response: res
-    //     });
-    //     if (res.data.success) {
-    //       status.orderTemp.paySuccess = true;
-    //       status.orderTemp.orderId = res.data.orderId;
-    //     }
-
-    //   }).catch((err) => {
-    //     status.isLoading = false;
-    //     catchErr(err)
-
-    //   });
   }
   return {
     orders, status, pagination, order,
