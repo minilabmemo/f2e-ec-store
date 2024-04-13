@@ -190,7 +190,10 @@ export default {
         items = this.productsByCAT.filter((item) => item.id != removeID)
       }
       if (items.length === 0) {
-        items = this.products.slice(0, 3)
+        if (this.products && this.products.length >= 3) {
+          items = this.products.slice(0, 3)
+        }
+
       }
 
 

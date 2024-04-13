@@ -1,9 +1,9 @@
-import axios from 'axios'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { userProductsApi, userProductApi } from '@/utils/config/path'
 import statusStore from './statusStore'
-import { catchErr, dataErr } from '@/utils/methods/handleErr.js'
+
+import fetchAct from '@/utils/methods/fetchAct'
 export const useProductStore = defineStore('productStore', () => {
   const products = ref()
   const defaultProductsSort = ref()
@@ -12,35 +12,20 @@ export const useProductStore = defineStore('productStore', () => {
   const product = ref({})
   function getProducts() {
     const url = `${userProductsApi}`
-    status.isLoading = true
-    axios
-      .get(url)
-      .then((response) => {
-        status.isLoading = false
-        if (response.data.success) {
-          products.value = response.data.products
-          defaultProductsSort.value = response.data.products
-        } else {
-          dataErr(response)
-        }
-      })
-      .catch((err) => {
-        catchErr(err)
-        status.isLoading = false
-      })
+    fetchAct.get(url).then((data) => {
+      products.value = data.products
+      defaultProductsSort.value = data.products
+    })
   }
   function getProductByID(id: string) {
     if (!id) {
       console.warn('getProductByID id is empty.')
       return
     }
-    const api = `${userProductApi}/${id}`
-    status.isLoading = true
-    axios.get(api).then((response) => {
-      status.isLoading = false
-      if (response.data.success) {
-        product.value = response.data.product
-      }
+    const url = `${userProductApi}/${id}`
+
+    fetchAct.get(url).then((data) => {
+      product.value = data.product
     })
   }
   function filterByCategory(category: string, subcategory: string) {
