@@ -59,12 +59,15 @@
               <div class="col-4   ">
                 <button type="button" class="h-100 w-100 btn btn-outline-danger  "
                   @click="checkQty(product.id, itemQty)">
-                  立即結帳
+                  <div class="d-flex flex-wrap justify-content-center ">
+                    <span> 立即</span><span>結帳</span>
+                  </div>
+
                 </button>
               </div>
               <div class="col-4  "> <button type="button" class="h-100 w-100  btn btn-outline-danger "
                   @click="addCartCheck(product.id, itemQty, false)" :class="{ disabled: status.isCartLoading }">
-                  加到購物車
+                  加入購物車
                 </button></div>
               <div class="col-4  ">
                 <SaveButton class="h-100 w-100 " :item="saveButtonItem" />
