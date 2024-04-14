@@ -1,7 +1,7 @@
 <template>
   <LoadingOverlay :active="status.isLoading" />
 
-  <div class="container-xl my-4">
+  <div class=" my-4">
     <div class="row ">
       <div v-if="cart" class="col-12 col-md-5">
         <h3 class="mb-3">訂單內容</h3>
@@ -26,13 +26,13 @@
           </tfoot>
         </table>
       </div>
-      <div class="col-12 col-md-6 mb-5 row justify-content-center">
+      <div class="col-12 col-md-6 mb-5 d-flex  justify-content-center flex-column ">
         <h3 class="mb-3">收件資訊</h3>
         <Form class="" v-slot="{ errors }" @submit="sendOrder">
-          <div>
+          <div class="d-flex flex-wrap ">
             <input type="checkbox" id="importDataCheckbox" @change="importDataCheckbox()" class="me-2">
-            <label for="importDataCheckbox"> 從會員資料中匯入（<router-link class=" "
-                to="/user/info">點此更新會員資料</router-link>）</label>
+            <label for="importDataCheckbox"> 從會員資料中匯入</label>
+            <div>（<router-link class=" " to="/user/info">點此更新會員資料</router-link>）</div>
           </div>
           <div class="mb-3">
             <label for="email" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>Email</label>
@@ -67,10 +67,11 @@
             <textarea name="" id="message" class="form-control" cols="5" rows="5" v-model="form.message"></textarea>
           </div>
 
-          <div class="text-end mt-5">
-            <button type="button" class="btn btn-outline-primary  me-2"
-              @click.prevent="emit('go-prev')">回上一步，修改購物車</button>
-            <button type="submit" class="btn btn-danger">確認，訂單送出</button>
+          <div class=" mt-5 d-flex flex-wrap justify-content-end ">
+            <div> <button type="button" class="btn btn-outline-primary  me-2"
+                @click.prevent="emit('go-prev')">回上一步</button></div>
+            <div><button type="submit" class="btn btn-danger">確認，送出訂單</button></div>
+
           </div>
         </Form>
       </div>

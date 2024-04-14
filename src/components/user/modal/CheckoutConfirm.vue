@@ -13,7 +13,8 @@
         <div class="modal-body">
           <div> 數量 {{ productsNum }} 件，金額 {{ item.total }}</div>
           <span>請點擊確認結帳，進入結帳流程後，請勿關閉畫面。</span>
-          <code>*此為作業模擬流程，並不會真的結帳。</code>
+          <div> <code>*此為作業模擬結帳流程，並不會真的進入結帳。</code></div>
+
 
         </div>
         <div class="modal-footer">
