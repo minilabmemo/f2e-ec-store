@@ -15,7 +15,7 @@ describe('user /cart/flow Page Test', () => {
     cy.visit('/#/product/all/all')
     cy.url().should('contain', '/#/product/all/all')
     cy.get('[data-cy="item"]').first().click()
-    cy.contains('button', '加到購物車').click()
+    cy.contains('button', '加入購物車').click()
     cy.visit('/#/user/cart/flow')
     cy.get('.bi-x').first().click()
     cy.contains('button', '移出購物車').click()
@@ -26,7 +26,7 @@ describe('user /cart/flow Page Test', () => {
     cy.visit('/#/product/all/all')
     cy.url().should('contain', '/#/product/all/all')
     cy.get('[data-cy="item"]').first().click()
-    cy.contains('button', '加到購物車').click()
+    cy.contains('button', '加入購物車').click()
     cy.visit('/#/user/cart/flow')
 
     cy.contains('button.btn-danger', '填寫訂單').click()
