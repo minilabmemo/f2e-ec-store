@@ -124,6 +124,13 @@ const form = ref({
   message: '',
 });
 function sendOrder() {
+
+
+  if (!cart.value.carts) {
+    alert("您的購物車沒有商品，請先新增商品進購物車。")
+    return
+  }
+
   const body = form.value;
   createOrder(body)
 }

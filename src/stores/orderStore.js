@@ -52,6 +52,17 @@ export const useOrderStore = defineStore('orderStore', () => {
 
   }
   function createOrder(body) {
+
+    if (!body.user) {
+      console.error(' order.user params is empty or invalid.')
+      return
+    }
+    const {name, email, tel, address} = body.user;
+    if (!name || !email || !tel || !address) {
+      console.error(' order.user params is empty or invalid.')
+      return;
+    }
+
     const url = userOrderApi;
     status.orderTemp.paySuccess = false;
     fetchAct.post(url, {data: body}, `訂單送出`)
