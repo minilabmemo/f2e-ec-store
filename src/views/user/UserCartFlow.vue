@@ -1,25 +1,25 @@
 <template>
 
-  <div class="container  ">
+  <div class="container font-sm ">
 
     <div class="row my-4 ">
       <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 
         <li class="nav-item" role="presentation">
-          <button class="nav-link p-1 p-xs-2  active" :id="`${tabsInfo[0].id}-tab`" data-bs-toggle="pill"
+          <button class="nav-link font-sm active" :id="`${tabsInfo[0].id}-tab`" data-bs-toggle="pill"
             :data-bs-target="`#${tabsInfo[0].id}`" type="button" role="tab" :aria-controls="tabsInfo[0].id"
             aria-selected="true">01
             購物車</button>
         </li>
         <li class="nav-item " role="presentation">
-          <button class="nav-link p-1 p-xs-2 " :disabled="stepRecord < 1" :id="`${tabsInfo[1].id}-tab`"
-            data-bs-toggle="pill" :data-bs-target="`#${tabsInfo[1].id}`" type="button" role="tab"
-            :aria-controls="tabsInfo[1].id" aria-selected="false">02 填寫訂單</button>
+          <button class="nav-link " :disabled="stepRecord < 1" :id="`${tabsInfo[1].id}-tab`" data-bs-toggle="pill"
+            :data-bs-target="`#${tabsInfo[1].id}`" type="button" role="tab" :aria-controls="tabsInfo[1].id"
+            aria-selected="false">02 填寫訂單</button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link p-1 p-xs-2 " :disabled="stepRecord < 2" :id="`${tabsInfo[2].id}-tab`"
-            data-bs-toggle="pill" :data-bs-target="`#${tabsInfo[2].id}`" type="button" role="tab"
-            :aria-controls="tabsInfo[2].id" aria-selected="false">03 結帳</button>
+          <button class="nav-link " :disabled="stepRecord < 2" :id="`${tabsInfo[2].id}-tab`" data-bs-toggle="pill"
+            :data-bs-target="`#${tabsInfo[2].id}`" type="button" role="tab" :aria-controls="tabsInfo[2].id"
+            aria-selected="false">03 結帳</button>
         </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">

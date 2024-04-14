@@ -37,13 +37,20 @@
 
 
 /* RWD setting*/
-/*1rem = 16px*/
 /* 1.125rem;18px */
+/* 1 rem = 16px*/
 /* 0.875rem;14px */
 /* 1.25rem 20px */
 /* 1.5rem 24px */
 /* 2rem 32px */
 /* 4rem; 64px */
+
+.font-sm {
+  font-size: clamp( 0.875rem, 2.5vw, 1rem);
+}
+
+
+
   h1 {font-size:1.125rem;}
   h3 {
     font-size:1rem;
