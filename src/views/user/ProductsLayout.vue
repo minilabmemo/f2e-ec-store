@@ -1,6 +1,6 @@
 <template>
 
-  <div class="row products-layout py-5">
+  <div class="row products-layout py-3 py-md-5 ">
     <div class="col-lg-3 d-none d-lg-flex">
       <CATNav />
     </div>

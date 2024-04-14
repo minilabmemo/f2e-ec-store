@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container-lg  d-flex flex-column align-items-center my-5">
+  <div class="container-lg  d-flex flex-column align-items-center my-3 my-md-5 ">
 
     <HomeBanner />
     <div class="my-5"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>

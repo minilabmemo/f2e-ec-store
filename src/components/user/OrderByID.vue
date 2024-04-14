@@ -1,5 +1,5 @@
 <template>
-  <div class="my-5 row justify-content-center">
+  <div class="my-2 my-md-5 row justify-content-center">
     <form class="" @submit.prevent="confirmPay" v-if="order">
       <table class="table align-middle">
         <thead>
