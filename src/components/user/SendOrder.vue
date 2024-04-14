@@ -1,52 +1,82 @@
 <template>
   <LoadingOverlay :active="status.isLoading" />
 
-  <div class="container-xl">
-    <div class="my-5 row justify-content-center">
-      <Form class="col-md-6" v-slot="{ errors }" @submit="sendOrder">
-        <div>
-          <input type="checkbox" id="importDataCheckbox" @change="importDataCheckbox()" class="me-2">
-          <label for="importDataCheckbox"> 從會員資料中匯入（<router-link class=" "
-              to="/user/info">點此更新會員資料</router-link>）</label>
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>Email</label>
-          <Field id="email" name="email" type="email" class="form-control" :class="{ 'is-invalid': errors['email'] }"
-            placeholder="請輸入 Email" rules="email|required" v-model="form.user.email" />
-          <ErrorMessage name="email" class="invalid-feedback" />
-        </div>
+  <div class="container-xl my-4">
+    <div class="row ">
+      <div v-if="cart" class="col-12 col-md-5">
+        <h3 class="mb-3">訂單內容</h3>
+        <table class="table align-middle">
+          <thead>
+            <th>品名</th>
+            <th>數量</th>
+            <th>單價</th>
+          </thead>
+          <tbody>
+            <tr v-for="item in cart.carts" :key="item.id">
+              <td style="width:60%">{{ item.product.title }}</td>
+              <td>{{ item.qty }}/{{ item.product.unit }}</td>
+              <td>{{ $filters.currency(item.final_total) }}</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2" class="text-end">總計</td>
+              <td>{{ $filters.currency(cart.total) }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="col-12 col-md-6 mb-5 row justify-content-center">
+        <h3 class="mb-3">收件資訊</h3>
+        <Form class="" v-slot="{ errors }" @submit="sendOrder">
+          <div>
+            <input type="checkbox" id="importDataCheckbox" @change="importDataCheckbox()" class="me-2">
+            <label for="importDataCheckbox"> 從會員資料中匯入（<router-link class=" "
+                to="/user/info">點此更新會員資料</router-link>）</label>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>Email</label>
+            <Field id="email" name="email" type="email" class="form-control" :class="{ 'is-invalid': errors['email'] }"
+              placeholder="請輸入 Email" rules="email|required" v-model="form.user.email" />
+            <ErrorMessage name="email" class="invalid-feedback" />
+          </div>
 
-        <div class="mb-3">
-          <label for="name" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人姓名</label>
-          <Field id="name" name="姓名" type="text" class="form-control" :class="{ 'is-invalid': errors['姓名'] }"
-            placeholder="請輸入姓名" rules="required" v-model="form.user.name" />
-          <ErrorMessage name="姓名" class="invalid-feedback" />
-        </div>
+          <div class="mb-3">
+            <label for="name" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人姓名</label>
+            <Field id="name" name="姓名" type="text" class="form-control" :class="{ 'is-invalid': errors['姓名'] }"
+              placeholder="請輸入姓名" rules="required" v-model="form.user.name" />
+            <ErrorMessage name="姓名" class="invalid-feedback" />
+          </div>
 
-        <div class="mb-3">
-          <label for="tel" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人電話</label>
-          <Field id="tel" name="電話" type="tel" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
-            placeholder="請輸入電話 Ex:0912345678" :rules="isPhone" v-model="form.user.tel" />
-          <ErrorMessage name="電話" class="invalid-feedback" />
-        </div>
+          <div class="mb-3">
+            <label for="tel" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人電話</label>
+            <Field id="tel" name="電話" type="tel" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
+              placeholder="請輸入電話 Ex:0912345678" :rules="isPhone" v-model="form.user.tel" />
+            <ErrorMessage name="電話" class="invalid-feedback" />
+          </div>
 
-        <div class="mb-3">
-          <label for="address" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人地址</label>
-          <Field id="address" name="地址" type="text" class="form-control" :class="{ 'is-invalid': errors['地址'] }"
-            placeholder="請輸入地址" rules="required" v-model="form.user.address" />
-          <ErrorMessage name="地址" class="invalid-feedback" />
-        </div>
+          <div class="mb-3">
+            <label for="address" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人地址</label>
+            <Field id="address" name="地址" type="text" class="form-control" :class="{ 'is-invalid': errors['地址'] }"
+              placeholder="請輸入地址" rules="required" v-model="form.user.address" />
+            <ErrorMessage name="地址" class="invalid-feedback" />
+          </div>
 
-        <div class="mb-3">
-          <label for="message" class="form-label">收貨備註</label>
-          <textarea name="" id="message" class="form-control" cols="5" rows="5" v-model="form.message"></textarea>
-        </div>
+          <div class="mb-3">
+            <label for="message" class="form-label">收貨備註</label>
+            <textarea name="" id="message" class="form-control" cols="5" rows="5" v-model="form.message"></textarea>
+          </div>
 
-        <div class="text-end">
-          <button class="btn btn-danger">送出訂單</button>
-        </div>
-      </Form>
+          <div class="text-end mt-5">
+            <button type="button" class="btn btn-outline-primary  me-2"
+              @click.prevent="emit('go-prev')">回上一步，修改購物車</button>
+            <button type="submit" class="btn btn-danger">確認，訂單送出</button>
+          </div>
+        </Form>
+      </div>
+
     </div>
+
   </div>
 </template>
 
@@ -56,10 +86,16 @@ import {ref, watch} from 'vue';
 import {storeToRefs} from 'pinia'
 import {useOrderStore} from '@/stores/orderStore'
 import {useCartStore} from '@/stores/cartStore';
-const orderStore = useOrderStore();
+const cartStore = useCartStore();
+const {cart} = storeToRefs(cartStore);
 const {getCart} = useCartStore();
+
+const orderStore = useOrderStore();
 const {createOrder, } = orderStore;
 const {status} = storeToRefs(orderStore);
+
+
+
 
 import {formDataStorage} from '@/utils/methods/formDataStorage';
 const {getFormData} = formDataStorage();
@@ -95,7 +131,7 @@ function isPhone(value) {
   const phoneNumber = /^(09)[0-9]{8}$/
   return phoneNumber.test(value) ? true : '請填寫台灣手機號碼，以 09 開頭加上 8 位數字之格式。'
 }
-const emit = defineEmits(['order-create', 'go-next'])
+const emit = defineEmits(['order-create', 'go-next', 'go-prev'])
 
 watch(
   () => orderStore.status.orderTemp,

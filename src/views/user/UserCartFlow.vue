@@ -1,5 +1,5 @@
 <template>
-  <!-- TODO 空間高度放大 -->
+
   <div class="container-xl ">
 
     <div class="row my-4 ">
@@ -28,7 +28,7 @@
           <ProductCart @go-next="goNextTab" :checkout="checkout" />
         </div>
         <div class="tab-pane fade" :id="tabsInfo[1].id" role="tabpanel" :aria-labelledby="`${tabsInfo[1].id}-tab`">
-          <OrderInfo @go-next="goNextTab" @order-create="updateOrderID" />
+          <OrderInfo @go-next="goNextTab" @go-prev="goPrevTab" @order-create="updateOrderID" />
         </div>
         <div class="tab-pane fade" :id="tabsInfo[2].id" role="tabpanel" :aria-labelledby="`${tabsInfo[2].id}-tab`">
           <OrderByID :orderId="orderId" />
@@ -76,14 +76,18 @@ export default {
     },
     goNextTab() {
       this.stepRecord = this.activeTab + 1;
-
-
       let nextSelector = `#${this.tabsInfo[this.activeTab + 1].id}`
       var triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${nextSelector}"]`)
       Tab.getInstance(triggerEl).show()
-
-
     },
+
+    goPrevTab() {
+      this.stepRecord = this.activeTab - 1;
+      let prevSelector = `#${this.tabsInfo[this.activeTab - 1].id}`
+      var triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${prevSelector}"]`)
+      Tab.getInstance(triggerEl).show()
+    },
+
     updateOrderID(orderID) {
       this.checkout = true;
       this.orderId = orderID

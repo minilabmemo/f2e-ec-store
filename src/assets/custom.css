@@ -76,6 +76,7 @@
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {  
   h1 {font-size:1.5rem;} 
+  h4 {font-size:1rem;} 
   .icon-size{
     width: 24px;
     height: 24px;
