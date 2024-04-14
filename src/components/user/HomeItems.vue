@@ -1,14 +1,14 @@
 <template>
   <section class="d-flex flex-column align-items-center ">
-    <h1 class=" ">{{ section }}</h1>
+    <h1 class="mb-3 mb-md-4  ">{{ section }}</h1>
 
     <div class="row">
 
       <DataItem v-for="(item, index) in showItems" :key="index" :item="item" class="col-4" :filter-err="filterErr" />
     </div>
 
-    <div class="d-flex justify-content-center gap-3">
-      <button class="btn btn-black q-btn" type="button">
+    <div class="d-flex justify-content-center gap-3 mt-3">
+      <button class="btn btn-black explore-btn" type="button">
         <router-link :to="`/product/${CAT}/all`" class="nav-link">
           Explore More <img src="@/assets/icons/next_arrow.svg" alt="Next Arrow"></router-link>
       </button>

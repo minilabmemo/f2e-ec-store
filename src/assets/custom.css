@@ -49,6 +49,9 @@
   font-size: clamp( 0.875rem, 2.5vw, 1rem);
 }
 
+.explore-btn {
+  font-size: clamp( 1rem, 2.5vw, 1.5rem);
+}
 
 
   h1 {font-size:1.125rem;}
@@ -64,7 +67,7 @@
     font-size:0.875rem;
     color: var(--bs-primary);
   }
-  .q-btn{font-size:1rem}
+ 
   .icon-size{
     width: 1.2rem;
     height: 1.2rem;
@@ -112,7 +115,7 @@
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {  
   .price{font-size:2rem}
-  .q-btn{font-size:1.5rem}
+
 }
  
 
