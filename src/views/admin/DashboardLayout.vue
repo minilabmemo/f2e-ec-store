@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Navbar from '@/components/admin/Navbar.vue';
+import Navbar from '@/components/admin/ManageNavbar.vue';
 
 import ToastMessages from '@/components/ToastMessages.vue';
 import statusStore from '@/stores/statusStore';

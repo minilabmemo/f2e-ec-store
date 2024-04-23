@@ -16,7 +16,7 @@
     </thead>
     <tbody>
 
-      <template v-for="(item, key) in displayItems" :key="key">
+      <template v-for="(item) in displayItems" :key="item.id">
 
         <tr class="d-flex " data-cy="item">
           <td style="flex:1">

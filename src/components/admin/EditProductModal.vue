@@ -51,7 +51,7 @@
                 </div>
 
 
-                <div class="row g-2 " v-for="(item, index) in this.tempProduct.imagesUrl" :key="item">
+                <div class="row g-2 " v-for="(imageUrl, index) in this.tempProduct.imagesUrl" :key="imageUrl">
                   <div class="mb-3 col-8">
                     <label for="image" class="form-label">輸入圖片網址</label>
                     <button type="button" class="ms-2 btn btn-outline-danger btn-sm"

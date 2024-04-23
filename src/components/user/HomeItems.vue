@@ -4,7 +4,7 @@
 
     <div class="row">
 
-      <DataItem v-for="(item, index) in showItems" :key="index" :item="item" class="col-4" :filter-err="filterErr" />
+      <DataItem v-for="(item) in showItems" :key="item.id" :item="item" class="col-4" :filter-err="filterErr" />
     </div>
 
     <div class="d-flex justify-content-center gap-3 mt-3">

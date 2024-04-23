@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <template v-for="(item, key) in orders" :key="key">
+      <template v-for="(item) in orders" :key="item.id">
 
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
           <td>
@@ -72,7 +72,7 @@
       </tr>
     </thead>
     <tbody>
-      <template v-for="(item, key) in orders" :key="key">
+      <template v-for="(item) in orders" :key="item.id">
 
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
           <td> <a href="#" class=" " @click.prevent="openModal(false, item)"> <i class="bi bi-search me-2"></i>
@@ -81,7 +81,7 @@
           <td><span v-text="item.user.email" v-if="item.user"></span></td>
           <td>
             <ul class="list-unstyled">
-              <li v-for="(product, i) in item.products" :key="i">
+              <li v-for="(product) in item.products" :key="product.product.id">
                 <small> {{ product.product.title }} 數量：{{ product.qty }}
                   {{ product.product.unit }}</small>
 

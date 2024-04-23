@@ -5,7 +5,7 @@
   </div>
   <div class="row row-cols-2 row-cols-lg-3 ">
 
-    <SaleItem v-for="(item, index) in filterItems" :key="index" :item="item" class="col"
+    <SaleItem v-for="(item) in filterItems" :key="item.id" :item="item" class="col"
       :path="`${$route.params.category}/${$route.params.subcategory}`" />
 
 

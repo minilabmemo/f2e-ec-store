@@ -37,7 +37,7 @@
 
     <div class="row row-cols-2 row-cols-md-3 " data-cy="products">
 
-      <SaleItem v-for="(item, index) in showItems" :key="index" :item="item" class="col d-flex  " data-cy="item"
+      <SaleItem v-for="(item) in showItems" :key="item.id" :item="item" class="col d-flex  " data-cy="item"
         :path="`${$route.params.category}/${$route.params.subcategory}`" />
 
       <div class="col-6 " v-if="!showItems.length && !status.isLoading">
@@ -169,4 +169,3 @@ watchEffect(() => {
 
 
 </script>
-@/utils/config/categories

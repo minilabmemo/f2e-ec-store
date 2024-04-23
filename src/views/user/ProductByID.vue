@@ -128,7 +128,7 @@
       <div class="col-12">
         <h4>您可能也喜歡</h4>
         <div class="row overflow-x-auto  flex-nowrap align-items-stretch  ">
-          <SaleItem v-for="(item, index) in recommendItems" :key="index" :item="item" class="col-5 col-xs-4 col-md-3 "
+          <SaleItem v-for="(item) in recommendItems" :key="item.id" :item="item" class="col-5 col-xs-4 col-md-3 "
             data-cy="item" :path="`${$route.params.category}/${$route.params.subcategory}`" />
         </div>
 
