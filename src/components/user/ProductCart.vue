@@ -1,6 +1,5 @@
 <template>
 
-
   <div class="row mt-4" v-if="cart && cart.carts && cart.carts.length !== 0">
     <div class="col-12 ">
       <table class="phone-table table align-middle d-table d-lg-none ">
@@ -110,7 +109,6 @@
 
                 </div>
 
-
               </td>
               <td>
                 <div class="input-group input-group-sm">
@@ -140,9 +138,6 @@
         </tfoot>
       </table>
 
-
-
-
       <div class=" d-flex justify-content-end mb-5 gap-2 ">
         <div class="">
           <div class="input-group mb-3 input-group-sm">
@@ -163,9 +158,6 @@
           </button>
         </div>
       </div>
-
-
-
 
     </div>
     <div class="col-12 ">
@@ -259,12 +251,9 @@ export default {
       });
     },
 
-
   },
   created() {
     this.getProducts();
-
-
 
   },
   watch: {

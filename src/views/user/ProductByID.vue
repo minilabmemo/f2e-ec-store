@@ -16,7 +16,7 @@
     </nav>
     <div class="row  justify-content-center  align-items-start">
       <div class="col-12 col-sm-4  d-flex justify-content-center  align-items-center">
-        <div style="max-width:300px"> <img :src="product.imageUrl" alt="" class="flex-image mb-3"></div>
+        <div style="max-width:300px"> <img :src="product.imageUrl" alt="image" class="flex-image mb-3"></div>
 
       </div>
       <div class="col-11 col-sm-6  d-flex justify-content-center  align-items-center">
@@ -79,7 +79,6 @@
         </article>
       </div>
 
-
     </div>
 
     <div class="row d-flex g-3 justify-content-center my-3 text-center">
@@ -89,18 +88,15 @@
         <div v-html="product.description.replace(/\n/g, '<br>')"></div>
       </div>
       <div v-for="  item   in   product.imagesUrl  " :key="item">
-        <img :src="item" alt="" class="img-fluid  col-6">
+        <img :src="item" alt="image" class="img-fluid  col-6">
       </div>
       <div v-if="product.content">
         <div v-html="product.content.replace(/\n/g, '<br>')"></div>
       </div>
 
-
-      <img :src="product.imageUrl" alt="" class="img-fluid  col-6">
-
+      <img :src="product.imageUrl" alt="image" class="img-fluid  col-6">
 
     </div>
-
 
     <div class="row flex-column  justify-content-center  align-items-center">
       <div class="my-2 my-md-5 col-11  ">
@@ -122,7 +118,6 @@
       </div>
     </div>
 
-
     <div class="row py-5" v-if="recommendItems.length > 0">
 
       <div class="col-12">
@@ -135,7 +130,6 @@
       </div>
 
     </div>
-
 
   </div>
   <AddCartConfirm v-if="product" :item="{ title: product.title, qty: itemQty }" ref="AddCartConfirm"
@@ -199,7 +193,6 @@ export default {
 
       }
 
-
       return items
     },
   },
@@ -233,7 +226,6 @@ export default {
 
     ...mapActions(useProductStore, ['getProductByID', 'getProducts', 'filterByCategory']),
 
-
     goToCart() {
       this.$router.push('/user/cart/flow');
     },
@@ -256,11 +248,9 @@ export default {
       }
     },
 
-
     addCartCheck(id, qty = 1, redirect = false) {
       let isMaxNum = false;
       let cartValue = this.cart;
-
 
       cartValue.carts.forEach(element => {
         if (element.product_id === this.id) {
@@ -279,7 +269,6 @@ export default {
       if (isMaxNum) {
         return
       }
-
 
       const cart = {
         product_id: id,
@@ -314,7 +303,6 @@ export default {
 };
 </script>
 
-
 <style lang="css" scoped>
 .flex-image {
   object-fit: cover;
@@ -333,7 +321,6 @@ export default {
   border: none;
 
 }
-
 
 .scroll-to-top-button.show {
   opacity: 1;

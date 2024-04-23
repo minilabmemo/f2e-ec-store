@@ -14,15 +14,12 @@
           <div class="col-4 col-sm-3 d-flex justify-content-center  align-items-center ">
             <HomeLogo />
           </div>
-
           <div class="col-6 col-sm-6  d-flex justify-content-end  align-items-center" id="device-sm-location">
             <!-- <for teleport> -->
           </div>
         </div>
 
       </div>
-
-
       <div class=" offcanvas offcanvas-start " tabindex="-1" id="offcanvasNavbar"
         aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header ">
@@ -63,7 +60,6 @@
             </li>
           </ul>
 
-
         </div>
       </div>
     </div>
@@ -77,7 +73,6 @@ import 'bootstrap/js/dist/collapse';
 import Offcanvas from 'bootstrap/js/dist/offcanvas';
 import HomeLogo from '@/components/user/HomeLogo.vue';
 import CATNav from '@/components/user/CategoriesNav.vue'
-
 
 export default {
   components: {HomeLogo, CATNav},
@@ -97,8 +92,6 @@ export default {
       } else {
         this.$router.push(`/product/all/all/keyword/${this.keyword}`)
       }
-
-
 
     },
     handleOffcanvasHide() {
@@ -122,8 +115,7 @@ export default {
   },
   mounted() {
 
-
-    var myOffcanvas = document.getElementById('offcanvasNavbar')
+    let myOffcanvas = document.getElementById('offcanvasNavbar')
     if (myOffcanvas) {
       this.bsOffcanvas = new Offcanvas(myOffcanvas, {
         toggle: false

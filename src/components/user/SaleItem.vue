@@ -20,7 +20,6 @@
 
 </template>
 
-
 <script>
 export default {
   props: {
@@ -28,10 +27,7 @@ export default {
     item: {title: "no name"},
     path: String,
 
-
   },
-
-
 
 }
 </script>
@@ -52,9 +48,6 @@ export default {
 .gray {
   color: var(--bs-gray-300);
 }
-
-
-
 
 .flex-image {
   object-fit: cover;

@@ -82,7 +82,6 @@
   </div>
 </template>
 
-
 <script setup>
 import {ref, watch} from 'vue';
 import {storeToRefs} from 'pinia'
@@ -95,9 +94,6 @@ const {getCart} = useCartStore();
 const orderStore = useOrderStore();
 const {createOrder, } = orderStore;
 const {status} = storeToRefs(orderStore);
-
-
-
 
 import {formDataStorage} from '@/utils/methods/formDataStorage';
 const {getFormData} = formDataStorage();
@@ -114,8 +110,6 @@ function importDataCheckbox() {
 
 }
 
-
-
 const form = ref({
   user: {
     name: '',
@@ -126,7 +120,6 @@ const form = ref({
   message: '',
 });
 function sendOrder() {
-
 
   if (!cart.value.carts) {
     alert("您的購物車沒有商品，請先新增商品進購物車。")
@@ -152,7 +145,5 @@ watch(
     }
     getCart();
   }, {deep: true})
-
-
 
 </script>

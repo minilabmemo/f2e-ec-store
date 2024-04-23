@@ -8,7 +8,6 @@
     <SaleItem v-for="(item) in filterItems" :key="item.id" :item="item" class="col"
       :path="`${$route.params.category}/${$route.params.subcategory}`" />
 
-
   </div>
 
 </template>
@@ -32,8 +31,6 @@ const filterItems = computed(() => {
   let items = products.value ? products.value : []
   itemsBYSearch = items.filter((item) => !item.category.toString().includes('test'));
   itemsBYSearch = items.filter((item) => item.title.toString().includes(route.params.keyword));
-
-
 
   if (itemsBYSearch.length !== 0) {
     return itemsBYSearch.map(item => ({

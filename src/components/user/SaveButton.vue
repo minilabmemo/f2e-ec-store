@@ -14,9 +14,7 @@
       </div>
     </div>
 
-
   </button>
-
 
   <button type="button" class=" btn btn-outline-800   " @click="saveItem()" v-else>
 
@@ -32,7 +30,6 @@
         <span> 加入收藏</span>
       </div>
     </div>
-
 
   </button>
 
@@ -64,7 +61,6 @@ export default {
   },
   methods: {
     syncSaveStatus() {
-
 
       this.isSave = false;
       let saveItems = JSON.parse(localStorage.getItem(this.saveKey))
@@ -103,7 +99,6 @@ export default {
   },
 }
 </script>
-
 
 <style lang="css" scoped>
 .btn-outline-primary:hover svg,

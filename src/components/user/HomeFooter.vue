@@ -13,7 +13,6 @@
 
           </div>
 
-
         </div>
         <div class="col-6 col-sm-4 ">
           <div class="row     gy-3 ">
@@ -52,12 +51,8 @@
 
         <span> Copyright © 2024 Koring All rights reserved. </span>
 
-
-
       </div>
     </div>
-
-
 
   </footer>
 </template>

@@ -1,5 +1,4 @@
 
-
  const itemLimit={
   max_price:5000,
   min_price:10,

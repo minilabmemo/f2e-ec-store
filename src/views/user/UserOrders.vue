@@ -23,19 +23,14 @@
           </td>
           <td>
 
-
-
-
             <div class="d-flex justify-content-start align-items-center  gap-1  ">
 
               <div class=" d-flex justify-content-start align-items-center  gap-1  flex-wrap ">
-
 
                 <div class="d-flex  " v-if="item.is_paid">
                   <div class="rounded-circle bg-success me-1 " style="height: 15px;width: 15px;"> </div>
                   <span> 已付款 </span>
                 </div>
-
 
                 <div class="d-flex flex-column " v-else>
                   <div class="d-flex  ">
@@ -46,9 +41,6 @@
                   <button class="btn btn-outline-danger btn-sm text-nowrap " @click="confirmPay(item)"
                     v-if="!item.is_paid">付款</button>
                 </div>
-
-
-
 
               </div>
 
@@ -91,7 +83,6 @@
           <td class="text-right">{{ $filters.currency(item.total) }}</td>
           <td>
 
-
             <div class="d-flex justify-content-start align-items-center  gap-1 flex-wrap ">
               <div class="  rounded-circle " :class="{ 'bg-success ': item.is_paid, 'bg-primary': !item.is_paid }"
                 style="height: 15px;width: 15px;">
@@ -111,7 +102,6 @@
       </template>
     </tbody>
   </table>
-
 
   <OrderModal :order="tempOrder" ref="orderModal" />
   <CheckoutConfirm :item="tempOrder" ref="CheckoutConfirm" @pay-order="payOrder" />

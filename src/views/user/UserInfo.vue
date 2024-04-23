@@ -45,12 +45,10 @@
   </div>
 </template>
 
-
 <script setup>
 import {ref} from 'vue';
 import {VeeFormDataStorage} from '@/utils/methods/VeeFormDataStorage';
 const {saveVeeFormData, getVeeFormData} = VeeFormDataStorage();
-
 
 const VeeFormDataFromLocalStorage = getVeeFormData();
 
@@ -68,6 +66,5 @@ function isPhone(value) {
   const phoneNumber = /^(09)[0-9]{8}$/
   return phoneNumber.test(value) ? true : '請填寫台灣手機號碼，以 09 開頭加上 8 位數字之格式。'
 }
-
 
 </script>

@@ -57,7 +57,6 @@
 
 </template>
 
-
 <script>
 import ProductModal from "@/components/admin/EditProductModal.vue";
 import DelModal from "@/components/DelModal.vue";

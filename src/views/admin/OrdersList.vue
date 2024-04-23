@@ -90,7 +90,6 @@ export default {
           dataErr(response)
         }
 
-
       }).catch((err) => {
         catchErr(err)
 
@@ -117,7 +116,6 @@ export default {
         this.isLoading = false;
         this.getOrders(this.currentPage);
         this.pushMessage({title: '更新付款狀態', response: response});
-
 
       });
     },

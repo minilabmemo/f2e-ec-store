@@ -14,8 +14,6 @@
         </div>
       </div>
 
-
-
       <div class="  border-bottom  d-none d-lg-flex  "></div>
       <div class="container-xl">
         <HomeNav />
@@ -33,7 +31,6 @@
     <UserNav />
   </Teleport>
 </template>
-
 
 <script setup lang="ts">
 import HomeNav from '@/components/user/HomeNav.vue';
@@ -60,7 +57,6 @@ watchEffect(() => {
   }
 });
 </script>
-
 
 <style scoped>
 .h-shadow {

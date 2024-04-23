@@ -13,7 +13,6 @@
         </router-link>
       </div>
 
-
       <ul class="navbar-nav flex-column px-4 " v-for="(item, subKey) in cat.sub_category" :key="subKey">
         <li class="d-flex align-items-center  ">
           <img src="@/assets/icons/nav.svg" alt="nav"
@@ -25,8 +24,6 @@
             <span>
               ({{ countByCAT(key, subKey) }})
             </span>
-
-
 
           </router-link>
         </li>
@@ -52,7 +49,6 @@ const {getProducts, } = productStore;
 const {products} = storeToRefs(productStore);
 getProducts();
 
-
 defineProps({
   isCollapsed: Boolean
 });
@@ -63,7 +59,6 @@ let catNumMap = computed(() => {
   let sum = sumProductsCAT(products.value);
   return sum
 })
-
 
 function countByCAT(cat, subCat) {
   if (!catNumMap.value) {
@@ -86,7 +81,6 @@ function countByCAT(cat, subCat) {
   }
   return 0;
 }
-
 
 function sumProductsCAT(products) {
 
@@ -134,8 +128,6 @@ function sumProductsCAT(products) {
   return catNumMap
 
 }
-
-
 
 </script>
 @/utils/config/categories

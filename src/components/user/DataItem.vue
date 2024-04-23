@@ -29,19 +29,14 @@
 
     </div>
 
-
   </div>
 
 </template>
 
-
 <script setup lang="ts">
-
-
 
 import statusStore from '@/stores/statusStore';
 const { isLoading } = statusStore();
-
 
 defineProps({
   filterErr: String,
@@ -51,10 +46,7 @@ defineProps({
   }
 });
 
-
 </script>
-
-
 
 <style scoped>
 .primary {

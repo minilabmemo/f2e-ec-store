@@ -33,8 +33,6 @@
       </div>
     </div>
 
-
-
     <div class="row row-cols-2 row-cols-md-3 " data-cy="products">
 
       <SaleItem v-for="(item) in showItems" :key="item.id" :item="item" class="col d-flex  " data-cy="item"
@@ -45,7 +43,6 @@
       </div>
 
     </div>
-
 
     <Pagination :pages="pagination" @change-page-num="filterItemsByPage" v-if="showItems.length !== 0" />
 
@@ -60,14 +57,10 @@ import categoriesConfig from '@/utils/config/categories';
 import {storeToRefs} from 'pinia'
 const categories = categoriesConfig;
 
-
 import {useProductStore} from '@/stores/productStore';
 const productStore = useProductStore();
 const {getProducts, sortProductsBy} = productStore;
 const {products, status} = storeToRefs(productStore);
-
-
-
 
 getProducts();
 
@@ -111,8 +104,6 @@ function filterItems() {
   filterItemsByPage(pagination.value.current_page);
 }
 
-
-
 function filterItemsByPage(currentPage = 1) {
 
   if (!catItems.value) {
@@ -155,7 +146,6 @@ const sub_category_name = computed(() => {
   return ""
 })
 
-
 watch(() => pagination.value.current_page, (newValue, oldValue) => {
   if (newValue != oldValue) {
     window.scrollTo({top: 0, behavior: 'smooth'});
@@ -165,7 +155,5 @@ watch(() => pagination.value.current_page, (newValue, oldValue) => {
 watchEffect(() => {
   filterItems();
 });
-
-
 
 </script>

@@ -31,7 +31,6 @@
                 </div>
                 <span class="text-secondary ms-2" v-if="!item.on_stock"> 此商品已下架。</span>
 
-
               </div>
 
             </div>
@@ -82,7 +81,6 @@ export default {
           }
           this.filterItemsByPage()
         }
-
 
       }
 
@@ -154,8 +152,6 @@ export default {
     this.getProducts();
 
   },
-
-
 
 };
 </script>

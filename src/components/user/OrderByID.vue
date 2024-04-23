@@ -72,7 +72,6 @@
 
 <script>
 
-
 import {useOrderStore} from '@/stores/orderStore'
 import {mapState, mapActions} from 'pinia'
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
@@ -109,7 +108,6 @@ export default {
 
   created() {
     this.getOrder();
-
 
   },
   watch: {

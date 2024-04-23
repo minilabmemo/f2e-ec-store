@@ -31,17 +31,9 @@
     </div>
     <div class="my-3"><img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid"></div>
 
-
-
-
-
-
   </div>
 
-
-
 </template>
-
 
 <script setup>
 import {ref} from 'vue';
@@ -56,11 +48,7 @@ const {getProducts, } = productStore;
 const {products} = storeToRefs(productStore);
 getProducts();
 
-
-
 </script>
-
-
 
 <style scoped>
 .h-shadow {

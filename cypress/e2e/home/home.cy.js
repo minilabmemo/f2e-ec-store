@@ -13,7 +13,6 @@ describe('Home Layout Test', () => {
     cy.visit('/')
     cy.get('.col-sm-3.justify-content-center > #logo').should('be.visible');
 
-
     cy.visitAndCheckPage()
   })
   it('visits the landing page website at 1440px.', () => {

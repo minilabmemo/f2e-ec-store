@@ -50,7 +50,6 @@
                   </div>
                 </div>
 
-
                 <div class="row g-2 " v-for="(imageUrl, index) in this.tempProduct.imagesUrl" :key="imageUrl">
                   <div class="mb-3 col-8">
                     <label for="image" class="form-label">輸入圖片網址</label>
@@ -73,7 +72,6 @@
                       <img class="img-fluid" alt="images photo" :src="tempProduct.imagesUrl[index]"
                         v-if="tempProduct.imagesUrl[index]">
                     </div>
-
 
                   </div>
                 </div>
@@ -245,12 +243,9 @@ export default {
         uploadedFile = this.$refs.filesInput[index].files[0];
       }
 
-
-
       const formData = new FormData();
       formData.append('file-to-upload', uploadedFile);
       this.$http.post(adminUploadApi, formData).then((response) => {
-
 
         this.pushMessage({title: '上傳圖片', response: response});
         if (response.data.success) {

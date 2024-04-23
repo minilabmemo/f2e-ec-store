@@ -33,8 +33,6 @@
         </router-link>
       </div>
 
-
-
     </div>
     <div class="col-1   d-flex justify-content-center  align-items-center  p-0 ">
       <img src="@/assets/icons/split.svg" alt="split" class="icon-size">
@@ -57,7 +55,6 @@
 
 </template>
 
-
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import Dropdown from 'bootstrap/js/dist/dropdown.js';
@@ -70,15 +67,14 @@ const { status, cartTotalQty } = storeToRefs(cartStore);
 getCart()
 
 onMounted(() => {
-  var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
+  let dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'))
   dropdownElementList.map(function (dropdownToggleEl) {
     return new Dropdown(dropdownToggleEl)
   })
-  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
   tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new Tooltip(tooltipTriggerEl)
   })
 })
-
 
 </script>

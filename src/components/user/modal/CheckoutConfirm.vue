@@ -15,7 +15,6 @@
           <span>請點擊確認結帳，進入結帳流程後，請勿關閉畫面。</span>
           <div> <code>*此為作業模擬結帳流程，並不會真的進入結帳。</code></div>
 
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" @click="goOrderPage">稍後付款

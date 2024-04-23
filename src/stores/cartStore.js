@@ -35,8 +35,6 @@ export const useCartStore = defineStore('cartStore', () => {
 
   }
 
-
-
   function addCartByItem(cart) {
     const url = `${userCartApi}`;
 
@@ -57,7 +55,6 @@ export const useCartStore = defineStore('cartStore', () => {
     }
 
     const url = `${userCartApi}/${item.id}`;
-
 
     const cart = {
       product_id: item.product_id,

@@ -10,12 +10,9 @@
 
   </div>
 
-
 </template>
 
-
 <script>
-
 
 import CATNav from '@/components/user/CategoriesNav.vue'
 
@@ -23,7 +20,5 @@ export default {
   components: {CATNav},
 
 }
-
-
 
 </script>

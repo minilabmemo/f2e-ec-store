@@ -8,7 +8,6 @@ export function date(time) {
   return localDate.toLocaleDateString();
 }
 
-
 //找尋商品其中一個分類
 export function extractOneCategory(category) {
   const cats = category.split(',').flatMap(subStr => subStr.split('|'));

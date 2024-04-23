@@ -12,7 +12,6 @@ export function formDataStorage() {
   const getFormData = () => {
     const formData = localStorage.getItem('formData');
 
-
     return formData ? JSON.parse(formData) : null;
   };
 

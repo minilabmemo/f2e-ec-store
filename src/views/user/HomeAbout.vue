@@ -90,7 +90,6 @@ export default {
   width: 80%;
   max-width: 680px;
 
-
 }
 </style>
 @/utils/config/sectionIds.js

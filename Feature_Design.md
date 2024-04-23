@@ -13,11 +13,19 @@
 - 查詢訂單
 - 商品收藏
 
-### 全局效果
+### 全局
+
+- ESLint
+  - [x] 加入 vue/html-self-closing 規則檢驗 `0.3.0`
+  - [x] 加入 'no-multiple-empty-lines' `0.4.0`
+  - [x] 加入 'no-var' `0.4.0`
+- html/vue
+
+  - [x]html 修改語系設定與新增 meta 描述 `0.4.0`
+  - [ ]確認 vue v-for key 是唯一值 `0.4.0`
 
 - 主題顏色
 
-  - body-color
   - [x] font
   - [x] h1~h5 title size
   - [x] class 新增：image size flex setting

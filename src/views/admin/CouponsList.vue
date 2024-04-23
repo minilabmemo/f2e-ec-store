@@ -96,7 +96,6 @@ export default {
           dataErr(response)
         }
 
-
       }).catch((err) => {
         catchErr(err)
         this.status.isLoading = false;
@@ -116,7 +115,6 @@ export default {
         this.$http.put(url, {data: this.tempCoupon}).then((response) => {
           this.pushMessage({title: '修改優惠券', response: response});
 
-
           this.getCoupons();
           this.$refs.couponModal.hideModal();
         });
@@ -127,7 +125,6 @@ export default {
       this.isLoading = true;
       this.$http.delete(url).then((response) => {
         this.pushMessage({title: '刪除優惠券', response: response});
-
 
         const delComponent = this.$refs.delModal;
         delComponent.hideModal();

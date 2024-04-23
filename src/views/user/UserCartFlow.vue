@@ -35,9 +35,6 @@
         </div>
       </div>
 
-
-
-
     </div>
 
   </div>
@@ -77,14 +74,14 @@ export default {
     goNextTab() {
       this.stepRecord = this.activeTab + 1;
       let nextSelector = `#${this.tabsInfo[this.activeTab + 1].id}`
-      var triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${nextSelector}"]`)
+      let triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${nextSelector}"]`)
       Tab.getInstance(triggerEl).show()
     },
 
     goPrevTab() {
       this.stepRecord = this.activeTab - 1;
       let prevSelector = `#${this.tabsInfo[this.activeTab - 1].id}`
-      var triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${prevSelector}"]`)
+      let triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${prevSelector}"]`)
       Tab.getInstance(triggerEl).show()
     },
 
@@ -96,9 +93,9 @@ export default {
 
   mounted() {
 
-    var triggerTabList = [].slice.call(document.querySelectorAll('#pills-tab button'))
+    let triggerTabList = [].slice.call(document.querySelectorAll('#pills-tab button'))
     triggerTabList.forEach(function (triggerEl) {
-      var tabTrigger = new Tab(triggerEl)
+      let tabTrigger = new Tab(triggerEl)
       triggerEl.addEventListener('click', function (event) {
         event.preventDefault()
         tabTrigger.show()

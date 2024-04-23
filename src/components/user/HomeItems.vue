@@ -17,7 +17,6 @@
 
 </template>
 
-
 <script>
 import DataItem from '@/components/user/DataItem.vue';
 import coming1 from '@/assets/images/design/coming1.png';
@@ -66,8 +65,6 @@ export default {
       }
     }
   }
-
-
 
 }
 </script>@/utils/config/categories
