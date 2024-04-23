@@ -10,7 +10,7 @@
     <div class="d-flex justify-content-center gap-3 mt-3">
       <button class="btn btn-black explore-btn" type="button">
         <router-link :to="`/product/${CAT}/all`" class="nav-link">
-          Explore More <img src="@/assets/icons/next_arrow.svg" alt="Next Arrow"></router-link>
+          Explore More <img src="@/assets/img/icons/next_arrow.svg" alt="Next Arrow"></router-link>
       </button>
     </div>
   </section>
@@ -19,9 +19,9 @@
 
 <script>
 import DataItem from '@/components/user/DataItem.vue';
-import coming1 from '@/assets/images/design/coming1.png';
-import coming2 from '@/assets/images/design/coming2.png';
-import coming3 from '@/assets/images/design/coming3.png';
+import coming1 from '@/assets/img/design/coming1.png';
+import coming2 from '@/assets/img/design/coming2.png';
+import coming3 from '@/assets/img/design/coming3.png';
 import categories from '@/utils/config/categories'
 export default {
   components: {DataItem},

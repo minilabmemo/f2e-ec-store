@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid my-5">
+    <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
 
     <div class="section mb-5" :id="sectionIds.shoppingProcess">
       <h3 class="mb-5 text-center text-primary">購物流程</h3>
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid my-5">
+    <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
     <div class="section mb-5" :id="sectionIds.faqs">
       <h3 class="mb-4 text-center text-primary ">常見問題</h3>
       <div class="content text-justify">
@@ -32,37 +32,38 @@
         <p><strong>解答：</strong> 我們提供 30 天無憂退換貨服務，請參閱我們的退換貨政策頁面獲取更多信息，或者聯繫我們的客服團隊查詢。</p>
       </div>
     </div>
-    <img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid my-5">
+    <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
     <div class="section mb-5" :id="sectionIds.paymentMethods">
       <h3 class="mb-4 text-center text-primary ">付款方式</h3>
       <div class="content text-justify">
-        <p><img src="/src/assets/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
           我們接受多種付款方式，包括信用卡、PayPal、支付寶等。</p>
-        <p><img src="/src/assets/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
           所有付款信息均經過安全加密，保障您的個人資訊安全。</p>
       </div>
     </div>
-    <img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid my-5">
+    <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
     <div class="section mb-5 " :id="sectionIds.shippingService">
       <h3 class="mb-4 text-center text-primary  ">運送服務</h3>
       <div class="content text-justify">
-        <p><img src="/src/assets/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
           我們提供全球送貨服務，運送到您指定的地址。</p>
-        <p><img src="/src/assets/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
           部分地區可能有額外運費或運送時效，請在結帳頁面查看詳細信息。</p>
       </div>
     </div>
-    <img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid my-5">
+    <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
     <div class="section" :id="sectionIds.returnPolicy">
       <h3 class="mb-4 text-center text-primary ">退換政策</h3>
       <div class="content text-justify">
-        <p><img src="/src/assets/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 "> 如果您對購買的產品不滿意，您可以在 30
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+          如果您對購買的產品不滿意，您可以在 30
           天內申請退換貨。</p>
-        <p><img src="/src/assets/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
           請確保商品未被使用且保留原包裝，以確保您的退換貨申請被受理。</p>
       </div>
     </div>
-    <img src="@/assets/icons/hr.svg" alt="hr" class="img-fluid my-5">
+    <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
   </div>
 
 </template>

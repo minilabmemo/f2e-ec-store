@@ -3,11 +3,11 @@
   <div class="w-100 row   justify-content-center  align-items-center">
     <div class="col-1 col-xl-2     d-flex justify-content-center  align-items-center">
       <router-link to="/user/saves" class="nav-link " data-bs-toggle="tooltip" data-bs-placement="top" title="前往收藏清單">
-        <img src="@/assets/icons/save.svg" alt="save" class="icon-size">
+        <img src="@/assets/img/icons/save.svg" alt="save" class="icon-size">
       </router-link>
     </div>
     <div class="col-1   d-flex justify-content-center  align-items-center p-0 ">
-      <img src="@/assets/icons/split.svg" alt="split" class="icon-size">
+      <img src="@/assets/img/icons/split.svg" alt="split" class="icon-size">
     </div>
     <div class="col-4  col-xl-4   ">
 
@@ -16,7 +16,7 @@
           title="前往購物車">
           <div class="row justify-content-center  align-items-center ">
             <div class="col-4  d-flex justify-content-center  align-items-center">
-              <img src="@/assets/icons/cart.svg" class="icon-size" alt="cart">
+              <img src="@/assets/img/icons/cart.svg" class="icon-size" alt="cart">
             </div>
 
             <div class="col-4 d-flex justify-content-center  align-items-center">
@@ -35,13 +35,13 @@
 
     </div>
     <div class="col-1   d-flex justify-content-center  align-items-center  p-0 ">
-      <img src="@/assets/icons/split.svg" alt="split" class="icon-size">
+      <img src="@/assets/img/icons/split.svg" alt="split" class="icon-size">
     </div>
     <div class="col-1  col-xl-2  d-flex justify-content-center  align-items-center">
       <div class=" dropdown">
         <button class="btn  btn-sm    dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
-          <img src="@/assets/icons/person.svg" alt="person" class="icon-size">
+          <img src="@/assets/img/icons/person.svg" alt="person" class="icon-size">
         </button>
         <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdownMenuButton">
           <router-link class="dropdown-item text-800 " to="/user/orders">查詢訂單</router-link>

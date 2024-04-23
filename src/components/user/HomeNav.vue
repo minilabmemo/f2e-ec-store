@@ -43,7 +43,7 @@
                 :class="{ active: $route.params.category === key }" aria-current="page">
                 <div class="d-flex flex-column  align-items-center ">
                   <div class=""> {{ item.name }}</div>
-                  <img src="@/assets/icons/nav.svg" alt="nav" v-if="$route.params.category === key" width="12px"
+                  <img src="@/assets/img/icons/nav.svg" alt="nav" v-if="$route.params.category === key" width="12px"
                     height="12px">
                 </div>
               </router-link>
@@ -53,7 +53,7 @@
                 aria-current="page">
                 <div class="d-flex flex-column  align-items-center ">
                   <div class=""> Styles</div>
-                  <img src="@/assets/icons/nav.svg" alt="nav" v-if="$route.path === '/style'" width="12px"
+                  <img src="@/assets/img/icons/nav.svg" alt="nav" v-if="$route.path === '/style'" width="12px"
                     height="12px">
                 </div>
               </router-link>

@@ -66,7 +66,7 @@ export default {
   },
   watch: {
     products: {
-      handler: function (val) {
+      handler(val) {
         if (this.saveItems) {
           for (const [key, item] of Object.entries(this.saveItems)) {
             this.saveItems[key].on_stock = false

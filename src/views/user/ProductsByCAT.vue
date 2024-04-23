@@ -39,7 +39,7 @@
         :path="`${$route.params.category}/${$route.params.subcategory}`" />
 
       <div class="col-6 " v-if="!showItems.length && !status.isLoading">
-        <img src="@/assets/images/design/empty200.png" alt="empty200" class="img-fluid ">
+        <img src="@/assets/img/design/empty200.png" alt="empty200" class="img-fluid ">
       </div>
 
     </div>
@@ -55,9 +55,11 @@ import SaleItem from '@/components/user/SaleItem.vue';
 import Pagination from '@/components/PaginationAct.vue';
 import categoriesConfig from '@/utils/config/categories';
 import {storeToRefs} from 'pinia'
+import {useProductStore} from '@/stores/productStore';
+import {useRoute} from 'vue-router'
+
 const categories = categoriesConfig;
 
-import {useProductStore} from '@/stores/productStore';
 const productStore = useProductStore();
 const {getProducts, sortProductsBy} = productStore;
 const {products, status} = storeToRefs(productStore);
@@ -74,7 +76,7 @@ let pagination = ref({
   has_next: true,
 })
 const dataPerPage = 12;
-import {useRoute} from 'vue-router'
+
 const route = useRoute()
 function filterItems() {
   let itemByCAT = [];

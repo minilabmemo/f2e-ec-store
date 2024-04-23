@@ -1,6 +1,5 @@
-//import './assets/main.css'
-import './assets/all.scss'
-import './assets/custom.css'
+import '@/assets/css/scss/all.scss'
+import '@/assets/css/custom.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import axios from 'axios'

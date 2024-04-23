@@ -41,11 +41,7 @@ const router = createRouter({
           path: 'about',
           component: () => import('../views/user/HomeAbout.vue')
         },
-        {
-          name: 'NoMatchRoute',
-          path: '/:pathMatch(.*)*',
-          redirect: { name: 'HomeBody' }
-        },
+
         {
           path: 'product/:category/:subcategory',
           component: () => import('../views/user/ProductsLayout.vue'),
@@ -91,6 +87,11 @@ const router = createRouter({
           path: 'user/saves',
           component: () => import('../views/user/UserSaves.vue'),
           meta: { icon: `../${shopFavIcon}` }
+        },
+        {
+          name: 'NoMatchRoute',
+          path: '/:pathMatch(.*)*',
+          redirect: { name: 'HomeBody' }
         }
       ]
     },

@@ -3,7 +3,7 @@
   <ul class="navbar-nav flex-column mt-2 mb-5 ">
     <li class="nav-item  lh-1   " v-for="(cat, key, index) in categories" :key="key">
       <div class="d-flex align-items-center">
-        <img src="@/assets/icons/nav.svg" alt="nav"
+        <img src="@/assets/img/icons/nav.svg" alt="nav"
           v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/all`" width="12px" height="12px">
         <router-link class="nav-link  fw-bold px-2 "
           :class="{ 'text-300': !countByCAT(key), 'text-800': countByCAT(key) }" aria-current="page" href="#"
@@ -15,7 +15,7 @@
 
       <ul class="navbar-nav flex-column px-4 " v-for="(item, subKey) in cat.sub_category" :key="subKey">
         <li class="d-flex align-items-center  ">
-          <img src="@/assets/icons/nav.svg" alt="nav"
+          <img src="@/assets/img/icons/nav.svg" alt="nav"
             v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/${subKey}`" width="12px"
             height="12px">
           <router-link class="nav-link   " :to="`/product/${key}/${subKey}`"

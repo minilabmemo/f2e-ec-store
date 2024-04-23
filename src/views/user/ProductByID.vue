@@ -100,21 +100,21 @@
 
     <div class="row flex-column  justify-content-center  align-items-center">
       <div class="my-2 my-md-5 col-11  ">
-        <img src="@/assets/images/design/shopping_note.png" alt="shopping_note" class="img-fluid  ">
+        <img src="@/assets/img/design/shopping_note.png" alt="shopping_note" class="img-fluid  ">
       </div>
 
       <div v-if="product && product.category && product.category.includes('dress')" class="my-2 my-md-5col-6">
-        <img src="@/assets/images/design/size_dress.png" alt="split" class="img-fluid ">
+        <img src="@/assets/img/design/size_dress.png" alt="split" class="img-fluid ">
       </div>
       <div v-if="product && product.category
     && (product.category.includes('upper') || product.category.includes('coat'))" class="my-2 my-md-5col-6">
-        <img src="@/assets/images/design/size_upper.png" alt="split" class="img-fluid  ">
+        <img src="@/assets/img/design/size_upper.png" alt="split" class="img-fluid  ">
       </div>
       <div v-if="product && product.category && product.category.includes('pants')" class="my-2 my-md-5col-6">
-        <img src="@/assets/images/design/size_pants.png" alt="split" class="img-fluid  ">
+        <img src="@/assets/img/design/size_pants.png" alt="split" class="img-fluid  ">
       </div>
       <div v-if="product && product.category && product.category.includes('skirt')" class="my-2 my-md-5col-6">
-        <img src="@/assets/images/design/size_skirt.png" alt="split" class="img-fluid  ">
+        <img src="@/assets/img/design/size_skirt.png" alt="split" class="img-fluid  ">
       </div>
     </div>
 
@@ -326,4 +326,4 @@ export default {
   opacity: 1;
   transform: translateY(0px);
 }
-</style>@/utils/config/categories
+</style>
