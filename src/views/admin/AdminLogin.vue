@@ -5,7 +5,7 @@
         <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
         <div class="mb-2">
           <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus
+          <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required
             v-model="user.username">
         </div>
         <div class="mb-2">

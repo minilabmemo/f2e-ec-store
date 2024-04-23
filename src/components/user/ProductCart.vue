@@ -112,7 +112,7 @@
               </td>
               <td>
                 <div class="input-group input-group-sm">
-                  <input type="number" class="form-control" min=1 :max="item.product.num"
+                  <input aria-label="number" type="number" class="form-control" min=1 :max="item.product.num"
                     :disabled="item.id === status.loadingItem" @change="updateCart(item)" v-model.number="item.qty">
                   <div class="input-group-text">/ {{ item.product.unit }}</div>
 
@@ -141,7 +141,7 @@
       <div class=" d-flex justify-content-end mb-5 gap-2 ">
         <div class="">
           <div class="input-group mb-3 input-group-sm">
-            <input type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
+            <input aria-label="coupon_code" type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
             <div class="input-group-append ">
               <button class="btn btn-secondary text-white" type="button" @click="addCouponCode">
                 套用優惠碼

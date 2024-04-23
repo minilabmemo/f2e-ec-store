@@ -3,12 +3,13 @@ require('@rushstack/eslint-patch/modern-module-resolution');
 
 module.exports = {
   root: true,
+  "plugins": ["vuejs-accessibility"],
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting',
-
+    "plugin:vuejs-accessibility/recommended",
   ],
   overrides: [
     {
@@ -35,7 +36,16 @@ module.exports = {
       math: 'always',
     }],
     'no-multiple-empty-lines':['error',{ max:1 }],
-    "no-var": 1
+    "no-var": 1,
+    "vuejs-accessibility/label-has-for": [
+      "error",
+      {
+        "required": {
+          "every": ["id"]
+        },
+        "allowChildren": false
+      }
+    ]
   },
 
 };
