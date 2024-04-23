@@ -96,11 +96,11 @@ export default {
     },
     handleOffcanvasHide() {
       this.isCollapsed = false;
-      console.log('this.isCollapsed', this.isCollapsed);
+
     },
     handleOffcanvasShow() {
       this.isCollapsed = true;
-      console.log('this.isCollapsed', this.isCollapsed);
+
     }
   },
   computed: {

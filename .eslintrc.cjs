@@ -26,6 +26,7 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
+   'no-console': ["error",{ allow: ["warn", "error"] }],
     'vue/html-self-closing': ['error', {
       html: {
         void: 'never',
