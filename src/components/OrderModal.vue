@@ -20,12 +20,12 @@
                     <td>{{ tempOrder.user.name }}</td>
                   </tr>
                   <tr>
-                    <th>Email</th>
-                    <td>{{ tempOrder.user.email }}</td>
+                    <th> Email</th>
+                    <td> <a :href="`mailto:${tempOrder.user.email}`">{{ tempOrder.user.email }}</a></td>
                   </tr>
                   <tr>
                     <th>電話</th>
-                    <td>{{ tempOrder.user.tel }}</td>
+                    <td> <a :href="`tel:+886-${tempOrder.user.tel.slice(1)}`">{{ tempOrder.user.tel }} </a></td>
                   </tr>
                   <tr>
                     <th>地址</th>

@@ -4,7 +4,7 @@
     <thead>
       <tr>
         <th>購買時間</th>
-        <th>Email</th>
+        <th>電子郵件</th>
         <th>購買款項</th>
         <th>應付金額</th>
         <th>是否付款</th>
@@ -15,7 +15,8 @@
       <template v-for="(item) in orders" :key="item.id">
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
           <td>{{ $filters.date(item.create_at) }}</td>
-          <td><span v-text="item.user.email" v-if="item.user"></span></td>
+          <td> <a :href="`mailto:${item.user.email}}`">{{
+    item.user.email }}</a></td>
           <td>
             <ul class="list-unstyled">
               <li v-for="(product) in item.products" :key="product.product.id">

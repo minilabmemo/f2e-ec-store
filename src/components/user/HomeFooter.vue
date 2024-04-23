@@ -30,8 +30,8 @@
           <div class=" row  gy-2 ">
             <div class="col-12 fw-semibold  noto-font ">Contact</div>
             <div>地址：星展區，時尚大道 88 號，韓星大樓 3 樓</div>
-            <div>電話：(02) 888-5678</div>
-            <div>客服信箱：koringoffice@line.tw </div>
+            <div>電話：<a href="tel:+886-2-8885678">(02) 888-5678 </a></div>
+            <div>客服信箱： <a :href="`mailto:koringoffice@line.tw`">koringoffice@line.tw</a></div>
             <div class="d-flex flex-wrap ">
               <div>客服時間：</div>
               <div> 週一至週五 10:30 ~ 18:00，例假日休息</div>
