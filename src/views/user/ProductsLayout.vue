@@ -12,13 +12,8 @@
 
 </template>
 
-<script>
+<script setup>
 
 import CategoriesNav from '@/components/user/CategoriesNav.vue'
-
-export default {
-  components: {CategoriesNav},
-
-}
 
 </script>

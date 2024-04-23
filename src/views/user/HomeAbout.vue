@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5 d-flex flex-column align-items-center">
-    <div class="section mb-5" :id="sectionIds.brand">
+    <div class="section mb-5" :id="sectionIdsRef.brand">
       <h3 class="mb-4 text-center text-primary ">品牌介紹</h3>
       <div class="content text-justify">
         <p>
@@ -11,7 +11,7 @@
 
     <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
 
-    <div class="section mb-5" :id="sectionIds.shoppingProcess">
+    <div class="section mb-5" :id="sectionIdsRef.shoppingProcess">
       <h3 class="mb-5 text-center text-primary">購物流程</h3>
       <div class="content text-justify">
         <p><strong>1. 瀏覽商品：</strong> 在網站上仔細瀏覽我們的商品目錄，選擇您喜歡的產品。</p>
@@ -23,7 +23,7 @@
     </div>
 
     <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
-    <div class="section mb-5" :id="sectionIds.faqs">
+    <div class="section mb-5" :id="sectionIdsRef.faqs">
       <h3 class="mb-4 text-center text-primary ">常見問題</h3>
       <div class="content text-justify">
         <p><strong>問題 1：</strong> 如何查詢訂單狀態？</p>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
-    <div class="section mb-5" :id="sectionIds.paymentMethods">
+    <div class="section mb-5" :id="sectionIdsRef.paymentMethods">
       <h3 class="mb-4 text-center text-primary ">付款方式</h3>
       <div class="content text-justify">
         <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
@@ -43,7 +43,7 @@
       </div>
     </div>
     <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
-    <div class="section mb-5 " :id="sectionIds.shippingService">
+    <div class="section mb-5 " :id="sectionIdsRef.shippingService">
       <h3 class="mb-4 text-center text-primary  ">運送服務</h3>
       <div class="content text-justify">
         <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
@@ -53,7 +53,7 @@
       </div>
     </div>
     <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
-    <div class="section" :id="sectionIds.returnPolicy">
+    <div class="section" :id="sectionIdsRef.returnPolicy">
       <h3 class="mb-4 text-center text-primary ">退換政策</h3>
       <div class="content text-justify">
         <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
@@ -67,16 +67,12 @@
   </div>
 
 </template>
-<script>
-import sectionIds from '@/utils/config/sectionIds.js';
+<script setup>
 
-export default {
-  data() {
-    return {
-      sectionIds: sectionIds
-    }
-  }
-}
+import {ref} from 'vue';
+import sectionIds from '@/utils/config/sectionIds.js';
+const sectionIdsRef = ref(sectionIds);
+
 </script>
 <style scoped>
 .section {

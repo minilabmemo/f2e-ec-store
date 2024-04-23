@@ -8,13 +8,8 @@
   </div>
 </template>
 
-<script>
+<script setup>
 
 import HomeStyleContent from '@/components/user/HomeStyleContent.vue';
 
-export default {
-  components: {
-    HomeStyleContent
-  }
-}
 </script>
