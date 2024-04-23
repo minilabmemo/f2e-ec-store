@@ -3,7 +3,6 @@ import './assets/all.scss'
 import './assets/custom.css'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import * as Vue from 'vue' // in Vue 3
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import App from './App.vue'
@@ -38,7 +37,7 @@ app.use(createPinia())
 app.use(router)
 app.use(VueAxios, axios)
 app.component('LoadingOverlay', LoadingOverlay)
-app.component('Form', Form)
-app.component('Field', Field)
-app.component('ErrorMessage', ErrorMessage)
+app.component('VeeForm', Form)
+app.component('VeeField', Field)
+app.component('VeeErrorMessage', ErrorMessage)
 app.mount('#app')

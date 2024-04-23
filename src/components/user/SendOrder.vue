@@ -28,7 +28,7 @@
       </div>
       <div class="col-12 col-md-6 mb-5 d-flex  justify-content-center flex-column ">
         <h3 class="mb-3">收件資訊</h3>
-        <Form class="" v-slot="{ errors }" @submit="sendOrder">
+        <VeeForm class="" v-slot="{ errors }" @submit="sendOrder">
           <div class="d-flex flex-wrap ">
             <input type="checkbox" id="importDataCheckbox" @change="importDataCheckbox()" class="me-2">
             <label for="importDataCheckbox"> 從會員資料中匯入</label>
@@ -36,30 +36,31 @@
           </div>
           <div class="mb-3">
             <label for="email" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>Email</label>
-            <Field id="email" name="email" type="email" class="form-control" :class="{ 'is-invalid': errors['email'] }"
-              placeholder="請輸入 Email" rules="email|required" v-model="form.user.email" />
-            <ErrorMessage name="email" class="invalid-feedback" />
+            <VeeField id="email" name="email" type="email" class="form-control"
+              :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email" rules="email|required"
+              v-model="form.user.email" />
+            <VeeErrorMessage name="email" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
             <label for="name" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人姓名</label>
-            <Field id="name" name="姓名" type="text" class="form-control" :class="{ 'is-invalid': errors['姓名'] }"
+            <VeeField id="name" name="姓名" type="text" class="form-control" :class="{ 'is-invalid': errors['姓名'] }"
               placeholder="請輸入姓名" rules="required" v-model="form.user.name" />
-            <ErrorMessage name="姓名" class="invalid-feedback" />
+            <VeeErrorMessage name="姓名" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
             <label for="tel" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人電話</label>
-            <Field id="tel" name="電話" type="tel" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
+            <VeeField id="tel" name="電話" type="tel" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
               placeholder="請輸入電話 Ex:0912345678" :rules="isPhone" v-model="form.user.tel" />
-            <ErrorMessage name="電話" class="invalid-feedback" />
+            <VeeErrorMessage name="電話" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
             <label for="address" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人地址</label>
-            <Field id="address" name="地址" type="text" class="form-control" :class="{ 'is-invalid': errors['地址'] }"
+            <VeeField id="address" name="地址" type="text" class="form-control" :class="{ 'is-invalid': errors['地址'] }"
               placeholder="請輸入地址" rules="required" v-model="form.user.address" />
-            <ErrorMessage name="地址" class="invalid-feedback" />
+            <VeeErrorMessage name="地址" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
@@ -73,7 +74,7 @@
             <div><button type="submit" class="btn btn-danger">確認，送出訂單</button></div>
 
           </div>
-        </Form>
+        </VeeForm>
       </div>
 
     </div>
