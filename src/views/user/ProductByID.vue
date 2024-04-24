@@ -4,17 +4,17 @@
   <div class="" v-if="!status.isLoading">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><router-link :to="`/product/${$route.params.category}/all`"> {{ category_name
+        <li class="breadcrumb-item"><router-link :to="`/product/${route.params.category}/all`"> {{ category_name
             }}</router-link>
         </li>
         <li v-if="sub_category_name" class="breadcrumb-item ">
-          <router-link :to="`/product/${$route.params.category}/${$route.params.subcategory}`"> {{ sub_category_name
+          <router-link :to="`/product/${route.params.category}/${route.params.subcategory}`"> {{ sub_category_name
             }}</router-link>
         </li>
         <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
       </ol>
     </nav>
-    <div class="row  justify-content-center  align-items-start">
+    <div class="row  justify-content-start  align-items-start">
       <div class="col-12 col-sm-4  d-flex justify-content-center  align-items-center">
         <div style="max-width:300px"> <img :src="product.imageUrl" alt="image" class="flex-image mb-3"></div>
 
@@ -40,7 +40,7 @@
               </div>
             </div>
             <hr>
-            <div class="row fw-bold justify-content-center ">
+            <div class="row fw-bold justify-content-center mb-1">
               <div class="col-4">尺寸</div>
               <div class="col-4">顏色</div>
               <div class="col-4">數量</div>
@@ -56,6 +56,9 @@
               </div>
             </div>
             <div class="row  justify-content-center align-items-stretch ">
+              <div class="col-4  ">
+                <SaveButton class="h-100 w-100 " :item="saveButtonItem" />
+              </div>
               <div class="col-4   ">
                 <button type="button" class="h-100 w-100 btn btn-outline-danger  "
                   @click="checkQty(product.id, itemQty)">
@@ -69,9 +72,6 @@
                   @click="addCartCheck(product.id, itemQty, false)" :class="{ disabled: status.isCartLoading }">
                   加入購物車
                 </button></div>
-              <div class="col-4  ">
-                <SaveButton class="h-100 w-100 " :item="saveButtonItem" />
-              </div>
 
             </div>
 
@@ -124,7 +124,7 @@
         <h4>您可能也喜歡</h4>
         <div class="row overflow-x-auto  flex-nowrap align-items-stretch  ">
           <SaleItem v-for="(item) in recommendItems" :key="item.id" :item="item" class="col-5 col-xs-4 col-md-3 "
-            data-cy="item" :path="`${$route.params.category}/${$route.params.subcategory}`" />
+            data-cy="item" :path="`${route.params.category}/${route.params.subcategory}`" />
         </div>
 
       </div>
@@ -132,7 +132,7 @@
     </div>
 
   </div>
-  <AddCartConfirm v-if="product" :item="{ title: product.title, qty: itemQty }" ref="AddCartConfirm"
+  <AddCartConfirm v-if="product" :item="{ title: product.title, qty: itemQty }" ref="cartConfirm"
     @add-item="addCartCheck(product.id, itemQty, true)" @go-carts="goToCart" />
 
   <button @click="scrollToTop" class="btn bg-primary   rounded-circle  "
@@ -142,165 +142,150 @@
   </button>
 </template>
 
-<script>
-
-import categories from '@/utils/config/categories'
+<script setup>
+import {ref, watch, onMounted, onBeforeUnmount, computed} from 'vue';
+import {useRoute, useRouter} from 'vue-router';
+import categories from '@/utils/config/categories';
 import AddCartConfirm from '@/components/user/modal/AddCartConfirm.vue';
-import SaveButton from '@/components/user/SaveButton.vue'
-import {useCartStore} from '@/stores/cartStore';
-import {useProductStore} from '@/stores/productStore';
-import {mapState, mapActions} from 'pinia'
+import SaveButton from '@/components/user/SaveButton.vue';
 import SaleItem from '@/components/user/SaleItem.vue';
-export default {
+import {useCartStore} from '@/stores/cartStore';
+import {storeToRefs} from 'pinia'
+import {useProductStore} from '@/stores/productStore';
+const productStore = useProductStore();
+const {product, products, status} = storeToRefs(productStore);
+const cartStore = useCartStore();
+const {getCart, addCartByItem} = cartStore;
+const {cart} = cartStore;
 
-  components: {AddCartConfirm, SaveButton, SaleItem},
+const {productsByCAT, getProductByID, getProducts, filterByCategory} = useProductStore();
+const route = useRoute();
+const cartConfirm = ref(null);
+const id = ref('');
+const itemQty = ref(1);
+const saveButtonItem = ref({});
+const showScrollToTopButton = ref(false);
 
-  data() {
-    return {
+const category_name = computed(() => {
+  return categories[route.params.category] ? categories[route.params.category].name : '';
+});
 
-      id: '',
-      categories: categories,
-      itemQty: 1,
-      saveButtonItem: {},
-      showScrollToTopButton: false,
-    };
-  },
-  computed: {
-    ...mapState(useCartStore, ['cart', 'status']),
-    ...mapState(useProductStore, ['product', 'products', 'status', 'productsByCAT']),
-    category_name() {
-      return categories[this.$route.params.category] ? categories[this.$route.params.category].name : ''
-    },
-    sub_category_name() {
-      if (
-        categories[this.$route.params.category]?.sub_category &&
-        categories[this.$route.params.category].sub_category[this.$route.params.subcategory]
-      ) {
-        return categories[this.$route.params.category].sub_category[this.$route.params.subcategory].name
+const sub_category_name = computed(() => {
+  if (categories[route.params.category]?.sub_category && categories[route.params.category].sub_category[route.params.subcategory]) {
+    return categories[route.params.category].sub_category[route.params.subcategory].name;
+  }
+  return '';
+});
+
+const recommendItems = () => {
+  let items = [];
+  let removeID = id.value;
+  if (productsByCAT) {
+    items = productsByCAT.filter((item) => item.id != removeID);
+  }
+  if (items.length === 0) {
+    if (products && products.length >= 3) {
+      items = products.slice(0, 3);
+    }
+  }
+  return items;
+};
+const router = useRouter();
+const goToCart = () => {
+  router.push('/user/cart/flow');
+};
+
+const checkQty = (id, qty = 1) => {
+  let confirmAddCart = false;
+  if (cart.carts) {
+    cart.carts.forEach(element => {
+      if (element.product_id === id) {
+        confirmAddCart = true;
       }
-      return ""
-    },
-    recommendItems() {
-      let items = [];
-      let removeID = this.id;
-      if (this.productsByCAT) {
-        items = this.productsByCAT.filter((item) => item.id != removeID)
-      }
-      if (items.length === 0) {
-        if (this.products && this.products.length >= 3) {
-          items = this.products.slice(0, 3)
-        }
+    });
+  }
+  if (confirmAddCart) {
+    const confirmModal = cartConfirm.value;
+    confirmModal.showModal();
+  } else {
+    addCartCheck(id, qty, true);
+  }
+};
 
-      }
+function addCartCheck(id, qty = 1, redirect = false) {
+  if (!cart) {
+    return
+  }
+  let isMaxNum = false;
+  let cartValue = cart;
 
-      return items
-    },
-  },
-  watch: {
-    product: {
-      handler: function (val) {
-        this.saveButtonItem = {
-          title: val.title,
-          id: val.id,
-          imageUrl: val.imageUrl,
-          on_stock: true
-        };
+  cartValue.carts.forEach(element => {
+    if (element.product_id === id) {
+      if (element.qty >= element.product.num) {
+        alert(`無法加入購物車，購物車數量${element.qty}已達最大可購買量 ${element.product.num}件商品。`);
+        isMaxNum = true;
+        return;
       }
 
-    },
-    products: {
-      handler: function () {
-        this.filterByCategory(this.$route.params.category)
-      }
-    },
-    $route(to, from) {
-      if (to.path !== from.path) {
-        this.id = this.$route.params.productId;
-        this.getProductByID(this.id);
-        this.getProducts()
+      if (qty + element.qty > element.product.num) {
+        alert(`無法加入購物車，購物車數量已有${element.qty}件，只可再購買 ${element.product.num - element.qty}件商品。`);
+        isMaxNum = true;
       }
     }
-  },
-  methods: {
-    ...mapActions(useCartStore, ['addCartByItem']),
-
-    ...mapActions(useProductStore, ['getProductByID', 'getProducts', 'filterByCategory']),
-
-    goToCart() {
-      this.$router.push('/user/cart/flow');
-    },
-
-    checkQty(id, qty = 1) {
-      let confirmAddCart = false;
-      if (this.cart.carts) {
-        this.cart.carts.forEach(element => {
-          if (element.product_id === this.id) {
-            confirmAddCart = true;
-          }
-        });
-
-      }
-      if (confirmAddCart) {
-        const confirmModal = this.$refs.AddCartConfirm;
-        confirmModal.showModal();
-      } else {
-        this.addCartCheck(id, qty, true);
-      }
-    },
-
-    addCartCheck(id, qty = 1, redirect = false) {
-      let isMaxNum = false;
-      let cartValue = this.cart;
-
-      cartValue.carts.forEach(element => {
-        if (element.product_id === this.id) {
-          if (element.qty >= element.product.num) {
-            alert(`無法加入購物車，購物車數量${element.qty}已達最大可購買量 ${element.product.num}件商品。`)
-            isMaxNum = true
-            return
-          }
-
-          if (qty + element.qty > element.product.num) {
-            alert(`無法加入購物車，購物車數量已有${element.qty}件，只可再購買 ${element.product.num - element.qty}件商品。`)
-            isMaxNum = true
-          }
-        }
-      });
-      if (isMaxNum) {
-        return
-      }
-
-      const cart = {
-        product_id: id,
-        qty,
-      };
-
-      this.addCartByItem(cart);
-      if (redirect) {
-        this.goToCart();
-      }
-    },
-    handleScroll() {
-      this.showScrollToTopButton = window.pageYOffset > window.innerHeight / 2;
-    },
-    scrollToTop() {
-      window.scrollTo({top: 0, behavior: "smooth"});
-    },
-
-  },
-  created() {
-    this.id = this.$route.params.productId;
-    this.getProductByID(this.id);
-    this.getProducts()
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
+  });
+  if (isMaxNum) {
+    return;
   }
 
+  const cartItem = {product_id: id, qty, };
+
+  addCartByItem(cartItem);
+  if (redirect) {
+    goToCart();
+  }
 };
+
+const handleScroll = () => {
+  showScrollToTopButton.value = window.pageYOffset > window.innerHeight / 2;
+};
+
+const scrollToTop = () => {
+  window.scrollTo({top: 0, behavior: "smooth"});
+};
+
+onMounted(() => {
+  id.value = route.params.productId;
+  getProductByID(id.value);
+  getProducts();
+  window.addEventListener("scroll", handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
+
+watch(() => product, () => {
+  saveButtonItem.value = {
+    title: product.title,
+    id: product.id,
+    imageUrl: product.imageUrl,
+    on_stock: true
+  };
+});
+
+watch(() => products, () => {
+  filterByCategory(route.params.category);
+  getCart();
+});
+
+watch(() => route, (to, from) => {
+  if (to.path !== from.path) {
+    id.value = route.params.productId;
+    getProductByID(id.value);
+    getProducts();
+  }
+});
+
 </script>
 
 <style lang="css" scoped>
