@@ -40,80 +40,67 @@
   </div>
 </template>
 
-<script>
-
+<script setup>
+import {ref, onMounted} from 'vue'
 import Tab from 'bootstrap/js/dist/tab';
 import CartFlowItems from '@/components/user/CartFlowItems.vue';
 import CartFlowOrderLoc from '@/components/user/CartFlowOrderLoc.vue';
 import CartFlowOrderSuccess from '@/components/user/CartFlowOrderSuccess.vue';
+const orderId = ref("")
+const stepRecord = ref(0);
+const checkout = ref(false);
 
-export default {
+let activeTab = 0;
+const tabsInfo = [
+  {id: "01-cart"},
+  {id: "02-fill-order"},
+  {id: "03-checkout"}
+];
+function setActiveTab(index) {
+  activeTab = index;
+}
 
-  components: {CartFlowItems, CartFlowOrderLoc, CartFlowOrderSuccess},
-  data() {
-    return {
-      orderId: "",
-      stepRecord: 0,//紀錄
-      checkout: false,
-      products: [],
-      activeTab: 0,
-      tabsInfo: [{
-        id: "01-cart",
-      }, {
-        id: "02-fill-order",
-      }, {
-        id: "03-checkout",
-      }]
-    }
-  },
-  methods: {
+function goNextTab() {
+  stepRecord.value = activeTab + 1;
+  let nextSelector = `#${tabsInfo[activeTab + 1].id}`
+  let triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${nextSelector}"]`)
+  Tab.getInstance(triggerEl).show()
+}
 
-    setActiveTab(index) {
-      this.activeTab = index;
-    },
-    goNextTab() {
-      this.stepRecord = this.activeTab + 1;
-      let nextSelector = `#${this.tabsInfo[this.activeTab + 1].id}`
-      let triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${nextSelector}"]`)
-      Tab.getInstance(triggerEl).show()
-    },
+function goPrevTab() {
+  stepRecord.value = activeTab - 1;
+  let prevSelector = `#${tabsInfo[activeTab - 1].id}`
+  let triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${prevSelector}"]`)
+  Tab.getInstance(triggerEl).show()
+}
 
-    goPrevTab() {
-      this.stepRecord = this.activeTab - 1;
-      let prevSelector = `#${this.tabsInfo[this.activeTab - 1].id}`
-      let triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${prevSelector}"]`)
-      Tab.getInstance(triggerEl).show()
-    },
-
-    updateOrderID(orderID) {
-      this.checkout = true;
-      this.orderId = orderID
-    }
-  },
-
-  mounted() {
-
-    let triggerTabList = [].slice.call(document.querySelectorAll('#pills-tab button'))
-    triggerTabList.forEach(function (triggerEl) {
-      let tabTrigger = new Tab(triggerEl)
-      triggerEl.addEventListener('click', function (event) {
-        event.preventDefault()
-        tabTrigger.show()
-      })
+function updateOrderID(orderID) {
+  checkout.value = true;
+  orderId.value = orderID
+}
+onMounted(() => {
+  let triggerTabList = [].slice.call(document.querySelectorAll('#pills-tab button'))
+  triggerTabList.forEach(function (triggerEl) {
+    let tabTrigger = new Tab(triggerEl)
+    triggerEl.addEventListener('click', function (event) {
+      event.preventDefault()
+      tabTrigger.show()
     })
-    // 監聽 show.bs.tab 事件
-    document.querySelectorAll('.nav-link').forEach(tab => {
-      tab.addEventListener('show.bs.tab', event => {
-        const tabId = event.target.getAttribute('aria-controls');
-        let tabIndex = 0;
-        this.tabsInfo.forEach((e, index) => {
-          if (e.id === tabId) {
-            tabIndex = index
-            this.setActiveTab(tabIndex)
-          }
-        })
-      });
+  })
+
+  document.querySelectorAll('.nav-link').forEach(tab => {
+    tab.addEventListener('show.bs.tab', event => {
+      const tabId = event.target.getAttribute('aria-controls');
+      let tabIndex = 0;
+      tabsInfo.forEach((e, index) => {
+        if (e.id === tabId) {
+          tabIndex = index
+          setActiveTab(tabIndex)
+        }
+      })
     });
-  },
-};
+  });
+
+})
+
 </script>
