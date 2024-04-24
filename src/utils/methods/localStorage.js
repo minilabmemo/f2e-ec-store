@@ -19,7 +19,7 @@ class LocalStorage {
     const data = localStorage.getItem(key)
 
     if (!data) {
-      return {}
+      return null
     }
 
     return JSON.parse(data)

@@ -95,17 +95,17 @@ const orderStore = useOrderStore();
 const {createOrder, } = orderStore;
 const {status} = storeToRefs(orderStore);
 
-import {formDataStorage} from '@/utils/methods/formDataStorage';
-const {getFormData} = formDataStorage();
+import {memberStorage} from '@/utils/methods/memberStorage.js';
+const {getMemberData} = memberStorage();
 
 function importDataCheckbox() {
 
-  const formDataFromLocalStorage = getFormData();
-  if (!formDataFromLocalStorage) {
+  const memberData = getMemberData();
+  if (!memberData) {
     alert('您沒有保存的會員資料，請先更新會員資料。');
     document.getElementById('importDataCheckbox').checked = false;
   } else {
-    form.value = formDataFromLocalStorage;
+    form.value = memberData;
   }
 
 }
