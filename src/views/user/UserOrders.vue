@@ -93,7 +93,7 @@
               <span v-else>未付款 </span>
 
             </div>
-            <button class="btn btn-outline-danger btn-sm text-nowrap " @click="confirmPay(item)"
+            <button class="btn btn-outline-danger btn-sm text-nowrap w-100 mt-1" @click="confirmPay(item)"
               v-if="!item.is_paid">付款</button>
 
           </td>

@@ -74,7 +74,7 @@
           <div> <button type="button" class="btn btn-outline-primary  me-2"
               @click.prevent="emit('go-prev')">回上一步</button>
           </div>
-          <div><button type="submit" class="btn btn-primary ">送出訂單</button></div>
+          <div><button type="submit" class="btn btn-primary  ">送出訂單</button></div>
 
         </div>
       </div>

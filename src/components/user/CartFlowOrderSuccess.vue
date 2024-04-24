@@ -57,8 +57,8 @@
           </tr>
         </tbody>
       </table>
-      <div class="text-end" v-if="order.is_paid === false">
-        <button class="btn btn-danger">確認付款去</button>
+      <div class="text-center" v-if="order.is_paid === false">
+        <button class="btn btn-primary">確認付款去</button>
       </div>
       <div class="text-center " v-else>
         <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">

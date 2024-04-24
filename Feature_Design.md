@@ -16,9 +16,11 @@
 ### 全局
 
 - ESLint
+
   - [x] 加入 vue/html-self-closing 規則檢驗 `0.3.0`
   - [x] 加入 'no-multiple-empty-lines' `0.4.0`
   - [x] 加入 'no-var' `0.4.0`
+
 - html/vue
 
   - [x]html 修改語系設定與新增 meta 描述 `0.4.0`
@@ -58,6 +60,7 @@
 - [x] Just For You 隨機顯示 Hot 分類商品，未獲取到資料則顯示 coming soon 圖示。
 - [x] 獲取資料中則商品名稱會顯示 Loading
 - [x] 關鍵字搜尋
+- [ ] 首頁圖變小裝置時會變成輪播
 
 #### 商品列表
 
@@ -127,3 +130,5 @@ SIZE
    (F) 長度 46 下擺長 110  腰圍 32 臀圍 43
 
 ```
+
+---
