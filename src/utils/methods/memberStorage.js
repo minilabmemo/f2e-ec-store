@@ -3,6 +3,8 @@ import statusStore from '@/stores/statusStore';
 const saveKey = "memberData"
 import LocalStorage from '@/utils/methods/localStorage.js'
 export function memberStorage() {
+  const status = statusStore();
+
   const saveMemberData = (data) => {
     LocalStorage.set(saveKey, data);
     status.pushMessage({
@@ -11,7 +13,6 @@ export function memberStorage() {
     });
   };
 
-  const status = statusStore();
   const getMemberData = () => {
     const formData = LocalStorage.get(saveKey);
 

@@ -36,6 +36,8 @@
 </template>
 <script setup>
 import LocalStorage from '@/utils/methods/localStorage.js'
+import statusStore from '@/stores/statusStore';
+const status = statusStore();
 import {ref, watch, onMounted} from 'vue';
 const props = defineProps({
   item: Object,
@@ -65,6 +67,10 @@ const saveItem = () => {
   }
 
   LocalStorage.set(saveKey, saveItems);
+  status.pushMessage({
+    title: '加入收藏',
+    response: {data: {message: "", success: true}, }
+  });
   syncSaveStatus();
 };
 
@@ -78,6 +84,10 @@ const removeItem = () => {
       }
     }
   }
+  status.pushMessage({
+    title: '移除收藏',
+    response: {data: {message: "", success: true}, }
+  });
   LocalStorage.set(saveKey, saveItems);
   syncSaveStatus();
 };
