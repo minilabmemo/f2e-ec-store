@@ -69,7 +69,7 @@
                 </button>
               </div>
               <div class="col-4  "> <button type="button" class="h-100 w-100  btn btn-outline-danger "
-                  @click="addCartCheck(product.id, itemQty, false)" :class="{ disabled: status.isCartLoading }">
+                  @click="addCart(product.id, itemQty, false)" :class="{ disabled: status.isCartLoading }">
                   加入購物車
                 </button></div>
 
@@ -133,7 +133,7 @@
 
   </div>
   <AddCartConfirm v-if="product" :item="{ title: product.title, qty: itemQty }" ref="cartConfirm"
-    @add-item="addCartCheck(product.id, itemQty, true)" @go-carts="goToCart" />
+    @add-item="addCart(product.id, itemQty, true)" @go-carts="goToCart" />
 
   <button @click="scrollToTop" class="btn bg-primary   rounded-circle  "
     :class="{ 'scroll-to-top-button': true, 'show': showScrollToTopButton }">
@@ -152,10 +152,11 @@ import SaleItem from '@/components/user/SaleItem.vue';
 import {useCartStore} from '@/stores/cartStore';
 import {storeToRefs} from 'pinia'
 import {useProductStore} from '@/stores/productStore';
+import {addCartCheck} from '@/utils/methods/addCartCheck.js'
 const productStore = useProductStore();
 const {product, products, status} = storeToRefs(productStore);
 const cartStore = useCartStore();
-const {getCart, addCartByItem} = cartStore;
+
 const {cart} = cartStore;
 
 const {productsByCAT, getProductByID, getProducts, filterByCategory} = useProductStore();
@@ -197,7 +198,7 @@ const goToCart = () => {
 
 const checkQty = (id, qty = 1) => {
   let confirmAddCart = false;
-  if (cart.carts) {
+  if (cart) {
     cart.carts.forEach(element => {
       if (element.product_id === id) {
         confirmAddCart = true;
@@ -208,38 +209,42 @@ const checkQty = (id, qty = 1) => {
     const confirmModal = cartConfirm.value;
     confirmModal.showModal();
   } else {
-    addCartCheck(id, qty, true);
+    addCart(id, qty, true);
   }
 };
 
-function addCartCheck(id, qty = 1, redirect = false) {
-  if (!cart) {
+function addCart(id, qty = 1, redirect = false) {
+  const isAdd = addCartCheck(id, qty)
+  if (!isAdd) {
     return
   }
-  let isMaxNum = false;
-  let cartValue = cart;
+  // if (!cart) {
+  //   return
+  // }
+  // let isMaxNum = false;
+  // let cartValue = cart;
 
-  cartValue.carts.forEach(element => {
-    if (element.product_id === id) {
-      if (element.qty >= element.product.num) {
-        alert(`無法加入購物車，購物車數量${element.qty}已達最大可購買量 ${element.product.num}件商品。`);
-        isMaxNum = true;
-        return;
-      }
+  // cartValue.carts.forEach(element => {
+  //   if (element.product_id === id) {
+  //     if (element.qty >= element.product.num) {
+  //       alert(`無法加入購物車，購物車數量${element.qty}已達最大可購買量 ${element.product.num}件商品。`);
+  //       isMaxNum = true;
+  //       return;
+  //     }
 
-      if (qty + element.qty > element.product.num) {
-        alert(`無法加入購物車，購物車數量已有${element.qty}件，只可再購買 ${element.product.num - element.qty}件商品。`);
-        isMaxNum = true;
-      }
-    }
-  });
-  if (isMaxNum) {
-    return;
-  }
+  //     if (qty + element.qty > element.product.num) {
+  //       alert(`無法加入購物車，購物車數量已有${element.qty}件，只可再購買 ${element.product.num - element.qty}件商品。`);
+  //       isMaxNum = true;
+  //     }
+  //   }
+  // });
+  // if (isMaxNum) {
+  //   return;
+  // }
 
-  const cartItem = {product_id: id, qty, };
+  // const cartItem = {product_id: id, qty, };
 
-  addCartByItem(cartItem);
+  // addCartByItem(cartItem);
   if (redirect) {
     goToCart();
   }

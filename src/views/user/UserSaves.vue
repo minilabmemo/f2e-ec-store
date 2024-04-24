@@ -8,54 +8,49 @@
       </button>
     </div>
   </div>
-  <div v-else>
-    <table class="table mt-4">
-      <thead>
-        <tr class="d-flex ">
-          <th style="flex:1">商品</th>
-          <th style="flex:1">操作</th>
-        </tr>
-      </thead>
-      <tbody>
+  <div v-else class=" container-xl row justify-content-center ">
 
-        <template v-for="(item) in displayItems" :key="item.id">
+    <div class="col-12 col-md-7 ">
+      <h4>收藏清單</h4>
+      <template v-for="(item) in displayItems" :key="item.id">
 
-          <tr class="d-flex " data-cy="item">
-            <td style="flex:1">
-              <div class="d-flex ">
-                <div style="flex:1"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
-                <div style="flex:2" class="col-11 d-flex  flex-column  align-items-start text-start ms-2">
-                  <div> {{ item.title }}</div>
-                  <div class="d-flex gap-2 justify-content-center  align-items-center ms-2">
-                    <span class="text-300" v-show="item.origin_price !== item.price"> <del>${{ item.origin_price
-                        }}</del></span>
-                    <span class="text-primary  me-4 " v-show="item.price">${{ item.price }}</span>
+        <div class="row justify-content-center border-bottom border-black p-3 g-3" data-cy=" item">
+          <div class="col-12 col-md-4  d-flex align-items-center  justify-content-center ">
+            <div style="max-width: 200px"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
 
-                  </div>
-                  <span class="text-secondary ms-2" v-if="!item.on_stock"> 此商品已下架。</span>
+          </div>
+          <div class="col-12 col-md-8  ">
 
-                </div>
+            <div class=" d-flex  flex-column  justify-content-between  align-items-start text-start ms-2">
+              <div> {{ item.title }}</div>
+              <div class="d-flex gap-2 justify-content-center  align-items-center ms-2">
+                <span class="text-300" v-show="item.origin_price !== item.price"> <del>${{ item.origin_price
+                    }}</del></span>
+                <span class="text-primary  me-4 " v-show="item.price">${{ item.price }}</span>
 
               </div>
-            </td>
-            <td style="flex:1">
-              <div class=" btn-group" role="group" aria-label="Basic example">
-                <button type="button" class=" btn btn-outline-danger" :disabled="!item.on_stock">
+              <span class="text-secondary ms-2" v-if="!item.on_stock"> 此商品已下架。</span>
+              <div class="d-flex gap-2 mt-2 ">
+                <button type="button" class=" btn btn-outline-secondary " :disabled="!item.on_stock">
                   <router-link class="nav-link" :to="`/product/all/all/id/${item.id}`">前往商品頁</router-link>
-
                 </button>
-                <button type="button" class="btn btn-outline-danger" @click="removeItem(item.id)">
+                <button type="button" class="btn btn-outline-secondary" @click="removeItem(item.id)">
                   移出收藏
                 </button>
+                <button type="button" class="btn btn-outline-secondary" @click="addCartCheck(item.id, 1)">
+                  加入購物車
+                </button>
               </div>
-            </td>
 
-          </tr>
-        </template>
-      </tbody>
-    </table>
+            </div>
 
-    <Pagination :pages="pagination" @change-page-num="filterItemsByPage" />
+          </div>
+
+        </div>
+      </template>
+
+      <Pagination :pages="pagination" @change-page-num="filterItemsByPage" class="mt-3" />
+    </div>
   </div>
 
 </template>
@@ -65,12 +60,13 @@ import Pagination from '@/components/PaginationAct.vue';
 import {useProductStore} from '@/stores/productStore';
 import {ref, watch} from 'vue';
 import {storeToRefs} from 'pinia'
-
+import LocalStorage from '@/utils/methods/localStorage.js'
+import {addCartCheck} from '@/utils/methods/addCartCheck.js'
 const {status} = useProductStore();
 const productStore = useProductStore();
 const {products} = storeToRefs(productStore);
 const {getProducts} = productStore;
-import LocalStorage from '@/utils/methods/localStorage.js'
+
 const saveKey = "favorite";
 let saveItems = ref({});
 let displayItems = ref({});
