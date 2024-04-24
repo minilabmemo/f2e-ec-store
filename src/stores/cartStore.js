@@ -37,13 +37,13 @@ export const useCartStore = defineStore('cartStore', () => {
 
   function addCartByItem(cart) {
     const url = `${userCartApi}`;
-
     fetchAct.post(url, {data: cart}, `加入購物車`)
       .then(data => {
         if (data.data & data.data.product_id !== cart.product_id) {
           console.warn("後端回應資訊有誤 product_id=", data.data.product_id)
         }
         this.getCart();
+
       })
 
   }

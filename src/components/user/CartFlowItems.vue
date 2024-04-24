@@ -1,6 +1,6 @@
 <template>
 
-  <div class="row mt-4" v-if="cart && cart.carts && cart.carts.length !== 0">
+  <div class="row mt-4  ">
     <div class="col-12 ">
       <table class="phone-table table align-middle d-table d-lg-none ">
         <thead>
@@ -31,7 +31,7 @@
                         <span class=" text-300" v-show="item.product.price !== item.product.origin_price"> <del>
 
                             ${{
-    $filters.currency(item.product.origin_price) }}</del></span>
+            $filters.currency(item.product.origin_price) }}</del></span>
                         <span class=" text-primary  me-1 ">${{ $filters.currency(item.product.price) }}</span>
 
                       </div>
@@ -62,7 +62,8 @@
         <tfoot>
           <tr>
             <td class="text-end">總計</td>
-            <td class="text-end">{{ $filters.currency(cart.total) }}</td>
+
+            <td class="text-end">${{ $filters.currency(cart.total) }}</td>
           </tr>
           <tr v-if="cart.final_total !== cart.total">
             <td class="text-end text-success text-nowrap "><small>折扣價</small></td>
@@ -97,7 +98,7 @@
                         }}</router-link></div>
                     <div class="ms-2">
                       <span class=" text-300  me-4" v-show="item.product.price !== item.product.origin_price"> <del>${{
-    $filters.currency(item.product.origin_price) }}</del></span>
+            $filters.currency(item.product.origin_price) }}</del></span>
                       <span class=" text-primary  me-4 ">${{ $filters.currency(item.product.price) }}</span>
                       <div class=" text-500  ">剩餘數量： {{ item.product.num }}</div>
                     </div>
@@ -111,16 +112,15 @@
 
               </td>
               <td>
-                <div class="input-group input-group-sm">
-                  <input aria-label="number" type="number" class="form-control" min=1 :max="item.product.num"
-                    :disabled="item.id === status.loadingItem" @change="updateCart(item)" v-model.number="item.qty">
-                  <div class="input-group-text">/ {{ item.product.unit }}</div>
+                <select id="qty" class="form-select" v-model="item.qty" :disabled="item.id === status.loadingItem"
+                  @change="updateCart(item)">
 
-                </div>
+                  <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
+                </select>
               </td>
               <td class="text-end">
                 <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
-                {{ $filters.currency(item.final_total) }}
+                ${{ $filters.currency(item.final_total) }}
               </td>
             </tr>
 
@@ -128,12 +128,13 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="3" class="text-end">總計</td>
-            <td class="text-end">{{ $filters.currency(cart.total) }}</td>
+            <td colspan="2" class="text-end">總計</td>
+            <td class="text-center ">{{ cartTotalQty }}件</td>
+            <td class="text-end">${{ $filters.currency(cart.total) }}</td>
           </tr>
           <tr v-if="cart.final_total !== cart.total">
             <td colspan="3" class="text-end text-success">折扣價</td>
-            <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
+            <td class="text-end text-success">${{ $filters.currency(cart.final_total) }}</td>
           </tr>
         </tfoot>
       </table>
@@ -160,25 +161,9 @@
       </div>
 
     </div>
-    <div class="col-12 ">
-      <div class="col-12 ">
-        <div class=" d-flex justify-content-center">
-          <button class="btn btn-danger  text-white  " type="button" @click="$emit('go-next')">確認，填寫訂單</button>
-        </div>
-
-      </div>
-
-    </div>
 
   </div>
 
-  <div v-else class="text-dark  "> 您的購物車是空的，請先將商品放入購物車。
-    <div class="d-flex justify-content-end mb-5">
-      <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
-          繼續購物</router-link>
-      </button>
-    </div>
-  </div>
   <RemoveCartConfirm :item="tempItem" ref="RemoveCartConfirm" @remove-item="removeCartItem(tempItem.id)" />
 </template>
 
@@ -192,12 +177,12 @@ import {useProductStore} from '@/stores/productStore';
 import {mapState, mapActions} from 'pinia'
 export default {
   components: {RemoveCartConfirm},
-  emits: ['go-next'],
+
   props: {
     checkout: Boolean,
   },
   computed: {
-    ...mapState(useCartStore, ['cart', 'status']),
+    ...mapState(useCartStore, ['cart', 'status', 'cartTotalQty']),
     ...mapState(useProductStore, ['products', 'status'])
   },
 
@@ -273,4 +258,4 @@ export default {
   width: 100%;
   height: auto;
 }
-</style>@/utils/config/path
+</style>

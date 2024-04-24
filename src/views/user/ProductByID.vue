@@ -157,7 +157,7 @@ const productStore = useProductStore();
 const {product, products, status} = storeToRefs(productStore);
 const cartStore = useCartStore();
 
-const {cart} = cartStore;
+const {cart} = storeToRefs(cartStore);
 
 const {productsByCAT, getProductByID, getProducts, filterByCategory} = useProductStore();
 const route = useRoute();
@@ -198,8 +198,8 @@ const goToCart = () => {
 
 const checkQty = (id, qty = 1) => {
   let confirmAddCart = false;
-  if (cart) {
-    cart.carts.forEach(element => {
+  if (cart.value) {
+    cart.value.carts.forEach(element => {
       if (element.product_id === id) {
         confirmAddCart = true;
       }
@@ -218,33 +218,7 @@ function addCart(id, qty = 1, redirect = false) {
   if (!isAdd) {
     return
   }
-  // if (!cart) {
-  //   return
-  // }
-  // let isMaxNum = false;
-  // let cartValue = cart;
 
-  // cartValue.carts.forEach(element => {
-  //   if (element.product_id === id) {
-  //     if (element.qty >= element.product.num) {
-  //       alert(`無法加入購物車，購物車數量${element.qty}已達最大可購買量 ${element.product.num}件商品。`);
-  //       isMaxNum = true;
-  //       return;
-  //     }
-
-  //     if (qty + element.qty > element.product.num) {
-  //       alert(`無法加入購物車，購物車數量已有${element.qty}件，只可再購買 ${element.product.num - element.qty}件商品。`);
-  //       isMaxNum = true;
-  //     }
-  //   }
-  // });
-  // if (isMaxNum) {
-  //   return;
-  // }
-
-  // const cartItem = {product_id: id, qty, };
-
-  // addCartByItem(cartItem);
   if (redirect) {
     goToCart();
   }

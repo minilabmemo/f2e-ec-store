@@ -1,37 +1,59 @@
 <template>
 
-  <div class="container font-sm ">
+  <div class=" font-sm  ">
 
-    <div class="row my-4 ">
-      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <div class="row   flex-column align-items-center  " v-if="!checkout && (!cart || cart.carts.length === 0)">
+      <div class="col-12  col-lg-7 text-dark   d-flex flex-column align-items-start">
+        <h5 class=" my-3">購物車頁面</h5>
+        <div class="  mb-5">
 
-        <li class="nav-item" role="presentation">
-          <button class="nav-link font-sm active" :id="`${tabsInfo[0].id}-tab`" data-bs-toggle="pill"
-            :data-bs-target="`#${tabsInfo[0].id}`" type="button" role="tab" :aria-controls="tabsInfo[0].id"
-            aria-selected="true">01
-            購物車</button>
-        </li>
-        <li class="nav-item " role="presentation">
-          <button class="nav-link " :disabled="stepRecord < 1" :id="`${tabsInfo[1].id}-tab`" data-bs-toggle="pill"
-            :data-bs-target="`#${tabsInfo[1].id}`" type="button" role="tab" :aria-controls="tabsInfo[1].id"
-            aria-selected="false">02 填寫訂單</button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link " :disabled="stepRecord < 2" :id="`${tabsInfo[2].id}-tab`" data-bs-toggle="pill"
-            :data-bs-target="`#${tabsInfo[2].id}`" type="button" role="tab" :aria-controls="tabsInfo[2].id"
-            aria-selected="false">03 結帳</button>
-        </li>
-      </ul>
-      <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" :id="tabsInfo[0].id" role="tabpanel"
-          :aria-labelledby="`${tabsInfo[0].id}-tab`">
-          <CartFlowItems @go-next="goNextTab" :checkout="checkout" />
+          <div>您的購物車是空的，請先將商品放入購物車。</div>
+          <button class="btn btn-outline-primary mt-2" type="button"> <router-link to="/product/all/all"
+              class="nav-link ">
+              前往購物</router-link>
+          </button>
         </div>
-        <div class="tab-pane fade" :id="tabsInfo[1].id" role="tabpanel" :aria-labelledby="`${tabsInfo[1].id}-tab`">
-          <CartFlowOrderLoc @go-next="goNextTab" @go-prev="goPrevTab" @order-create="updateOrderID" />
-        </div>
-        <div class="tab-pane fade" :id="tabsInfo[2].id" role="tabpanel" :aria-labelledby="`${tabsInfo[2].id}-tab`">
-          <CartFlowOrderSuccess :orderId="orderId" />
+      </div>
+    </div>
+    <div class="my-3 " v-else>
+      <div class="row flex-column align-items-center">
+        <div class="col-12  col-lg-10">
+          <h5 class=" my-3">購物車頁面</h5>
+          <ul class="nav  mb-3">
+            <li class="nav-item">
+              <button class="btn  " :class="{ 'btn-secondary': activeTab === 1, 'text-white': activeTab === 1 }"
+                type="button" role="tab" @click="setActiveTab(1)">01
+                加入商品</button>
+            </li>
+            <li class="nav-item " role="presentation">
+              <button class="btn border-0 " :disabled="stepRecord < 2"
+                :class="{ 'btn-secondary': activeTab === 2, 'text-white': activeTab === 2 }" type="button" role="tab"
+                @click="setActiveTab(2)">02 填寫訂單</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="btn border-0 " :disabled="stepRecord < 3"
+                :class="{ 'btn-secondary': activeTab === 3, 'text-white': activeTab === 3 }" type="button" role="tab"
+                @click="setActiveTab(3)">03 結帳</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade " :class="{ 'show': activeTab === 1, 'active': activeTab === 1 }">
+              <div class="">
+                <CartFlowItems :checkout="checkout" />
+              </div>
+              <div class=" d-flex justify-content-center">
+                <button class="btn btn-primary  text-white  " type="button" @click="goNextTab">填寫訂單資訊</button>
+              </div>
+
+            </div>
+            <div class="tab-pane fade" :class="{ 'show': activeTab === 2, 'active': activeTab === 2 }">
+              <CartFlowOrderLoc @go-prev="goPrevTab" @order-create="updateOrderID" />
+
+            </div>
+            <div class="tab-pane fade" :class="{ 'show': activeTab === 3, 'active': activeTab === 3 }">
+              <CartFlowOrderSuccess :orderId="orderId" />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -41,66 +63,45 @@
 </template>
 
 <script setup>
-import {ref, onMounted} from 'vue'
-import Tab from 'bootstrap/js/dist/tab';
+import {ref} from 'vue'
+
 import CartFlowItems from '@/components/user/CartFlowItems.vue';
 import CartFlowOrderLoc from '@/components/user/CartFlowOrderLoc.vue';
 import CartFlowOrderSuccess from '@/components/user/CartFlowOrderSuccess.vue';
+import {useCartStore} from '@/stores/cartStore';
+import {storeToRefs} from 'pinia'
+const cartStore = useCartStore();
+
+const {cart} = storeToRefs(cartStore);
+
 const orderId = ref("")
 const stepRecord = ref(0);
 const checkout = ref(false);
 
-let activeTab = 0;
-const tabsInfo = [
-  {id: "01-cart"},
-  {id: "02-fill-order"},
-  {id: "03-checkout"}
-];
+let activeTab = ref(1);
+
 function setActiveTab(index) {
-  activeTab = index;
+  activeTab.value = index;
 }
 
 function goNextTab() {
-  stepRecord.value = activeTab + 1;
-  let nextSelector = `#${tabsInfo[activeTab + 1].id}`
-  let triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${nextSelector}"]`)
-  Tab.getInstance(triggerEl).show()
+  const next = activeTab.value + 1
+  stepRecord.value = next;
+  setActiveTab(next);
+
 }
 
 function goPrevTab() {
-  stepRecord.value = activeTab - 1;
-  let prevSelector = `#${tabsInfo[activeTab - 1].id}`
-  let triggerEl = document.querySelector(`#pills-tab button[data-bs-target="${prevSelector}"]`)
-  Tab.getInstance(triggerEl).show()
+
+  const prev = activeTab.value - 1
+  setActiveTab(prev);
+
 }
 
 function updateOrderID(orderID) {
   checkout.value = true;
   orderId.value = orderID
+  goNextTab();
 }
-onMounted(() => {
-  let triggerTabList = [].slice.call(document.querySelectorAll('#pills-tab button'))
-  triggerTabList.forEach(function (triggerEl) {
-    let tabTrigger = new Tab(triggerEl)
-    triggerEl.addEventListener('click', function (event) {
-      event.preventDefault()
-      tabTrigger.show()
-    })
-  })
-
-  document.querySelectorAll('.nav-link').forEach(tab => {
-    tab.addEventListener('show.bs.tab', event => {
-      const tabId = event.target.getAttribute('aria-controls');
-      let tabIndex = 0;
-      tabsInfo.forEach((e, index) => {
-        if (e.id === tabId) {
-          tabIndex = index
-          setActiveTab(tabIndex)
-        }
-      })
-    });
-  });
-
-})
 
 </script>
