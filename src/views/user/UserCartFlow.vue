@@ -25,13 +25,13 @@
       <div class="tab-content" id="pills-tabContent">
         <div class="tab-pane fade show active" :id="tabsInfo[0].id" role="tabpanel"
           :aria-labelledby="`${tabsInfo[0].id}-tab`">
-          <ProductCart @go-next="goNextTab" :checkout="checkout" />
+          <CartFlowItems @go-next="goNextTab" :checkout="checkout" />
         </div>
         <div class="tab-pane fade" :id="tabsInfo[1].id" role="tabpanel" :aria-labelledby="`${tabsInfo[1].id}-tab`">
-          <OrderInfo @go-next="goNextTab" @go-prev="goPrevTab" @order-create="updateOrderID" />
+          <CartFlowOrderLoc @go-next="goNextTab" @go-prev="goPrevTab" @order-create="updateOrderID" />
         </div>
         <div class="tab-pane fade" :id="tabsInfo[2].id" role="tabpanel" :aria-labelledby="`${tabsInfo[2].id}-tab`">
-          <OrderByID :orderId="orderId" />
+          <CartFlowOrderSuccess :orderId="orderId" />
         </div>
       </div>
 
@@ -43,13 +43,13 @@
 <script>
 
 import Tab from 'bootstrap/js/dist/tab';
-import ProductCart from '@/components/user/ProductCart.vue';
-import OrderInfo from '@/components/user/SendOrder.vue';
-import OrderByID from '@/components/user/OrderByID.vue';
+import CartFlowItems from '@/components/user/CartFlowItems.vue';
+import CartFlowOrderLoc from '@/components/user/CartFlowOrderLoc.vue';
+import CartFlowOrderSuccess from '@/components/user/CartFlowOrderSuccess.vue';
 
 export default {
 
-  components: {ProductCart, OrderInfo, OrderByID},
+  components: {CartFlowItems, CartFlowOrderLoc, CartFlowOrderSuccess},
   data() {
     return {
       orderId: "",
