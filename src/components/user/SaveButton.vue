@@ -34,70 +34,62 @@
   </button>
 
 </template>
+<script setup>
+import LocalStorage from '@/utils/methods/localStorage.js'
+import {ref, watch, onMounted} from 'vue';
+const props = defineProps({
+  item: Object,
+});
 
-<script>
-export default {
-  props: {
-    item: Object,
-  },
-  data() {
-    return {
-      saveKey: "favorite",
-      isSave: false,
+const saveKey = "favorite";
+let isSave = ref(false);
 
+const syncSaveStatus = () => {
+  isSave.value = false;
+  const saveItems = LocalStorage.get(saveKey);
+  if (saveItems) {
+    for (const value of Object.values(saveItems)) {
+      if (value.id === props.item.id) {
+        isSave.value = true;
+      }
     }
-  },
-  created() {
+  }
+};
 
-    this.syncSaveStatus();
-  },
-  watch: {
-    item: {
-      handler() {
-        this.syncSaveStatus();
-      },
-      deep: true,
-    },
-  },
-  methods: {
-    syncSaveStatus() {
+const saveItem = () => {
+  let saveItems = LocalStorage.get(saveKey);
+  if (saveItems) {
+    saveItems = [...saveItems, props.item];
+  } else {
+    saveItems = [props.item];
+  }
 
-      this.isSave = false;
-      let saveItems = JSON.parse(localStorage.getItem(this.saveKey))
-      if (saveItems) {
-        for (const value of Object.values(saveItems)) {
-          if (value.id === this.item.id) {
-            this.isSave = true;
-          }
-        }
-      }
-    },
+  LocalStorage.set(saveKey, saveItems);
+  syncSaveStatus();
+};
 
-    saveItem() {
-      let saveItems = JSON.parse(localStorage.getItem(this.saveKey))
-      if (saveItems) {
-        saveItems = [...saveItems, this.item]
-      } else {
-        saveItems = [this.item]
+const removeItem = () => {
+  let saveItems = [];
+  const nowItems = LocalStorage.get(saveKey);
+  if (nowItems) {
+    for (const value of Object.values(nowItems)) {
+      if (value.id !== props.item.id) {
+        saveItems = [...saveItems, value];
       }
-      localStorage.setItem(this.saveKey, JSON.stringify(saveItems))
-      this.syncSaveStatus()
-    },
-    removeItem() {
-      let saveItems = [];
-      let nowItems = JSON.parse(localStorage.getItem(this.saveKey))
-      if (nowItems) {
-        for (const value of Object.values(nowItems)) {
-          if (value.id !== this.item.id) {
-            saveItems = [...saveItems, value]
-          }
-        }
-      }
-      localStorage.setItem(this.saveKey, JSON.stringify(saveItems))
-      this.syncSaveStatus()
-    },
-  },
-}
+    }
+  }
+  LocalStorage.set(saveKey, saveItems);
+  syncSaveStatus();
+};
+
+onMounted(() => {
+  syncSaveStatus();
+});
+
+watch(() => props.item, () => {
+  syncSaveStatus();
+}, {deep: true});
+
 </script>
 
 <style lang="css" scoped>

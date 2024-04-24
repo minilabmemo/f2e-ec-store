@@ -3,7 +3,7 @@
 ### Fix
 
 - 第一次 review 修正
-  - https://rpg.hexschool.com/#/tasks/12061579703981170471
+  -
 
 ## 0.3.0 (2024-04-10)
 
