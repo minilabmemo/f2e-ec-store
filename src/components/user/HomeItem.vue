@@ -1,6 +1,6 @@
 <template>
 
-  <div class="d-flex flex-column gap-3  ">
+  <div class="d-flex flex-column gap-3  home-item">
 
     <div class="position-relative ">
       <router-link :to="`/product/all/all/id/${item.id}`" class="nav-link">
@@ -49,20 +49,8 @@ defineProps({
 </script>
 
 <style scoped>
-.primary {
-  color: var(--bs-primary);
-}
-
-.secondary {
-  color: var(--bs-secondary);
-}
-
-.orange {
-  color: var(--bs-orange-200);
-}
-
-.gray {
-  color: var(--bs-gray-300);
+.home-item:hover {
+  opacity: .8
 }
 
 .photo-mix-text {

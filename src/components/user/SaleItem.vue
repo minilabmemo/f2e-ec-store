@@ -1,6 +1,6 @@
 <template>
 
-  <div class=" ">
+  <div class="product-item ">
     <router-link :to="`/product/${path}/id/${item.id}`" class="nav-link h-100 ">
       <div class="d-flex flex-column gap-4   align-self-center  h-100">
         <img :src="item.imageUrl" alt="image" class="flex-image">
@@ -33,20 +33,14 @@ export default {
 </script>
 
 <style scoped>
-.primary {
-  color: var(--bs-primary);
+.product-item:hover {
+  opacity: 0.8;
+  overflow: hidden;
+
 }
 
-.secondary {
-  color: var(--bs-secondary);
-}
-
-.orange {
-  color: var(--bs-orange-200);
-}
-
-.gray {
-  color: var(--bs-gray-300);
+.product-item:hover img {
+  transform: scale(1.1);
 }
 
 .flex-image {
