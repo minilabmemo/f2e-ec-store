@@ -4,7 +4,7 @@
 
     <div class="row">
 
-      <DataItem v-for="(item) in showItems" :key="item.id" :item="item" class="col-4" :filter-err="filterErr" />
+      <HomeItem v-for="(item) in showItems" :key="item.id" :item="item" class="col-4" :filter-err="filterErr" />
     </div>
 
     <div class="d-flex justify-content-center gap-3 mt-3">
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-import DataItem from '@/components/user/DataItem.vue';
+import HomeItem from '@/components/user/HomeItem.vue';
 import coming1 from '@/assets/img/design/coming1.png';
 import coming2 from '@/assets/img/design/coming2.png';
 import coming3 from '@/assets/img/design/coming3.png';
 import categories from '@/utils/config/categories'
 export default {
-  components: {DataItem},
+  components: {HomeItem},
   props: {
     section: String,
     CAT: String,
@@ -67,4 +67,4 @@ export default {
   }
 
 }
-</script>@/utils/config/categories
+</script>

@@ -67,4 +67,4 @@ export default {
     }
   }
 }
-</script>@/utils/config/sectionIds.js
+</script>

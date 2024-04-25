@@ -136,4 +136,4 @@ export default {
 
   },
 };
-</script>@/utils/config/path
+</script>
