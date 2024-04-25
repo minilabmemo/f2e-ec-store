@@ -21,7 +21,6 @@
 
     </header>
     <div class="container-xl " id="content">
-
       <RouterView />
     </div>
     <HomeFooter />
@@ -61,9 +60,5 @@ watchEffect(() => {
 <style scoped>
 .h-shadow {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
-}
-
-#content {
-  min-height: 60vh;
 }
 </style>

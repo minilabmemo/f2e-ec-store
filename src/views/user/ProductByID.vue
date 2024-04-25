@@ -4,12 +4,14 @@
   <div class="" v-if="!status.isLoading">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><router-link :to="`/product/${route.params.category}/all`"> {{ category_name
+        <li class="breadcrumb-item"><router-link class="link-offset-2 " :to="`/product/${route.params.category}/all`">
+            {{ category_name
             }}</router-link>
         </li>
         <li v-if="sub_category_name" class="breadcrumb-item ">
-          <router-link :to="`/product/${route.params.category}/${route.params.subcategory}`"> {{ sub_category_name
-            }}</router-link>
+          <router-link class="link-offset-2 " :to="`/product/${route.params.category}/${route.params.subcategory}`"> {{
+    sub_category_name
+  }}</router-link>
         </li>
 
       </ol>

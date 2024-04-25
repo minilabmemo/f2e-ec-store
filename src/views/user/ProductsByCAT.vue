@@ -3,23 +3,26 @@
 
   <div class="d-flex flex-column gap-4  ">
 
-    <div class="row  gy-2">
-      <nav a class="col-12 col-xs-6  " ria-label="breadcrumb ">
+    <div class="row  gy-4 ">
+      <nav a class="col-12 col-xs-6  d-flex justify-content-start  justify-content-xs-start" ria-label="breadcrumb ">
         <ol class="breadcrumb mb-0 ">
-          <li class="breadcrumb-item" v-if="$route.params.category !== 'all'"><router-link :to="`/product/all/all`"> 全部
+          <li class="breadcrumb-item" v-if="$route.params.category !== 'all'"><router-link :to="`/product/all/all`"
+              class="link-offset-2 "> 全部
             </router-link>
           </li>
-          <li class="breadcrumb-item"><router-link :to="`/product/${$route.params.category}/all`"> {{ category_name
+          <li class="breadcrumb-item "><router-link class="link-offset-2 "
+              :to="`/product/${$route.params.category}/all`"> {{ category_name
               }}</router-link>
           </li>
           <li v-if="sub_category_name" class="breadcrumb-item ">
-            <router-link :to="`/product/${$route.params.category}/${$route.params.subcategory}`"> {{ sub_category_name
+            <router-link class="link-offset-1" :to="`/product/${$route.params.category}/${$route.params.subcategory}`">
+              {{ sub_category_name
               }}</router-link>
           </li>
         </ol>
       </nav>
 
-      <div class="col-12 col-xs-6  d-flex justify-content-end  ">
+      <div class="col-12 col-xs-6  d-flex justify-content-end justify-content-xs-end  ">
         <div class="btn-group  ">
           <button type="button" @click="sortByButton(0, 'default')" class="btn  btn-sm  "
             :class="{ 'btn-primary': sortByID === 0, 'btn-outline-primary': sortByID !== 0 }">

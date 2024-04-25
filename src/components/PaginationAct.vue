@@ -46,7 +46,7 @@ watchEffect(() => {
 
   }
 });
-const props = defineProps({
+defineProps({
   pages: Object,
 });
 

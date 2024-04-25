@@ -1,18 +1,18 @@
 <template>
   <LoadingOverlay :active="status.isLoading" />
-  <div class=" font-sm  ">
+  <div class=" font-sm   ">
 
-    <div class="row   flex-column align-items-center  " v-if="!checkout && (!cart || cart.carts.length === 0)">
-      <div class="col-12  col-lg-7 text-dark   d-flex flex-column align-items-start">
-        <h5 class=" my-3">購物頁面</h5>
-        <div class="  mb-5">
+    <div class="row   flex-column align-items-center  justify-content-center  " style="min-height: 50vh"
+      v-if="!checkout && (!cart || cart.carts.length === 0)">
+      <div class="col-12  col-lg-7 text-dark   d-flex flex-column align-items-center   ">
+        <h5 class=" my-4 fs-2">購物頁面</h5>
 
-          <div>您的購物車是空的，請先將商品放入購物車。</div>
-          <button class="btn btn-outline-primary mt-2" type="button"> <router-link to="/product/all/all"
-              class="nav-link ">
-              前往購物</router-link>
-          </button>
-        </div>
+        <div class="fs-4">您的購物車是空的，請先將商品放入購物車。</div>
+
+        <button class="btn btn-outline-primary mt-3 mt-lg-4" type="button">
+          <router-link to="/product/all/all" class="nav-link ">
+            前往購物</router-link>
+        </button>
       </div>
     </div>
     <div class="my-3 " v-else>

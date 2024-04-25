@@ -70,7 +70,9 @@ h4 {
   color: var(--bs-primary);
 }
  
-
+#content {
+  min-height: 60vh;
+}
  
   .icon-size{
     width: 1.2rem;
