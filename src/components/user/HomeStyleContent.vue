@@ -38,7 +38,7 @@ const items = computed(() => {
 <style lang="css" scoped>
 .flex-image {
   object-fit: cover;
-
+  aspect-ratio: 2/3;
   width: 100%;
   height: auto;
 }
