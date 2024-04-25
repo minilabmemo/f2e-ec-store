@@ -1,10 +1,10 @@
 <template>
-
+  <LoadingOverlay :active="status.isLoading" />
   <div class=" font-sm  ">
 
     <div class="row   flex-column align-items-center  " v-if="!checkout && (!cart || cart.carts.length === 0)">
       <div class="col-12  col-lg-7 text-dark   d-flex flex-column align-items-start">
-        <h5 class=" my-3">購物車頁面</h5>
+        <h5 class=" my-3">購物頁面</h5>
         <div class="  mb-5">
 
           <div>您的購物車是空的，請先將商品放入購物車。</div>
@@ -18,12 +18,12 @@
     <div class="my-3 " v-else>
       <div class="row flex-column align-items-center">
         <div class="col-12  col-lg-10">
-          <h5 class=" my-3">購物車頁面</h5>
+          <h5 class=" my-3">購物頁面</h5>
           <ul class="nav  mb-3">
             <li class="nav-item">
               <button class="btn  " :class="{ 'btn-secondary': activeTab === 1, 'text-white': activeTab === 1 }"
                 type="button" role="tab" @click="setActiveTab(1)">01
-                加入商品</button>
+                加入購物車</button>
             </li>
             <li class="nav-item " role="presentation">
               <button class="btn border-0 " :disabled="stepRecord < 2"
@@ -41,7 +41,8 @@
               <div class="">
                 <CartFlowItems :checkout="checkout" />
               </div>
-              <div class=" d-flex justify-content-center">
+              <div class=" d-flex justify-content-center gap-2">
+
                 <button class="btn btn-primary  text-white  " type="button" @click="goNextTab">填寫訂單資訊</button>
               </div>
 
@@ -72,7 +73,7 @@ import {useCartStore} from '@/stores/cartStore';
 import {storeToRefs} from 'pinia'
 const cartStore = useCartStore();
 
-const {cart} = storeToRefs(cartStore);
+const {cart, status} = storeToRefs(cartStore);
 
 const orderId = ref("")
 const stepRecord = ref(0);

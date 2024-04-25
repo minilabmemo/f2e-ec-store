@@ -49,7 +49,7 @@ export default defineStore('statusStore', {
         let message = {
           style: 'danger',
           title: `${title}失敗`,
-          content: contents.join('、'),
+          content: contents !== undefined ? contents.join('、') : ''
         };
         this.messages.push(message);
       }

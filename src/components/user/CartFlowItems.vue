@@ -13,10 +13,10 @@
           <template v-if="cart.carts">
             <tr v-for="item in cart.carts" :key="item.id" data-cy="item">
               <td>
-                <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.loadingItem === item.id"
+                <!-- <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.cartLoadingItem === item.id"
                   @click="removeConfirm(item)">
                   <i class="bi bi-x"></i>
-                </button>
+                </button> -->
               </td>
               <td>
 
@@ -35,8 +35,8 @@
                       </div>
                       <span class=" text-500  ">剩餘數量： {{ item.product.num }}</span>
 
-                      <select id="qty" class="form-select" v-model="item.qty" :disabled="item.id === status.loadingItem"
-                        @change="updateCart(item)">
+                      <select id="qty" class="form-select" v-model="item.qty"
+                        :disabled="item.id === status.cartCartLoadingItem" @change="updateCart(item)">
 
                         <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
                       </select>
@@ -73,7 +73,8 @@
       <table class="pc-table table align-middle d-none d-lg-table ">
         <thead>
           <tr>
-            <th></th>
+            <th>
+            </th>
             <th>品名</th>
             <th style="width: 110px">數量</th>
             <th style="width: 110px">單價</th>
@@ -83,8 +84,8 @@
           <template v-if="cart.carts">
             <tr v-for="item in cart.carts" :key="item.id" data-cy="item">
               <td>
-                <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.loadingItem === item.id"
-                  @click="removeConfirm(item)">
+
+                <button type="button" class="btn btn-outline-danger btn-sm" @click="removeConfirm(item)">
                   <i class="bi bi-x"></i>
                 </button>
               </td>
@@ -110,7 +111,7 @@
 
               </td>
               <td>
-                <select id="qty" class="form-select" v-model="item.qty" :disabled="item.id === status.loadingItem"
+                <select id="qty" class="form-select" v-model="item.qty" :disabled="item.id === status.CartLoadingItem"
                   @change="updateCart(item)">
 
                   <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
@@ -136,25 +137,32 @@
           </tr>
         </tfoot>
       </table>
-
-      <div class=" d-flex justify-content-end mb-5 gap-2 ">
+      <div class="d-flex justify-content-between ">
         <div class="">
-          <div class="input-group mb-3 input-group-sm">
-            <input aria-label="coupon_code" type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
-            <div class="input-group-append ">
-              <button class="btn btn-secondary text-white" type="button" @click="addCouponCode">
-                套用優惠碼
-              </button>
+          <button class="btn btn-outline-primary" type="button" @click="deleteAll">清空購物車</button>
+        </div>
+        <div class=" d-flex justify-content-end mb-5 gap-2 ">
+
+          <div class="">
+            <div class="input-group mb-3 input-group-sm">
+              <input aria-label="coupon_code" type="text" class="form-control" v-model="coupon_code"
+                placeholder="請輸入優惠碼">
+              <div class="input-group-append ">
+                <button class="btn btn-secondary text-white" type="button" @click="addCouponCode">
+                  套用優惠碼
+                </button>
+
+              </div>
 
             </div>
 
           </div>
-
-        </div>
-        <div class="">
-          <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
-              新增其他商品</router-link>
-          </button>
+          <div class="">
+            <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all"
+                class="nav-link ">
+                新增其他商品</router-link>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -162,91 +170,71 @@
 
   </div>
 
-  <RemoveCartConfirm :item="tempItem" ref="RemoveCartConfirm" @remove-item="removeCartItem(tempItem.id)" />
+  <RemoveCartConfirm :item="tempItem" ref="RemoveItemRef" @remove-item="removeCartItem(tempItem.id)" />
+  <RemoveAllCartConfirm :cartTotalQty="cartTotalQty" ref="RemoveAllItemRef" @remove-items="removeAllCartItem()" />
 </template>
 
-<script>
-import {userCouponApi} from '@/utils/config/path'
-import statusStore from '@/stores/statusStore';
+<script setup>
+import {ref, watch, defineProps} from 'vue';
+import {userCouponApi} from '@/utils/config/path';
+import {useCartStore} from '@/stores/cartStore';
+import fetchAct from '@/utils/methods/fetchAct';
+import {storeToRefs} from 'pinia';
 
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
-import {useCartStore} from '@/stores/cartStore';
-import {useProductStore} from '@/stores/productStore';
-import {mapState, mapActions} from 'pinia'
-export default {
-  components: {RemoveCartConfirm},
+import RemoveAllCartConfirm from '@/components/user/modal/RemoveAllCartConfirm.vue';
+const {getCart, updateCart, removeCartByID, removeAllItems} = useCartStore();
+const {cart, cartTotalQty, status} = storeToRefs(useCartStore());
 
-  props: {
-    checkout: Boolean,
-  },
-  computed: {
-    ...mapState(useCartStore, ['cart', 'status', 'cartTotalQty']),
-    ...mapState(useProductStore, ['products', 'status'])
-  },
+const props = defineProps({
+  checkout: Boolean,
+});
+const RemoveItemRef = ref(null);
+const RemoveAllItemRef = ref(null);
+const tempItem = ref({});
+const coupon_code = ref('');
 
-  data() {
-    return {
+const removeConfirm = (item) => {
+  tempItem.value = {...item};
+  const confirmModal = RemoveItemRef.value
+  confirmModal.showModal();
+};
 
-      product: {},
+const removeCartItem = (id) => {
 
-      form: {
-        user: {
-          name: '',
-          email: '',
-          tel: '',
-          address: '',
-        },
-        message: '',
-      },
+  removeCartByID(id);
+  const confirmModal = RemoveItemRef.value;
+  confirmModal.hideModal();
+};
 
-      coupon_code: '',
-      tempItem: {},
-    };
-  },
-  methods: {
-    ...mapActions(useCartStore, ['getCart', "updateCart", "removeCartByID"]),
-    ...mapActions(useProductStore, ['getProducts']),
-    ...mapActions(statusStore, ['pushMessage']),
-
-    removeConfirm(item) {
-      this.tempItem = {...item};
-
-      const confirmModal = this.$refs.RemoveCartConfirm;
-      confirmModal.showModal();
-    },
-
-    removeCartItem(id) {
-      this.removeCartByID(id);
-      const confirmModal = this.$refs.RemoveCartConfirm;
-      confirmModal.hideModal();
-    },
-    addCouponCode() {
-      const url = userCouponApi;
-      const coupon = {
-        code: this.coupon_code,
-      };
-      this.isLoading = true;
-      this.$http.post(url, {data: coupon}).then((response) => {
-
-        this.pushMessage({title: '加入優惠券', response: response});
-        this.getCart();
-        this.isLoading = false;
-      });
-    },
-
-  },
-  created() {
-    this.getProducts();
-
-  },
-  watch: {
-    checkout() {
-      this.getCart();
-
-    }
-  }
+const deleteAll = () => {
+  const confirmModal = RemoveAllItemRef.value
+  confirmModal.showModal();
 
 };
+const removeAllCartItem = () => {
+
+  removeAllItems();
+  const confirmModal = RemoveAllItemRef.value;
+  confirmModal.hideModal();
+};
+const addCouponCode = () => {
+  const url = userCouponApi;
+  const coupon = {
+    code: coupon_code.value,
+  };
+
+  fetchAct.post(url, {data: coupon}).then(() => {
+    getCart();
+
+  });
+};
+
+watch(() => props.checkout, () => {
+  getCart();
+  items = ref(cart.value.carts);
+});
+
 </script>
 
 <style lang="css" scoped>

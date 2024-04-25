@@ -3,12 +3,12 @@ import {defineStore} from 'pinia';
 import {computed, ref} from 'vue'
 
 import statusStore from './statusStore';
-import {userCartApi} from '@/utils/config/path'
+import {userCartApi, userCartsApi} from '@/utils/config/path'
 
 import fetchAct from '@/utils/methods/fetchAct';
 
 export const useCartStore = defineStore('cartStore', () => {
-  const cart = ref();
+  const cart = ref({carts: []});
   const status = statusStore();
   const cartTotalQty = computed(() => {
     let total = 0
@@ -60,13 +60,13 @@ export const useCartStore = defineStore('cartStore', () => {
       product_id: item.product_id,
       qty: item.qty,
     };
-    status.loadingItem = item.id;
+    status.cartLoadingItem = item.id;
     fetchAct.put(url, {data: cart}, "")
       .then(data => {
         if (data.data & data.data.product_id !== cart.product_id) {
           console.warn("後端回應資訊有誤 product_id=", data.data.product_id)
         }
-        status.loadingItem = '';
+        status.cartLoadingItem = '';
         this.getCart();
       })
 
@@ -79,18 +79,25 @@ export const useCartStore = defineStore('cartStore', () => {
     }
 
     const url = `${userCartApi}/${id}`;
-    status.loadingItem = id;
+    status.cartLoadingItem = id;
     fetchAct.delete(url, `移除購物車品項`)
       .then(() => {
-        status.loadingItem = '';
+        status.cartLoadingItem = '';
         this.getCart();
       })
 
   }
+  function removeAllItems() {
+    const url = `${userCartsApi}`;
+    fetchAct.delete(url, `移除全部購物車品項`)
+      .then(() => {
+        this.getCart();
+      })
 
+  }
   return {
     cart, status, cartTotalQty,
-    getCart, addCartByItem, updateCart, removeCartByID,
+    getCart, addCartByItem, updateCart, removeCartByID, removeAllItems
   }
 })
 
