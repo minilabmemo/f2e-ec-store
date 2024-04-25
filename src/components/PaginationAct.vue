@@ -1,6 +1,6 @@
 <template>
   <nav aria-label="Page navigation ">
-    <ul class="pagination justify-content-center ">
+    <ul class="pagination justify-content-center " :class="{ 'pagination-sm ': !isLargeDevice }">
       <li class="page-item">
         <a class="page-link " href="#" aria-label="Previous" @click.prevent="updatePage(pages.current_page - 1)"
           :class="{ disabled: !pages.has_pre }">
@@ -22,8 +22,8 @@
     </ul>
   </nav>
 </template>
-
-<script>
+<script setup>
+import {defineProps, defineEmits} from 'vue';
 // :pages="{ 頁碼資訊 }" 
 // 頁碼資訊:{
 // total_pages:3
@@ -31,12 +31,28 @@
 // has_pre:true
 // has_next:false}
 // @change-page-num="更新頁面事件" ,param = current_page (number)
-export default {
-  props: ['pages'],
-  methods: {
-    updatePage(pageNum) {
-      this.$emit('change-page-num', pageNum);
-    },
-  },
-};
+
+import {useWindowSize} from '@vueuse/core'
+import {ref, watchEffect} from 'vue';
+const {width} = useWindowSize()
+const isLargeDevice = ref(false);
+watchEffect(() => {
+  let newWidth = width.value
+  if (newWidth >= 992) {
+    isLargeDevice.value = true;
+
+  } else {
+    isLargeDevice.value = false;
+
+  }
+});
+const props = defineProps({
+  pages: Object,
+});
+
+const emit = defineEmits(['change-page-num']);
+
+function updatePage(pageNum) {
+  emit('change-page-num', pageNum);
+}
 </script>
