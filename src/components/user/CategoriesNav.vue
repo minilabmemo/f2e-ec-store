@@ -6,7 +6,7 @@
         <img src="@/assets/img/icons/nav.svg" alt="nav"
           v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/all`" width="12px" height="12px">
         <router-link class="nav-link  fw-bold px-2 "
-          :class="{ 'text-300': !countByCAT(key), 'text-800': countByCAT(key) }" aria-current="page" href="#"
+          :class="{ 'nav-inactive': !countByCAT(key), 'text-800': countByCAT(key) }" aria-current="page" href="#"
           :to="`/product/${key}/all`">
 
           {{ cat.name }} {{ key }} <span>({{ countByCAT(key) }})</span>
@@ -18,8 +18,8 @@
           <img src="@/assets/img/icons/nav.svg" alt="nav"
             v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/${subKey}`" width="12px"
             height="12px">
-          <router-link class="nav-link   " :to="`/product/${key}/${subKey}`"
-            :class="{ 'text-300': !countByCAT(key, subKey), 'text-800': countByCAT(key, subKey) }">
+          <router-link class="nav-link" :to="`/product/${key}/${subKey}`"
+            :class="{ 'nav-inactive': !countByCAT(key, subKey), 'text-900': countByCAT(key, subKey) }">
             {{ item.name }} {{ item.key }}
             <span>
               ({{ countByCAT(key, subKey) }})

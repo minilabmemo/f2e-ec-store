@@ -8,7 +8,7 @@
           <h4 style="" class=" "> {{ item.title }}</h4>
           <div class="d-flex gap-2 justify-content-center  align-items-baseline mb-3 mt-auto ">
 
-            <span class="text-300" v-show="item.price !== item.origin_price"> <del>${{
+            <span class="text-500" v-show="item.price !== item.origin_price"> <del>${{
       $filters.currency(item.origin_price)
     }}</del></span>
             <span class="price me-4 ">${{ $filters.currency(item.price) }}</span>

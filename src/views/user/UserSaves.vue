@@ -24,7 +24,7 @@
             <div class=" d-flex  flex-column  justify-content-between  align-items-start text-start ms-2">
               <div> {{ item.title }}</div>
               <div class="d-flex gap-2 justify-content-center  align-items-center ms-2">
-                <span class="text-300" v-show="item.origin_price !== item.price"> <del>${{ item.origin_price
+                <span class="text-500" v-show="item.origin_price !== item.price"> <del>${{ item.origin_price
                     }}</del></span>
                 <span class="text-primary  me-4 " v-show="item.price">${{ item.price }}</span>
 

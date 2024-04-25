@@ -44,9 +44,9 @@
           <img src="@/assets/img/icons/person.svg" alt="person" class="icon-size">
         </button>
         <div class="dropdown-menu  dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-          <router-link class="dropdown-item text-800 " to="/user/orders">查詢訂單</router-link>
+          <router-link class="dropdown-item  " to="/user/orders">查詢訂單</router-link>
 
-          <router-link class="dropdown-item text-800 " to="/user/info">會員資料</router-link>
+          <router-link class="dropdown-item " to="/user/info">會員資料</router-link>
 
         </div>
       </div>

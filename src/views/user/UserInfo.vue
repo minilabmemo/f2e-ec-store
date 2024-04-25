@@ -37,7 +37,7 @@
         </div>
 
         <div class="text-end">
-          <button class="btn btn-danger">更新會員資料</button>
+          <button class="btn btn-primary ">更新會員資料</button>
         </div>
       </VeeForm>
     </div>

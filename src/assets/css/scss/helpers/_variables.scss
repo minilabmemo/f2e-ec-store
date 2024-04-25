@@ -301,8 +301,8 @@ $cyans: (
 // fusv-enable
 
 // scss-docs-start theme-color-variables
-$primary:       #DD8560 !default;
-$secondary:     #A8715A !default;
+$primary:       #BF5124 !default;
+$secondary:     #9E6650 !default;
 $success:       $green !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
@@ -1757,13 +1757,21 @@ $pre-color:                         null !default;
 
 
 //自訂義 colors map start//
-$custom-colors: (
-  "custom-color": #900
-);
 
-$theme-colors: map-merge($theme-colors, $custom-colors);
-$theme-colors: map-merge($theme-colors, $oranges);//oranges BS 上面已有定義
+$inactive-text-opacity:    .8 !default;
+
+$custom-colors: (
+  "custom-color": #900,
+
+);
+.nav-link.nav-inactive{
+  --bs-text-opacity: var(--inactive-text-opacity);
+  color: rgba($gray-900, $inactive-text-opacity);
+}
+
 $theme-colors: map-merge($theme-colors, $grays);
+$theme-colors: map-merge($theme-colors, $oranges);//oranges BS 上面已有定義
+$theme-colors: map-merge($theme-colors, $custom-colors);
 
 //自訂義 colors map end//
 

@@ -30,7 +30,7 @@
                   }}</span>
                 <span class="price" v-show="product.price === product.origin_price"> 特惠價 ${{
     $filters.currency(product.origin_price) }}</span>
-                <span class="text-300" v-show="product.price !== product.origin_price"> <del>原價 ${{
+                <span class="text-500" v-show="product.price !== product.origin_price"> <del>原價 ${{
     $filters.currency(product.origin_price) }}</del></span>
                 <span class="price  " v-show="product.price !== product.origin_price"> 優惠價 ${{
     $filters.currency(product.price) }}</span>
@@ -60,15 +60,14 @@
                 <SaveButton class="h-100 w-100 " :item="saveButtonItem" />
               </div>
               <div class="col-4   ">
-                <button type="button" class="h-100 w-100 btn btn-outline-danger  "
-                  @click="checkQty(product.id, itemQty)">
+                <button type="button" class="h-100 w-100 btn btn-primary  " @click="checkQty(product.id, itemQty)">
                   <div class="d-flex flex-wrap justify-content-center ">
                     <span> 立即</span><span>結帳</span>
                   </div>
 
                 </button>
               </div>
-              <div class="col-4  "> <button type="button" class="h-100 w-100  btn btn-outline-danger "
+              <div class="col-4  "> <button type="button" class="h-100 w-100  btn btn-primary  "
                   @click="addCart(product.id, itemQty, false)" :class="{ disabled: status.isCartLoading }">
                   加入購物車
                 </button></div>
