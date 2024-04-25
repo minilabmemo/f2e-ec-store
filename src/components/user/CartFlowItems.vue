@@ -142,7 +142,8 @@
         <div class="input-group mb-3 input-group-sm">
           <input aria-label="coupon_code" type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
           <div class="input-group-append ">
-            <button class="btn btn-secondary text-white" type="button" @click="addCouponCode">
+            <button class="btn btn-secondary text-white rounded-0 rounded-end" type="button" @click="addCouponCode"
+              :class="{ 'btn-sm': isExtraSmallDevice }">
               套用優惠碼
             </button>
 
@@ -153,13 +154,14 @@
       </div>
       <div class="d-flex justify-content-end flex-wrap gap-2 ">
         <div class="">
-          <button class="btn btn-outline-primary" type="button" @click="deleteAll">清空購物車</button>
+          <button class="btn btn-outline-primary" :class="{ 'btn-sm': isExtraSmallDevice }" type="button"
+            @click="deleteAll">清空購物車</button>
         </div>
         <div class=" d-flex justify-content-end  gap-2 flex-wrap">
 
           <div class="">
-            <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all"
-                class="nav-link ">
+            <button class="btn btn-outline-primary " type="button" :class="{ 'btn-sm': isExtraSmallDevice }">
+              <router-link to="/product/all/all" class="nav-link ">
                 新增其他商品</router-link>
             </button>
           </div>
@@ -175,7 +177,7 @@
 </template>
 
 <script setup>
-import {ref, watch, defineProps} from 'vue';
+import {ref, watch, watchEffect, defineProps} from 'vue';
 import {userCouponApi} from '@/utils/config/path';
 import {useCartStore} from '@/stores/cartStore';
 import fetchAct from '@/utils/methods/fetchAct';
@@ -183,6 +185,20 @@ import {storeToRefs} from 'pinia';
 
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
 import RemoveAllCartConfirm from '@/components/user/modal/RemoveAllCartConfirm.vue';
+import {useWindowSize} from '@vueuse/core'
+
+const {width} = useWindowSize()
+const isExtraSmallDevice = ref(false);
+watchEffect(() => {
+  let newWidth = width.value
+  if (newWidth >= 480) {
+    isExtraSmallDevice.value = false;
+
+  } else {
+    isExtraSmallDevice.value = true;
+
+  }
+});
 const {getCart, updateCart, removeCartByID, removeAllItems} = useCartStore();
 const {cart, cartTotalQty, status} = storeToRefs(useCartStore());
 
@@ -232,7 +248,7 @@ const addCouponCode = () => {
 
 watch(() => props.checkout, () => {
   getCart();
-  items = ref(cart.value.carts);
+
 });
 
 </script>
