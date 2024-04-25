@@ -25,23 +25,14 @@
 
             <div class="d-flex justify-content-start align-items-center  gap-1  ">
 
-              <div class=" d-flex justify-content-start align-items-center  gap-1  flex-wrap ">
+              <div class="d-flex  align-items-center justify-content-center    " v-if="item.is_paid">
+                <div class="rounded-circle bg-success me-1 " style="height: 16px;width: 16px;"> </div>
+                <div class=""> 已付款 </div>
+              </div>
 
-                <div class="d-flex  " v-if="item.is_paid">
-                  <div class="rounded-circle bg-success me-1 " style="height: 15px;width: 15px;"> </div>
-                  <span> 已付款 </span>
-                </div>
-
-                <div class="d-flex flex-column " v-else>
-                  <div class="d-flex  ">
-                    <div class="rounded-circle bg-primary me-1 " style="height: 15px;width: 15px;"> </div>
-                    <span> 未付款 </span>
-                  </div>
-
-                  <button class="btn btn-outline-danger btn-sm text-nowrap " @click="confirmPay(item)"
-                    v-if="!item.is_paid">付款</button>
-                </div>
-
+              <div class="d-flex flex-column w-100" v-else>
+                <button class="btn btn-outline-danger btn-sm text-nowrap " @click="confirmPay(item)"
+                  v-if="!item.is_paid">付款</button>
               </div>
 
             </div>
@@ -59,7 +50,7 @@
         <th>電子郵件</th>
         <th>購買款項</th>
         <th>應付金額</th>
-        <th>是否付款</th>
+        <th>付款狀況</th>
 
       </tr>
     </thead>
@@ -83,16 +74,11 @@
           <td class="text-right">{{ $filters.currency(item.total) }}</td>
           <td>
 
-            <div class="d-flex justify-content-start align-items-center  gap-1 flex-wrap ">
-              <div class="  rounded-circle " :class="{ 'bg-success ': item.is_paid, 'bg-primary': !item.is_paid }"
-                style="height: 15px;width: 15px;">
-              </div>
-              <span v-if="item.is_paid">
-                已付款
-              </span>
-              <span v-else>未付款 </span>
-
+            <div v-if="item.is_paid" class="d-flex justify-content-start align-items-center  gap-1 flex-grow-1 ">
+              <div class="  rounded-circle " :class="{ 'bg-success ': item.is_paid }" style="height: 16px;width: 16px;">
+              </div><span>已付款</span>
             </div>
+
             <button class="btn btn-outline-danger btn-sm text-nowrap w-100 mt-1" @click="confirmPay(item)"
               v-if="!item.is_paid">付款</button>
 
