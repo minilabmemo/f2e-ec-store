@@ -10,11 +10,7 @@
     <div class="my-3 my-md-5"><img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products" id="special" />
     <div class="my-3 my-md-5"><img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid"></div>
-    <div class="row   align-items-end gy-3 gx-1 gx-md-4 ">
-      <div class="col-4"><img src="@/assets/img/design/news1.png" class="img-fluid" alt="news"></div>
-      <div class="col-4"><img src="@/assets/img/design/news2.png" class="img-fluid" alt="news"></div>
-      <div class="col-4"><img src="@/assets/img/design/news3.png" class="img-fluid" alt="news"></div>
-    </div>
+    <HomeNews />
 
     <div class="my-3 my-md-5"><img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <h1 class="mb-5 ">COLLECTIONS</h1>
@@ -39,6 +35,7 @@
 import {ref} from 'vue';
 import HomeBanner from '@/components/user/HomeBanner.vue';
 import HomeItems from '@/components/user/HomeItems.vue';
+import HomeNews from '@/components/user/HomeNews.vue';
 import categoriesConfig from '@/utils/config/categories';
 import {storeToRefs} from 'pinia'
 const categories = ref(categoriesConfig);
