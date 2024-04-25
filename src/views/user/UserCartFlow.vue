@@ -21,28 +21,31 @@
           <h5 class=" my-3">購物頁面</h5>
           <ul class="nav  mb-3">
             <li class="nav-item">
-              <button class="btn  " :class="{ 'btn-secondary': activeTab === 1, 'text-white': activeTab === 1 }"
+              <button class="btn"
+                :class="{ 'btn-secondary': activeTab === 1, 'text-white': activeTab === 1, 'btn-sm': isExtraSmallDevice }"
                 type="button" role="tab" @click="setActiveTab(1)">01
                 加入購物車</button>
+
             </li>
             <li class="nav-item " role="presentation">
               <button class="btn border-0 " :disabled="stepRecord < 2"
-                :class="{ 'btn-secondary': activeTab === 2, 'text-white': activeTab === 2 }" type="button" role="tab"
-                @click="setActiveTab(2)">02 填寫訂單</button>
+                :class="{ 'btn-secondary': activeTab === 2, 'text-white': activeTab === 2, 'btn-sm': isExtraSmallDevice }"
+                type="button" role="tab" @click="setActiveTab(2)">02 填寫訂單</button>
+
             </li>
             <li class="nav-item" role="presentation">
+
               <button class="btn border-0 " :disabled="stepRecord < 3"
-                :class="{ 'btn-secondary': activeTab === 3, 'text-white': activeTab === 3 }" type="button" role="tab"
-                @click="setActiveTab(3)">03 結帳</button>
+                :class="{ 'btn-secondary': activeTab === 3, 'text-white': activeTab === 3, 'btn-sm': isExtraSmallDevice }"
+                type="button" role="tab" @click="setActiveTab(3)">03 結帳</button>
             </li>
           </ul>
           <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade " :class="{ 'show': activeTab === 1, 'active': activeTab === 1 }">
-              <div class="">
+              <div class="mb-4 mb-xs-5">
                 <CartFlowItems :checkout="checkout" />
               </div>
               <div class=" d-flex justify-content-center gap-2">
-
                 <button class="btn btn-primary  text-white  " type="button" @click="goNextTab">填寫訂單資訊</button>
               </div>
 
@@ -64,13 +67,26 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
 
 import CartFlowItems from '@/components/user/CartFlowItems.vue';
 import CartFlowOrderLoc from '@/components/user/CartFlowOrderLoc.vue';
 import CartFlowOrderSuccess from '@/components/user/CartFlowOrderSuccess.vue';
 import {useCartStore} from '@/stores/cartStore';
 import {storeToRefs} from 'pinia'
+import {useWindowSize} from '@vueuse/core'
+import {ref, watchEffect} from 'vue';
+const {width} = useWindowSize()
+const isExtraSmallDevice = ref(false);
+watchEffect(() => {
+  let newWidth = width.value
+  if (newWidth >= 480) {
+    isExtraSmallDevice.value = false;
+
+  } else {
+    isExtraSmallDevice.value = true;
+
+  }
+});
 const cartStore = useCartStore();
 
 const {cart, status} = storeToRefs(cartStore);

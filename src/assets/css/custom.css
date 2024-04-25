@@ -35,7 +35,12 @@
  
 }
 
-
+.custom-select-xs {
+  width: 4rem;
+  font-size: 0.875rem;
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.5rem;
+}
 /* RWD setting*/
 /* 1.125rem;18px */
 /* 1 rem = 16px*/

@@ -2,48 +2,33 @@
 
   <div class="row mt-4  ">
     <div class="col-12 ">
-      <table class="phone-table table align-middle d-table d-lg-none ">
-        <thead>
-          <tr>
-            <th></th>
-            <th>品名</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div class="phone-layout  align-middle d-flex d-xs-none flex-column ">
+        <div>
           <template v-if="cart.carts">
-            <tr v-for="item in cart.carts" :key="item.id" data-cy="item">
-              <td>
-                <button type="button" class="btn btn-outline-danger btn-sm"
-                  :disabled="status.cartLoadingItem === item.id" @click="removeConfirm(item)">
-                  <i class="bi bi-x"></i>
-                </button>
-              </td>
-              <td>
+            <div v-for="item in cart.carts" :key="item.id" data-cy="item" class="d-flex  border-bottom border-500 py-2">
+
+              <div>
 
                 <div class="d-flex  gap-2 ">
                   <div style="flex: 1;width: 100px"> <img :src="item.product.imageUrl" alt="imageUrl"
-                      class="flex-image"></div>
+                      class="flex-image">
+                  </div>
                   <div style="flex: 2;" class=" d-flex   flex-column  align-items-start text-start gap-2">
                     <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
                         }}</router-link></div>
                     <div class="d-flex   flex-column  align-items-start text-start gap-2 ">
                       <div>
-                        <span class=" text-500" v-show="item.product.price !== item.product.origin_price">
+                        <span class=" text-500 me-1" v-show="item.product.price !== item.product.origin_price">
                           <del>${{ $filters.currency(item.product.origin_price) }}</del></span>
                         <span class=" text-primary  me-1 ">${{ $filters.currency(item.product.price) }}</span>
-
+                        <span class=" text-500  ">剩餘數量： {{ item.product.num }}</span>
                       </div>
-                      <span class=" text-500  ">剩餘數量： {{ item.product.num }}</span>
 
-                      <select id="qty" class="form-select" v-model="item.qty"
+                      <select id="qty" class="form-select custom-select-xs" v-model="item.qty"
                         :disabled="item.id === status.cartCartLoadingItem" @change="updateCart(item)">
-
                         <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
                       </select>
-                      <div>
-                        <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
-                        ${{ $filters.currency(item.final_total) }}
-                      </div>
+
                     </div>
 
                     <small class="text-success  ms-1" v-if="item.coupon">
@@ -52,25 +37,41 @@
                   </div>
                 </div>
 
-              </td>
+              </div>
 
-            </tr>
+              <div class=" d-flex flex-grow-1    flex-column  justify-content-between ">
+                <div class="d-flex justify-content-end ">
+                  <button type="button" class="btn btn-outline-danger btn-sm "
+                    :disabled="status.cartLoadingItem === item.id" @click="removeConfirm(item)">
+                    <i class="bi bi-x"></i>
+                  </button>
+                </div>
+
+                <div class="text-nowrap   text-success">
+
+                  ${{ $filters.currency(item.final_total) }}
+                </div>
+              </div>
+
+            </div>
+
           </template>
-        </tbody>
-        <tfoot>
-          <tr>
-            <td class="text-end">總計</td>
+        </div>
+        <div class="d-flex fs-6 flex-column gap-2 my-3">
+          <div class="d-flex justify-content-between ">
+            <div class=" ">總計</div>
 
-            <td class="text-end">${{ $filters.currency(cart.total) }}</td>
-          </tr>
-          <tr v-if="cart.final_total !== cart.total">
-            <td class="text-end text-success text-nowrap "><small>折扣價</small></td>
-            <td class="text-end text-success">{{ $filters.currency(cart.final_total) }}</td>
-          </tr>
-        </tfoot>
-      </table>
+            <div class="text-end">${{ $filters.currency(cart.total) }}</div>
+          </div>
+          <div v-if="cart.final_total !== cart.total" class="d-flex fs-6  justify-content-between gap-2 ">
 
-      <table class="pc-table table align-middle d-none d-lg-table ">
+            <div class="text-end text-success text-nowrap "><small>折扣價</small></div>
+            <div class="text-end text-success"> ${{ $filters.currency(cart.final_total) }}</div>
+          </div>
+        </div>
+      </div>
+
+      <table class="pc-table table align-middle d-none d-xs-table ">
         <thead>
           <tr>
             <th>
@@ -154,7 +155,7 @@
         <div class="">
           <button class="btn btn-outline-primary" type="button" @click="deleteAll">清空購物車</button>
         </div>
-        <div class=" d-flex justify-content-end mb-5 gap-2 flex-wrap">
+        <div class=" d-flex justify-content-end  gap-2 flex-wrap">
 
           <div class="">
             <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all"
