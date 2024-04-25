@@ -13,10 +13,10 @@
           <template v-if="cart.carts">
             <tr v-for="item in cart.carts" :key="item.id" data-cy="item">
               <td>
-                <!-- <button type="button" class="btn btn-outline-danger btn-sm" :disabled="status.cartLoadingItem === item.id"
-                  @click="removeConfirm(item)">
+                <button type="button" class="btn btn-outline-danger btn-sm"
+                  :disabled="status.cartLoadingItem === item.id" @click="removeConfirm(item)">
                   <i class="bi bi-x"></i>
-                </button> -->
+                </button>
               </td>
               <td>
 
@@ -137,26 +137,25 @@
           </tr>
         </tfoot>
       </table>
-      <div class="d-flex justify-content-between ">
+      <div class="">
+        <div class="input-group mb-3 input-group-sm">
+          <input aria-label="coupon_code" type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
+          <div class="input-group-append ">
+            <button class="btn btn-secondary text-white" type="button" @click="addCouponCode">
+              套用優惠碼
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+      <div class="d-flex justify-content-end flex-wrap gap-2 ">
         <div class="">
           <button class="btn btn-outline-primary" type="button" @click="deleteAll">清空購物車</button>
         </div>
-        <div class=" d-flex justify-content-end mb-5 gap-2 ">
+        <div class=" d-flex justify-content-end mb-5 gap-2 flex-wrap">
 
-          <div class="">
-            <div class="input-group mb-3 input-group-sm">
-              <input aria-label="coupon_code" type="text" class="form-control" v-model="coupon_code"
-                placeholder="請輸入優惠碼">
-              <div class="input-group-append ">
-                <button class="btn btn-secondary text-white" type="button" @click="addCouponCode">
-                  套用優惠碼
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
           <div class="">
             <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all"
                 class="nav-link ">

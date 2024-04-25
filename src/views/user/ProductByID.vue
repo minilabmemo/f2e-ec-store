@@ -11,15 +11,15 @@
           <router-link :to="`/product/${route.params.category}/${route.params.subcategory}`"> {{ sub_category_name
             }}</router-link>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+
       </ol>
     </nav>
-    <div class="row  justify-content-start  align-items-start">
-      <div class="col-12 col-sm-4  d-flex justify-content-center  align-items-center">
+    <div class="row  justify-content-start  align-items-start flex-wrap ">
+      <div class="col-12 col-md-4  px-sm-2 d-flex justify-content-center  align-items-center">
         <div style="max-width:300px"> <img :src="product.imageUrl" alt="image" class="flex-image mb-3"></div>
 
       </div>
-      <div class="col-11 col-sm-6  d-flex justify-content-center  align-items-center">
+      <div class="col-12 col-md-7  px-md-2 px-sm-4   d-flex justify-content-center  align-items-center">
         <article class="row  justify-content-center  align-items-baseline py-3 ">
           <h3 class="col-12">{{ product.title }}</h3>
 
@@ -40,12 +40,12 @@
               </div>
             </div>
             <hr>
-            <div class="row fw-bold justify-content-center mb-1">
+            <div class="row fw-bold justify-content-center mb-1  ">
               <div class="col-4">尺寸</div>
               <div class="col-4">顏色</div>
               <div class="col-4">數量</div>
             </div>
-            <div class="row mb-3 justify-content-center ">
+            <div class="row mb-3 justify-content-center align-items-center">
               <div class="col-4">Free</div>
               <div class="col-4">單一色</div>
               <div class="col-4">
@@ -55,22 +55,35 @@
 
               </div>
             </div>
-            <div class="row  justify-content-center align-items-stretch ">
-              <div class="col-4  ">
-                <SaveButton class="h-100 w-100 " :item="saveButtonItem" />
+            <div class="d-flex justify-content-between   align-items-stretch ">
+              <div class=" ">
+                <SaveButton class="d-none d-xs-inline-block" :item="saveButtonItem" style="min-width:120px" />
+                <SaveButton class="d-inline-block d-xs-none  btn  btn-sm " :item="saveButtonItem" />
               </div>
-              <div class="col-4   ">
-                <button type="button" class="h-100 w-100 btn btn-primary  " @click="checkQty(product.id, itemQty)">
+              <div class="  ">
+                <button type="button" class=" d-none d-xs-inline-block   btn btn-primary " style="min-width:120px"
+                  @click="checkQty(product.id, itemQty)">
                   <div class="d-flex flex-wrap justify-content-center ">
-                    <span> 立即</span><span>結帳</span>
+                    <span> 立即結帳</span>
                   </div>
-
+                </button>
+                <button type="button" class="d-inline-block d-xs-none  btn btn-primary btn-sm"
+                  @click="checkQty(product.id, itemQty)">
+                  <div class="d-flex flex-wrap justify-content-center ">
+                    <span> 立即結帳</span>
+                  </div>
                 </button>
               </div>
-              <div class="col-4  "> <button type="button" class="h-100 w-100  btn btn-primary  "
+              <div class="  ">
+                <button type="button" class="d-none d-xs-inline-block btn btn-primary  " style="min-width:120px"
                   @click="addCart(product.id, itemQty, false)" :class="{ disabled: status.isCartLoading }">
                   加入購物車
-                </button></div>
+                </button>
+                <button type="button" class="d-inline-block d-xs-none  btn btn-primary btn-sm  "
+                  @click="addCart(product.id, itemQty, false)" :class="{ disabled: status.isCartLoading }">
+                  加入購物車
+                </button>
+              </div>
 
             </div>
 
