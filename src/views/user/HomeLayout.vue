@@ -2,7 +2,7 @@
 
   <div class="tenor-sans-regular   ">
     <ToastMessages />
-    <header class="h-shadow mb-4 col" id="header">
+    <header class="h-shadow mb-4 col  bg-white sticky-header" id="header">
 
       <div class="container-xl justify-content-center  mb-2  align-items-end   d-none d-lg-flex position-relative  ">
 
@@ -60,5 +60,13 @@ watchEffect(() => {
 <style scoped>
 .h-shadow {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+@media (min-height: 700px) {
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
 }
 </style>
