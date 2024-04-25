@@ -41,12 +41,15 @@ import Carousel from 'bootstrap/js/dist/carousel.js';
 onMounted(() => {
 
   const newsCarouselElement = document.querySelector('#newsCarousel')
-
-  new Carousel(newsCarouselElement, {
-    interval: 2000,
-    touch: true,
-    ride: 'carousel'
-  })
+  if (newsCarouselElement) {
+    new Carousel(newsCarouselElement, {
+      interval: 2000,
+      touch: true,
+      ride: 'carousel'
+    })
+  } else {
+    console.error('Element with ID "newsCarousel" not found.');
+  }
 
 })
 </script>
