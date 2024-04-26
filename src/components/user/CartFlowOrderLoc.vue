@@ -2,7 +2,7 @@
   <LoadingOverlay :active="status.isLoading" />
   <VeeForm class="" v-slot="{ errors }" @submit="sendOrder">
     <div class=" my-4">
-      <div class="row ">
+      <div class="row g-3">
         <div class="col-12 col-md-6">
           <h3 class="mb-3">訂單內容</h3>
           <table class="table align-middle">
@@ -38,35 +38,39 @@
           <div class="mb-3">
             <label for="email" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>Email</label>
             <VeeField id="email" name="email" type="email" class="form-control"
-              :class="{ 'is-invalid': errors['email'] }" placeholder="請輸入 Email" rules="email|required"
-              v-model="form.user.email" />
+              :class="{ 'is-invalid': errors['email'], 'form-control-sm': isExtraSmallDevice }" placeholder="請輸入 Email"
+              rules="email|required" v-model="form.user.email" />
             <VeeErrorMessage name="email" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
             <label for="name" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人姓名</label>
-            <VeeField id="name" name="姓名" type="text" class="form-control" :class="{ 'is-invalid': errors['姓名'] }"
-              placeholder="請輸入姓名" rules="required" v-model="form.user.name" />
+            <VeeField id="name" name="姓名" type="text" class="form-control "
+              :class="{ 'is-invalid': errors['姓名'], 'form-control-sm': isExtraSmallDevice }" placeholder="請輸入姓名"
+              rules="required" v-model="form.user.name" />
             <VeeErrorMessage name="姓名" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
             <label for="tel" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人電話</label>
-            <VeeField id="tel" name="電話" type="tel" class="form-control" :class="{ 'is-invalid': errors['電話'] }"
+            <VeeField id="tel" name="電話" type="tel" class="form-control"
+              :class="{ 'is-invalid': errors['電話'], 'form-control-sm': isExtraSmallDevice }"
               placeholder="請輸入電話 Ex:0912345678" :rules="isPhone" v-model="form.user.tel" />
             <VeeErrorMessage name="電話" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
             <label for="address" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人地址</label>
-            <VeeField id="address" name="地址" type="text" class="form-control" :class="{ 'is-invalid': errors['地址'] }"
-              placeholder="請輸入地址" rules="required" v-model="form.user.address" />
+            <VeeField id="address" name="地址" type="text" class="form-control"
+              :class="{ 'is-invalid': errors['地址'], 'form-control-sm': isExtraSmallDevice }" placeholder="請輸入地址"
+              rules="required" v-model="form.user.address" />
             <VeeErrorMessage name="地址" class="invalid-feedback" />
           </div>
 
           <div class="mb-3">
             <label for="message" class="form-label">收貨備註</label>
-            <textarea name="" id="message" class="form-control" cols="3" rows="3" v-model="form.message"></textarea>
+            <textarea name="" id="message" class="form-control" cols="3" rows="3" v-model="form.message" rules="max:5"
+              placeholder="請輸入收貨備註" :class="{ 'form-control-sm': isExtraSmallDevice }"></textarea>
           </div>
 
         </div>
@@ -88,6 +92,10 @@ import {ref, watch} from 'vue';
 import {storeToRefs} from 'pinia'
 import {useOrderStore} from '@/stores/orderStore'
 import {useCartStore} from '@/stores/cartStore';
+import {useDeviceSize} from '@/composables/useDeviceSize.js'
+
+const {isExtraSmallDevice} = useDeviceSize()
+
 const cartStore = useCartStore();
 const {cart, cartTotalQty} = storeToRefs(cartStore);
 const {getCart} = useCartStore();
@@ -147,3 +155,4 @@ watch(
   }, {deep: true})
 
 </script>
+@/composables/useDeviceSize.js
