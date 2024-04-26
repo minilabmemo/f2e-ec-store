@@ -25,7 +25,7 @@
                       </div>
 
                       <select id="qty" class="form-select custom-select-xs" v-model="item.qty"
-                        :disabled="item.id === status.cartCartLoadingItem" @change="updateCart(item)">
+                        :disabled="item.id === status.cartLoadingItem" @change="updateCart(item)">
                         <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
                       </select>
 
@@ -112,7 +112,7 @@
 
               </td>
               <td>
-                <select id="qty" class="form-select" v-model="item.qty" :disabled="item.id === status.CartLoadingItem"
+                <select id="qty" class="form-select" v-model="item.qty" :disabled="item.id === status.cartLoadingItem"
                   @change="updateCart(item)">
 
                   <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>

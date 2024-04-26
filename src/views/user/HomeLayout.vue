@@ -1,7 +1,7 @@
 <template>
 
   <div class="tenor-sans-regular   ">
-    <ToastMessages />
+
     <header class="h-shadow mb-4 col  bg-white sticky-header" id="header">
 
       <div class="container-xl justify-content-center  mb-2  align-items-end   d-none d-lg-flex position-relative  ">
@@ -20,7 +20,8 @@
       </div>
 
     </header>
-    <div class="container-xl " id="content">
+    <div class="container-xl position-relative " id="content">
+      <ToastMessages />
       <RouterView />
     </div>
     <HomeFooter />

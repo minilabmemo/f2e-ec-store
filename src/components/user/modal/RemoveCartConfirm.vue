@@ -17,7 +17,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消
           </button>
-          <button type="button" class="btn btn-primary " @click="$emit('remove-item', item.id)">是，移出購物車
+          <button type="button" class="btn btn-primary " @click="$emit('remove-item', item.id)">移出購物車
           </button>
         </div>
       </div>

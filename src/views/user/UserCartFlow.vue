@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="status.isLoading" />
+
   <div class=" font-sm   ">
 
     <div class="row   flex-column align-items-center  justify-content-center  " style="min-height: 50vh"
@@ -89,7 +89,7 @@ watchEffect(() => {
 });
 const cartStore = useCartStore();
 
-const {cart, status} = storeToRefs(cartStore);
+const {cart} = storeToRefs(cartStore);
 
 const orderId = ref("")
 const stepRecord = ref(0);
