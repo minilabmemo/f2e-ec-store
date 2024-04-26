@@ -1,7 +1,7 @@
 <template>
   <div class="my-2 my-md-5 row justify-content-center">
     <form class="" @submit.prevent="confirmPay" v-if="order">
-      <table class="table align-middle">
+      <table class="table align-middle ">
         <thead>
           <th>品名</th>
           <th>數量</th>
@@ -30,7 +30,7 @@
           </tr>
           <tr>
             <th width="100">Email</th>
-            <td>{{ order.user.email }}</td>
+            <td> <span class="text-break ">{{ order.user.email }}</span></td>
           </tr>
           <tr>
             <th>姓名</th>

@@ -17,11 +17,16 @@
                 <tbody v-if="tempOrder.user">
                   <tr>
                     <th style="width: 100px;">姓名</th>
-                    <td>{{ tempOrder.user.name }}</td>
+                    <td>
+                      <div class="text-break">{{ tempOrder.user.name }}</div>
+                    </td>
                   </tr>
                   <tr>
                     <th> Email</th>
-                    <td> <a :href="`mailto:${tempOrder.user.email}`">{{ tempOrder.user.email }}</a></td>
+                    <td> <a :href="`mailto:${tempOrder.user.email}`">
+                        <div class="text-break "> {{ tempOrder.user.email }}</div>
+
+                      </a></td>
                   </tr>
                   <tr>
                     <th>電話</th>
@@ -29,7 +34,9 @@
                   </tr>
                   <tr>
                     <th>地址</th>
-                    <td>{{ tempOrder.user.address }}</td>
+                    <td>
+                      <div class="text-break">{{ tempOrder.user.address }}</div>
+                    </td>
 
                   </tr>
                   <tr>
@@ -45,8 +52,8 @@
               <table class="table">
                 <tbody>
                   <tr>
-                    <th style="width: 100px">訂單編號</th>
-                    <td>{{ tempOrder.id }}</td>
+                    <th style="width: 100px" class="text-nowrap ">訂單編號</th>
+                    <td class="text-break ">{{ tempOrder.id }}</td>
                   </tr>
                   <tr>
                     <th>下單時間</th>

@@ -47,7 +47,7 @@
             <label for="name" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>收件人姓名</label>
             <VeeField id="name" name="姓名" type="text" class="form-control "
               :class="{ 'is-invalid': errors['姓名'], 'form-control-sm': isExtraSmallDevice }" placeholder="請輸入姓名"
-              rules="required" v-model="form.user.name" />
+              rules="required|max:30" v-model="form.user.name" />
             <VeeErrorMessage name="姓名" class="invalid-feedback" />
           </div>
 
@@ -68,9 +68,11 @@
           </div>
 
           <div class="mb-3">
-            <label for="message" class="form-label">收貨備註</label>
-            <textarea name="" id="message" class="form-control" cols="3" rows="3" v-model="form.message" rules="max:5"
-              placeholder="請輸入收貨備註" :class="{ 'form-control-sm': isExtraSmallDevice }"></textarea>
+            <label for="message" class="form-label">收貨備註 ({{ form.message.length }}/{{ maxMessage }})</label>
+            <VeeField as="textarea" name="收貨備註" id="message" class="form-control" cols="3" rows="3"
+              v-model="form.message" rules="max:20" placeholder="請輸入收貨備註"
+              :class="{ 'is-invalid': errors['收貨備註'], 'form-control-sm': isExtraSmallDevice }" />
+            <VeeErrorMessage name="收貨備註" class="invalid-feedback" />
           </div>
 
         </div>
@@ -154,5 +156,6 @@ watch(
     getCart();
   }, {deep: true})
 
+const maxMessage = ref(20);
+
 </script>
-@/composables/useDeviceSize.js

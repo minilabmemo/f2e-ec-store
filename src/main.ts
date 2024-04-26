@@ -13,7 +13,7 @@ import { currency, date } from '@/utils/methods/filters'
 
 import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
 
-import { required, email, min, numeric } from '@vee-validate/rules'
+import { required, email, min, max, numeric } from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 const app = createApp(App)
@@ -24,6 +24,7 @@ app.config.globalProperties.$filters = {
 defineRule('required', required)
 defineRule('email', email)
 defineRule('min', min)
+defineRule('max', max)
 defineRule('numeric', numeric)
 
 configure({

@@ -61,7 +61,10 @@
           <td> <a href="#" class=" " @click.prevent="openModal(false, item)"> <i class="bi bi-search me-2"></i>
               <small>查看訂單內容</small> </a> </td>
           <td>{{ $filters.date(item.create_at) }}</td>
-          <td><span v-text="item.user.email" v-if="item.user"></span></td>
+          <td><span v-text="item.user.email" v-if="item.user" class="d-inline-block text-truncate"
+              style="max-width: 200px;"></span>
+
+          </td>
           <td>
             <ul class="list-unstyled">
               <li v-for="(product) in item.products" :key="product.product.id">

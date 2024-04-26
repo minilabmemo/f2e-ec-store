@@ -15,8 +15,10 @@
       <template v-for="(item) in orders" :key="item.id">
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
           <td>{{ $filters.date(item.create_at) }}</td>
-          <td> <a :href="`mailto:${item.user.email}}`">{{
-    item.user.email }}</a></td>
+          <td> <a :href="`mailto:${item.user.email}}`">
+              <span class="d-inline-block text-truncate" style="max-width: 200px;">{{
+    item.user.email }}</span>
+            </a></td>
           <td>
             <ul class="list-unstyled">
               <li v-for="(product) in item.products" :key="product.product.id">
