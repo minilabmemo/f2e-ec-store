@@ -76,7 +76,7 @@ const sectionIdsRef = ref(sectionIds);
 </script>
 <style scoped>
 .section {
-  width: 80%;
+  width: max(300px, 80%);
   display: flex;
   flex-direction: column;
   align-items: center;

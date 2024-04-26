@@ -35,6 +35,10 @@
  
 }
 
+.offcanvas{
+  --bs-offcanvas-width: 16.25rem;;
+}
+
 .custom-select-xs {
   width: 4rem;
   font-size: 0.875rem;

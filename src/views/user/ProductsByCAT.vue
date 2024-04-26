@@ -1,9 +1,9 @@
 <template>
   <LoadingOverlay :active="status.isLoading" />
 
-  <div class="d-flex flex-column gap-4  ">
+  <div class="d-flex flex-column gap-3   ">
 
-    <div class="row  gy-4 ">
+    <div class="row  gy-3 ">
       <nav a class="col-12 col-xs-4  d-flex justify-content-start  justify-content-xs-start" ria-label="breadcrumb ">
         <ol class="breadcrumb mb-0 ">
           <li class="breadcrumb-item" v-if="$route.params.category !== 'all'"><router-link :to="`/product/all/all`"
