@@ -157,7 +157,7 @@
 </template>
 
 <script setup>
-import {ref, watch, onMounted, onBeforeUnmount, computed} from 'vue';
+import {ref, watch, watchEffect, onMounted, onBeforeUnmount, computed} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import categories from '@/utils/config/categories';
 import AddCartConfirm from '@/components/user/modal/AddCartConfirm.vue';
@@ -169,11 +169,13 @@ import {useProductStore} from '@/stores/productStore';
 import {addCartCheck} from '@/utils/methods/addCartCheck.js'
 const productStore = useProductStore();
 const {product, products, status} = storeToRefs(productStore);
+
 const cartStore = useCartStore();
 
 const {cart} = storeToRefs(cartStore);
-
-const {productsByCAT, getProductByID, getProducts, filterByCategory} = useProductStore();
+const {getCart} = cartStore;
+const {productsByCAT} = storeToRefs(productStore);
+const {getProductByID, getProducts, filterByCategory} = productStore;
 const route = useRoute();
 const cartConfirm = ref(null);
 const id = ref('');
@@ -192,19 +194,21 @@ const sub_category_name = computed(() => {
   return '';
 });
 
-const recommendItems = () => {
+const recommendItems = computed(() => {
+
   let items = [];
   let removeID = id.value;
-  if (productsByCAT) {
-    items = productsByCAT.filter((item) => item.id != removeID);
+  if (productsByCAT.value) {
+    items = productsByCAT.value.filter((item) => item.id != removeID);
   }
   if (items.length === 0) {
-    if (products && products.length >= 3) {
-      items = products.slice(0, 3);
+    if (products.value && products.value.length >= 3) {
+      items = products.value.slice(0, 3);
     }
   }
+
   return items;
-};
+});
 const router = useRouter();
 const goToCart = () => {
   router.push('/user/cart/flow');
@@ -257,22 +261,23 @@ onBeforeUnmount(() => {
   window.removeEventListener("scroll", handleScroll);
 });
 
-watch(() => product, () => {
+watchEffect(() => {
   saveButtonItem.value = {
-    title: product.title,
-    id: product.id,
-    imageUrl: product.imageUrl,
+    title: product.value.title,
+    id: product.value.id,
+    imageUrl: product.value.imageUrl,
     on_stock: true
   };
 });
 
 watch(() => products, () => {
+
   filterByCategory(route.params.category);
   getCart();
-});
+}, {deep: true});
 
-watch(() => route, (to, from) => {
-  if (to.path !== from.path) {
+watch(() => route.params.productId, (newV, oldV) => {
+  if (newV !== oldV) {
     id.value = route.params.productId;
     getProductByID(id.value);
     getProducts();

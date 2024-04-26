@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="status.isLoading" />
+
   <div class="d-flex flex-column align-items-center  justify-content-center fs-3 fw-bold "
     v-if="!saveItems || Object.keys(saveItems.data).length === 0"> 無收藏商品。
     <div class="mt-3 ">
@@ -14,7 +14,7 @@
       <h4>收藏清單</h4>
       <template v-for="(item) in displayItems" :key="item.id">
 
-        <div class="row justify-content-center border-bottom border-black p-3 g-3" data-cy=" item">
+        <div class="row justify-content-center border-bottom border-black p-3 g-3" data-cy="item">
           <div class="col-12 col-md-4  d-flex align-items-center  justify-content-center ">
             <div style="max-width: 200px"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
 
@@ -37,7 +37,7 @@
                 <button type="button" class="btn btn-outline-secondary" @click="removeItem(item.id)">
                   移出收藏
                 </button>
-                <button type="button" class="btn btn-outline-secondary" @click="addCartCheck(item.id, 1)">
+                <button type="button" class="btn btn-primary" @click="addCartCheck(item.id, 1)">
                   加入購物車
                 </button>
               </div>
