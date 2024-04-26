@@ -1,7 +1,7 @@
 <template>
 
-  <div class="product-item ">
-    <router-link :to="`/product/${path}/id/${item.id}`" class="nav-link h-100 ">
+  <div class="">
+    <router-link :to="`/product/${path}/id/${item.id}`" class="nav-link h-100 product-item ">
       <div class="d-flex flex-column gap-4   align-self-center  h-100">
         <img :src="item.imageUrl" alt="image" class="flex-image">
         <div class="text-center d-flex flex-column    justify-content-between   h-100">
