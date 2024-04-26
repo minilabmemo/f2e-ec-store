@@ -78,3 +78,9 @@ onMounted(() => {
 })
 
 </script>
+
+<style lang="css" scoped>
+.nav-link:hover {
+  opacity: .8;
+}
+</style>

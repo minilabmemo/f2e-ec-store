@@ -15,7 +15,7 @@
               }}</router-link>
           </li>
           <li v-if="sub_category_name" class="breadcrumb-item ">
-            <router-link class="link-offset-1" :to="`/product/${$route.params.category}/${$route.params.subcategory}`">
+            <router-link class="link-offset-2" :to="`/product/${$route.params.category}/${$route.params.subcategory}`">
               {{ sub_category_name
               }}</router-link>
           </li>

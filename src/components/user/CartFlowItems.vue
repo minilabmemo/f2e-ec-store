@@ -47,7 +47,7 @@
                   </button>
                 </div>
 
-                <div class="text-nowrap   text-success">
+                <div class="text-nowrap  " :class="{ ' text-success': item.coupon }">
 
                   ${{ $filters.currency(item.final_total) }}
                 </div>

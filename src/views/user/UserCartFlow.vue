@@ -1,6 +1,6 @@
 <template>
 
-  <div class=" font-sm   ">
+  <div class=" font-sm   mb-5">
 
     <div class="row   flex-column align-items-center  justify-content-center  " style="min-height: 50vh"
       v-if="!checkout && (!cart || cart.carts.length === 0)">
