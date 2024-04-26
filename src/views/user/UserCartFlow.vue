@@ -98,7 +98,9 @@ const checkout = ref(false);
 let activeTab = ref(1);
 
 function setActiveTab(index) {
-  activeTab.value = index;
+  if (activeTab.value !== stepRecord.value) {
+    activeTab.value = index;
+  }
 }
 
 function goNextTab() {

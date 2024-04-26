@@ -1,6 +1,13 @@
 <template>
-  <div class="my-2 my-md-5 row justify-content-center">
-    <form class="" @submit.prevent="confirmPay" v-if="order">
+  <div class="my-2 my-md-5 row justify-content-center" v-if="order">
+
+    <div v-if="order.is_paid" class="text-success d-flex flex-column justify-content-center align-items-center mb-5">
+      <div class="fs-1"> <i class="bi bi-check-circle "></i></div>
+
+      <span> 付款完成</span>
+
+    </div>
+    <form class="" @submit.prevent="confirmPay">
       <table class="table align-middle ">
         <thead>
           <th>品名</th>
