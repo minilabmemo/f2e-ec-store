@@ -8,44 +8,54 @@
       </button>
     </div>
   </div>
-  <div v-else class=" container-xl row justify-content-center ">
+  <div v-else class="  row justify-content-center ">
 
-    <div class="col-12 col-md-7 ">
-      <h4>收藏清單</h4>
-      <template v-for="(item) in displayItems" :key="item.id">
+    <div class="col-12  col-md-8 ">
+      <h5>收藏清單</h5>
+      <template v-for="(item) in        displayItems       " :key="item.id">
 
-        <div class="row justify-content-center border-bottom border-black p-3 g-3" data-cy="item">
-          <div class="col-12 col-md-4  d-flex align-items-center  justify-content-center ">
-            <div style="max-width: 200px"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
+        <div class="row justify-content-center  p-3 g-3" data-cy="item">
+          <div class="col-5  col-xs-3 d-flex align-items-center  justify-content-center ">
+            <router-link class="nav-link" :to="`/product/all/all/id/${item.id}`"
+              :class="{ 'link-disabled ': !item.on_stock }">
+              <div style="max-width: 200px"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
+            </router-link>
 
           </div>
-          <div class="col-12 col-md-8  ">
-
-            <div class=" d-flex  flex-column  justify-content-between  align-items-start text-start ms-2">
-              <div> {{ item.title }}</div>
+          <div class="col-7  col-xs-4 ">
+            <div class=" d-flex  flex-column  justify-content-between  align-items-start text-start ">
+              <div>
+                <router-link :to="`/product/all/all/id/${item.id}`" :class="{ 'link-disabled ': !item.on_stock }">
+                  <h4 class="text-primary ">{{ item.title }}</h4>
+                </router-link>
+              </div>
+              <span class=" text-500  " v-show="item.on_stock">剩餘數量： {{ item.num }}</span>
               <div class="d-flex gap-2 justify-content-center  align-items-center ms-2">
+
                 <span class="text-500" v-show="item.origin_price !== item.price"> <del>${{ item.origin_price
                     }}</del></span>
                 <span class="text-primary  me-4 " v-show="item.price">${{ item.price }}</span>
 
               </div>
               <span class="text-secondary ms-2" v-if="!item.on_stock"> 此商品已下架。</span>
-              <div class="d-flex gap-2 mt-2 ">
-                <button type="button" class=" btn btn-outline-secondary " :disabled="!item.on_stock">
-                  <router-link class="nav-link" :to="`/product/all/all/id/${item.id}`">前往商品頁</router-link>
-                </button>
-                <button type="button" class="btn btn-outline-secondary" @click="removeItem(item.id)">
-                  移出收藏
-                </button>
-                <button type="button" class="btn btn-primary" @click="addCartCheck(item.id, 1)">
-                  加入購物車
-                </button>
-              </div>
 
             </div>
 
           </div>
+          <div class="col-12 col-xs-4 d-flex flex-column  justify-content-evenly flex-xs-grow-1   gy  "
+            style="min-height: 100px">
 
+            <button type="button" class="btn btn-outline-secondary text-nowrap "
+              :class="{ 'btn-sm': isExtraSmallDevice }" @click="removeItem(item.id)">
+              移出收藏
+            </button>
+            <button type="button" class="btn btn-primary text-nowrap " @click="addCartCheck(item.id, 1)"
+              :class="{ disabled: !item.on_stock, 'btn-sm': isExtraSmallDevice }">
+              加入購物車
+            </button>
+
+          </div>
+          <div class="border-bottom border-500"></div>
         </div>
       </template>
 
@@ -58,11 +68,25 @@
 <script setup>
 import Pagination from '@/components/PaginationAct.vue';
 import {useProductStore} from '@/stores/productStore';
-import {ref, watch} from 'vue';
+import {ref, watch, watchEffect} from 'vue';
 import {storeToRefs} from 'pinia'
 import LocalStorage from '@/utils/methods/localStorage.js'
 import {addCartCheck} from '@/utils/methods/addCartCheck.js'
-const {status} = useProductStore();
+import {useWindowSize} from '@vueuse/core'
+
+const {width} = useWindowSize()
+const isExtraSmallDevice = ref(false);
+watchEffect(() => {
+  let newWidth = width.value
+  if (newWidth >= 480) {
+    isExtraSmallDevice.value = false;
+
+  } else {
+    isExtraSmallDevice.value = true;
+
+  }
+});
+
 const productStore = useProductStore();
 const {products} = storeToRefs(productStore);
 const {getProducts} = productStore;
@@ -114,6 +138,7 @@ watch(() => products, (val) => {
       val.value.forEach(element => {
 
         if (item.id === element.id) {
+          saveItems.value.data[key].num = element.num;
           saveItems.value.data[key].origin_price = element.origin_price;
           saveItems.value.data[key].price = element.price;
           saveItems.value.data[key].on_stock = true;
@@ -135,5 +160,11 @@ getProducts();
   aspect-ratio: 1/1;
   width: 100%;
   height: auto;
+}
+
+.link-disabled {
+  pointer-events: none;
+  text-decoration: none;
+
 }
 </style>
