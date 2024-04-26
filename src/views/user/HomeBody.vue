@@ -10,8 +10,8 @@
     <div class="my-3 my-md-5"><img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <HomeItems section="JUST FOR YOU" :CAT="categories.hot.key" :products="products" id="special" />
     <div class="my-3 my-md-5"><img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid"></div>
-    <HomeNews />
 
+    <HomeNews />
     <div class="my-3 my-md-5"><img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <h1 class="mb-5 ">COLLECTIONS</h1>
     <div class="d-flex flex-column gap-3  justify-content-center align-items-center ">

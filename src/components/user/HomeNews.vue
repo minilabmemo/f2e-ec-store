@@ -1,11 +1,11 @@
 <template>
-  <div class="row   align-items-end gy-3 gx-1 gx-md-4 d-none d-md-flex">
+  <div class="row   align-items-end gy-3 gx-1 gx-md-4 d-none d-sm-flex">
     <div class="col-4"><img src="@/assets/img/design/news1.png" class="img-fluid" alt="news"></div>
     <div class="col-4"><img src="@/assets/img/design/news2.png" class="img-fluid" alt="news"></div>
     <div class="col-4"><img src="@/assets/img/design/news3.png" class="img-fluid" alt="news"></div>
   </div>
 
-  <div class="  d-block d-md-none">
+  <div class="  d-block d-sm-none">
     <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
 
       <div class="carousel-inner">

@@ -2,8 +2,8 @@
   <LoadingOverlay :active="status.isLoading" />
   <VeeForm class="" v-slot="{ errors }" @submit="sendOrder">
     <div class=" my-4">
-      <div class="row g-5">
-        <div class="col-12 col-md-6">
+      <div class="row g-5 ">
+        <div class="col-12 col-md-7">
           <h3 class="mb-3">訂單內容</h3>
           <table class="table align-middle">
             <thead>
@@ -27,7 +27,7 @@
             </tfoot>
           </table>
         </div>
-        <div class="col-12 col-md-6  d-flex  justify-content-center flex-column ">
+        <div class="col-12 col-md-5  d-flex  justify-content-center flex-column ">
           <h3 class="mb-3">收件資訊</h3>
 
           <div class="d-flex flex-wrap ">

@@ -1,14 +1,16 @@
 <template>
   <footer class="bg-orange-100 container-fluid py-5  text-900   " id="footer">
     <div class="container-xl">
-      <div class=" row d-flex justify-content-center  gy-3 ">
+      <div class=" row d-flex justify-content-center  gy-4 ">
         <div class="col-6 col-sm-4   ">
           <div class="row   gy-3  ">
             <div class="col-12 fw-semibold  noto-font">About</div>
             <div class="col-12"> <router-link :to="`/about#${sectionIds.brand}`" class="nav-link">品牌介紹</router-link>
             </div>
-            <div class="col-12"><router-link :to="`/about#${sectionIds.shoppingProcess}`"
-                class="nav-link">購物流程</router-link></div>
+            <div class="col-12">
+              <router-link :to="`/about#${sectionIds.shoppingProcess}`" class="nav-link">
+                購物流程</router-link>
+            </div>
             <div class="col-12"><router-link :to="`/about#${sectionIds.faqs}`" class="nav-link">常見問題</router-link></div>
 
           </div>
@@ -29,7 +31,7 @@
         <div class="col-12 col-sm-4">
           <div class=" row  gy-2 ">
             <div class="col-12 fw-semibold  noto-font ">Contact</div>
-            <div>地址：星展區，時尚大道 88 號，韓星大樓 3 樓</div>
+            <div>地址：韓國村星展區，時尚大道 88 號，星星大樓 3 樓 2 室</div>
             <div>電話：<a href="tel:+886-2-8885678" class="text-900 ">(02) 888-5678 </a></div>
             <div>客服信箱： <a :href="`mailto:koringoffice@line.tw`" class="text-900 ">koringoffice@line.tw</a></div>
             <div class="d-flex flex-wrap ">
