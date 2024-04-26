@@ -14,10 +14,12 @@ describe('Product By ID Test', () => {
   it('user save item and save page test.', () => {
     cy.visit('/#/product/all/all')
     cy.get('[data-cy="item"]').first().click()
-    // save action can re-work
-    cy.contains('button', '加入收藏').click()
+    cy.url().should('contain', '/#/product/all/all/id')
+
+    cy.contains('button', '加入收藏').first().click({ force: true }) //force without isLoading
+    cy.url().should('contain', '/#/product/all/all/id')
     cy.contains('button', '已收藏').should('be.visible')
-    cy.get("img[alt='save']").first().click()
+    cy.get("img[alt='save']").first().click({ force: true })
     cy.url().should('contain', '/#/user/saves')
     cy.get("[data-cy='item']").should('exist')
     cy.contains('button', '前往商品頁').click()
@@ -25,7 +27,13 @@ describe('Product By ID Test', () => {
 
     cy.visit('/#/user/saves')
     cy.contains('button', '移出收藏').click()
-    cy.contains('div', '無收藏商品').should('exist')
+    cy.contains('div', '無收藏商品').should('exist') // save action can re-work, only one saved
+  })
+  it('product recommendItems exist.', () => {
+    cy.visit('/#/product/all/all')
+    cy.get('[data-cy="item"]').first().click()
+    cy.url().should('contain', '/#/product/all/all/id')
+    cy.contains('h4', '您可能也喜歡').should('exist')
   })
 
   // it('user check out.', () => {
