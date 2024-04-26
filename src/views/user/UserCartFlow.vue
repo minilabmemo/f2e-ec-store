@@ -5,7 +5,7 @@
     <div class="row   flex-column align-items-center  justify-content-center  " style="min-height: 50vh"
       v-if="!checkout && (!cart || cart.carts.length === 0)">
       <div class="col-12  col-lg-7 text-dark   d-flex flex-column align-items-center   ">
-        <h5 class=" my-4 fs-2">購物頁面</h5>
+        <h5 class=" my-4 fs-2 ">購物頁面</h5>
 
         <div class="fs-4">您的購物車是空的，請先將商品放入購物車。</div>
 
@@ -16,12 +16,13 @@
       </div>
     </div>
     <div class="my-3 " v-else>
-      <div class="row flex-column align-items-center">
-        <div class="col-12  col-lg-10">
-          <h5 class=" my-3">購物頁面</h5>
-          <ul class="nav  mb-3">
+      <div class="row flex-column align-items-center justify-content-center ">
+        <div class="col-12  ">
+          <h2 class=" my-3">購物頁面</h2>
+          <div class=" my-3 border-bottom bolder-500"></div>
+          <ul class="nav  ">
             <li class="nav-item">
-              <button class="btn"
+              <button class="btn border-0"
                 :class="{ 'btn-secondary': activeTab === 1, 'text-white': activeTab === 1, 'btn-sm': isExtraSmallDevice }"
                 type="button" role="tab" @click="setActiveTab(1)">01
                 加入購物車</button>
@@ -98,9 +99,10 @@ const checkout = ref(false);
 let activeTab = ref(1);
 
 function setActiveTab(index) {
-  if (activeTab.value !== stepRecord.value) {
+  if (!checkout.value) {
     activeTab.value = index;
   }
+
 }
 
 function goNextTab() {
@@ -118,9 +120,10 @@ function goPrevTab() {
 }
 
 function updateOrderID(orderID) {
-  checkout.value = true;
+
   orderId.value = orderID
   goNextTab();
+  checkout.value = true;
 }
 
 </script>

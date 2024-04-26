@@ -2,7 +2,7 @@
   <LoadingOverlay :active="status.isLoading" />
   <VeeForm class="" v-slot="{ errors }" @submit="sendOrder">
     <div class=" my-4">
-      <div class="row g-3">
+      <div class="row g-5">
         <div class="col-12 col-md-6">
           <h3 class="mb-3">訂單內容</h3>
           <table class="table align-middle">
@@ -80,7 +80,7 @@
           <div> <button type="button" class="btn btn-outline-primary  me-2"
               @click.prevent="emit('go-prev')">回上一步</button>
           </div>
-          <div><button type="submit" class="btn btn-primary  ">送出訂單</button></div>
+          <div><button type="submit" class="btn btn-primary" :disabled="cart.carts.length === 0">送出訂單</button></div>
 
         </div>
       </div>

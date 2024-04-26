@@ -173,7 +173,7 @@ const {product, products, status} = storeToRefs(productStore);
 const cartStore = useCartStore();
 
 const {cart} = storeToRefs(cartStore);
-const {getCart} = cartStore;
+
 const {productsByCAT} = storeToRefs(productStore);
 const {getProductByID, getProducts, filterByCategory} = productStore;
 const route = useRoute();
@@ -273,7 +273,7 @@ watchEffect(() => {
 watch(() => products, () => {
 
   filterByCategory(route.params.category);
-  getCart();
+
 }, {deep: true});
 
 watch(() => route.params.productId, (newV, oldV) => {
