@@ -177,7 +177,7 @@
 </template>
 
 <script setup>
-import {ref, watch, watchEffect, defineProps} from 'vue';
+import {ref, watch, defineProps} from 'vue';
 import {userCouponApi} from '@/utils/config/path';
 import {useCartStore} from '@/stores/cartStore';
 import fetchAct from '@/utils/methods/fetchAct';
@@ -185,20 +185,9 @@ import {storeToRefs} from 'pinia';
 
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
 import RemoveAllCartConfirm from '@/components/user/modal/RemoveAllCartConfirm.vue';
-import {useWindowSize} from '@vueuse/core'
 
-const {width} = useWindowSize()
-const isExtraSmallDevice = ref(false);
-watchEffect(() => {
-  let newWidth = width.value
-  if (newWidth >= 480) {
-    isExtraSmallDevice.value = false;
-
-  } else {
-    isExtraSmallDevice.value = true;
-
-  }
-});
+import {useDeviceSize} from '@/composables/useDeviceSize.js'
+const {isExtraSmallDevice} = useDeviceSize()
 const {getCart, updateCart, removeCartByID, removeAllItems} = useCartStore();
 const {cart, cartTotalQty, status} = storeToRefs(useCartStore());
 

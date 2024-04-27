@@ -59,32 +59,24 @@
             </div>
             <div class="d-flex justify-content-between   align-items-stretch ">
               <div class=" ">
-                <SaveButton class="d-none d-xs-inline-block" :item="saveButtonItem" style="min-width:120px" />
-                <SaveButton class="d-inline-block d-xs-none  btn  btn-sm " :item="saveButtonItem" />
+                <SaveButton class="  btn   " :class="{ 'btn-sm': isExtraSmallDevice }" :item="saveButtonItem" />
               </div>
               <div class="  ">
-                <button type="button" class=" d-none d-xs-inline-block   btn btn-primary " style="min-width:120px"
-                  @click="checkQty(product.id, itemQty)">
+                <button type="button" class="    btn btn-primary " :class="{ 'btn-sm': isExtraSmallDevice }"
+                  style="min-width:120px" @click="checkQty(product.id, itemQty)">
                   <div class="d-flex flex-wrap justify-content-center ">
                     <span> 立即結帳</span>
                   </div>
                 </button>
-                <button type="button" class="d-inline-block d-xs-none  btn btn-primary btn-sm"
-                  @click="checkQty(product.id, itemQty)">
-                  <div class="d-flex flex-wrap justify-content-center ">
-                    <span> 立即結帳</span>
-                  </div>
-                </button>
+
               </div>
               <div class="  ">
-                <button type="button" class="d-none d-xs-inline-block btn btn-primary  " style="min-width:120px"
-                  @click="addCart(product.id, itemQty, false)" :class="{ disabled: status.isCartLoading }">
+                <button type="button" class="btn btn-primary  " style="min-width:120px"
+                  @click="addCart(product.id, itemQty, false)"
+                  :class="{ disabled: status.isCartLoading, 'btn-sm': isExtraSmallDevice }">
                   加入購物車
                 </button>
-                <button type="button" class="d-inline-block d-xs-none  btn btn-primary btn-sm  "
-                  @click="addCart(product.id, itemQty, false)" :class="{ disabled: status.isCartLoading }">
-                  加入購物車
-                </button>
+
               </div>
 
             </div>
@@ -167,6 +159,8 @@ import {useCartStore} from '@/stores/cartStore';
 import {storeToRefs} from 'pinia'
 import {useProductStore} from '@/stores/productStore';
 import {addCartCheck} from '@/utils/methods/addCartCheck.js'
+import {useDeviceSize} from '@/composables/useDeviceSize.js'
+const {isExtraSmallDevice} = useDeviceSize()
 const productStore = useProductStore();
 const {product, products, status} = storeToRefs(productStore);
 

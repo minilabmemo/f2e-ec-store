@@ -95,7 +95,6 @@ import {storeToRefs} from 'pinia'
 import {useOrderStore} from '@/stores/orderStore'
 import {useCartStore} from '@/stores/cartStore';
 import {useDeviceSize} from '@/composables/useDeviceSize.js'
-
 const {isExtraSmallDevice} = useDeviceSize()
 
 const cartStore = useCartStore();

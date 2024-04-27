@@ -68,24 +68,12 @@
 <script setup>
 import Pagination from '@/components/PaginationAct.vue';
 import {useProductStore} from '@/stores/productStore';
-import {ref, watch, watchEffect} from 'vue';
+import {ref, watch} from 'vue';
 import {storeToRefs} from 'pinia'
 import LocalStorage from '@/utils/methods/localStorage.js'
 import {addCartCheck} from '@/utils/methods/addCartCheck.js'
-import {useWindowSize} from '@vueuse/core'
-
-const {width} = useWindowSize()
-const isExtraSmallDevice = ref(false);
-watchEffect(() => {
-  let newWidth = width.value
-  if (newWidth >= 480) {
-    isExtraSmallDevice.value = false;
-
-  } else {
-    isExtraSmallDevice.value = true;
-
-  }
-});
+import {useDeviceSize} from '@/composables/useDeviceSize.js'
+const {isExtraSmallDevice} = useDeviceSize()
 
 const productStore = useProductStore();
 const {products} = storeToRefs(productStore);

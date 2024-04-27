@@ -73,20 +73,9 @@ import CartFlowOrderLoc from '@/components/user/CartFlowOrderLoc.vue';
 import CartFlowOrderSuccess from '@/components/user/CartFlowOrderSuccess.vue';
 import {useCartStore} from '@/stores/cartStore';
 import {storeToRefs} from 'pinia'
-import {useWindowSize} from '@vueuse/core'
-import {ref, watchEffect} from 'vue';
-const {width} = useWindowSize()
-const isExtraSmallDevice = ref(false);
-watchEffect(() => {
-  let newWidth = width.value
-  if (newWidth >= 480) {
-    isExtraSmallDevice.value = false;
-
-  } else {
-    isExtraSmallDevice.value = true;
-
-  }
-});
+import {ref} from 'vue';
+import {useDeviceSize} from '@/composables/useDeviceSize.js'
+const {isExtraSmallDevice} = useDeviceSize()
 const cartStore = useCartStore();
 
 const {cart} = storeToRefs(cartStore);
