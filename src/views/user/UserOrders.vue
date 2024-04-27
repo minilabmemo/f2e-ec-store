@@ -93,64 +93,50 @@
   </table>
 
   <OrderModal :order="tempOrder" ref="orderModal" />
-  <CheckoutConfirm :item="tempOrder" ref="CheckoutConfirm" @pay-order="payOrder" />
+  <CheckoutConfirm :item="tempOrder" ref="checkoutConfirm" @pay-order="payOrder" />
   <Pagination :pages="pagination" @change-page-num="getOrders" />
 </template>
 
-<script>
+<script setup lang="js">
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 import OrderModal from '@/components/OrderModal.vue';
 import Pagination from '@/components/PaginationAct.vue';
 
 import {useOrderStore} from '@/stores/orderStore'
-import {mapState, mapActions} from 'pinia'
-export default {
 
-  data() {
-    return {
-      isNew: false,
-      tempOrder: {},
-      currentPage: 1,
-    };
-  },
-  computed: {
-    ...mapState(useOrderStore, ['orders', 'status', 'pagination']),
+import {ref} from 'vue'
+import {storeToRefs} from 'pinia';
 
-  },
-  components: {
-    Pagination,
-    CheckoutConfirm,
-    OrderModal,
-  },
-  methods: {
-    ...mapActions(useOrderStore, ['getOrders', 'payOrderByID']),
+const tempOrder = ref({})
+const orderStore = useOrderStore()
+const {orders, status, pagination} = storeToRefs(orderStore);
+const {getOrders, payOrderByID} = orderStore;
+getOrders()
+const orderModal = ref(null);
+const checkoutConfirm = ref(null);
 
-    openModal(isNew, item) {
-      this.tempOrder = {...item};
-      this.isNew = false;
-      const orderComponent = this.$refs.orderModal;
-      orderComponent.showModal();
-    },
+function openModal(isNew, item) {
+  tempOrder.value = {...item};
+  isNew = false;
+  const orderComponent = orderModal.value;
+  if (orderComponent) {
+    orderComponent.showModal();
+  }
+}
+let orderId = "";
+function confirmPay(item) {
+  tempOrder.value = {...item};
+  orderId = item.id;
+  const confirmModal = checkoutConfirm.value;
+  confirmModal.showModal();
+}
 
-    confirmPay(item) {
-      this.tempOrder = {...item};
-      this.orderId = item.id;
-      const confirmModal = this.$refs.CheckoutConfirm;
-      confirmModal.showModal();
-    },
+function payOrder() {
+  const confirmModal = checkoutConfirm.value;
+  confirmModal.hideModal();
+  if (orderId) {
+    payOrderByID(orderId)
 
-    payOrder() {
-      const confirmModal = this.$refs.CheckoutConfirm;
-      confirmModal.hideModal();
-      if (this.orderId) {
-        this.payOrderByID(this.orderId)
-
-      }
-    },
-  },
-  created() {
-    this.getOrders();
-
-  },
-};
+  }
+}
 </script>

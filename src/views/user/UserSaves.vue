@@ -12,7 +12,7 @@
 
     <div class="col-12  col-md-8 ">
       <h5>收藏清單</h5>
-      <template v-for="(item) in        displayItems       " :key="item.id">
+      <template v-for="(item) in displayItems" :key="item.id">
 
         <div class="row justify-content-center  p-3 g-3" data-cy="item">
           <div class="col-5  col-xs-3 d-flex align-items-center  justify-content-center ">
