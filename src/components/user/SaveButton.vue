@@ -1,6 +1,6 @@
 <template>
 
-  <button type="button" class=" btn btn-outline-primary  " @click="removeItem()" v-if="isSave">
+  <button type="button" class="text-nowrap  btn btn-outline-primary  " @click="removeItem()" v-if="isSave">
     <div>
       <div class="d-flex justify-content-center  align-items-center gap-1">
         <svg width="20" height="20" viewBox="0 0 30 30" fill="#DD8560" stroke="#DD8560"
@@ -16,7 +16,7 @@
 
   </button>
 
-  <button type="button" class=" btn btn-outline-800   " @click="saveItem()" v-else>
+  <button type="button" class="text-nowrap  btn btn-outline-800   " @click="saveItem()" v-else>
 
     <div>
       <div class="d-flex justify-content-center  align-items-center gap-1 ">

@@ -250,11 +250,4 @@ watch(() => props.checkout, () => {
   width: 100%;
   height: auto;
 }
-
-.custom-select-xs {
-  width: 4rem;
-  font-size: 0.875rem;
-  height: 1.5rem;
-  padding: 0.1rem 0.5rem;
-}
 </style>

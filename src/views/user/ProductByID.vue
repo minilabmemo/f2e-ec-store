@@ -57,21 +57,22 @@
 
               </div>
             </div>
-            <div class="d-flex justify-content-between   align-items-stretch ">
-              <div class=" ">
-                <SaveButton class="  btn   " :class="{ 'btn-sm': isExtraSmallDevice }" :item="saveButtonItem" />
+            <div class="d-flex justify-content-between   align-items-stretch gap-2">
+              <div class="flex-grow-1 ">
+                <SaveButton class="btn" style="min-width:98px;width:100%" :class="{ 'btn-sm': isExtraSmallDevice }"
+                  :item="saveButtonItem" />
               </div>
-              <div class="  ">
+              <div class=" flex-grow-1  ">
                 <button type="button" class="    btn btn-primary " :class="{ 'btn-sm': isExtraSmallDevice }"
-                  style="min-width:120px" @click="checkQty(product.id, itemQty)">
+                  style="min-width:90px;width:100%" @click="checkQty(product.id, itemQty)">
                   <div class="d-flex flex-wrap justify-content-center ">
                     <span> 立即結帳</span>
                   </div>
                 </button>
 
               </div>
-              <div class="  ">
-                <button type="button" class="btn btn-primary  " style="min-width:120px"
+              <div class=" flex-grow-1  ">
+                <button type="button" class="btn btn-primary  " style="min-width:90px;width:100%"
                   @click="addCart(product.id, itemQty, false)"
                   :class="{ disabled: status.isCartLoading, 'btn-sm': isExtraSmallDevice }">
                   加入購物車
@@ -302,5 +303,9 @@ watch(() => route.params.productId, (newV, oldV) => {
 .scroll-to-top-button.show {
   opacity: 1;
   transform: translateY(0px);
+}
+
+.custom-btn-xs {
+  --bs-btn-padding-x: 0.3rem;
 }
 </style>
