@@ -63,7 +63,16 @@ watchEffect(() => {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
 }
 
-@media (min-height: 700px) {
+@media (max-width: 992px) {
+
+  .sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+  }
+}
+
+@media (min-width: 992px) and (min-height: 700px) {
   .sticky-header {
     position: sticky;
     top: 0;

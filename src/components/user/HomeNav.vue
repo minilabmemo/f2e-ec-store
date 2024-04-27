@@ -3,7 +3,7 @@
   <nav class="navbar navbar-expand-lg position-relative" aria-label="Offcanvas navbar large">
     <div class="container-fluid px-0 ">
       <div class="container-lg d-lg-none p-0 nav-bar-for-small">
-        <div class="row gy-2    justify-content-between   align-items-center  ">
+        <div class="row     justify-content-between   align-items-center  g-0">
           <div class="col-2 col-sm-3 d-flex  justify-content-start ">
             <button class="navbar-toggler " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
               aria-controls="offcanvasNavbar" aria-label="Toggle navigation"

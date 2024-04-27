@@ -39,20 +39,8 @@
   --bs-offcanvas-width: 16.25rem;;
 }
 
-.custom-select-xs {
-  width: 4rem;
-  font-size: 0.875rem;
-  height: calc(1.5em + 0.5rem + 2px);
-  padding: 0.25rem 0.5rem;
-}
 /* RWD setting*/
-/* 1.125rem;18px */
-/* 1 rem = 16px*/
-/* 0.875rem;14px */
-/* 1.25rem 20px */
-/* 1.5rem 24px */
-/* 2rem 32px */
-/* 4rem; 64px */
+
 
 .font-sm {
   font-size: clamp( 0.875rem, 2.5vw, 1rem);
@@ -87,9 +75,7 @@ h4 {
     width: 1.2rem;
     height: 1.2rem;
   }
-  .icon-font-size{
-    font-size: 1rem;
-  }
+ 
   .font-small {
     font-size: 0.875rem;
   }
@@ -103,12 +89,10 @@ h4 {
  
 
   .icon-size{
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
   }
-  .icon-font-size{
-    font-size: 1.125rem;
-  }
+
  
 }
  

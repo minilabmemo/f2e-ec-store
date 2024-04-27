@@ -96,7 +96,7 @@
                   <div class="d-flex   flex-column  align-items-start text-start ">
                     <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
                         }}</router-link></div>
-                    <div class="ms-2">
+                    <div class="ms-1">
                       <span class=" text-500  me-4" v-show="item.product.price !== item.product.origin_price"> <del>${{
             $filters.currency(item.product.origin_price) }}</del></span>
                       <span class=" text-primary  me-4 ">${{ $filters.currency(item.product.price) }}</span>
@@ -119,7 +119,7 @@
                 </select>
               </td>
               <td class="text-end">
-                <small v-if="cart.final_total !== cart.total" class="text-success">折扣價：</small>
+                <small v-if="item.coupon" class="text-success">折扣價：</small>
                 ${{ $filters.currency(item.final_total) }}
               </td>
             </tr>
@@ -144,7 +144,7 @@
           <div class="input-group-append ">
             <button class="btn btn-secondary text-white rounded-0 rounded-end" type="button" @click="addCouponCode"
               :class="{ 'btn-sm': isExtraSmallDevice }">
-              套用優惠碼
+              套用優惠卷
             </button>
 
           </div>
@@ -259,5 +259,12 @@ watch(() => props.checkout, () => {
   aspect-ratio: 1/1;
   width: 100%;
   height: auto;
+}
+
+.custom-select-xs {
+  width: 4rem;
+  font-size: 0.875rem;
+  height: 1.5rem;
+  padding: 0.1rem 0.5rem;
 }
 </style>

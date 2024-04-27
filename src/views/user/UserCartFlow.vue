@@ -17,15 +17,14 @@
     </div>
     <div class="my-3 " v-else>
       <div class="row flex-column align-items-center justify-content-center ">
-        <div class="col-12  ">
+        <div class="col-12 my-3 ">
           <h2 class=" my-3">購物頁面</h2>
           <div class=" my-3 border-bottom bolder-500"></div>
           <ul class="nav  ">
             <li class="nav-item">
               <button class="btn border-0"
                 :class="{ 'btn-secondary': activeTab === 1, 'text-white': activeTab === 1, 'btn-sm': isExtraSmallDevice }"
-                type="button" role="tab" @click="setActiveTab(1)">01
-                加入購物車</button>
+                type="button" role="tab" @click="setActiveTab(1)">01 購物車</button>
 
             </li>
             <li class="nav-item " role="presentation">
