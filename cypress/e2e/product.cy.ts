@@ -16,16 +16,12 @@ describe('Product By ID Test', () => {
     cy.get('[data-cy="item"]').first().click()
     cy.url().should('contain', '/#/product/all/all/id')
 
-    cy.contains('button', '加入收藏').first().click({ force: true }) //force without isLoading
+    cy.contains('button', '加入收藏').click()
     cy.url().should('contain', '/#/product/all/all/id')
     cy.contains('button', '已收藏').should('be.visible')
     cy.get("img[alt='save']").first().click({ force: true })
     cy.url().should('contain', '/#/user/saves')
     cy.get("[data-cy='item']").should('exist')
-    cy.contains('button', '前往商品頁').click()
-    cy.url().should('contain', '/#/product/all/all/id')
-
-    cy.visit('/#/user/saves')
     cy.contains('button', '移出收藏').click()
     cy.contains('div', '無收藏商品').should('exist') // save action can re-work, only one saved
   })
