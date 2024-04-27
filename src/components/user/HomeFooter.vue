@@ -6,7 +6,7 @@
           <div class="row   gy-3  ">
             <div class="col-12 fw-semibold  noto-font ">
               About
-              <div class=" bg-500  mt-2" style="width: 30%;height: 2px"></div>
+              <div class=" bg-500  mt-2" style="min-width: 4rem;width: 30%;height: 2px"></div>
             </div>
 
             <div class="col-12"> <router-link :to="`/about#${sectionIds.brand}`" class="nav-link">品牌介紹</router-link>
@@ -23,7 +23,7 @@
         <div class="col-6 col-sm-4 ">
           <div class="row     gy-3 ">
             <div class="col-12 fw-semibold  noto-font ">Service
-              <div class=" bg-500  mt-2" style="width: 30%;height: 2px"></div>
+              <div class=" bg-500  mt-2" style="min-width: 4rem;width: 30%;height: 2px"></div>
             </div>
 
             <div class="col-12"><router-link :to="`/about#${sectionIds.paymentMethods}`"
