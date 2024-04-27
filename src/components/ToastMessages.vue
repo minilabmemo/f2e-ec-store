@@ -4,14 +4,10 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Toast from '@/components/ToastCard.vue';
 import statusStore from '@/stores/statusStore';
-import {mapState} from 'pinia';
-export default {
-  components: {Toast},
-  computed: {
-    ...mapState(statusStore, ["messages"])
-  }
-};
+import {storeToRefs} from 'pinia';
+const {messages} = storeToRefs(statusStore());
+
 </script>
