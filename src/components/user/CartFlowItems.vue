@@ -12,14 +12,14 @@
                 <div class="d-flex  gap-2 ">
                   <div style="flex-basis: 100px"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image">
                   </div>
-                  <div style="flex: 1;" class=" d-flex   flex-column  align-items-start text-start gap-2">
+                  <div style="flex: 1;" class=" d-flex   flex-column  align-items-start text-start gap-2 pe-2">
                     <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
                         }}</router-link></div>
-                    <div class="d-flex   flex-column  align-items-start text-start gap-2 ">
-                      <div>
-                        <span class=" text-500 me-1" v-show="item.product.price !== item.product.origin_price">
+                    <div class=" d-flex   flex-column  align-items-start text-start gap-2 ">
+                      <div class=" d-flex   flex-wrap gap-1">
+                        <span class=" text-500 " v-show="item.product.price !== item.product.origin_price">
                           <del>${{ $filters.currency(item.product.origin_price) }}</del></span>
-                        <span class=" text-primary  me-1 ">${{ $filters.currency(item.product.price) }}</span>
+                        <span class=" text-primary   ">${{ $filters.currency(item.product.price) }}</span>
                         <span class=" text-500  ">剩餘數量： {{ item.product.num }}</span>
                       </div>
 
@@ -119,8 +119,9 @@
                 </select>
               </td>
               <td class="text-end">
-                <small v-if="item.coupon" class="text-success">折扣價：</small>
-                ${{ $filters.currency(item.final_total) }}
+                <div class="text-nowrap  " :class="{ ' text-success': item.coupon }">
+                  ${{ $filters.currency(item.final_total) }}
+                </div>
               </td>
             </tr>
 
