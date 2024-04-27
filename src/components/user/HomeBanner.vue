@@ -5,13 +5,19 @@
 
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="@/assets/img/design/banner1.png" class="d-block w-100 " alt="news">
+          <router-link :to="`/product/new/all`" class="nav-link">
+            <img src="@/assets/img/design/banner1.png" class="d-block w-100 " alt="banner">
+          </router-link>
         </div>
         <div class="carousel-item">
-          <img src="@/assets/img/design/banner2.png" class="d-block w-100 " alt="news">
+          <router-link :to="`/product/new/all`" class="nav-link">
+            <img src="@/assets/img/design/banner2.png" class="d-block w-100 " alt="banner">
+          </router-link>
         </div>
         <div class="carousel-item">
-          <img src="@/assets/img/design/banner3.png" class="d-block w-100 " alt="news">
+          <router-link :to="`/product/new/all`" class="nav-link">
+            <img src="@/assets/img/design/banner3.png" class="d-block w-100 " alt="banner">
+          </router-link>
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#bannersCarousel" data-bs-slide="prev">
