@@ -6,7 +6,7 @@
           <div class="row   gy-3  ">
             <div class="col-12 fw-semibold  noto-font ">
               About
-              <div class=" bg-500  mt-2" style="min-width: 4rem;width: 30%;height: 2px"></div>
+              <div class=" bg-500  mt-2" style="min-width: 4rem;width: 30%;height: 0.125rem"></div>
             </div>
 
             <div class="col-12"> <router-link :to="`/about#${sectionIds.brand}`" class="nav-link">品牌介紹</router-link>
@@ -23,7 +23,7 @@
         <div class="col-6 col-sm-4 ">
           <div class="row     gy-3 ">
             <div class="col-12 fw-semibold  noto-font ">Service
-              <div class=" bg-500  mt-2" style="min-width: 4rem;width: 30%;height: 2px"></div>
+              <div class=" bg-500  mt-2" style="min-width: 4rem;width: 30%;height: 0.125rem"></div>
             </div>
 
             <div class="col-12"><router-link :to="`/about#${sectionIds.paymentMethods}`"
@@ -38,7 +38,7 @@
         <div class="col-12 col-sm-4">
           <div class=" row  gy-2 ">
             <div class="col-12 fw-semibold  noto-font ">Contact
-              <div class=" bg-500  mt-2" style="width: 100%;height: 2px"></div>
+              <div class=" bg-500  mt-2" style="width: 100%;height: 0.125rem"></div>
             </div>
             <div>地址：韓國村星展區，時尚大道 88 號，星星大樓 3 樓 </div>
             <div>電話：<a href="tel:+886-2-8885678" class="text-900 ">(02) 888-5678 </a></div>

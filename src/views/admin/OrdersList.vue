@@ -16,7 +16,7 @@
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
           <td>{{ $filters.date(item.create_at) }}</td>
           <td> <a :href="`mailto:${item.user.email}}`">
-              <span class="d-inline-block text-truncate" style="max-width: 200px;">{{
+              <span class="d-inline-block text-truncate" style="max-width: 12.5rem;">{{
     item.user.email }}</span>
             </a></td>
           <td>

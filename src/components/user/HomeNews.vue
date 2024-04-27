@@ -5,7 +5,7 @@
     <div class="col-4"><img src="@/assets/img/design/news3.png" class="img-fluid" alt="news"></div>
   </div>
 
-  <div class="  d-block d-md-none" style="max-width: 500px">
+  <div class="  d-block d-md-none" style="max-width: 31.25rem">
     <div id="newsCarousel" class="carousel slide" data-bs-ride="carousel">
 
       <div class="carousel-inner">

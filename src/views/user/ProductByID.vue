@@ -59,12 +59,12 @@
             </div>
             <div class="d-flex justify-content-between   align-items-stretch gap-2">
               <div class="flex-grow-1 ">
-                <SaveButton class="btn" style="min-width:98px;width:100%" :class="{ 'btn-sm': isExtraSmallDevice }"
+                <SaveButton class="btn" style="min-width:6.125rem;width:100%" :class="{ 'btn-sm': isExtraSmallDevice }"
                   :item="saveButtonItem" />
               </div>
               <div class=" flex-grow-1  ">
                 <button type="button" class="    btn btn-primary " :class="{ 'btn-sm': isExtraSmallDevice }"
-                  style="min-width:90px;width:100%" @click="checkQty(product.id, itemQty)">
+                  style="min-width:5.625rem;width:100%" @click="checkQty(product.id, itemQty)">
                   <div class="d-flex flex-wrap justify-content-center ">
                     <span> 立即結帳</span>
                   </div>
@@ -72,7 +72,7 @@
 
               </div>
               <div class=" flex-grow-1  ">
-                <button type="button" class="btn btn-primary  " style="min-width:90px;width:100%"
+                <button type="button" class="btn btn-primary  " style="min-width:5.625rem;width:100%"
                   @click="addCart(product.id, itemQty, false)"
                   :class="{ disabled: status.isCartLoading, 'btn-sm': isExtraSmallDevice }">
                   加入購物車
@@ -291,10 +291,10 @@ watch(() => route.params.productId, (newV, oldV) => {
 
 .scroll-to-top-button {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 1.25rem;
+  right: 1.25rem;
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(3.125rem);
   transition: transform 0.3s ease-in-out;
   border: none;
 

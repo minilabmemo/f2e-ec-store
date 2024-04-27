@@ -26,7 +26,7 @@
             <div class="d-flex justify-content-start align-items-center  gap-1  ">
 
               <div class="d-flex  align-items-center justify-content-center    " v-if="item.is_paid">
-                <div class="rounded-circle bg-success me-1 " style="height: 16px;width: 16px;"> </div>
+                <div class="rounded-circle bg-success me-1 " style="height: 1rem;width: 1rem;"> </div>
                 <div class=""> 已付款 </div>
               </div>
 
@@ -62,7 +62,7 @@
               <small>查看訂單內容</small> </a> </td>
           <td>{{ $filters.date(item.create_at) }}</td>
           <td><span v-text="item.user.email" v-if="item.user" class="d-inline-block text-truncate"
-              style="max-width: 200px;"></span>
+              style="max-width: 12.5rem;"></span>
 
           </td>
           <td>
@@ -78,7 +78,7 @@
           <td>
 
             <div v-if="item.is_paid" class="d-flex justify-content-start align-items-center  gap-1 flex-grow-1 ">
-              <div class="  rounded-circle " :class="{ 'bg-success ': item.is_paid }" style="height: 16px;width: 16px;">
+              <div class="  rounded-circle " :class="{ 'bg-success ': item.is_paid }" style="height: 1rem;width: 1rem;">
               </div><span>已付款</span>
             </div>
 

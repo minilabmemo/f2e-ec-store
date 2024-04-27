@@ -18,7 +18,7 @@
           <div class="col-5  col-xs-3 d-flex align-items-center  justify-content-center ">
             <router-link class="nav-link" :to="`/product/all/all/id/${item.id}`"
               :class="{ 'link-disabled ': !item.on_stock }">
-              <div style="max-width: 200px"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
+              <div style="max-width: 12.5rem"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
             </router-link>
 
           </div>
@@ -43,7 +43,7 @@
 
           </div>
           <div class="col-12 col-xs-4 d-flex flex-column  justify-content-evenly flex-xs-grow-1   gy  "
-            style="min-height: 100px">
+            style="min-height: 6.25rem">
 
             <button type="button" class="btn btn-outline-secondary text-nowrap "
               :class="{ 'btn-sm': isExtraSmallDevice }" @click="removeItem(item.id)">

@@ -79,37 +79,37 @@ defineProps({
 .lds-ellipsis {
   display: inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 5rem;
+  height: 5rem;
 }
 
 .lds-ellipsis div {
   position: absolute;
-  top: 33px;
-  width: 13px;
-  height: 13px;
+  top: 2.0625rem;
+  width: 0.8125rem;
+  height: 0.8125rem;
   border-radius: 50%;
   background: #131313;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 
 .lds-ellipsis div:nth-child(1) {
-  left: 8px;
+  left: 0.5rem;
   animation: lds-ellipsis1 0.6s infinite;
 }
 
 .lds-ellipsis div:nth-child(2) {
-  left: 8px;
+  left: 0.5rem;
   animation: lds-ellipsis2 0.6s infinite;
 }
 
 .lds-ellipsis div:nth-child(3) {
-  left: 32px;
+  left: 2rem;
   animation: lds-ellipsis2 0.6s infinite;
 }
 
 .lds-ellipsis div:nth-child(4) {
-  left: 56px;
+  left: 3.5rem;
   animation: lds-ellipsis3 0.6s infinite;
 }
 
@@ -139,7 +139,7 @@ defineProps({
   }
 
   100% {
-    transform: translate(24px, 0);
+    transform: translate(1.5rem, 0);
   }
 }
 

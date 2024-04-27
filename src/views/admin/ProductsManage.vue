@@ -23,7 +23,7 @@
 
           <td>{{ item.category }}</td>
           <td class="d-flex ">
-            <div style="flex:1"> <img style="width: 100px;" :src="item.imageUrl" alt="imageUrl" class="flex-image">
+            <div style="flex:1"> <img style="width: 6.25rem;" :src="item.imageUrl" alt="imageUrl" class="flex-image">
             </div>
             <div style="flex:2"> {{ item.title }}</div>
 

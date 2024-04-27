@@ -10,7 +10,7 @@
               <div>
 
                 <div class="d-flex  gap-2 ">
-                  <div style="flex-basis: 100px"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image">
+                  <div style="flex-basis: 6.25rem"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image">
                   </div>
                   <div style="flex: 1;" class=" d-flex   flex-column  align-items-start text-start gap-2 pe-2">
                     <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
@@ -76,8 +76,8 @@
             <th>
             </th>
             <th>品名</th>
-            <th style="width: 110px">數量</th>
-            <th style="width: 110px">單價</th>
+            <th style="width: 6.875rem">數量</th>
+            <th style="width: 6.875rem">單價</th>
           </tr>
         </thead>
         <tbody>
@@ -91,7 +91,7 @@
               </td>
               <td>
                 <div class="d-flex gap-2 ">
-                  <div style="flex-basis: 100px"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image">
+                  <div style="flex-basis: 6.25rem"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image">
                   </div>
                   <div style="flex:1" class="d-flex   flex-column  align-items-start text-start ">
                     <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title

@@ -16,7 +16,7 @@
               <table class="table">
                 <tbody v-if="tempOrder.user">
                   <tr>
-                    <th style="width: 100px;">姓名</th>
+                    <th style="width: 6.25rem;">姓名</th>
                     <td>
                       <div class="text-break">{{ tempOrder.user.name }}</div>
                     </td>
@@ -52,7 +52,7 @@
               <table class="table">
                 <tbody>
                   <tr>
-                    <th style="width: 100px" class="text-nowrap ">訂單編號</th>
+                    <th style="width: 6.25rem" class="text-nowrap ">訂單編號</th>
                     <td class="text-break ">{{ tempOrder.id }}</td>
                   </tr>
                   <tr>

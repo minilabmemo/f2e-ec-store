@@ -36,9 +36,9 @@
     <div class="section mb-5" :id="sectionIdsRef.paymentMethods">
       <h3 class="mb-4 text-center text-primary ">付款方式</h3>
       <div class="content text-justify">
-        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="0.75rem" height="0.75rem" class="me-1 ">
           我們接受多種付款方式，包括信用卡、PayPal、支付寶等。</p>
-        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="0.75rem" height="0.75rem" class="me-1 ">
           所有付款信息均經過安全加密，保障您的個人資訊安全。</p>
       </div>
     </div>
@@ -46,9 +46,9 @@
     <div class="section mb-5 " :id="sectionIdsRef.shippingService">
       <h3 class="mb-4 text-center text-primary  ">運送服務</h3>
       <div class="content text-justify">
-        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="0.75rem" height="0.75rem" class="me-1 ">
           我們提供全球送貨服務，運送到您指定的地址。</p>
-        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="0.75rem" height="0.75rem" class="me-1 ">
           部分地區可能有額外運費或運送時效，請在結帳頁面查看詳細信息。</p>
       </div>
     </div>
@@ -56,10 +56,10 @@
     <div class="section" :id="sectionIdsRef.returnPolicy">
       <h3 class="mb-4 text-center text-primary ">退換政策</h3>
       <div class="content text-justify">
-        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="0.75rem" height="0.75rem" class="me-1 ">
           如果您對購買的產品不滿意，您可以在 30
           天內申請退換貨。</p>
-        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="12px" height="12px" class="me-1 ">
+        <p><img src="/src/assets/img/icons/nav.svg" alt="nav" width="0.75rem" height="0.75rem" class="me-1 ">
           請確保商品未被使用且保留原包裝，以確保您的退換貨申請被受理。</p>
       </div>
     </div>
@@ -76,7 +76,7 @@ const sectionIdsRef = ref(sectionIds);
 </script>
 <style scoped>
 .section {
-  width: max(300px, 80%);
+  width: max(18.75rem, 80%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,8 +85,7 @@ const sectionIdsRef = ref(sectionIds);
 
 .content {
   width: 80%;
-  max-width: 680px;
+  max-width: 42.5rem;
 
 }
 </style>
-@/utils/config/sectionIds.js

@@ -4,7 +4,7 @@
     <li class="nav-item  lh-1   " v-for="(cat, key, index) in categories" :key="key">
       <div class="d-flex align-items-center">
         <img src="@/assets/img/icons/nav.svg" alt="nav"
-          v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/all`" width="12px" height="12px">
+          v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/all`" width="0.75rem" height="0.75rem">
         <router-link class="nav-link  fw-bold px-2 "
           :class="{ 'nav-inactive': !countByCAT(key), 'text-800': countByCAT(key) }" aria-current="page" href="#"
           :to="`/product/${key}/all`">
@@ -16,8 +16,8 @@
       <ul class="navbar-nav flex-column px-4 " v-for="(item, subKey) in cat.sub_category" :key="subKey">
         <li class="d-flex align-items-center  ">
           <img src="@/assets/img/icons/nav.svg" alt="nav"
-            v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/${subKey}`" width="12px"
-            height="12px">
+            v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/${subKey}`" width="0.75rem"
+            height="0.75rem">
           <router-link class="nav-link" :to="`/product/${key}/${subKey}`"
             :class="{ 'nav-inactive': !countByCAT(key, subKey), 'text-900': countByCAT(key, subKey) }">
             {{ item.name }} {{ item.key }}
