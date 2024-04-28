@@ -84,53 +84,44 @@
       </div>
     </form>
   </div>
-  <CheckoutConfirm :item="order" ref="CheckoutConfirm" @pay-order="payOrder" v-if="order" />
+  <CheckoutConfirm :item="order" ref="checkoutConfirm" @pay-order="payOrder" v-if="order" />
 </template>
 
-<script>
+<script setup>
 
 import {useOrderStore} from '@/stores/orderStore'
-import {mapState, mapActions} from 'pinia'
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
+const props = defineProps({
+  orderId: String,
+});
+import {storeToRefs} from 'pinia';
+import {watch, ref} from 'vue';
+const orderStore = useOrderStore()
+const {order} = storeToRefs(orderStore);
+const {getOrderByID, payOrderByID} = orderStore;
+const checkoutConfirm = ref(null)
 
-export default {
-  components: {CheckoutConfirm},
-  props: {
-    orderId: String,
-  },
-  computed: {
-    ...mapState(useOrderStore, ['order', 'status']),
+function getOrder() {
+  if (props.orderId === "") {
+    return
+  }
+  getOrderByID(props.orderId)
+}
+getOrder()
 
-  },
+watch(() => props.orderId,
+  () => {
+    getOrder()
+  }
+);
+function confirmPay() {
+  const confirmModal = checkoutConfirm.value;
+  confirmModal.showModal();
+}
+function payOrder() {
+  payOrderByID(orderId)
+  const confirmModal = checkoutConfirm.value;
+  confirmModal.hideModal();
+}
 
-  methods: {
-    ...mapActions(useOrderStore, ['getOrderByID', 'payOrderByID']),
-
-    getOrder() {
-      if (this.orderId == "") {
-        return
-      }
-      this.getOrderByID(this.orderId)
-    },
-    confirmPay() {
-      const confirmModal = this.$refs.CheckoutConfirm;
-      confirmModal.showModal();
-    },
-    payOrder() {
-      this.payOrderByID(this.orderId)
-      const confirmModal = this.$refs.CheckoutConfirm;
-      confirmModal.hideModal();
-    },
-  },
-
-  created() {
-    this.getOrder();
-
-  },
-  watch: {
-    orderId() {
-      this.getOrder();
-    },
-  },
-};
 </script>
