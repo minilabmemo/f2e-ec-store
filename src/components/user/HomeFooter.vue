@@ -9,13 +9,14 @@
               <div class=" bg-500  mt-2" style="min-width: 4rem;width: 30%;height: 0.125rem"></div>
             </div>
 
-            <div class="col-12"> <router-link :to="`/about#${sectionIds.brand}`" class="nav-link">品牌介紹</router-link>
+            <div class="col-12"> <router-link :to="`/about#${sectionIdsRef.brand}`" class="nav-link">品牌介紹</router-link>
             </div>
             <div class="col-12">
-              <router-link :to="`/about#${sectionIds.shoppingProcess}`" class="nav-link">
+              <router-link :to="`/about#${sectionIdsRef.shoppingProcess}`" class="nav-link">
                 購物流程</router-link>
             </div>
-            <div class="col-12"><router-link :to="`/about#${sectionIds.faqs}`" class="nav-link">常見問題</router-link></div>
+            <div class="col-12"><router-link :to="`/about#${sectionIdsRef.faqs}`" class="nav-link">常見問題</router-link>
+            </div>
 
           </div>
 
@@ -26,11 +27,11 @@
               <div class=" bg-500  mt-2" style="min-width: 4rem;width: 30%;height: 0.125rem"></div>
             </div>
 
-            <div class="col-12"><router-link :to="`/about#${sectionIds.paymentMethods}`"
+            <div class="col-12"><router-link :to="`/about#${sectionIdsRef.paymentMethods}`"
                 class="nav-link">付款方式</router-link></div>
-            <div class="ol-12"><router-link :to="`/about#${sectionIds.shippingService}`"
+            <div class="ol-12"><router-link :to="`/about#${sectionIdsRef.shippingService}`"
                 class="nav-link">運送服務</router-link></div>
-            <div class="ol-12"><router-link :to="`/about#${sectionIds.returnPolicy}`"
+            <div class="ol-12"><router-link :to="`/about#${sectionIdsRef.returnPolicy}`"
                 class="nav-link">退換政策</router-link></div>
 
           </div>
@@ -68,14 +69,9 @@
   </footer>
 </template>
 
-<script>
+<script setup>
 import sectionIds from '@/utils/config/sectionIds.js';
+import {ref} from 'vue'
+const sectionIdsRef = ref(sectionIds)
 
-export default {
-  data() {
-    return {
-      sectionIds: sectionIds
-    }
-  }
-}
 </script>
