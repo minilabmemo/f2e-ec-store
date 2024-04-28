@@ -277,4 +277,4 @@ export default {
   },
 
 }
-</script>@/utils/config/path@/utils/config/itemLimit@/utils/config/categories
+</script>

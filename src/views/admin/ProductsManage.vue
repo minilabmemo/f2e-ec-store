@@ -160,4 +160,4 @@ export default {
   width: 100%;
   height: auto;
 }
-</style>@/utils/config/path
+</style>
