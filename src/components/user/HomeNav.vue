@@ -66,82 +66,63 @@
   </nav>
 
 </template>
-
-<script>
+<script setup>
 import categories from '@/utils/config/categories'
 import 'bootstrap/js/dist/collapse';
+import {ref, onMounted, onUnmounted, computed, watch} from 'vue';
 import Offcanvas from 'bootstrap/js/dist/offcanvas';
 import HomeLogo from '@/components/user/HomeLogo.vue';
-import CATNav from '@/components/user/CategoriesNav.vue'
+import CATNav from '@/components/user/CategoriesNav.vue';
+import {useRoute, useRouter} from "vue-router";
+const route = useRoute();
+const router = useRouter();
+const keyword = ref("");
+const isCollapsed = ref(false);
+const bsOffcanvas = ref({});
+watch(() => route.path, () => {
+  bsOffcanvas.value.hide()
+});
 
-export default {
-  components: {HomeLogo, CATNav},
-
-  data() {
-    return {
-      keyword: "",
-      categories: categories,
-      isCollapsed: false,
-      bsOffcanvas: {},
-    }
-  },
-  methods: {
-    search() {
-      if (this.keyword == "") {
-        alert("請輸入關鍵字")
-      } else {
-        this.$router.push(`/product/all/all/keyword/${this.keyword}`)
-      }
-
-    },
-    handleOffcanvasHide() {
-      this.isCollapsed = false;
-
-    },
-    handleOffcanvasShow() {
-      this.isCollapsed = true;
-
-    }
-  },
-  computed: {
-    searchClasses() {
-      return {
-        'position-absolute': !this.isCollapsed,
-        'end-0': !this.isCollapsed,
-        "top-50": !this.isCollapsed,
-        "translate-middle-y": !this.isCollapsed
-      };
-    }
-  },
-  mounted() {
-
-    let myOffcanvas = document.getElementById('offcanvasNavbar')
-    if (myOffcanvas) {
-      this.bsOffcanvas = new Offcanvas(myOffcanvas, {
-        toggle: false
-      })
-      myOffcanvas.addEventListener('hide.bs.offcanvas', this.handleOffcanvasHide);
-
-      myOffcanvas.addEventListener('show.bs.offcanvas', this.handleOffcanvasShow);
-    }
-
-  },
-  unmounted() {
-    const myOffcanvas = document.getElementById('offcanvasNavbar');
-    if (myOffcanvas) {
-      myOffcanvas.removeEventListener('hide.bs.offcanvas', this.handleOffcanvasHide);
-      myOffcanvas.removeEventListener('show.bs.offcanvas', this.handleOffcanvasShow);
-    }
-  },
-
-  watch: {
-    '$route'(to, from) {
-      if (to.path !== from.path) {
-        this.bsOffcanvas.hide()
-      }
-    }
+const search = () => {
+  if (keyword.value === "") {
+    alert("請輸入關鍵字");
+  } else {
+    router.push(`/product/all/all/keyword/${keyword.value}`);
   }
-}
+};
+
+const handleOffcanvasHide = () => {
+  isCollapsed.value = false;
+};
+
+const handleOffcanvasShow = () => {
+  isCollapsed.value = true;
+};
+
+const searchClasses = computed(() => ({
+  'position-absolute': !isCollapsed.value,
+  'end-0': !isCollapsed.value,
+  "top-50": !isCollapsed.value,
+  "translate-middle-y": !isCollapsed.value
+}));
+
+onMounted(() => {
+  const myOffcanvas = document.getElementById('offcanvasNavbar');
+  if (myOffcanvas) {
+    bsOffcanvas.value = new Offcanvas(myOffcanvas, {
+      toggle: false
+    });
+    myOffcanvas.addEventListener('hide.bs.offcanvas', handleOffcanvasHide);
+    myOffcanvas.addEventListener('show.bs.offcanvas', handleOffcanvasShow);
+  }
+});
+
+onUnmounted(() => {
+  const myOffcanvas = document.getElementById('offcanvasNavbar');
+  if (myOffcanvas) {
+    myOffcanvas.removeEventListener('hide.bs.offcanvas', handleOffcanvasHide);
+    myOffcanvas.removeEventListener('show.bs.offcanvas', handleOffcanvasShow);
+  }
+});
 
 </script>
-@/utils/config/categories
