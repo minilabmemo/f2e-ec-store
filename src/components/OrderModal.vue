@@ -114,32 +114,24 @@
     </div>
   </div>
 </template>
-<script>
-import modalMixin from '@/utils/mixins/modalMixin';
-export default {
-  name: 'orderModal',
-  props: {
-    order: {
-      type: Object,
-      default() {return {};},
-    },
-  },
-  data() {
-    return {
-      status: {},
-      modal: '',
-      tempOrder: {},
-      isPaid: false,
-    };
-  },
+<script setup>
+import {ref, watch} from 'vue'
+import {useModal} from '@/composables/useModal.js'
+const props = defineProps({
+  order: Object,
+});
+const modal = ref(null)
 
-  mixins: [modalMixin],
-
-  watch: {
-    order() {
-      this.tempOrder = this.order;
-      this.isPaid = this.tempOrder.is_paid;
-    },
-  },
-};
+const {showModal, hideModal} = useModal(modal);
+defineExpose({
+  showModal, hideModal
+})
+const tempOrder = ref({})
+const isPaid = ref(false)
+watch(
+  () => props.order, () => {
+    tempOrder.value = props.order;
+    isPaid.value = tempOrder.value.is_paid;
+  }
+);
 </script>
