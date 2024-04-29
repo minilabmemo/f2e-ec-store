@@ -72,13 +72,17 @@ const products = ref([])
 const pagination = ref({})
 const tempProduct = ref({})
 const isNewRef = ref(false)
+const currentPageRef = ref(1)
 
-function getProducts(page = 1) {
-  const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${page}`
+function getProducts(currentPage = 1) {
+  currentPageRef.value = currentPage;
+
+  const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${currentPage}`
   fetchAct.get(url).then((response) => {
     if (response.success) {
       products.value = response.products;
       pagination.value = response.pagination;
+
     }
 
   })
@@ -112,7 +116,7 @@ function updateProduct(item) {
   const productComponent = productModal.value;
   fetchAct[httpMethod](api, {data: tempProduct.value}, "更新產品").then(() => {
     productComponent.hideModal();
-    getProducts();
+    getProducts(currentPageRef.value);
   });
 
 }
@@ -122,7 +126,7 @@ function deleteProduct() {
   fetchAct.delete(api, "刪除產品").then(() => {
     const delComponent = delModal.value;
     delComponent.hideModal();
-    getProducts();
+    getProducts(currentPageRef.value);
   });
 
 }
