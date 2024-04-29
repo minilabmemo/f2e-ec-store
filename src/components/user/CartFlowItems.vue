@@ -98,7 +98,7 @@
                         }}</router-link></div>
                     <div class="ms-1">
                       <span class=" text-500  me-4" v-show="item.product.price !== item.product.origin_price"> <del>${{
-            $filters.currency(item.product.origin_price) }}</del></span>
+                        $filters.currency(item.product.origin_price) }}</del></span>
                       <span class=" text-primary  me-4 ">${{ $filters.currency(item.product.price) }}</span>
                       <div class=" text-500  ">剩餘數量： {{ item.product.num }}</div>
                     </div>
@@ -173,8 +173,8 @@
 
   </div>
 
-  <RemoveCartConfirm :item="tempItem" ref="RemoveItemRef" @remove-item="removeCartItem(tempItem.id)" />
-  <RemoveAllCartConfirm :cartTotalQty="cartTotalQty" ref="RemoveAllItemRef" @remove-items="removeAllCartItem()" />
+  <RemoveCartConfirm :item="tempItem" ref="removeItemRef" @remove-item="removeCartItem(tempItem.id)" />
+  <RemoveAllCartConfirm :cartTotalQty="cartTotalQty" ref="removeAllItemRef" @remove-items="removeAllCartItem()" />
 </template>
 
 <script setup>
@@ -195,33 +195,32 @@ const {cart, cartTotalQty, status} = storeToRefs(useCartStore());
 const props = defineProps({
   checkout: Boolean,
 });
-const RemoveItemRef = ref(null);
-const RemoveAllItemRef = ref(null);
+const removeItemRef = ref(null);
+const removeAllItemRef = ref(null);
 const tempItem = ref({});
 const coupon_code = ref('');
 
 const removeConfirm = (item) => {
   tempItem.value = {...item};
-  const confirmModal = RemoveItemRef.value
-  confirmModal.showModal();
+  const confirmModal = removeItemRef.value
+  confirmModal.showModal()
 };
 
 const removeCartItem = (id) => {
 
   removeCartByID(id);
-  const confirmModal = RemoveItemRef.value;
+  const confirmModal = removeItemRef.value;
   confirmModal.hideModal();
 };
 
 const deleteAll = () => {
-  const confirmModal = RemoveAllItemRef.value
+  const confirmModal = removeAllItemRef.value
   confirmModal.showModal();
-
 };
 const removeAllCartItem = () => {
 
   removeAllItems();
-  const confirmModal = RemoveAllItemRef.value;
+  const confirmModal = removeAllItemRef.value;
   confirmModal.hideModal();
 };
 const addCouponCode = () => {
