@@ -50,7 +50,7 @@
                   </div>
                 </div>
 
-                <div class="row g-2 " v-for="(imageUrl, index) in this.tempProduct.imagesUrl" :key="imageUrl">
+                <div class="row g-2 " v-for="(imageUrl, index) in tempProduct.imagesUrl" :key="imageUrl">
                   <div class="mb-3 col-8">
                     <label for="image" class="form-label">輸入圖片網址</label>
                     <button type="button" class="ms-2 btn btn-outline-danger btn-sm"
@@ -96,7 +96,7 @@
                     <option value="test">test</option>
                     <option value="styles">styles</option>
                     <option :value="item.key" v-for="item in findCategoriesList()" :key="item.id">{{ item.key }} -{{
-                        item.name }}
+                      item.name }}
                     </option>
                   </select>
                 </div>
@@ -145,7 +145,7 @@
               </div>
               <div class="mb-3">
                 <label for="content" class="form-label">說明內容</label>
-                <textarea type="text" class="form-control" id="content" placeholder="請輸入產品說明內容"
+                <textarea type="text" class="form-control" id="content" placeholder="請輸入產品說明內容" style="height: 12.5rem"
                   v-model="tempProduct.content"></textarea>
               </div>
               <div class="mb-3">
@@ -171,110 +171,105 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import categories from '@/utils/config/categories'
 
 import {adminUploadApi} from "@/utils/config/path"
-import modalMixin from "@/utils/mixins/modalMixin"
+import {useModal} from '@/composables/useModal.js'
 import itemLimit from '@/utils/config/itemLimit'
-import categories from '@/utils/config/categories'
-import statusStore from '@/stores/statusStore';
-import {mapActions} from 'pinia'
-export default {
+import fetchAct from '@/utils/methods/fetchAct';
+import {ref, watch} from 'vue'
+const modal = ref(null)
 
-  props: {
-    product: {
-      type: Object,
-      default() {return {};}
-    }
-  },
+const {showModal, hideModal} = useModal(modal);
+defineExpose({
+  showModal, hideModal
+})
+const props = defineProps({
+  product: Object,
+});
+const tempProduct = ref({unit: ""})
+const selectCategories = ref(['test'])
 
-  data() {
-    return {
-      modal: {},
-      tempProduct: {unit: ""},
-      itemLimit: itemLimit,
-      categories: categories,
-      selectCategories: ['test'],
-    }
-  },
-  watch: {
-    product() {
-      this.tempProduct = this.product;
-      //設置選項預設值
-      this.tempProduct.imagesUrl = this.tempProduct.imagesUrl ? this.tempProduct.imagesUrl : [];
-      this.tempProduct.category = this.product.category ? this.product.category : "test";
-      this.selectCategories = this.tempProduct.category.split(",");
-      this.tempProduct.unit = this.product.unit ? this.product.unit : "件";
-      this.tempProduct.num = this.product.num ? this.product.num : this.itemLimit.min_num;
+function setTempProductDefault() {
+  tempProduct.value = props.product;
+  tempProduct.value.imagesUrl = tempProduct.value.imagesUrl ? tempProduct.value.imagesUrl : [];
+  tempProduct.value.category = props.product.category ? props.product.category : "test";
+  selectCategories.value = tempProduct.value.category.split(",");
+  tempProduct.value.unit = props.product.unit ? props.product.unit : "件";
+  tempProduct.value.num = props.product.num ? props.product.num : itemLimit.min_num;
+}
+watch(
+  () => props.product, () => {
+    setTempProductDefault()
+  }
+);
+watch(
+  () => selectCategories.value, () => {
+    tempProduct.value.category = selectCategories.value.join(',');
 
-    },
-    selectCategories() {
-      this.tempProduct.category = this.selectCategories.join(',');
+  }
+);
 
-    }
-  },
-  mixins: [modalMixin],
-
-  methods: {
-    ...mapActions(statusStore, ['pushMessage']),
-
-    findCategoriesList() {
-      let lists = []
-      for (const [key, value] of Object.entries(this.categories,)) {
-        if (value.sub_category) {
-          for (const [subKey, sub] of Object.entries(value.sub_category)) {
-            let item = {key: `${key}/${subKey}`, name: `${value.name}/${sub.name}`}
-            lists.push(item)
-          }
-        } else {
-          let item = {key: `${key}`, name: value.name}
-          lists.push(item)
-        }
+function findCategoriesList() {
+  let lists = []
+  for (const [key, value] of Object.entries(categories,)) {
+    if (value.sub_category) {
+      for (const [subKey, sub] of Object.entries(value.sub_category)) {
+        let item = {key: `${key}/${subKey}`, name: `${value.name}/${sub.name}`}
+        lists.push(item)
       }
+    } else {
+      let item = {key: `${key}`, name: value.name}
+      lists.push(item)
+    }
+  }
 
-      return lists
-    },
-    uploadFile(isMain, index) {
-      let uploadedFile = null;
+  return lists
+}
+let fileInput = ref(null);
+let filesInput = ref(null);
+
+function uploadFile(isMain, index) {
+  let uploadedFile = null;
+
+  if (isMain) {
+    uploadedFile = fileInput.value.files[0];
+  }
+  if (!isMain) {
+    uploadedFile = filesInput.value[index].files[0];
+  }
+
+  const formData = new FormData();
+  formData.append('file-to-upload', uploadedFile);
+  fetchAct.post(adminUploadApi, formData, "上傳圖片").then((response) => {
+
+    if (response.success) {
       if (isMain) {
-        uploadedFile = this.$refs.fileInput.files[0];
-      }
-      if (!isMain) {
-        uploadedFile = this.$refs.filesInput[index].files[0];
-      }
-
-      const formData = new FormData();
-      formData.append('file-to-upload', uploadedFile);
-      this.$http.post(adminUploadApi, formData).then((response) => {
-
-        this.pushMessage({title: '上傳圖片', response: response});
-        if (response.data.success) {
-          if (isMain) {
-            this.tempProduct.imageUrl = response.data.imageUrl;
-          } else {
-            this.tempProduct.imagesUrl[index] = response.data.imageUrl;
-          }
-
-        }
-      });
-    },
-    addImages() {
-      this.tempProduct.imagesUrl.push([]);
-    },
-
-    confirmAction(tempProduct) {
-
-      const form = document.querySelector('.needs-validation');
-      if (form.checkValidity()) {
-        form.submit();
-        this.$emit('update-product', tempProduct);
+        tempProduct.value.imageUrl = response.imageUrl;
       } else {
-        form.classList.add('was-validated');
+        tempProduct.value.imagesUrl[index] = response.imageUrl;
       }
 
-    },
+    }
+  });
+}
+function addImages() {
+  tempProduct.value.imagesUrl.push([]);
+}
 
-  },
+const emit = defineEmits(['update-product'])
+
+function confirmAction(tempProduct) {
+
+  const form = document.querySelector('.needs-validation');
+  if (form.checkValidity()) {
+    form.submit();
+    emit('update-product', tempProduct);
+  } else {
+    form.classList.add('was-validated');
+  }
 
 }
+
 </script>
