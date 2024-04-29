@@ -29,7 +29,7 @@
 import {ref} from 'vue'
 import {useModal} from '@/composables/useModal.js'
 defineProps({
-  cartTotalQty: String,
+  cartTotalQty: Number,
 });
 const modal = ref(null)
 

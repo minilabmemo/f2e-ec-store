@@ -119,7 +119,7 @@ function confirmPay() {
   confirmModal.showModal();
 }
 function payOrder() {
-  payOrderByID(orderId)
+  payOrderByID(props.orderId)
   const confirmModal = checkoutConfirm.value;
   confirmModal.hideModal();
 }
