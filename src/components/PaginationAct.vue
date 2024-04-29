@@ -1,15 +1,18 @@
 <template>
   <nav aria-label="Page navigation ">
-    <ul class="pagination justify-content-center " :class="{ 'pagination-sm ': !isLargeDevice }">
+    <ul class="pagination justify-content-center " :class="{ 'pagination-sm ': isExtraSmallDevice }">
       <li class="page-item">
         <a class="page-link " href="#" aria-label="Previous" @click.prevent="updatePage(pages.current_page - 1)"
           :class="{ disabled: !pages.has_pre }">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
-      <li class="page-item" v-for="pageNum in pages.total_pages" :key="pageNum"
+      <li class="page-item" v-for="pageNum in displayPages" :key="pageNum"
         :class="{ 'active': pageNum === pages.current_page }">
-        <a class="page-link" href="#" @click.prevent="updatePage(pageNum)">
+        <a v-if="pageNum === omitStr" class="page-link disabled " href="#">
+          {{ pageNum }}
+        </a>
+        <a v-else class="page-link" href="#" @click.prevent="updatePage(pageNum)">
           {{ pageNum }}
         </a>
       </li>
@@ -32,21 +35,10 @@ import {defineProps, defineEmits} from 'vue';
 // has_next:false}
 // @change-page-num="更新頁面事件" ,param = current_page (number)
 
-import {useWindowSize} from '@vueuse/core'
-import {ref, watchEffect} from 'vue';
-const {width} = useWindowSize()
-const isLargeDevice = ref(false);
-watchEffect(() => {
-  let newWidth = width.value
-  if (newWidth >= 992) {
-    isLargeDevice.value = true;
-
-  } else {
-    isLargeDevice.value = false;
-
-  }
-});
-defineProps({
+import {ref, computed} from 'vue';
+import {useDeviceSize} from '@/composables/useDeviceSize.js'
+const {isExtraSmallDevice} = useDeviceSize()
+const props = defineProps({
   pages: Object,
 });
 
@@ -55,4 +47,37 @@ const emit = defineEmits(['change-page-num']);
 function updatePage(pageNum) {
   emit('change-page-num', pageNum);
 }
+const omitStr = ref("...");
+
+const displayPages = computed(() => {
+  const {total_pages, current_page} = props.pages;
+  const maxDisplayPages = 10;
+  const pagesArray = [];
+
+  if (total_pages <= maxDisplayPages) {
+    for (let i = 1; i <= total_pages; i++) {
+      pagesArray.push(i);
+    }
+  } else {
+    //only display current_page +-2
+    const startPage = Math.max(1, current_page - 2);
+    const endPage = Math.min(total_pages, current_page + 2);
+
+    for (let i = startPage; i <= endPage; i++) {
+      pagesArray.push(i);
+    }
+
+    if (startPage > 1 && current_page - startPage > 0) {
+      pagesArray.unshift(omitStr.value);
+      pagesArray.unshift(1);
+    }
+
+    if (endPage !== total_pages && total_pages - current_page > 0) {
+      pagesArray.push(omitStr.value);
+      pagesArray.push(total_pages);
+    }
+  }
+
+  return pagesArray;
+});
 </script>
