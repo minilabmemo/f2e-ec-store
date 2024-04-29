@@ -32,8 +32,12 @@
         </div>
 
         <div class="mb-3">
-          <label for="message" class="form-label">收貨備註</label>
-          <textarea name="" id="message" class="form-control" cols="5" rows="5" v-model="formData.message"></textarea>
+          <label for="message" class="form-label">收貨備註 ({{ formData.message.length }}/{{ maxMessage
+            }})</label>
+          <VeeField as="textarea" name="收貨備註" id="message" :rules="`max:${maxMessage}`" class="form-control" cols="2"
+            rows="2" v-model="formData.message" :class="{ 'is-invalid': errors['收貨備註'] }" />
+
+          <VeeErrorMessage name="收貨備註" class="invalid-feedback" />
         </div>
 
         <div class="text-end">
@@ -59,11 +63,11 @@ const formData = ref(memberData ? memberData : {
     address: '',
   },
   message: '',
-}); formData.value
+});
 
 function isPhone(value) {
   const phoneNumber = /^(09)[0-9]{8}$/
   return phoneNumber.test(value) ? true : '請填寫台灣手機號碼，以 09 開頭加上 8 位數字之格式。'
 }
-
+const maxMessage = ref(50);
 </script>

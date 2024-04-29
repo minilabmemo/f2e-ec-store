@@ -70,7 +70,7 @@
           <div class="mb-3">
             <label for="message" class="form-label">收貨備註 ({{ form.message.length }}/{{ maxMessage }})</label>
             <VeeField as="textarea" name="收貨備註" id="message" class="form-control" cols="3" rows="3"
-              v-model="form.message" rules="max:20" placeholder="請輸入收貨備註"
+              v-model="form.message" :rules="`max:${maxMessage}`" placeholder="請輸入收貨備註"
               :class="{ 'is-invalid': errors['收貨備註'], 'form-control-sm': isExtraSmallDevice }" />
             <VeeErrorMessage name="收貨備註" class="invalid-feedback" />
           </div>
@@ -155,6 +155,6 @@ watch(
     getCart();
   }, {deep: true})
 
-const maxMessage = ref(20);
+const maxMessage = ref(50);
 
 </script>

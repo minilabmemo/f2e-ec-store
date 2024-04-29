@@ -31,9 +31,8 @@
 import {ref, computed} from 'vue'
 import {useModal} from '@/composables/useModal.js'
 import {useRouter} from 'vue-router'
-const {router} = useRouter()
-
-defineProps({
+const router = useRouter();
+const props = defineProps({
   item: {
     total: Number
   }
@@ -50,8 +49,8 @@ function goOrderPage() {
 }
 const productsNum = computed(() => {
   let cum = 0
-  if (item && item.products) {
-    for (const value of Object.values(item.products)) {
+  if (props.item && props.item.products) {
+    for (const value of Object.values(props.item.products)) {
       cum = cum + value.qty
     }
 
