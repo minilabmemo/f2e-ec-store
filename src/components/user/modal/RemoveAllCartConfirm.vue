@@ -24,19 +24,17 @@
     </div>
   </div>
 </template>
-<script>
 
-import modalMixin from "@/utils/mixins/modalMixin"
-export default {
-  props: {
-    cartTotalQty: {},
-  },
-  data() {
-    return {
-      modal: '',
-    };
-  },
-  mixins: [modalMixin],
+<script setup>
+import {ref} from 'vue'
+import {useModal} from '@/composables/useModal.js'
+defineProps({
+  cartTotalQty: String,
+});
+const modal = ref(null)
 
-};
+const {showModal, hideModal} = useModal(modal);
+defineExpose({
+  showModal, hideModal
+})
 </script>
