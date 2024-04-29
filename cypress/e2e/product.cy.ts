@@ -1,6 +1,6 @@
 // https://on.cypress.io/api
 
-describe('Product By ID Test', () => {
+describe('Product By ID Page Test', () => {
   it('navbar visible.', () => {
     cy.viewport('samsung-s10')
     cy.visit('/#/product/all/all')

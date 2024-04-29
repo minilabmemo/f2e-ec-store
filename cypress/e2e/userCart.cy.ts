@@ -14,8 +14,8 @@ describe('user /cart/flow Page Test', () => {
 
     cy.visit('/#/product/all/all')
     cy.url().should('contain', '/#/product/all/all')
-    cy.get('[data-cy="item"]').first().click()
-    cy.contains('button', '加入購物車').click({ force: true })
+    cy.get('[data-cy="product-item"]').first().click()
+    cy.contains('button', '加入購物車').click()
     cy.visit('/#/user/cart/flow')
     cy.get('.bi-x').first().click()
     cy.contains('button', '移出購物車').click()
@@ -25,8 +25,8 @@ describe('user /cart/flow Page Test', () => {
     cy.viewport('samsung-s10')
     cy.visit('/#/product/all/all')
     cy.url().should('contain', '/#/product/all/all')
-    cy.get('[data-cy="item"]').first().click()
-    cy.contains('button', '加入購物車').click({ force: true })
+    cy.get('[data-cy="product-item"]').first().click()
+    cy.contains('button', '加入購物車').click()
     cy.visit('/#/user/cart/flow')
 
     cy.contains('button', '填寫訂單資訊').click()
@@ -37,5 +37,18 @@ describe('user /cart/flow Page Test', () => {
     // cy.contains('button', '送出訂單').click()
     // cy.contains('button', '確認付款去').click()
     // cy.contains('button', '稍後付款').click()
+  })
+
+  it('user remove all cart item.', () => {
+    cy.viewport('samsung-s10')
+
+    cy.visit('/#/product/all/all')
+    cy.url().should('contain', '/#/product/all/all')
+    cy.get('[data-cy="product-item"]').first().click()
+    cy.contains('button', '加入購物車').click({ force: true })
+    cy.visit('/#/user/cart/flow')
+    cy.contains('button', '清空購物車').click()
+    cy.contains('.modal button', '清空購物車').click()
+    cy.contains('div', '您的購物車是空的，請先將商品放入購物車。')
   })
 })

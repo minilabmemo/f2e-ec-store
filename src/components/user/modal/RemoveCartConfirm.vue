@@ -36,23 +36,4 @@ const {showModal, hideModal} = useModal(modal);
 defineExpose({
   showModal, hideModal
 })
-
-// import {ref, onMounted} from 'vue'
-// import Modal from 'bootstrap/js/dist/modal';
-
-// const modal = ref(null)
-// const newModal = ref(null)
-// onMounted(() => {
-//   newModal.value = new Modal(modal.value);
-//   console.log("modal", modal.value)
-//   console.log("modal", newModal.value)
-
-// })
-// function showModal() {
-//   newModal.value.show()
-// }
-
-// defineExpose({
-//   newModal, showModal
-// })
 </script>
