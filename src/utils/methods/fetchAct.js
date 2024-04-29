@@ -30,7 +30,10 @@ class FetchAct {
     });
   }
 
-  post(url, body, msgTitle) {
+  post(url, body, msgTitle, token) {
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = token
+    }
     return new Promise((resolve) => {
       const status = statusStore();
       status.isLoading = true;

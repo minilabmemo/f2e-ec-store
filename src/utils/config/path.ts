@@ -1,4 +1,5 @@
 export const baseApi = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/`
+const url = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/admin/signin`
 
 export const adminApi = `${baseApi}admin`
 
@@ -21,4 +22,7 @@ export const userOrdersApi = `${baseApi}orders`
 export const userOrderPayApi = `${baseApi}pay`
 
 export const base = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/`
+export const loginApi = `${base}admin/signin`
+
+export const loginCheckApi = `${base}api/user/check`
 export const logoutApi = `${base}logout`

@@ -9,36 +9,27 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import ManageNavbar from '@/components/admin/ManageNavbar.vue';
 
 import ToastMessages from '@/components/ToastMessages.vue';
-import statusStore from '@/stores/statusStore';
-import {mapActions} from 'pinia'
-export default {
+import {useRouter} from 'vue-router'
+import {loginCheckApi} from "@/utils/config/path"
+import fetchAct from '@/utils/methods/fetchAct';
 
-  components: {ManageNavbar, ToastMessages},
+const token = document.cookie.replace(
+  /(?:(?:^|.*;\s*)defToken\s*=\s*([^;]*).*$)|^.*$/,
+  "$1",
+);
+const router = useRouter()
+const url = loginCheckApi
 
-  methods: {
-    ...mapActions(statusStore, ['pushMessage']),
-  },
-  created() {
-    const token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)defToken\s*=\s*([^;]*).*$)|^.*$/,
-      "$1",
-    );
+fetchAct.post(url, null, "登入", token).then((response) => {
 
-    this.axios.defaults.headers.common['Authorization'] = token
-    const url = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/api/user/check`
+  if (!response.success) {
+    router.push('/login')
+  }
 
-    this.axios.post(url, this.user).then((response) => {
-      this.pushMessage({title: '登入', response: response});
+})
 
-      if (!response.data.success) {
-        this.$router.push('/login')
-      }
-
-    })
-  },
-}
 </script>

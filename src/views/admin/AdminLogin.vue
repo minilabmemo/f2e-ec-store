@@ -11,7 +11,7 @@
         <div class="mb-2">
           <label for="inputPassword" class="sr-only">Password</label>
           <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
-            v-model="user.password">
+            v-model="user.password" autocomplete="on">
         </div>
 
         <div class="text-end mt-4">
@@ -22,32 +22,29 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      user: {
-        username: null,
-        password: null,
-      }
+<script setup>
+import {loginApi} from "@/utils/config/path"
+import {useRouter} from 'vue-router'
+import fetchAct from '@/utils/methods/fetchAct';
+import {ref} from 'vue'
+const user = ref({
+  username: null,
+  password: null,
+})
+const router = useRouter()
+function login() {
+
+  const url = loginApi
+  fetchAct.post(url, user.value).then((response) => {
+    if (response.success) {
+      const {token, expired} = response;
+      document.cookie = `defToken=${token}; expires=${new Date(expired)}`;
+
+      router.push('/admin/dashboard/products')
     }
-  },
-  methods: {
-    login() {
 
-      const url = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/admin/signin`
+  })
 
-      this.axios.post(url, this.user).then((response) => {
-        if (response.data.success) {
-          const {token, expired} = response.data;
-          document.cookie = `defToken=${token}; expires=${new Date(expired)}`;
-
-          this.$router.push('/admin/dashboard/products')
-        }
-
-      })
-
-    }
-  },
 }
+
 </script>
