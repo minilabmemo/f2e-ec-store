@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LoadingOverlay :active="isLoading" />
+    <LoadingOverlay :active="status.isLoading" />
     <div class="text-end mt-4">
       <button type="button" class="btn btn-primary" @click="openCouponModal(true)">
         建立新的優惠券
@@ -36,104 +36,81 @@
         </tr>
       </tbody>
     </table>
-    <couponModal :coupon="tempCoupon" ref="couponModal" @update-coupon="updateCoupon" />
+    <CouponModal :coupon="tempCoupon" ref="couponModal" @update-coupon="updateCoupon" />
     <DelModal :item="tempCoupon" ref="delModal" @del-item="delCoupon" />
   </div>
 </template>
 
-<script>
+<script setup>
+
 import CouponModal from '@/components/admin/CouponModal.vue';
 import DelModal from '@/components/DelModal.vue';
 import {adminCouponsApi, adminCouponApi} from '@/utils/config/path'
-import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
+import {ref} from 'vue'
+import fetchAct from '@/utils/methods/fetchAct';
 import statusStore from '@/stores/statusStore';
-import {mapActions} from 'pinia'
-export default {
-  components: {CouponModal, DelModal},
+const status = statusStore();
+const delModal = ref(null)
+const couponModal = ref(null)
+const coupons = ref({})
+const tempCoupon = ref({
+  title: '',
+  is_enabled: 0,
+  percent: 100,
+  code: '',
+})
+const isNewRef = ref(false)
 
-  props: {
-    config: Object,
-  },
-  data() {
-    return {
-      coupons: {},
-      tempCoupon: {
-        title: '',
-        is_enabled: 0,
-        percent: 100,
-        code: '',
-      },
-      isLoading: false,
-      isNew: false,
+function openCouponModal(isNew, item) {
+  isNewRef.value = isNew;
+  if (isNew) {
+    tempCoupon.value = {
+      due_date: new Date().getTime() / 1000,
     };
-  },
-  methods: {
-    ...mapActions(statusStore, ['pushMessage']),
-    openCouponModal(isNew, item) {
-      this.isNew = isNew;
-      if (this.isNew) {
-        this.tempCoupon = {
-          due_date: new Date().getTime() / 1000,
-        };
-      } else {
-        this.tempCoupon = {...item};
-      }
-      this.$refs.couponModal.showModal();
-    },
-    openDelCouponModal(item) {
-      this.tempCoupon = {...item};
-      const delComponent = this.$refs.delModal;
-      delComponent.showModal();
-    },
-    getCoupons() {
-      this.isLoading = true;
-      const url = `${adminCouponsApi}`;
-      this.$http.get(url, this.tempProduct).then((response) => {
-        this.isLoading = false;
-        if (response.data.success) {
-          this.coupons = response.data.coupons;
-        } else {
-          dataErr(response)
-        }
+  } else {
+    tempCoupon.value = {...item};
+  }
+  couponModal.value.showModal();
+}
+function openDelCouponModal(item) {
+  tempCoupon.value = {...item};
+  const delComponent = delModal;
+  delComponent.value.showModal();
+}
+function getCoupons() {
+  const url = `${adminCouponsApi}`;
+  fetchAct.get(url).then((response) => {
+    if (response.success) {
+      coupons.value = response.coupons;
+    }
+  })
+}
+function updateCoupon(tempCoupon) {
+  if (isNewRef.value) {
+    const url = `${adminCouponApi}`;
+    fetchAct.post(url, {data: tempCoupon}, "新增優惠券").then(() => {
 
-      }).catch((err) => {
-        catchErr(err)
-        this.status.isLoading = false;
-      });
-    },
-    updateCoupon(tempCoupon) {
-      if (this.isNew) {
-        const url = `${adminCouponApi}`;
-        this.$http.post(url, {data: tempCoupon}).then((response) => {
-          this.pushMessage({title: '新增優惠券', response: response});
+      getCoupons();
+      couponModal.value.hideModal();
+    });
+  } else {
+    const url = `${adminCouponApi}/${tempCoupon.id}`;
+    fetchAct.put(url, {data: tempCoupon}, "修改優惠券").then(() => {
 
-          this.getCoupons();
-          this.$refs.couponModal.hideModal();
-        });
-      } else {
-        const url = `${adminCouponApi}/${this.tempCoupon.id}`;
-        this.$http.put(url, {data: this.tempCoupon}).then((response) => {
-          this.pushMessage({title: '修改優惠券', response: response});
+      getCoupons();
+      couponModal.value.hideModal();
+    });
+  }
+}
+function delCoupon() {
+  const url = `${adminCouponApi}/${tempCoupon.value.id}`;
+  fetchAct.delete(url, "刪除優惠券").then(() => {
+    const delComponent = delModal;
+    delComponent.value.hideModal();
+    getCoupons();
+  });
+}
 
-          this.getCoupons();
-          this.$refs.couponModal.hideModal();
-        });
-      }
-    },
-    delCoupon() {
-      const url = `${adminCouponApi}/${this.tempCoupon.id}`;
-      this.isLoading = true;
-      this.$http.delete(url).then((response) => {
-        this.pushMessage({title: '刪除優惠券', response: response});
+getCoupons();
 
-        const delComponent = this.$refs.delModal;
-        delComponent.hideModal();
-        this.getCoupons();
-      });
-    },
-  },
-  created() {
-    this.getCoupons();
-  },
-};
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="isLoading" />
+  <LoadingOverlay :active="status.isLoading" />
   <table class="table mt-4">
     <thead>
       <tr>
@@ -17,7 +17,7 @@
           <td>{{ $filters.date(item.create_at) }}</td>
           <td> <a :href="`mailto:${item.user.email}}`">
               <span class="d-inline-block text-truncate" style="max-width: 12.5rem;">{{
-    item.user.email }}</span>
+                item.user.email }}</span>
             </a></td>
           <td>
             <ul class="list-unstyled">
@@ -53,89 +53,64 @@
   <Pagination :pages="pagination" @change-page-num="getOrders" />
 </template>
 
-<script>
+<script setup>
 import DelModal from '@/components/DelModal.vue';
 import OrderModal from '@/components/OrderModal.vue';
 import Pagination from '@/components/PaginationAct.vue';
 import {adminOrderApi, adminOrdersApi} from '@/utils/config/path'
-import {catchErr, dataErr} from '@/utils/methods/handleErr.js'
 import statusStore from '@/stores/statusStore';
-import {mapActions} from 'pinia'
-export default {
+import fetchAct from '@/utils/methods/fetchAct';
+import {ref} from 'vue'
+const status = statusStore();
+const delModal = ref(null)
+const orderModal = ref(null)
+const pagination = ref({})
+const tempOrder = ref({})
 
-  data() {
-    return {
-      orders: {},
-      isNew: false,
-      pagination: {},
-      isLoading: false,
-      tempOrder: {},
-      currentPage: 1,
-    };
-  },
-  components: {
-    Pagination,
-    DelModal,
-    OrderModal,
-  },
-  methods: {
-    ...mapActions(statusStore, ['pushMessage']),
-    getOrders(currentPage = 1) {
-      this.currentPage = currentPage;
-      const url = `${adminOrdersApi}?page=${currentPage}`;
-      this.isLoading = true;
-      this.$http.get(url, this.tempProduct).then((response) => {
-        this.isLoading = false;
-        if (response.data.success) {
-          this.orders = response.data.orders;
-          this.pagination = response.data.pagination;
-        } else {
-          dataErr(response)
-        }
+const orders = ref({})
+const currentPageRef = ref(1)
 
-      }).catch((err) => {
-        catchErr(err)
+const isNewRef = ref(false)
 
-      });
-    },
-    openModal(isNew, item) {
-      this.tempOrder = {...item};
-      this.isNew = false;
-      const orderComponent = this.$refs.orderModal;
-      orderComponent.showModal();
-    },
-    openDelOrderModal(item) {
-      this.tempOrder = {...item};
-      const delComponent = this.$refs.delModal;
-      delComponent.showModal();
-    },
-    updatePaid(item) {
-      this.isLoading = true;
-      const api = `${adminOrderApi}/${item.id}`;
-      const paid = {
-        is_paid: item.is_paid,
-      };
-      this.$http.put(api, {data: paid}).then((response) => {
-        this.isLoading = false;
-        this.getOrders(this.currentPage);
-        this.pushMessage({title: '更新付款狀態', response: response});
+function getOrders(currentPage = 1) {
+  currentPageRef.value = currentPage;
+  const url = `${adminOrdersApi}?page=${currentPage}`;
+  fetchAct.get(url).then((response) => {
+    if (response.success) {
+      orders.value = response.orders;
+      pagination.value = response.pagination;
+    }
+  })
+}
+function openModal(isNew, item) {
+  tempOrder.value = {...item};
+  isNewRef.value = false;
+  const orderComponent = orderModal;
+  orderComponent.value.showModal();
+}
+function openDelOrderModal(item) {
+  tempOrder.value = {...item};
+  const delComponent = delModal;
+  delComponent.value.showModal();
+}
+function updatePaid(item) {
+  const api = `${adminOrderApi}/${item.id}`;
+  const paid = {
+    is_paid: item.is_paid,
+  };
+  fetchAct.put(api, {data: paid}, "更新付款狀態").then(() => {
+    getOrders(currentPageRef.value);
 
-      });
-    },
-    delOrder() {
-      const url = `${adminOrderApi}/${this.tempOrder.id}`;
-      this.isLoading = true;
-      this.$http.delete(url).then((response) => {
-        this.pushMessage({title: '刪除訂單', response: response});
-        const delComponent = this.$refs.delModal;
-        delComponent.hideModal();
-        this.getOrders(this.currentPage);
-      });
-    },
-  },
-  created() {
-    this.getOrders();
+  });
+}
+function delOrder() {
+  const url = `${adminOrderApi}/${tempOrder.value.id}`;
+  fetchAct.delete(url, "刪除訂單").then(() => {
+    const delComponent = delModal;
+    delComponent.value.hideModal();
+    getOrders(currentPageRef.value);
+  });
+}
+getOrders();
 
-  },
-};
 </script>

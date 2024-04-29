@@ -1,5 +1,5 @@
 <template>
-  <LoadingOverlay :active="isLoading" />
+  <LoadingOverlay :active="status.isLoading" />
   <div class="pt-5">
 
     <div class="text-end">
@@ -57,99 +57,77 @@
 
 </template>
 
-<script>
+<script setup>
 import ProductModal from "@/components/admin/EditProductModal.vue";
 import DelModal from "@/components/DelModal.vue";
 import {adminProductApi} from '@/utils/config/path'
 import Pagination from '@/components/PaginationAct.vue';
-import {catchErr} from '@/utils/methods/handleErr.js'
+import {ref} from 'vue'
+import fetchAct from '@/utils/methods/fetchAct';
 import statusStore from '@/stores/statusStore';
-import {mapActions} from 'pinia'
-export default {
-  components: {ProductModal, DelModal, Pagination, },
-  data() {
-    return {
-      products: [],
-      pagination: {},
-      tempProduct: {},
-      isNew: false,
-      isLoading: false,
+const status = statusStore();
+const delModal = ref(null)
+const productModal = ref(null)
+const products = ref([])
+const pagination = ref({})
+const tempProduct = ref({})
+const isNewRef = ref(false)
 
-    }
-  },
-
-  methods: {
-    ...mapActions(statusStore, ['pushMessage']),
-    getProducts(page = 1) {
-      const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${page}`
-      this.isLoading = true;
-      this.$http.get(url).then((response) => {
-
-        this.isLoading = false;
-        if (response.data.success) {
-
-          this.products = response.data.products;
-          this.pagination = response.data.pagination;
-        }
-
-      }).catch((err) => {
-        catchErr(err)
-
-      });
-    },
-    openModal(isNew, item) {
-
-      if (isNew) {
-        this.tempProduct = {};
-      } else {
-        this.tempProduct = {...item};
-      }
-      this.isNew = isNew;
-      const productModal = this.$refs.productModal;
-      productModal.showModal();
-    },
-    openDelModal(item) {
-
-      this.tempProduct = {...item};
-      const delModal = this.$refs.delModal;
-      delModal.showModal();
-    },
-    updateProduct(item) {
-
-      this.tempProduct = item;
-      let api = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/product`;
-      let httpMethod = 'post';
-      if (!this.isNew) {
-        api = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/product/${item.id}`;
-        httpMethod = 'put';
-      }
-      const productComponent = this.$refs.productModal;
-      this.$http[httpMethod](api, {data: this.tempProduct}).then((response) => {
-
-        productComponent.hideModal();
-
-        this.pushMessage({title: '更新產品', response: response})
-        this.getProducts();
-      });
-
-    },
-    deleteProduct() {
-
-      let api = `${adminProductApi}/${this.tempProduct.id}`;
-      this.$http.delete(api).then((response) => {
-        this.pushMessage({title: '刪除產品', response: response})
-        const delComponent = this.$refs.delModal;
-        delComponent.hideModal();
-        this.getProducts();
-      });
-
+function getProducts(page = 1) {
+  const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${page}`
+  fetchAct.get(url).then((response) => {
+    if (response.success) {
+      products.value = response.products;
+      pagination.value = response.pagination;
     }
 
-  },
-  created() {
-    this.getProducts();
-  },
+  })
 }
+function openModal(isNew, item) {
+
+  if (isNew) {
+    tempProduct.value = {};
+  } else {
+    tempProduct.value = {...item};
+  }
+  isNewRef.value = isNew;
+  const productModalVal = productModal.value;
+  productModalVal.showModal();
+}
+function openDelModal(item) {
+
+  tempProduct.value = {...item};
+  const delModalVal = delModal.value;
+  delModalVal.showModal();
+}
+function updateProduct(item) {
+
+  tempProduct.value = item;
+  let api = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/product`;
+  let httpMethod = 'post';
+  if (!isNewRef.value) {
+    api = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/product/${item.id}`;
+    httpMethod = 'put';
+  }
+  const productComponent = productModal.value;
+  fetchAct[httpMethod](api, {data: tempProduct.value}, "更新產品").then(() => {
+    productComponent.hideModal();
+    getProducts();
+  });
+
+}
+function deleteProduct() {
+
+  let api = `${adminProductApi}/${tempProduct.value.id}`;
+  fetchAct.delete(api, "刪除產品").then(() => {
+    const delComponent = delModal.value;
+    delComponent.hideModal();
+    getProducts();
+  });
+
+}
+
+getProducts();
 
 </script>
 
