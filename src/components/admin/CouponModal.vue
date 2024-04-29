@@ -44,32 +44,35 @@
     </div>
   </div>
 </template>
-<script>
-import modalMixin from '@/utils/mixins/modalMixin';
-export default {
-  name: 'couponModal',
-  props: {
-    coupon: {},
-  },
-  data() {
-    return {
-      tempCoupon: {},
-      due_date: '',
-    };
-  },
-  emits: ['update-coupon'],
-  watch: {
-    coupon() {
-      this.tempCoupon = this.coupon;
-      // 將時間格式改為 YYYY-MM-DD
-      const dateAndTime = new Date(this.tempCoupon.due_date * 1000)
-        .toISOString().split('T');
-      [this.due_date] = dateAndTime;
-    },
-    due_date() {
-      this.tempCoupon.due_date = Math.floor(new Date(this.due_date) / 1000);
-    },
-  },
-  mixins: [modalMixin],
-};
+
+<script setup>
+import {ref, watch} from 'vue'
+import {useModal} from '@/composables/useModal.js'
+defineEmits(['update-coupon'])
+
+const props = defineProps({
+  coupon: Object,
+});
+const modal = ref(null)
+
+const {showModal, hideModal} = useModal(modal);
+defineExpose({
+  showModal, hideModal
+})
+const tempCoupon = ref({})
+const due_date = ref("")
+watch(
+  () => props.coupon, () => {
+    tempCoupon.value = props.coupon;
+    const dateAndTime = new Date(tempCoupon.value.due_date * 1000).toISOString().split('T'); // 將時間格式改為 YYYY-MM-DD
+    [due_date.value] = dateAndTime;
+
+  }
+);
+watch(
+  () => due_date.value, () => {
+    tempCoupon.value.due_date = Math.floor(new Date(due_date.value) / 1000);
+  }
+);
+
 </script>
