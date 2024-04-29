@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar />
+    <ManageNavbar />
     <div class="container-fluid ">
       <ToastMessages />
       <RouterView />
@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import Navbar from '@/components/admin/ManageNavbar.vue';
+import ManageNavbar from '@/components/admin/ManageNavbar.vue';
 
 import ToastMessages from '@/components/ToastMessages.vue';
 import statusStore from '@/stores/statusStore';
 import {mapActions} from 'pinia'
 export default {
 
-  components: {Navbar, ToastMessages},
+  components: {ManageNavbar, ToastMessages},
 
   methods: {
     ...mapActions(statusStore, ['pushMessage']),

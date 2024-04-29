@@ -19,3 +19,6 @@ export const userCouponApi = `${baseApi}coupon`
 export const userOrderApi = `${baseApi}order`
 export const userOrdersApi = `${baseApi}orders`
 export const userOrderPayApi = `${baseApi}pay`
+
+export const base = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/`
+export const logoutApi = `${base}logout`

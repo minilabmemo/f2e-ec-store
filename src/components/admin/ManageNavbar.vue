@@ -18,17 +18,18 @@
   </nav>
 </template>
 
-<script>
-export default {
-  methods: {
-    logout() {
-      const api = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/logout`;
-      this.$http.post(api, this.user).then((res) => {
-        if (res.data.success) {
-          this.$router.push('/login');
-        }
-      });
-    },
-  },
-};
+<script setup>
+import {logoutApi} from '@/utils/config/path'
+import fetchAct from '@/utils/methods/fetchAct';
+import {useRouter} from 'vue-router'
+const router = useRouter();
+function logout() {
+  const url = logoutApi;
+  fetchAct.post(url, null).then((res) => {
+    if (res.success) {
+      router.push('/login');
+    }
+  });
+}
+
 </script>
