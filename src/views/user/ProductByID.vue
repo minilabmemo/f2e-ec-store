@@ -10,8 +10,8 @@
         </li>
         <li v-if="sub_category_name" class="breadcrumb-item ">
           <router-link class="link-offset-2 " :to="`/product/${route.params.category}/${route.params.subcategory}`"> {{
-    sub_category_name
-  }}</router-link>
+            sub_category_name
+          }}</router-link>
         </li>
 
       </ol>
@@ -31,11 +31,11 @@
                 <span class="price " v-if="!product.origin_price"> 價格 ${{ $filters.currency(product.origin_price)
                   }}</span>
                 <span class="price" v-show="product.price === product.origin_price"> 特惠價 ${{
-    $filters.currency(product.origin_price) }}</span>
+                  $filters.currency(product.origin_price) }}</span>
                 <span class="text-500" v-show="product.price !== product.origin_price"> <del>原價 ${{
-    $filters.currency(product.origin_price) }}</del></span>
+                  $filters.currency(product.origin_price) }}</del></span>
                 <span class="price  " v-show="product.price !== product.origin_price"> 優惠價 ${{
-    $filters.currency(product.price) }}</span>
+                  $filters.currency(product.price) }}</span>
               </div>
               <div class="col-12 col-md-4">
                 <span class=" text-500 " v-if="product.num"> 商品數量 {{ product.num }} 件</span>
@@ -71,13 +71,15 @@
                 </button>
 
               </div>
-              <div class=" flex-grow-1  ">
+              <div class=" flex-grow-1 position-relative  ">
                 <button type="button" class="btn btn-primary  " style="min-width:5.625rem;width:100%"
                   @click="addCart(product.id, itemQty, false)"
                   :class="{ disabled: status.isCartLoading, 'btn-sm': isExtraSmallDevice }">
                   加入購物車
                 </button>
-
+                <transition name="fade">
+                  <div v-if="showAnimation" class="animation">+{{ itemQty }}</div>
+                </transition>
               </div>
 
             </div>
@@ -94,7 +96,7 @@
       <div v-if="product.description">
         <div v-html="product.description.replace(/\n/g, '<br>')"></div>
       </div>
-      <div v-for="  item   in   product.imagesUrl  " :key="item">
+      <div v-for="  item in product.imagesUrl  " :key="item">
         <img :src="item" alt="image" class="img-fluid  col-6">
       </div>
       <div v-if="product.content">
@@ -114,7 +116,7 @@
         <img src="@/assets/img/design/size_dress.png" alt="split" class="img-fluid ">
       </div>
       <div v-if="product && product.category
-    && (product.category.includes('upper') || product.category.includes('coat'))" class="my-2 my-md-5col-6">
+        && (product.category.includes('upper') || product.category.includes('coat'))" class="my-2 my-md-5col-6">
         <img src="@/assets/img/design/size_upper.png" alt="split" class="img-fluid  ">
       </div>
       <div v-if="product && product.category && product.category.includes('pants')" class="my-2 my-md-5col-6">
@@ -225,13 +227,17 @@ const checkQty = (id, qty = 1) => {
     addCart(id, qty, true);
   }
 };
+const showAnimation = ref(false);
 
 function addCart(id, qty = 1, redirect = false) {
   const isAdd = addCartCheck(id, qty)
   if (!isAdd) {
     return
   }
-
+  showAnimation.value = true;
+  setTimeout(() => {
+    showAnimation.value = false;
+  }, 1000);
   if (redirect) {
     goToCart();
   }
@@ -307,5 +313,25 @@ watch(() => route.params.productId, (newV, oldV) => {
 
 .custom-btn-xs {
   --bs-btn-padding-x: 0.3rem;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1.5s;
+  top: 0;
+
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  top: -4rem;
+}
+
+.animation {
+  position: absolute;
+
+  right: 50%;
+
 }
 </style>
