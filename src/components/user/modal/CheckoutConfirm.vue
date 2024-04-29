@@ -26,39 +26,37 @@
     </div>
   </div>
 </template>
-<script>
 
-import modalMixin from "@/utils/mixins/modalMixin"
-export default {
-  props: {
-    item: {total: 0},
+<script setup>
+import {ref, computed} from 'vue'
+import {useModal} from '@/composables/useModal.js'
+import {useRouter} from 'vue-router'
+const {router} = useRouter()
 
-  },
-  data() {
-    return {
-      modal: '',
+defineProps({
+  item: {
+    total: Number
+  }
+});
+const modal = ref(null)
 
-    };
-  },
-  mixins: [modalMixin],
-  methods: {
-    goOrderPage() {
-      this.$router.push('/user/orders')
+const {showModal, hideModal} = useModal(modal);
+defineExpose({
+  showModal, hideModal
+})
+
+function goOrderPage() {
+  router.push('/user/orders')
+}
+const productsNum = computed(() => {
+  let cum = 0
+  if (item && item.products) {
+    for (const value of Object.values(item.products)) {
+      cum = cum + value.qty
     }
-  },
-  computed: {
-    productsNum() {
 
-      let cum = 0
-      if (this.item && this.item.products) {
-        for (const value of Object.values(this.item.products)) {
-          cum = cum + value.qty
-        }
+  }
+  return cum
+})
 
-      }
-      return cum
-    }
-  },
-
-};
 </script>
