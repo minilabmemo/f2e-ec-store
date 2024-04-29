@@ -20,7 +20,7 @@
       </div>
 
     </header>
-    <div class="container-xl position-relative " id="content">
+    <div class="container-xl position-relative " id="container-content">
       <ToastMessages />
       <RouterView />
     </div>
@@ -61,6 +61,10 @@ watchEffect(() => {
 <style scoped>
 .h-shadow {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+#container-content {
+  min-height: 60vh;
 }
 
 @media (max-width: 992px) {
