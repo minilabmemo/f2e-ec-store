@@ -242,7 +242,7 @@ function uploadFile(isMain, index) {
 
   const formData = new FormData();
   formData.append('file-to-upload', uploadedFile);
-  fetchAct.post(adminUploadApi, formData, "上傳圖片").then((response) => {
+  fetchAct.post(adminUploadApi, formData, {msgTitle: "上傳圖片"}).then((response) => {
 
     if (response.success) {
       if (isMain) {

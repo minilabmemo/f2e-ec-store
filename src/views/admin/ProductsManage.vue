@@ -114,7 +114,7 @@ function updateProduct(item) {
     httpMethod = 'put';
   }
   const productComponent = productModal.value;
-  fetchAct[httpMethod](api, {data: tempProduct.value}, "更新產品").then(() => {
+  fetchAct[httpMethod](api, {data: tempProduct.value}, {msgTitle: "更新產品"}).then(() => {
     productComponent.hideModal();
     getProducts(currentPageRef.value);
   });
@@ -123,7 +123,7 @@ function updateProduct(item) {
 function deleteProduct() {
 
   let api = `${adminProductApi}/${tempProduct.value.id}`;
-  fetchAct.delete(api, "刪除產品").then(() => {
+  fetchAct.delete(api, {msgTitle: "刪除產品"}).then(() => {
     const delComponent = delModal.value;
     delComponent.hideModal();
     getProducts(currentPageRef.value);

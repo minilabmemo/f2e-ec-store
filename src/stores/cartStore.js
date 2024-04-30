@@ -37,7 +37,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
   function addCartByItem(cart) {
     const url = `${userCartApi}`;
-    fetchAct.post(url, {data: cart}, `加入購物車`)
+    fetchAct.post(url, {data: cart}, {msgTitle: `加入購物車`})
       .then(data => {
         if (data.data & data.data.product_id !== cart.product_id) {
           console.warn("後端回應資訊有誤 product_id=", data.data.product_id)
@@ -80,7 +80,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
     const url = `${userCartApi}/${id}`;
     status.cartLoadingItem = id;
-    fetchAct.delete(url, `移除購物車品項`)
+    fetchAct.delete(url, {msgTitle: `移除購物車品項`})
       .then(() => {
         status.cartLoadingItem = '';
         this.getCart();
@@ -89,7 +89,7 @@ export const useCartStore = defineStore('cartStore', () => {
   }
   function removeAllItems() {
     const url = `${userCartsApi}`;
-    fetchAct.delete(url, `移除全部購物車品項`)
+    fetchAct.delete(url, {msgTitle: `移除全部購物車品項`})
       .then(() => {
         this.getCart();
       })

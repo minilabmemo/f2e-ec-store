@@ -43,7 +43,7 @@ export const useOrderStore = defineStore('orderStore', () => {
       return
     }
     const url = `${userOrderPayApi}/${orderId}`;
-    fetchAct.post(url, null, `訂單編號${orderId} 付款`)
+    fetchAct.post(url, null,  {msgTitle:`訂單編號${orderId} 付款`})
       .then(() => {
         this.getOrders();
         this.getOrderByID(orderId);
@@ -64,7 +64,7 @@ export const useOrderStore = defineStore('orderStore', () => {
 
     const url = userOrderApi;
     status.orderTemp.paySuccess = false;
-    fetchAct.post(url, {data: body}, `訂單送出`)
+    fetchAct.post(url, {data: body}, {msgTitle: `訂單送出`})
       .then(data => {
 
         status.orderTemp.paySuccess = true;

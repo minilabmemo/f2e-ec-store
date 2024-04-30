@@ -88,14 +88,14 @@ function getCoupons() {
 function updateCoupon(tempCoupon) {
   if (isNewRef.value) {
     const url = `${adminCouponApi}`;
-    fetchAct.post(url, {data: tempCoupon}, "新增優惠券").then(() => {
+    fetchAct.post(url, {data: tempCoupon},  {msgTitle:"新增優惠券"}).then(() => {
 
       getCoupons();
       couponModal.value.hideModal();
     });
   } else {
     const url = `${adminCouponApi}/${tempCoupon.id}`;
-    fetchAct.put(url, {data: tempCoupon}, "修改優惠券").then(() => {
+    fetchAct.put(url, {data: tempCoupon},  {msgTitle:"修改優惠券"}).then(() => {
 
       getCoupons();
       couponModal.value.hideModal();
@@ -104,7 +104,7 @@ function updateCoupon(tempCoupon) {
 }
 function delCoupon() {
   const url = `${adminCouponApi}/${tempCoupon.value.id}`;
-  fetchAct.delete(url, "刪除優惠券").then(() => {
+  fetchAct.delete(url, {msgTitle: "刪除優惠券"}).then(() => {
     const delComponent = delModal;
     delComponent.value.hideModal();
     getCoupons();

@@ -12,7 +12,7 @@ export const useProductStore = defineStore('productStore', () => {
   const product = ref({})
   function getProducts() {
     const url = `${userProductsApi}`
-    fetchAct.get(url).then((data) => {
+    fetchAct.get(url).then((data: any) => {
       products.value = data.products
       defaultProductsSort.value = data.products
     })
@@ -24,7 +24,7 @@ export const useProductStore = defineStore('productStore', () => {
     }
     const url = `${userProductApi}/${id}`
 
-    fetchAct.get(url).then((data) => {
+    fetchAct.get(url).then((data: any) => {
       product.value = data.product
     })
   }

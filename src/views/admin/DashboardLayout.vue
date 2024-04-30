@@ -24,7 +24,7 @@ const token = document.cookie.replace(
 const router = useRouter()
 const url = loginCheckApi
 
-fetchAct.post(url, null, "登入", token).then((response) => {
+fetchAct.post(url, null, {msgTitle: "登入", token: token}).then((response) => {
 
   if (!response.success) {
     router.push('/login')

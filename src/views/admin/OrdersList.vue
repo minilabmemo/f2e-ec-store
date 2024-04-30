@@ -98,14 +98,14 @@ function updatePaid(item) {
   const paid = {
     is_paid: item.is_paid,
   };
-  fetchAct.put(api, {data: paid}, "更新付款狀態").then(() => {
+  fetchAct.put(api, {data: paid}, {msgTitle: "更新付款狀態"}).then(() => {
     getOrders(currentPageRef.value);
 
   });
 }
 function delOrder() {
   const url = `${adminOrderApi}/${tempOrder.value.id}`;
-  fetchAct.delete(url, "刪除訂單").then(() => {
+  fetchAct.delete(url, {msgTitle: "刪除訂單"}).then(() => {
     const delComponent = delModal;
     delComponent.value.hideModal();
     getOrders(currentPageRef.value);
