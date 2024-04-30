@@ -50,7 +50,6 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          auto-cancel-after-failures: 2
           build: npm run build
           browser: chrome
           wait-on: http://localhost:4173
