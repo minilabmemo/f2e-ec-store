@@ -1,9 +1,14 @@
 <template>
 
   <div class="">
-    <router-link :to="`/product/${path}/id/${item.id}`" class="nav-link h-100 product-item ">
-      <div class="d-flex flex-column gap-2 gap-md-4    align-self-center  h-100">
-        <img :src="item.imageUrl" alt="image" class="flex-image">
+    <router-link :to="`/product/${path}/id/${item.id}`" class="nav-link h-100 ">
+      <div class="d-flex flex-column gap-2 gap-md-4    align-self-center  h-100 product-item">
+        <div>
+          <div class="img-container">
+            <img :src="item.imageUrl" alt="image" class="flex-image">
+          </div>
+        </div>
+
         <div class="text-center d-flex flex-column    justify-content-between   h-100">
           <h4 style="" class=" "> {{ item.title }}</h4>
           <div class="d-flex gap-2 justify-content-center  align-items-baseline mb-3 mt-auto ">
@@ -31,9 +36,13 @@ defineProps({
 </script>
 
 <style scoped>
+.img-container {
+  overflow: hidden;
+
+}
+
 .product-item:hover {
   opacity: 0.8;
-  overflow: hidden;
 
 }
 
