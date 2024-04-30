@@ -25,7 +25,7 @@ describe('Product List Test', () => {
         pageItem = 12
       }
       cy.get('[data-cy="products"]').within(() => {
-        cy.get('[data-cy="item"]').should('have.length', pageItem)
+        cy.get('[data-cy="product-item"]').should('have.length', pageItem)
       })
     })
   })
