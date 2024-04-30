@@ -6,7 +6,7 @@
       <router-link :to="`/product/all/all/id/${item.id}`" class="nav-link">
         <img :src="item.src" alt="image" class="flex-image">
       </router-link>
-      <div class="photo-mix-text" :class="item.color" v-if="isLoading">
+      <div class="photo-mix-text" :class="item.color" v-if="status.isLoading">
         <h1>coming</h1>
         <h1>soon</h1>
       </div>
@@ -14,7 +14,7 @@
     </div>
 
     <div>
-      <div class="lds-ellipsis" v-if="isLoading">
+      <div class="lds-ellipsis" v-if="status.isLoading">
         <div></div>
         <div></div>
         <div></div>
@@ -36,7 +36,7 @@
 <script setup lang="ts">
 
 import statusStore from '@/stores/statusStore';
-const { isLoading } = statusStore();
+const status = statusStore();
 
 defineProps({
   filterErr: String,
