@@ -11,7 +11,7 @@
         <li v-if="sub_category_name" class="breadcrumb-item ">
           <router-link class="link-offset-2 " :to="`/product/${route.params.category}/${route.params.subcategory}`"> {{
             sub_category_name
-            }}</router-link>
+          }}</router-link>
         </li>
 
       </ol>
@@ -79,7 +79,7 @@
                   加入購物車
                 </button>
                 <transition name="fade">
-                  <div v-if="status.isAddLoading" class="animation fw-bold ">+{{ itemQty }}</div>
+                  <div v-if="status.isAddLoading" class="animation fw-bolder ">+{{ itemQty }}</div>
                 </transition>
               </div>
 
@@ -290,6 +290,7 @@ watch(() => route.params.productId, (newV, oldV) => {
   aspect-ratio: 2/3;
   width: 100%;
   height: auto;
+
 }
 
 .scroll-to-top-button {
@@ -310,12 +311,13 @@ watch(() => route.params.productId, (newV, oldV) => {
 
 .custom-btn-xs {
   --bs-btn-padding-x: 0.3rem;
+
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 1s ease-in-out, top 1s ease-in-out;
-  top: 0;
+  transition: opacity 1s ease-out, top 1s ease-out;
+  top: -0.625rem;
 
 }
 
