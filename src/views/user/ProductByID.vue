@@ -64,7 +64,7 @@
               </div>
               <div class=" flex-grow-1  ">
                 <button type="button" class="    btn btn-primary " :class="{ 'btn-sm': isExtraSmallDevice }"
-                  style="min-width:5.625rem;width:100%" @click="checkQty(product.id, itemQty)">
+                  style="min-width:5.625rem;width:100%" @click="checkAndAddCart(product.id, itemQty)">
                   <div class="d-flex flex-wrap justify-content-center ">
                     <span> 立即結帳</span>
                   </div>
@@ -72,6 +72,7 @@
 
               </div>
               <div class=" flex-grow-1 position-relative  ">
+
                 <button type="button" class="btn btn-primary  " style="min-width:5.625rem;width:100%"
                   @click="addCart(product.id, itemQty, false)"
                   :class="{ disabled: status.isAddLoading, 'btn-sm': isExtraSmallDevice }">
@@ -166,7 +167,9 @@ import {addCartCheck} from '@/utils/methods/addCartCheck.js'
 import {useDeviceSize} from '@/composables/useDeviceSize.js'
 const {isExtraSmallDevice} = useDeviceSize()
 const productStore = useProductStore();
-const {product, products, status} = storeToRefs(productStore);
+const {product, products} = storeToRefs(productStore);
+import statusStore from '@/stores/statusStore';
+const status = statusStore();
 
 const cartStore = useCartStore();
 
@@ -212,7 +215,14 @@ const goToCart = () => {
   router.push('/user/cart/flow');
 };
 
-const checkQty = (id, qty = 1) => {
+async function checkAndAddCart(id, qty = 1, retries = 3) {
+  if (status.isAddLoading === undefined || status.isAddLoading) {
+    if (retries === 0) {
+      throw new Error('Maximum retries exceeded');
+    }
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    return checkAndAddCart(id, qty, retries - 1);
+  }
   let confirmAddCart = false;
   if (cart.value) {
     cart.value.carts.forEach(element => {
