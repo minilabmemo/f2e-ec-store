@@ -42,12 +42,7 @@ jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
       - run: node -v
-
       - name: Checkout
         uses: actions/checkout@v4
       # Install NPM dependencies, cache them correctly
@@ -55,8 +50,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          tag: node-18
-          record: true
+          auto-cancel-after-failures: 2
           build: npm run build
           browser: chrome
           wait-on: http://localhost:4173
