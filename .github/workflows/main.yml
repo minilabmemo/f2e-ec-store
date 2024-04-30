@@ -56,6 +56,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           tag: node-18
+          record: true
           build: npm run build
           browser: chrome
           wait-on: http://localhost:4173
