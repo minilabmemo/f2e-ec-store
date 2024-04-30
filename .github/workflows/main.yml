@@ -55,6 +55,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
+          tag: node-18
           build: npm run build
           browser: chrome
           wait-on: http://localhost:4173
