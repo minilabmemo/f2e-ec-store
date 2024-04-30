@@ -1,5 +1,5 @@
 import './commands.cy'
-describe('Product By ID Page Test', () => {
+describe('Product By ID Page  - visible Test', () => {
   it('navbar visible.', () => {
     cy.viewport('samsung-s10')
     cy.visit('/#/product/all/all')
@@ -15,6 +15,11 @@ describe('Product By ID Page Test', () => {
     cy.url().should('contain', '/#/product/all/all/id')
     cy.contains('h4', '您可能也喜歡').should('exist')
   })
+
+})
+
+describe('Product By ID Page  - button Test', () => {
+
   it('user save item and save page test.', () => {
     cy.visit('/#/product/all/all')
     cy.get('[data-cy="product-item"]').first().click()
@@ -35,6 +40,7 @@ describe('Product By ID Page Test', () => {
     cy.get('[data-cy="product-item"]').first().click()
     cy.url().should('contain', '/#/product/all/all/id')
     cy.contains('button', '加入購物車').click()
+    cy.url().should('contain', '/#/product/all/all/id')
     cy.contains('button', '立即結帳').click()
     cy.contains('.modal-title', '是否加入相同商品').should('be.visible')
   })
