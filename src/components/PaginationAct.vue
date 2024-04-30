@@ -26,7 +26,7 @@
   </nav>
 </template>
 <script setup>
-import {defineProps, defineEmits} from 'vue';
+
 // :pages="{ 頁碼資訊 }" 
 // 頁碼資訊:{
 // total_pages:3

@@ -180,7 +180,7 @@
 </template>
 
 <script setup>
-import {ref, watch, defineProps} from 'vue';
+import {ref, watch} from 'vue';
 import {userCouponApi} from '@/utils/config/path';
 import {useCartStore} from '@/stores/cartStore';
 import fetchAct from '@/utils/methods/fetchAct';
