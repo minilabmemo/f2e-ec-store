@@ -4,8 +4,10 @@ Cypress.Commands.add('deleteAllItems', () => {
   cy.get('[data-cy="product-item"]').first().click()
   cy.contains('button', '加入購物車').click({force: true})
   cy.visit('/#/user/cart/flow')
+  cy.url().should('contain', '/#/user/cart/flow')
+
   // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(1000)
+  cy.wait(5000) //fix for github env
   cy.contains('button', '清空購物車').click()
   cy.contains('.modal button', '清空購物車').click()
   cy.contains('div', '您的購物車是空的，請先將商品放入購物車。')
