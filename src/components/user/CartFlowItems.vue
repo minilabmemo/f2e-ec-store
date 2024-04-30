@@ -10,7 +10,8 @@
               <div>
 
                 <div class="d-flex  gap-2 ">
-                  <div style="flex-basis: 6.25rem"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image">
+                  <div style="width: 6.25rem;flex-basis: 6.25rem"> <img :src="item.product.imageUrl" alt="imageUrl"
+                      class="flex-image">
                   </div>
                   <div style="flex: 1;" class=" d-flex   flex-column  align-items-start text-start gap-2 pe-2">
                     <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
@@ -91,7 +92,8 @@
               </td>
               <td>
                 <div class="d-flex gap-2 ">
-                  <div style="flex-basis: 6.25rem"> <img :src="item.product.imageUrl" alt="imageUrl" class="flex-image">
+                  <div style="width: 6.25rem;flex-basis: 6.25rem"> <img :src="item.product.imageUrl" alt="imageUrl"
+                      class="flex-image">
                   </div>
                   <div style="flex:1" class="d-flex   flex-column  align-items-start text-start ">
                     <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
