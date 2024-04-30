@@ -1,5 +1,4 @@
 export const baseApi = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/`
-const url = `${import.meta.env.VITE_API}/${import.meta.env.VITE_PATH}/admin/signin`
 
 export const adminApi = `${baseApi}admin`
 
