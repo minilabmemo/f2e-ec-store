@@ -3,20 +3,7 @@
 
   <div class=" font-sm   mb-5">
 
-    <div class="row   flex-column align-items-center  justify-content-center  " style="min-height: 50vh"
-      v-if="!status.isLoading && !checkout && (!cart || cart.carts.length === 0)">
-      <div class="col-12  col-lg-7 text-dark   d-flex flex-column align-items-center   ">
-        <h5 class=" my-4 fs-2 ">購物頁面</h5>
-
-        <div class="fs-4">您的購物車是空的，請先將商品放入購物車。</div>
-
-        <button class="btn btn-outline-primary mt-3 mt-lg-4" type="button">
-          <router-link to="/product/all/all" class="nav-link ">
-            前往購物</router-link>
-        </button>
-      </div>
-    </div>
-    <div class="my-3 " v-else>
+    <div class="my-3 " v-if="checkout || (cart && cart.carts.length !== 0)">
       <div class="row flex-column align-items-center justify-content-center ">
         <div class="col-12 my-3 ">
           <h2 class=" my-3">購物頁面</h2>
@@ -63,7 +50,18 @@
       </div>
 
     </div>
+    <div class="row   flex-column align-items-center  justify-content-center  " style="min-height: 50vh" v-else>
+      <div class="col-12  col-lg-7 text-dark   d-flex flex-column align-items-center   ">
+        <h5 class=" my-4 fs-2 ">購物頁面</h5>
 
+        <div class="fs-4">您的購物車是空的，請先將商品放入購物車。</div>
+
+        <button class="btn btn-outline-primary mt-3 mt-lg-4" type="button">
+          <router-link to="/product/all/all" class="nav-link ">
+            前往購物</router-link>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 

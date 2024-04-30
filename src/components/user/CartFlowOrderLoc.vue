@@ -24,6 +24,12 @@
                 <td>{{ cartTotalQty }}件</td>
                 <td>${{ $filters.currency(cart.total) }}</td>
               </tr>
+              <tr v-if="cart.final_total !== cart.total">
+                <td class=" text-success text-nowrap ">折扣價</td>
+                <td></td>
+                <td class=" text-success">${{ $filters.currency(cart.final_total) }}</td>
+              </tr>
+
             </tfoot>
           </table>
         </div>
