@@ -1,9 +1,10 @@
 <template>
+  <LoadingOverlay :active="status.isLoading" />
 
   <div class=" font-sm   mb-5">
 
     <div class="row   flex-column align-items-center  justify-content-center  " style="min-height: 50vh"
-      v-if="!checkout && (!cart || cart.carts.length === 0)">
+      v-if="!status.isLoading && !checkout && (!cart || cart.carts.length === 0)">
       <div class="col-12  col-lg-7 text-dark   d-flex flex-column align-items-center   ">
         <h5 class=" my-4 fs-2 ">購物頁面</h5>
 
@@ -75,9 +76,11 @@ import {useCartStore} from '@/stores/cartStore';
 import {storeToRefs} from 'pinia'
 import {ref} from 'vue';
 import {useDeviceSize} from '@/composables/useDeviceSize.js'
+import statusStore from '@/stores/statusStore';
 const {isExtraSmallDevice} = useDeviceSize()
 const cartStore = useCartStore();
 
+const status = statusStore();
 const {cart} = storeToRefs(cartStore);
 
 const orderId = ref("")

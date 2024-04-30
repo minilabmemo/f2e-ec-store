@@ -112,8 +112,8 @@
 
               </td>
               <td>
-                <select id="qty" class="form-select" v-model="item.qty" :disabled="item.id === status.cartLoadingItem"
-                  @change="updateCart(item)">
+                <select id="pc-qty" class="form-select" v-model="item.qty"
+                  :disabled="item.id === status.cartLoadingItem" @change="updateCart(item)">
 
                   <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
                 </select>
@@ -186,11 +186,14 @@ import {storeToRefs} from 'pinia';
 
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
 import RemoveAllCartConfirm from '@/components/user/modal/RemoveAllCartConfirm.vue';
-
 import {useDeviceSize} from '@/composables/useDeviceSize.js'
+import statusStore from '@/stores/statusStore';
+const status = statusStore();
 const {isExtraSmallDevice} = useDeviceSize()
-const {getCart, updateCart, removeCartByID, removeAllItems} = useCartStore();
-const {cart, cartTotalQty, status} = storeToRefs(useCartStore());
+const cartStore = useCartStore();
+const {getCart, updateCart, removeCartByID, removeAllItems} = cartStore
+getCart(true)
+const {cart, cartTotalQty} = storeToRefs(cartStore);
 
 const props = defineProps({
   checkout: Boolean,

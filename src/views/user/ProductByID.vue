@@ -11,7 +11,7 @@
         <li v-if="sub_category_name" class="breadcrumb-item ">
           <router-link class="link-offset-2 " :to="`/product/${route.params.category}/${route.params.subcategory}`"> {{
             sub_category_name
-          }}</router-link>
+            }}</router-link>
         </li>
 
       </ol>
@@ -74,11 +74,12 @@
               <div class=" flex-grow-1 position-relative  ">
                 <button type="button" class="btn btn-primary  " style="min-width:5.625rem;width:100%"
                   @click="addCart(product.id, itemQty, false)"
-                  :class="{ disabled: status.isCartLoading, 'btn-sm': isExtraSmallDevice }">
+                  :class="{ disabled: status.isAddLoading, 'btn-sm': isExtraSmallDevice }">
+
                   加入購物車
                 </button>
                 <transition name="fade">
-                  <div v-if="showAnimation" class="animation">+{{ itemQty }}</div>
+                  <div v-if="status.isAddLoading" class="animation fw-bold ">+{{ itemQty }}</div>
                 </transition>
               </div>
 
@@ -227,17 +228,13 @@ const checkQty = (id, qty = 1) => {
     addCart(id, qty, true);
   }
 };
-const showAnimation = ref(false);
 
 function addCart(id, qty = 1, redirect = false) {
   const isAdd = addCartCheck(id, qty)
   if (!isAdd) {
     return
   }
-  showAnimation.value = true;
-  setTimeout(() => {
-    showAnimation.value = false;
-  }, 1000);
+
   if (redirect) {
     goToCart();
   }
@@ -317,7 +314,7 @@ watch(() => route.params.productId, (newV, oldV) => {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 1.5s;
+  transition: opacity 1s ease-in-out, top 1s ease-in-out;
   top: 0;
 
 }
@@ -325,13 +322,11 @@ watch(() => route.params.productId, (newV, oldV) => {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
-  top: -4rem;
+  top: -5rem;
 }
 
 .animation {
   position: absolute;
-
   right: 50%;
-
 }
 </style>

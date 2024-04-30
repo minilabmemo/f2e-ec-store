@@ -20,7 +20,7 @@
             <div class="cart-number  d-flex justify-content-center  align-items-center" v-if="cartTotalQty !== 0">
               <div
                 class=" bg-800  text-white  py-0  rounded-1 cart-number-icon-size d-flex justify-content-center  align-items-center">
-                <span v-if="!status.isGetCartLoading" class="cart-number-font-size  ">{{ cartTotalQty }}</span>
+                <span v-if="!status.isAddLoading" class="cart-number-font-size  ">{{ cartTotalQty }}</span>
                 <div v-else class="spinner-border spinner-border-sm " role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
@@ -59,7 +59,10 @@ import { storeToRefs } from 'pinia'
 import { useCartStore } from '@/stores/cartStore.js'
 const cartStore = useCartStore();
 const { getCart } = cartStore;
-const { status, cartTotalQty } = storeToRefs(cartStore);
+const { cartTotalQty } = storeToRefs(cartStore);
+import statusStore from '@/stores/statusStore';
+const status = statusStore();
+
 getCart()
 
 onMounted(() => {

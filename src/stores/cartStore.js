@@ -20,24 +20,30 @@ export const useCartStore = defineStore('cartStore', () => {
     cartValue.carts.forEach(element => {
       total = total + element.qty
     });
+
     return total
   });
 
-  function getCart() {
+  function getCart(isGlobeLoad) {
     const url = `${userCartApi}`;
-    status.isGetCartLoading = true;
-    fetchAct.get(url)
-      .then(data => {
-
-        status.isGetCartLoading = false;
-        cart.value = data.data;
-      })
+    if (isGlobeLoad) {
+      fetchAct.get(url)
+        .then(res => {
+          cart.value = res.data;
+        })
+    } else {
+      fetchAct.get(url, {loadStates: ['isGetLoading']})
+        .then(res => {
+          cart.value = res.data;
+        })
+    }
 
   }
 
   function addCartByItem(cart) {
     const url = `${userCartApi}`;
-    fetchAct.post(url, {data: cart}, {msgTitle: `加入購物車`})
+
+    fetchAct.post(url, {data: cart}, {loadStates: ['isAddLoading']})
       .then(data => {
         if (data.data & data.data.product_id !== cart.product_id) {
           console.warn("後端回應資訊有誤 product_id=", data.data.product_id)
@@ -53,19 +59,15 @@ export const useCartStore = defineStore('cartStore', () => {
       alert(`你輸入的數量大於可購買數量${item.product.num},自動更新為最大可購買數量。`)
       item.qty = item.product.num;
     }
-
     const url = `${userCartApi}/${item.id}`;
 
-    const cart = {
+    const putCart = {
       product_id: item.product_id,
       qty: item.qty,
     };
     status.cartLoadingItem = item.id;
-    fetchAct.put(url, {data: cart}, "")
-      .then(data => {
-        if (data.data & data.data.product_id !== cart.product_id) {
-          console.warn("後端回應資訊有誤 product_id=", data.data.product_id)
-        }
+    fetchAct.put(url, {data: putCart}, {loadStates: ['isUpdateLoading']})
+      .then(() => {
         status.cartLoadingItem = '';
         this.getCart();
       })

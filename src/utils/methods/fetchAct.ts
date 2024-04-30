@@ -1,10 +1,10 @@
 import { catchErr, dataErr } from '@/utils/methods/handleErr.js'
 import statusStore from '@/stores/statusStore.js'
-import axios from 'axios'
+import axios, { type AxiosResponse } from 'axios'
 interface RequestOptions {
   msgTitle?: string
   token?: string
-  loadState?: boolean
+  loadStates?: string[]
 }
 class FetchAct {
   static instance: any
@@ -15,11 +15,28 @@ class FetchAct {
     FetchAct.instance = this
   }
   private static setOptions(opts?: RequestOptions) {
-    if (opts && opts.loadState === undefined) {
-      opts.loadState = true
-    }
     if (opts && opts.token) {
       axios.defaults.headers.common['Authorization'] = opts.token
+    }
+  }
+  private static setLoading(isLoading: boolean, opts?: RequestOptions) {
+    const status = statusStore()
+
+    if (opts && opts.loadStates) {
+      opts.loadStates.forEach((stateKey: string) => {
+        status.setState(stateKey, isLoading)
+      })
+    } else {
+      status.isLoading = isLoading
+    }
+  }
+  private static sendMessage(response: AxiosResponse<any, any>, opts?: RequestOptions) {
+    const status = statusStore()
+    if (opts && opts.msgTitle && status.pushMessage) {
+      status.pushMessage({
+        title: opts.msgTitle,
+        response: response
+      })
     }
   }
 
@@ -27,16 +44,15 @@ class FetchAct {
     FetchAct.setOptions(opts)
 
     return new Promise((resolve) => {
-      const status = statusStore()
-      if (opts && opts.loadState) {
-        status.isLoading = true
-      }
+      FetchAct.setLoading(true, opts)
+
       axios
         .get(url)
         .then((response) => {
-          if (opts && opts.loadState) {
-            status.isLoading = false
-          }
+          FetchAct.setLoading(false, opts)
+
+          FetchAct.sendMessage(response, opts)
+
           if (response.data.success) {
             resolve(response.data)
           } else {
@@ -44,9 +60,8 @@ class FetchAct {
           }
         })
         .catch((error) => {
-          if (opts && opts.loadState) {
-            status.isLoading = false
-          }
+          FetchAct.setLoading(false, opts)
+
           catchErr(error)
         })
     })
@@ -56,22 +71,12 @@ class FetchAct {
     FetchAct.setOptions(opts)
 
     return new Promise((resolve) => {
-      const status = statusStore()
-      if (opts && opts.loadState) {
-        status.isLoading = true
-      }
+      FetchAct.setLoading(true, opts)
       axios
         .post(url, body)
         .then((response) => {
-          if (opts && opts.loadState) {
-            status.isLoading = false
-          }
-          if (opts && opts.msgTitle && status.pushMessage) {
-            status.pushMessage({
-              title: opts.msgTitle,
-              response: response
-            })
-          }
+          FetchAct.setLoading(false, opts)
+          FetchAct.sendMessage(response, opts)
 
           if (response.data.success) {
             resolve(response.data)
@@ -80,9 +85,7 @@ class FetchAct {
           }
         })
         .catch((err) => {
-          if (opts && opts.loadState) {
-            status.isLoading = false
-          }
+          FetchAct.setLoading(false, opts)
           catchErr(err)
         })
     })
@@ -91,22 +94,14 @@ class FetchAct {
     FetchAct.setOptions(opts)
 
     return new Promise((resolve) => {
-      const status = statusStore()
-      if (opts && opts.loadState) {
-        status.isLoading = true
-      }
+      FetchAct.setLoading(true, opts)
+
       axios
         .put(url, body)
         .then((response) => {
-          if (opts && opts.loadState) {
-            status.isLoading = false
-          }
-          if (opts && opts.msgTitle && status.pushMessage) {
-            status.pushMessage({
-              title: opts.msgTitle,
-              response: response
-            })
-          }
+          FetchAct.setLoading(false, opts)
+
+          FetchAct.sendMessage(response, opts)
 
           if (response.data.success) {
             resolve(response.data)
@@ -115,9 +110,8 @@ class FetchAct {
           }
         })
         .catch((err) => {
-          if (opts && opts.loadState) {
-            status.isLoading = false
-          }
+          FetchAct.setLoading(false, opts)
+
           catchErr(err)
         })
     })
@@ -126,22 +120,15 @@ class FetchAct {
     FetchAct.setOptions(opts)
 
     return new Promise((resolve) => {
-      const status = statusStore()
-      if (opts && opts.loadState) {
-        status.isLoading = true
-      }
+      FetchAct.setLoading(true, opts)
+
       axios
         .delete(url)
         .then((response) => {
-          if (opts && opts.loadState) {
-            status.isLoading = false
-          }
-          if (opts && opts.msgTitle && status.pushMessage) {
-            status.pushMessage({
-              title: opts.msgTitle,
-              response: response
-            })
-          }
+          FetchAct.setLoading(false, opts)
+
+          FetchAct.sendMessage(response, opts)
+
           if (response.data.success) {
             resolve(response.data)
           } else {
@@ -149,9 +136,7 @@ class FetchAct {
           }
         })
         .catch((error) => {
-          if (opts && opts.loadState) {
-            status.isLoading = false
-          }
+          FetchAct.setLoading(false, opts)
           catchErr(error)
         })
     })

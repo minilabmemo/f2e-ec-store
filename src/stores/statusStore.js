@@ -5,7 +5,9 @@ export default defineStore('statusStore', {
     isLoading: false,
     cartLoadingItem: '',
     messages: [],
-    isGetCartLoading: false,
+    isGetLoading: false,
+    isAddLoading: false,
+    isUpdateLoading: false,
     orderTemp: {
       paySuccess: false,
       orderId: ""
@@ -54,5 +56,8 @@ export default defineStore('statusStore', {
         this.messages.push(message);
       }
     },
+    setState(key, value) {
+      this[key] = value;
+    }
   },
 });
