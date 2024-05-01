@@ -35,14 +35,14 @@ export default defineStore('statusStore', {
         this.messages.push(message);
       } else {
 
-        // 有些訊息是字串，有些則是陣列或物件，在此統一格式成字串陣列，再列出訊息。
+        // 有些訊息是字串，陣列或物件，在此統一格式成字串陣列，再列出訊息。
         let contents = [];
         switch (typeof response.data.message) {
           case 'string':
             contents = [response.data.message]
             break;
           case 'object':
-            contents = Object.keys(response.data.message).map((key) => response.data.message[key]);//只列出 obj,value
+            contents = Object.keys(response.data.message).map((key) => response.data.message[key]);
             break;
           default:
             contents = response.data.message
