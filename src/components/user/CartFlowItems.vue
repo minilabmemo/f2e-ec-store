@@ -7,28 +7,28 @@
           <template v-if="cart.carts">
             <div v-for="item in cart.carts" :key="item.id" data-cy="item" class="d-flex  border-bottom border-500 py-2">
 
-              <div>
+              <div class="flex-grow-1">
 
                 <div class="d-flex  gap-2 ">
-                  <div style="width: 6.25rem;flex-basis: 6.25rem"> <img :src="item.product.imageUrl" alt="imageUrl"
-                      class="flex-image">
+                  <div style="width: 6.25rem;flex-basis: 6.25rem" class=" flex-shrink-0 "> <img
+                      :src="item.product.imageUrl" alt="imageUrl" class="flex-image">
                   </div>
-                  <div style="flex: 1;" class=" d-flex   flex-column  align-items-start text-start gap-2 pe-2">
+                  <div class="flex-grow-1  d-flex    flex-column  align-items-start text-start gap-2 ">
                     <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
                         }}</router-link></div>
-                    <div class=" d-flex   flex-column  align-items-start text-start gap-2 ">
+                    <div class="w-100 d-flex   flex-column  align-items-start text-start gap-2 ">
                       <div class=" d-flex   flex-wrap gap-1">
                         <span class=" text-500 " v-show="item.product.price !== item.product.origin_price">
                           <del>${{ $filters.currency(item.product.origin_price) }}</del></span>
                         <span class=" text-primary   ">${{ $filters.currency(item.product.price) }}</span>
                         <span class=" text-500  ">剩餘數量： {{ item.product.num }}</span>
                       </div>
-
-                      <select id="qty" class="form-select custom-select-xs" v-model="item.qty"
-                        :disabled="item.id === status.cartLoadingItem" @change="updateCart(item)">
-                        <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
-                      </select>
-
+                      <div class="px-1 w-100">
+                        <select id="qty" class="form-select form-select-sm  " v-model="item.qty"
+                          :disabled="item.id === status.cartLoadingItem" @change="updateCart(item)">
+                          <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
+                        </select>
+                      </div>
                     </div>
 
                     <small class="text-success  ms-1" v-if="item.coupon">
@@ -39,7 +39,7 @@
 
               </div>
 
-              <div class=" d-flex flex-grow-1    flex-column  justify-content-between ">
+              <div style="width:4rem;" class=" d-flex flex-shrink-0   flex-column  justify-content-between ">
                 <div class="d-flex justify-content-end ">
                   <button type="button" class="btn btn-outline-danger btn-sm "
                     :disabled="status.cartLoadingItem === item.id" @click="removeConfirm(item)">
@@ -47,7 +47,7 @@
                   </button>
                 </div>
 
-                <div class="text-nowrap  " :class="{ ' text-success': item.coupon }">
+                <div class="text-nowrap text-end  " :class="{ ' text-success': item.coupon }">
 
                   ${{ $filters.currency(item.final_total) }}
                 </div>
