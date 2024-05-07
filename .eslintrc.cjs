@@ -46,7 +46,10 @@ module.exports = {
         },
         "allowChildren": false
       }
-    ]
+    ],
+    "vue/block-order": ["error", {
+      "order": [ [ "script", "template" ], "style" ]
+    }]
   },
 
 };
