@@ -3,7 +3,7 @@
 
     <div v-for="(item, index) in items" :key="index" class="col  ">
       <router-link :to="`/product/all/all/id/${item.id}`">
-        <img class="flex-image" :src="item.imageUrl" alt="image"></router-link>
+        <img class="flex-image" :src="item.imageUrl" alt="clothes"></router-link>
 
     </div>
 

@@ -5,7 +5,7 @@
       <div class="d-flex flex-column gap-2 gap-md-4    align-self-center  h-100 product-item">
         <div>
           <div class="img-container">
-            <img :src="item.imageUrl" alt="image" class="flex-image">
+            <img :src="item.imageUrl" alt="clothes" class="flex-image">
           </div>
         </div>
 

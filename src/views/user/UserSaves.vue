@@ -18,7 +18,7 @@
           <div class="col-5  col-xs-3 d-flex align-items-center  justify-content-center ">
             <router-link class="nav-link" :to="`/product/all/all/id/${item.id}`"
               :class="{ 'link-disabled ': !item.on_stock }">
-              <div style="max-width: 12.5rem"> <img :src="item.imageUrl" alt="imageUrl" class="flex-image"></div>
+              <div style="max-width: 12.5rem"> <img :src="item.imageUrl" alt="clothes" class="flex-image"></div>
             </router-link>
 
           </div>

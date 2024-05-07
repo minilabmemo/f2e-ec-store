@@ -18,7 +18,7 @@
     </nav>
     <div class="row  justify-content-start  align-items-start flex-wrap ">
       <div class="col-12 col-md-4  px-sm-2 d-flex justify-content-center  align-items-center">
-        <div style="max-width:300px"> <img :src="product.imageUrl" alt="image" class="flex-image mb-3"></div>
+        <div style="max-width:300px"> <img :src="product.imageUrl" alt="clothes" class="flex-image mb-3"></div>
 
       </div>
       <div class="col-12 col-md-7  px-md-2 px-sm-4   d-flex justify-content-center  align-items-center">
@@ -99,13 +99,13 @@
         <div v-html="product.description.replace(/\n/g, '<br>')"></div>
       </div>
       <div v-for="  item in product.imagesUrl  " :key="item">
-        <img :src="item" alt="image" class="img-fluid  col-6">
+        <img :src="item" alt="clothes" class="img-fluid  col-6">
       </div>
       <div v-if="product.content">
         <div v-html="product.content.replace(/\n/g, '<br>')"></div>
       </div>
 
-      <img :src="product.imageUrl" alt="image" class="img-fluid  col-6">
+      <img :src="product.imageUrl" alt="clothes" class="img-fluid  col-6">
 
     </div>
 
@@ -115,17 +115,17 @@
       </div>
 
       <div v-if="product && product.category && product.category.includes('dress')" class="my-2 my-md-5col-6">
-        <img src="@/assets/img/design/size_dress.png" alt="split" class="img-fluid ">
+        <img src="@/assets/img/design/size_dress.png" alt="size_dress" class="img-fluid ">
       </div>
       <div v-if="product && product.category
         && (product.category.includes('upper') || product.category.includes('coat'))" class="my-2 my-md-5col-6">
-        <img src="@/assets/img/design/size_upper.png" alt="split" class="img-fluid  ">
+        <img src="@/assets/img/design/size_upper.png" alt="size_upper" class="img-fluid  ">
       </div>
       <div v-if="product && product.category && product.category.includes('pants')" class="my-2 my-md-5col-6">
-        <img src="@/assets/img/design/size_pants.png" alt="split" class="img-fluid  ">
+        <img src="@/assets/img/design/size_pants.png" alt="size_pants" class="img-fluid  ">
       </div>
       <div v-if="product && product.category && product.category.includes('skirt')" class="my-2 my-md-5col-6">
-        <img src="@/assets/img/design/size_skirt.png" alt="split" class="img-fluid  ">
+        <img src="@/assets/img/design/size_skirt.png" alt="size_skirt" class="img-fluid  ">
       </div>
     </div>
 

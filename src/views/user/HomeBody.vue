@@ -15,9 +15,9 @@
     <div class="my-3 my-md-5"><img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid"></div>
     <h1 class="mb-5 ">COLLECTIONS</h1>
     <div class="d-flex flex-column gap-3  justify-content-center align-items-center ">
-      <div class=""><img src="@/assets/img/design/c1.png" alt="style" class="img-fluid"></div>
+      <div class=""><img src="@/assets/img/design/c1.png" alt="winter clothes" class="img-fluid"></div>
 
-      <div class=""><img src="@/assets/img/design/c2.png" alt="style" class="img-fluid"></div>
+      <div class=""><img src="@/assets/img/design/c2.png" alt="autumn clothes" class="img-fluid"></div>
       <div class="d-flex justify-content-center gap-5">
         <button class="btn btn-black explore-btn">
           <router-link :to="`/style`" class="nav-link">

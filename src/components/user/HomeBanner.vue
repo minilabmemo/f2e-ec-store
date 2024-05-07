@@ -1,22 +1,20 @@
 <template>
-
   <div class="  ">
     <div id="bannersCarousel" class="carousel slide" data-bs-ride="carousel">
-
       <div class="carousel-inner">
         <div class="carousel-item active">
           <router-link :to="`/product/new/all`" class="nav-link">
-            <img src="@/assets/img/design/banner1.png" class="d-block w-100 " alt="banner">
+            <img src="@/assets/img/design/banner1.png" class="d-block w-100" alt="clothes shop banner">
           </router-link>
         </div>
         <div class="carousel-item">
           <router-link :to="`/product/new/all`" class="nav-link">
-            <img src="@/assets/img/design/banner2.png" class="d-block w-100 " alt="banner">
+            <img src="@/assets/img/design/banner2.png" class="d-block w-100" alt="member banner">
           </router-link>
         </div>
         <div class="carousel-item">
           <router-link :to="`/product/new/all`" class="nav-link">
-            <img src="@/assets/img/design/banner3.png" class="d-block w-100 " alt="banner">
+            <img src="@/assets/img/design/banner3.png" class="d-block w-100" alt="dress banner">
           </router-link>
         </div>
       </div>
@@ -30,15 +28,13 @@
       </button>
     </div>
   </div>
-
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import Carousel from 'bootstrap/js/dist/carousel.js';
+import Carousel from 'bootstrap/js/dist/carousel.js'
 
 onMounted(() => {
-
   const bannersCarouselElement = document.querySelector('#bannersCarousel')
   if (bannersCarouselElement) {
     new Carousel(bannersCarouselElement, {
@@ -47,8 +43,7 @@ onMounted(() => {
       ride: 'carousel'
     })
   } else {
-    console.error('Element with ID "bannersCarousel" not found.');
+    console.error('Element with ID "bannersCarousel" not found.')
   }
-
 })
 </script>

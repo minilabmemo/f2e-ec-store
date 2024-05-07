@@ -11,7 +11,7 @@
 
                 <div class="d-flex  gap-2 ">
                   <div style="width: 6.25rem;flex-basis: 6.25rem" class=" flex-shrink-0 "> <img
-                      :src="item.product.imageUrl" alt="imageUrl" class="flex-image">
+                      :src="item.product.imageUrl" alt="clothes" class="flex-image">
                   </div>
                   <div class="flex-grow-1  d-flex    flex-column  align-items-start text-start gap-2 ">
                     <div> <router-link :to="`/product/all/all/id/${item.product.id}`">{{ item.product.title
@@ -92,7 +92,7 @@
               </td>
               <td>
                 <div class="d-flex gap-2 ">
-                  <div style="width: 6.25rem;flex-basis: 6.25rem"> <img :src="item.product.imageUrl" alt="imageUrl"
+                  <div style="width: 6.25rem;flex-basis: 6.25rem"> <img :src="item.product.imageUrl" alt="clothes"
                       class="flex-image">
                   </div>
                   <div style="flex:1" class="d-flex   flex-column  align-items-start text-start ">

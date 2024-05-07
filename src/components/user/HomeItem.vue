@@ -4,7 +4,7 @@
 
     <div class="position-relative ">
       <router-link :to="`/product/all/all/id/${item.id}`" class="nav-link">
-        <img :src="item.src" alt="image" class="flex-image">
+        <img :src="item.src" alt="clothes" class="flex-image">
       </router-link>
       <div class="photo-mix-text" :class="item.color" v-if="status.isLoading">
         <h1>coming</h1>
