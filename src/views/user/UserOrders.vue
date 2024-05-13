@@ -100,7 +100,7 @@
   </div>
 </template>
 
-<script setup lang="js">
+<script setup>
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 import OrderModal from '@/components/OrderModal.vue';
 import PaginationAct from '@/components/PaginationAct.vue';
