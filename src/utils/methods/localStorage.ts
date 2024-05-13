@@ -2,72 +2,72 @@ class LocalStorage {
   constructor() {
     if (typeof window === 'undefined') {
       console.error('當前的開發環境不支援 window');
-      return
+      return;
     }
     if (!localStorage) {
       console.error('當前的開發環境不支援 localStorage');
-      return
+      return;
     }
   }
 
-  get(key) {
+  get(key: string) {
     if (!key) {
       console.error('缺少取得 localStorage 的 key');
-      return
+      return;
     }
 
-    const data = localStorage.getItem(key)
+    const data = localStorage.getItem(key);
 
     if (!data) {
-      return null
+      return null;
     }
 
-    return JSON.parse(data)
+    return JSON.parse(data);
   }
 
-  set(key, value) {
+  set(key: string, value: any) {
     if (!key) {
       console.error('缺少設定 localStorage 的 key');
-      return
+      return;
     }
 
     if (!value) {
       console.error('缺少設定 localStorage 的 value');
-      return
+      return;
     }
 
-    localStorage.setItem(key, JSON.stringify(value))
+    localStorage.setItem(key, JSON.stringify(value));
 
-    const data = this.get(key)
+    const data = this.get(key);
     if (!data) {
       console.error('設定 localStorage 失敗');
-      return false
+      return false;
     } else {
-      return true
+      return true;
     }
   }
 
-  remove(key) {
+  remove(key: string) {
     if (!key) {
       console.error('缺少刪除 localStorage 的 key');
-      return false
+      return false;
     }
 
-    localStorage.removeItem(key)
+    localStorage.removeItem(key);
 
-    const data = this.get(key)
+    const data = this.get(key);
 
     if (data) {
       console.error('刪除 localStorage 失敗');
-      return false
+      return false;
     } else {
-      return true
+      return true;
     }
   }
 
   clear() {
-    localStorage.clear()
+    localStorage.clear();
   }
 }
 
-export default new LocalStorage()
+export default new LocalStorage();

@@ -1,15 +1,14 @@
-
 import statusStore from '@/stores/statusStore';
-const saveKey = "memberData"
-import LocalStorage from '@/utils/methods/localStorage.js'
+const saveKey = 'memberData';
+import LocalStorage from '@/utils/methods/localStorage.js';
 export function memberStorage() {
   const status = statusStore();
 
-  const saveMemberData = (data) => {
+  const saveMemberData = (data: any) => {
     LocalStorage.set(saveKey, data);
     status.pushMessage({
       title: '更新會員資料',
-      response: {data: {message: "", success: true}, }
+      response: { data: { message: '', success: true } }
     });
   };
 
@@ -19,5 +18,5 @@ export function memberStorage() {
     return formData;
   };
 
-  return {saveMemberData, getMemberData};
+  return { saveMemberData, getMemberData };
 }
