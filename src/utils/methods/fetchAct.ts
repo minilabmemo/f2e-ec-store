@@ -1,4 +1,4 @@
-import { catchErr, dataErr } from '@/utils/methods/handleErr.js'
+import { catchErr, dataErr } from '@/utils/methods/handleErr'
 import statusStore from '@/stores/statusStore.js'
 import axios, { type AxiosResponse } from 'axios'
 interface RequestOptions {
