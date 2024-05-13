@@ -141,7 +141,7 @@
           </tr>
         </tfoot>
       </table>
-      <div class="">
+      <div>
         <div class="input-group mb-3 input-group-sm">
           <input aria-label="coupon_code" type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
           <div class="input-group-append ">
@@ -156,13 +156,13 @@
 
       </div>
       <div class="d-flex justify-content-end flex-wrap gap-2 ">
-        <div class="">
+        <div>
           <button class="btn btn-outline-primary" :class="{ 'btn-sm': isExtraSmallDevice }" type="button"
             @click="deleteAll">清空購物車</button>
         </div>
         <div class=" d-flex justify-content-end  gap-2 flex-wrap">
 
-          <div class="">
+          <div>
             <button class="btn btn-outline-primary " type="button" :class="{ 'btn-sm': isExtraSmallDevice }">
               <router-link to="/product/all/all" class="nav-link ">
                 新增其他商品</router-link>

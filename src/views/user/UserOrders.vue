@@ -28,7 +28,7 @@
 
                 <div class="d-flex  align-items-center justify-content-center    " v-if="item.is_paid">
                   <div class="rounded-circle bg-success me-1 " style="height: 1rem;width: 1rem;"> </div>
-                  <div class=""> 已付款 </div>
+                  <div> 已付款 </div>
                 </div>
 
                 <div class="d-flex flex-column w-100" v-else>

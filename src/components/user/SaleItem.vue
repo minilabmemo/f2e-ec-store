@@ -1,6 +1,6 @@
 <template>
 
-  <div class="">
+  <div>
     <router-link :to="`/product/${path}/id/${item.id}`" class="nav-link h-100 ">
       <div class="d-flex flex-column gap-2 gap-md-4    align-self-center  h-100 product-item">
         <div>

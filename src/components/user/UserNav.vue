@@ -8,7 +8,7 @@
         data-bs-placement="top"
         title="前往收藏清單"
       >
-        <img src="@/assets/img/icons/save.svg" alt="save" class="icon-size" />
+        <img src="@/assets/img/icons/save.svg" alt="save" class="icon-size" >
       </router-link>
     </div>
 
@@ -23,7 +23,7 @@
         >
           <div class="row justify-content-center align-items-center position-relative">
             <div class="col-4 d-flex justify-content-center align-items-center">
-              <img src="@/assets/img/icons/cart.svg" class="icon-size" alt="cart" />
+              <img src="@/assets/img/icons/cart.svg" class="icon-size" alt="cart" >
             </div>
 
             <div
@@ -57,7 +57,7 @@
           aria-expanded="false"
           data-bs-toggle="dropdown"
         >
-          <img src="@/assets/img/icons/person.svg" alt="person" class="icon-size" />
+          <img src="@/assets/img/icons/person.svg" alt="person" class="icon-size" >
         </button>
         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
           <router-link class="dropdown-item" to="/user/orders">查詢訂單</router-link>

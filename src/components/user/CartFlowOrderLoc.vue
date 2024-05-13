@@ -1,6 +1,6 @@
 <template>
   <LoadingOverlay :active="status.isLoading" />
-  <VeeForm class="" v-slot="{ errors }" @submit="sendOrder">
+  <VeeForm v-slot="{ errors }" @submit="sendOrder">
     <div class="col-12 my-4">
       <div class="row gy-3 ">
         <div class="col-12 col-md-7">

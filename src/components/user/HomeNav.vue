@@ -42,7 +42,7 @@
               <router-link :to="`/product/${key}/all`" class="nav-link "
                 :class="{ active: $route.params.category === key }" aria-current="page">
                 <div class="d-flex flex-column  align-items-center ">
-                  <div class=""> {{ item.name }}</div>
+                  <div> {{ item.name }}</div>
                   <img src="@/assets/img/icons/nav.svg" alt="nav" v-if="$route.params.category === key" width="0.75rem"
                     height="0.75rem">
                 </div>
@@ -52,7 +52,7 @@
               <router-link :to="`/style`" class="nav-link " :class="{ active: $route.path === '/style' }"
                 aria-current="page">
                 <div class="d-flex flex-column  align-items-center ">
-                  <div class=""> Styles</div>
+                  <div> Styles</div>
                   <img src="@/assets/img/icons/nav.svg" alt="nav" v-if="$route.path === '/style'" width="0.75rem"
                     height="0.75rem">
                 </div>

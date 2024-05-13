@@ -1,7 +1,7 @@
 <template>
   <LoadingOverlay :active="status.isLoading" />
   <div v-if="!status.isLoading && !product" class="text-primary">該商品已下架。</div>
-  <div class="" v-if="!status.isLoading">
+  <div v-if="!status.isLoading">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
