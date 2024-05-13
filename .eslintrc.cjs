@@ -48,7 +48,7 @@ module.exports = {
       }
     ],
     "vue/block-order": ["error", {
-      "order": [ [ "script", "template" ], "style" ]
+      "order": [  "template", "script" , "style" ]
     }]
   },
 
