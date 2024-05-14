@@ -78,7 +78,7 @@
             </th>
             <th>品名</th>
             <th style="width: 6.875rem">數量</th>
-            <th style="width: 6.875rem">單價</th>
+            <th style="width: 6.875rem" class="text-end ">單價</th>
           </tr>
         </thead>
         <tbody>
