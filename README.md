@@ -22,8 +22,10 @@
 ### NODE version
 
 ```
+$ nvm use v20.13.1
+Now using node v20.13.1 (npm v10.5.2)
 $ node -v
-v18.16.1
+v20.13.1
 ```
 
 ### test
