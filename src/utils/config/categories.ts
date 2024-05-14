@@ -1,19 +1,19 @@
 export interface Category {
-  [key: string]: CategoryItem
+  [key: string]: CategoryItem;
 }
 
 export interface CategoryItem {
-  path?: string
-  key: string
-  name: string
-  sub_category?: SubCategory
+  path?: string;
+  key: string;
+  name: string;
+  sub_category?: SubCategory;
 }
 export interface SubCategory {
-  [key: string]: SunCategoryItem
+  [key: string]: SunCategoryItem;
 }
 export interface SunCategoryItem {
-  key: string
-  name: string
+  key: string;
+  name: string;
 }
 
 const categories: Category = {
@@ -47,7 +47,7 @@ const categories: Category = {
       },
       tank_top: {
         key: 'tank_top',
-        name: '無袖上衣'
+        name: '無袖'
       }
     }
   },
@@ -103,7 +103,7 @@ const categories: Category = {
     sub_category: {
       knitted: {
         key: 'knitted',
-        name: '針織外套'
+        name: '針織'
       },
       thin: {
         key: 'thin',
@@ -115,6 +115,6 @@ const categories: Category = {
     key: 'accessories',
     name: '配件'
   }
-}
+};
 
-export default categories
+export default categories;

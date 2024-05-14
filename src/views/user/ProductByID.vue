@@ -3,14 +3,22 @@
   <div v-if="!status.isLoading && !product" class="text-primary">該商品已下架。</div>
   <div v-if="!status.isLoading">
     <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
+      <ol class="breadcrumb flex-nowrap ">
+        <li class="breadcrumb-item text-nowrap " v-if="$route.params.category !== 'all'">
+          <router-link :to="`/product/all/all`" class="link-offset-2"> 全部 </router-link>
+        </li>
+        <li class="breadcrumb-item text-nowrap ">
           <router-link class="link-offset-2" :to="`/product/${route.params.category}/all`">
             {{ category_name }}</router-link>
         </li>
-        <li v-if="sub_category_name" class="breadcrumb-item">
+        <li v-if="sub_category_name" class="breadcrumb-item text-nowrap ">
           <router-link class="link-offset-2" :to="`/product/${route.params.category}/${route.params.subcategory}`">
             {{ sub_category_name }}</router-link>
+        </li>
+        <li class="breadcrumb-item ellipsis">
+          <router-link class="link-offset-2"
+            :to="`/product/${route.params.category}/${route.params.subcategory}/id/${route.params.productId}`">
+            {{ product.title }}</router-link>
         </li>
       </ol>
     </nav>
@@ -333,5 +341,12 @@ watch(
 .animation {
   position: absolute;
   right: 50%;
+}
+
+.ellipsis {
+  width: 60%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>
