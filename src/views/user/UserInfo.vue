@@ -1,7 +1,9 @@
 <template>
   <div class="container-xl">
     <div class="my-5 row justify-content-center">
+
       <VeeForm class="col-md-6" v-slot="{ errors }" @submit="saveMemberData(formData)">
+        <h5>會員資料</h5>
         <div class="mb-3">
           <label for="email" class="form-label"><span class="text-primary fw-bold fs-3">*</span>Email</label>
           <VeeField id="email" name="email" type="email" class="form-control" :class="{ 'is-invalid': errors['email'] }"
@@ -39,7 +41,7 @@
         </div>
 
         <div class="text-end">
-          <button class="btn btn-primary">更新會員資料</button>
+          <button class="btn btn-primary">更新</button>
         </div>
       </VeeForm>
     </div>

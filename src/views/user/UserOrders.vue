@@ -1,6 +1,7 @@
 <template>
   <div class="py-3">
     <LoadingOverlay :active="status.isLoading" />
+    <h5>歷史訂單</h5>
     <table class="phone-table table table-sm align-middle d-table d-lg-none ">
       <thead>
         <tr>
