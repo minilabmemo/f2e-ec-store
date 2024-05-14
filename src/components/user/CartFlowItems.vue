@@ -141,17 +141,19 @@
           </tr>
         </tfoot>
       </table>
-      <div>
-        <div class="input-group mb-3 input-group-sm">
-          <input aria-label="coupon_code" type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
-          <div class="input-group-append ">
-            <button class="btn btn-secondary text-white rounded-0 rounded-end" type="button" @click="addCouponCode"
-              :class="{ 'btn-sm': isExtraSmallDevice }">
-              套用優惠卷
-            </button>
+      <div class="row  justify-content-end">
+        <div class="col-12 col-sm-7 col-md-6 col-lg-5  col-xl-4">
+          <div class="input-group mb-3 input-group-sm">
+            <input aria-label="coupon_code" type="text" class="form-control" v-model="coupon_code" placeholder="請輸入優惠碼">
+            <div class="input-group-append ">
+              <button class="btn btn-secondary text-white rounded-0 rounded-end" type="button" @click="addCouponCode"
+                :class="{ 'btn-sm': isExtraSmallDevice }">
+                套用優惠卷
+              </button>
+
+            </div>
 
           </div>
-
         </div>
 
       </div>
