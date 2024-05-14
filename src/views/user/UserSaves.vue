@@ -16,12 +16,12 @@
           <div class="col-5 col-xs-3 d-flex align-items-center justify-content-center">
             <router-link class="nav-link" :to="`/product/all/all/id/${item.id}`"
               :class="{ 'link-disabled ': !item.on_stock }">
-              <div style="max-width: 12.5rem">
+              <div style="max-width: 10rem;">
                 <img :src="item.imageUrl" alt="clothes" class="flex-image">
               </div>
             </router-link>
           </div>
-          <div class="col-7 col-xs-4">
+          <div class="col-7 col-xs-9 d-flex flex-column justify-content-between ">
             <div class="d-flex flex-column justify-content-between align-items-start text-start">
               <div>
                 <router-link :to="`/product/all/all/id/${item.id}`" :class="{ 'link-disabled ': !item.on_stock }">
@@ -29,25 +29,25 @@
                 </router-link>
               </div>
               <span class="text-500" v-show="item.on_stock">剩餘數量： {{ item.num }}</span>
-              <div class="d-flex gap-2 justify-content-center align-items-center ms-2">
+              <div class="d-flex gap-2 justify-content-center align-items-center my-1 ">
                 <span class="text-500" v-show="item.origin_price !== item.price">
                   <del>${{ item.origin_price }}</del></span>
                 <span class="text-primary me-4" v-show="item.price">${{ item.price }}</span>
               </div>
               <span class="text-secondary ms-2" v-if="!item.on_stock"> 此商品已下架。</span>
             </div>
+            <div class=" d-flex  justify-content-start gap-2  gap-md-3 ">
+              <button type="button" class="btn btn-outline-secondary text-nowrap"
+                :class="{ 'btn-sm': isExtraSmallDevice }" @click="removeItem(item.id)">
+                移出收藏
+              </button>
+              <button type="button" class="btn btn-primary text-nowrap" @click="addCartCheck(item.id, 1)"
+                :class="{ disabled: !item.on_stock, 'btn-sm': isExtraSmallDevice }">
+                加入購物車
+              </button>
+            </div>
           </div>
-          <div class="col-12 col-xs-4 d-flex flex-column justify-content-evenly flex-xs-grow-1 gy"
-            style="min-height: 6.25rem">
-            <button type="button" class="btn btn-outline-secondary text-nowrap"
-              :class="{ 'btn-sm': isExtraSmallDevice }" @click="removeItem(item.id)">
-              移出收藏
-            </button>
-            <button type="button" class="btn btn-primary text-nowrap" @click="addCartCheck(item.id, 1)"
-              :class="{ disabled: !item.on_stock, 'btn-sm': isExtraSmallDevice }">
-              加入購物車
-            </button>
-          </div>
+
           <div class="border-bottom border-500"></div>
         </div>
       </template>
