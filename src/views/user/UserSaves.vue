@@ -1,8 +1,10 @@
 <template>
-  <div class="d-flex flex-column align-items-center justify-content-center fs-3 fw-bold"
+  <div class="d-flex flex-column align-items-center justify-content-center "
     v-if="!saveItems || Object.keys(saveItems.data).length === 0">
-    無收藏商品。
-    <div class="mt-3">
+
+    <span class="fs-3 fw-bold" style="width: 9.375rem"> 無收藏商品。</span>
+
+    <div class="mt-3" style="width: 9.375rem">
       <button class="btn btn-outline-primary" type="button">
         <router-link to="/product/all/all" class="nav-link"> 探索更多商品</router-link>
       </button>
