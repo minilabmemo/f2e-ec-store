@@ -36,8 +36,8 @@
         <div class="col-12 col-md-5  d-flex  justify-content-center flex-column ">
           <h3 class="mb-3">收件資訊</h3>
 
-          <div class="d-flex flex-wrap ">
-            <input type="checkbox" id="importDataCheckbox" @change="importDataCheckbox()" class="me-2">
+          <div class="d-flex flex-wrap align-items-baseline  ">
+            <input type="checkbox" id="importDataCheckbox" @change="importDataCheckbox()" class="me-1">
             <label for="importDataCheckbox"> 從會員資料中匯入</label>
             <div>（<router-link class=" " to="/user/info">點此更新會員資料</router-link>）</div>
           </div>
