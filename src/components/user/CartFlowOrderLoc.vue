@@ -111,7 +111,7 @@ const orderStore = useOrderStore();
 const {createOrder, } = orderStore;
 const {status} = storeToRefs(orderStore);
 
-import {memberStorage} from '@/utils/methods/memberStorage.js';
+import {memberStorage} from '@/utils/methods/memberStorage';
 const {getMemberData} = memberStorage();
 
 function importDataCheckbox() {

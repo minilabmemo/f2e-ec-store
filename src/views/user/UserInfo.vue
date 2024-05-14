@@ -48,7 +48,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import {memberStorage} from '@/utils/methods/memberStorage.js'
+import {memberStorage} from '@/utils/methods/memberStorage'
 const {saveMemberData, getMemberData} = memberStorage()
 
 const memberData = getMemberData()

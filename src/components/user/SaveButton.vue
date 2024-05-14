@@ -35,7 +35,7 @@
 
 </template>
 <script setup>
-import LocalStorage from '@/utils/methods/localStorage.js'
+import LocalStorage from '@/utils/methods/localStorage'
 import statusStore from '@/stores/statusStore';
 const status = statusStore();
 import {ref, watch, onMounted} from 'vue';

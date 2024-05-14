@@ -1,6 +1,6 @@
 import statusStore from '@/stores/statusStore';
 const saveKey = 'memberData';
-import LocalStorage from '@/utils/methods/localStorage.js';
+import LocalStorage from '@/utils/methods/localStorage';
 export function memberStorage() {
   const status = statusStore();
 

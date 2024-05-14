@@ -62,7 +62,7 @@ import Pagination from '@/components/PaginationAct.vue'
 import {useProductStore} from '@/stores/productStore'
 import {ref, watch} from 'vue'
 import {storeToRefs} from 'pinia'
-import LocalStorage from '@/utils/methods/localStorage.js'
+import LocalStorage from '@/utils/methods/localStorage'
 import {addCartCheck} from '@/utils/methods/addCartCheck.js'
 import {useDeviceSize} from '@/composables/useDeviceSize.js'
 const {isExtraSmallDevice} = useDeviceSize()
