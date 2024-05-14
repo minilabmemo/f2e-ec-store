@@ -29,8 +29,8 @@
         </div>
         <div class="offcanvas-body   ">
           <div class="row g-2 justify-content-start align-items-center " :class="searchClasses" role="search">
-            <div class="col-6 col-mg-9"> <input class="form-control form-control-sm   " type="search"
-                placeholder="關鍵字搜尋" aria-label="Search" v-model="keyword" @keyup.enter="search"></div>
+            <div class="col-9"> <input class="form-control form-control-sm   " type="search" placeholder="關鍵字搜尋"
+                aria-label="Search" v-model="keyword" @keyup.enter="search"></div>
             <div class="col-auto">
               <button class="btn btn-outline-primary btn-sm" type="button" @click="search"><i
                   class="bi bi-search"></i></button>

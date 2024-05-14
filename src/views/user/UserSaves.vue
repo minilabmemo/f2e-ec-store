@@ -9,7 +9,7 @@
     </div>
   </div>
   <div v-else class="row justify-content-center">
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-8 ">
       <h5>收藏清單</h5>
       <template v-for="item in displayItems" :key="item.id">
         <div class="row justify-content-center p-3 g-3" data-cy="item">
@@ -21,7 +21,7 @@
               </div>
             </router-link>
           </div>
-          <div class="col-7 col-xs-9 d-flex flex-column justify-content-between ">
+          <div class="col-7 col-xs-8 d-flex flex-column justify-content-between ">
             <div class="d-flex flex-column justify-content-between align-items-start text-start">
               <div>
                 <router-link :to="`/product/all/all/id/${item.id}`" :class="{ 'link-disabled ': !item.on_stock }">
