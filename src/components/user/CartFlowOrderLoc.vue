@@ -101,6 +101,8 @@ import {storeToRefs} from 'pinia'
 import {useOrderStore} from '@/stores/orderStore'
 import {useCartStore} from '@/stores/cartStore';
 import {useDeviceSize} from '@/composables/useDeviceSize.js'
+import statusStore from '@/stores/statusStore'
+
 const {isExtraSmallDevice} = useDeviceSize()
 
 const cartStore = useCartStore();
@@ -109,7 +111,8 @@ const {getCart} = useCartStore();
 
 const orderStore = useOrderStore();
 const {createOrder, } = orderStore;
-const {status} = storeToRefs(orderStore);
+
+const status = statusStore()
 
 import {memberStorage} from '@/utils/methods/memberStorage';
 const {getMemberData} = memberStorage();
@@ -152,7 +155,7 @@ function isPhone(value) {
 const emit = defineEmits(['order-create', 'go-prev'])
 
 watch(
-  () => orderStore.status.orderTemp,
+  () => status.orderTemp,
   (newVal) => {
     if (newVal.paySuccess) {
       emit('order-create', newVal.orderId);

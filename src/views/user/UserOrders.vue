@@ -105,20 +105,19 @@
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 import OrderModal from '@/components/OrderModal.vue';
 import PaginationAct from '@/components/PaginationAct.vue';
-
 import {useOrderStore} from '@/stores/orderStore'
-
 import {ref} from 'vue'
 import {storeToRefs} from 'pinia';
+import statusStore from '@/stores/statusStore'
 
 const tempOrder = ref({})
 const orderStore = useOrderStore()
-const {orders, status, pagination} = storeToRefs(orderStore);
+const {orders, pagination} = storeToRefs(orderStore);
 const {getOrders, payOrderByID} = orderStore;
 getOrders()
 const orderModal = ref(null);
 const checkoutConfirm = ref(null);
-
+const status = statusStore()
 function openModal(isNew, item) {
   tempOrder.value = {...item};
   isNew = false;
