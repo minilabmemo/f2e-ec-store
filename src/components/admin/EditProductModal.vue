@@ -175,7 +175,7 @@
 import categories from '@/utils/config/categories'
 
 import {adminUploadApi} from "@/utils/config/path"
-import {useModal} from '@/composables/useModal.js'
+import {useModal} from '@/composables/useModal'
 import itemLimit from '@/utils/config/itemLimit'
 import fetchAct from '@/utils/methods/fetchAct';
 import {ref, watch} from 'vue'

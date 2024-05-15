@@ -78,7 +78,7 @@ import CartFlowOrderSuccess from '@/components/user/CartFlowOrderSuccess.vue'
 import {useCartStore} from '@/stores/cartStore'
 import {storeToRefs} from 'pinia'
 import {ref} from 'vue'
-import {useDeviceSize} from '@/composables/useDeviceSize.js'
+import {useDeviceSize} from '@/composables/useDeviceSize'
 import statusStore from '@/stores/statusStore'
 const {isExtraSmallDevice} = useDeviceSize()
 const cartStore = useCartStore()

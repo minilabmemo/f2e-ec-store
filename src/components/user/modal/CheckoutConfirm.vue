@@ -29,7 +29,7 @@
 
 <script setup>
 import {ref, computed} from 'vue'
-import {useModal} from '@/composables/useModal.js'
+import {useModal} from '@/composables/useModal'
 import {useRouter} from 'vue-router'
 const router = useRouter();
 const props = defineProps({

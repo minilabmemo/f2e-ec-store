@@ -161,7 +161,7 @@ import {useCartStore} from '@/stores/cartStore'
 import {storeToRefs} from 'pinia'
 import {useProductStore} from '@/stores/productStore'
 import {addCartCheck} from '@/utils/methods/addCartCheck'
-import {useDeviceSize} from '@/composables/useDeviceSize.js'
+import {useDeviceSize} from '@/composables/useDeviceSize'
 const {isExtraSmallDevice} = useDeviceSize()
 const productStore = useProductStore()
 const {product, products} = storeToRefs(productStore)

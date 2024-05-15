@@ -66,7 +66,7 @@ import {ref, watch} from 'vue'
 import {storeToRefs} from 'pinia'
 import LocalStorage from '@/utils/methods/localStorage'
 import {addCartCheck} from '@/utils/methods/addCartCheck'
-import {useDeviceSize} from '@/composables/useDeviceSize.js'
+import {useDeviceSize} from '@/composables/useDeviceSize'
 const {isExtraSmallDevice} = useDeviceSize()
 
 const productStore = useProductStore()

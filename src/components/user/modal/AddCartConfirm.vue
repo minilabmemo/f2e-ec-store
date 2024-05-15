@@ -28,7 +28,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import {useModal} from '@/composables/useModal.js'
+import {useModal} from '@/composables/useModal'
 defineProps({
   item: Object,
 });

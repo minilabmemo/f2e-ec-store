@@ -36,7 +36,7 @@
 // @change-page-num="更新頁面事件" ,param = current_page (number)
 
 import {ref, computed} from 'vue';
-import {useDeviceSize} from '@/composables/useDeviceSize.js'
+import {useDeviceSize} from '@/composables/useDeviceSize'
 const {isExtraSmallDevice} = useDeviceSize()
 const props = defineProps({
   pages: Object,

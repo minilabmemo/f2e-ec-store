@@ -116,7 +116,7 @@
 </template>
 <script setup>
 import {ref, watch} from 'vue'
-import {useModal} from '@/composables/useModal.js'
+import {useModal} from '@/composables/useModal'
 const props = defineProps({
   order: Object,
 });

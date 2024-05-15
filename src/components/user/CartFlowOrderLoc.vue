@@ -100,7 +100,7 @@ import {ref, watch} from 'vue';
 import {storeToRefs} from 'pinia'
 import {useOrderStore} from '@/stores/orderStore'
 import {useCartStore} from '@/stores/cartStore';
-import {useDeviceSize} from '@/composables/useDeviceSize.js'
+import {useDeviceSize} from '@/composables/useDeviceSize'
 import statusStore from '@/stores/statusStore'
 
 const {isExtraSmallDevice} = useDeviceSize()

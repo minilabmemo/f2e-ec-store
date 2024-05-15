@@ -190,7 +190,7 @@ import {storeToRefs} from 'pinia';
 
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
 import RemoveAllCartConfirm from '@/components/user/modal/RemoveAllCartConfirm.vue';
-import {useDeviceSize} from '@/composables/useDeviceSize.js'
+import {useDeviceSize} from '@/composables/useDeviceSize'
 import statusStore from '@/stores/statusStore';
 const status = statusStore();
 const {isExtraSmallDevice} = useDeviceSize()
