@@ -81,6 +81,7 @@ class FetchAct {
           if (response.data.success) {
             resolve(response.data);
           } else {
+            resolve(response.data);
             dataErr(response);
           }
         })
