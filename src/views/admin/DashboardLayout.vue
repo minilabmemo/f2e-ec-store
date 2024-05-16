@@ -9,12 +9,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ManageNavbar from '@/components/admin/ManageNavbar.vue';
 
 import ToastMessages from '@/components/ToastMessages.vue';
-import {useRouter} from 'vue-router'
-import {loginCheckApi} from "@/utils/config/path"
+import { useRouter } from 'vue-router'
+import { loginCheckApi } from "@/utils/config/path"
 import fetchAct from '@/utils/methods/fetchAct';
 
 const token = document.cookie.replace(
@@ -24,7 +24,7 @@ const token = document.cookie.replace(
 const router = useRouter()
 const url = loginCheckApi
 
-fetchAct.post(url, null, {msgTitle: "登入", token: token}).then((response) => {
+fetchAct.post(url, null, { msgTitle: "登入", token: token }).then((response: any) => {
 
   if (!response.success) {
     router.push('/login')
