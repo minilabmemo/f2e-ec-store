@@ -14,3 +14,32 @@ export interface CartItemUpdate {
   product_id: string;
   qty: number;
 }
+
+interface OrderUser {
+  name: string;
+  email: string;
+  tel: string;
+  address: string;
+}
+interface OrderProductItem {
+  id: string;
+  title: string;
+  unit: string;
+}
+interface OrderProduct {
+  id: string;
+  product: OrderProductItem;
+  qty: number;
+  final_total: number;
+}
+
+export interface Order {
+  id: string;
+  user: OrderUser;
+  create_at: number;
+  paid_date: number | null;
+  is_paid: boolean;
+  total: number;
+  message: string;
+  products: OrderProduct[];
+}

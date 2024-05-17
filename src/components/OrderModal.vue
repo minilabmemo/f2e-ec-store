@@ -9,12 +9,12 @@
           </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" v-if="tempOrder?.user">
           <div class="row">
             <div class="col-md-4">
               <h3 class="fw-bold text-primary ">用戶資料</h3>
               <table class="table">
-                <tbody v-if="tempOrder.user">
+                <tbody>
                   <tr>
                     <th style="width: 6.25rem;">姓名</th>
                     <td>
@@ -114,24 +114,27 @@
     </div>
   </div>
 </template>
-<script setup>
-import {ref, watch} from 'vue'
-import {useModal} from '@/composables/useModal'
-const props = defineProps({
-  order: Object,
-});
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import { useModal } from '@/composables/useModal'
+import type { Order } from '@/utils/type';
+const props = defineProps<{
+  order: Order;
+}>();
 const modal = ref(null)
 
-const {showModal, hideModal} = useModal(modal);
+const { showModal, hideModal } = useModal(modal);
 defineExpose({
   showModal, hideModal
 })
-const tempOrder = ref({})
+const tempOrder = ref<Order | null>(null)!;
 const isPaid = ref(false)
 watch(
-  () => props.order, () => {
-    tempOrder.value = props.order;
-    isPaid.value = tempOrder.value.is_paid;
-  }
+  () => props.order,
+  (newOrder) => {
+    tempOrder.value = newOrder;
+    isPaid.value = newOrder.is_paid;
+  },
+  { immediate: true }
 );
 </script>

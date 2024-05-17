@@ -1,5 +1,5 @@
-export function currency(num: string): string {
-  const n = parseInt(num, 10);
+export function currency(num: string | number): string {
+  const n = typeof num === 'string' ? parseInt(num, 10) : num;
   return `${n.toFixed(0).replace(/./g, (c, i, a) => (i && c !== '.' && (a.length - i) % 3 === 0 ? `, ${c}`.replace(/\s/g, '') : c))}`;
 }
 
@@ -9,7 +9,7 @@ export function date(time: number): string {
 }
 
 export interface FilterI {
-  currency(num: string): string;
+  currency(num: string | number): string;
   date(time: number): string;
 }
 
