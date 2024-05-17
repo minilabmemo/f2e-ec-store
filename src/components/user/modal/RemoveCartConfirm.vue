@@ -27,13 +27,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useModal } from '@/composables/useModal'
+import type { CartTempItem } from '@/utils/type';
 defineProps<{
-  item: {
-    product: {
-      title: string;
-    };
-    id: string;
-  };
+  item: CartTempItem;
 }>();
 
 const modal = ref(null)

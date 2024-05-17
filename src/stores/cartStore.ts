@@ -1,14 +1,14 @@
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import { computed, ref, type Ref } from 'vue';
 
 import statusStore from './statusStore';
 import { userCartApi, userCartsApi } from '@/utils/config/path';
 
 import fetchAct from '@/utils/methods/fetchAct';
-import type { CartItem, CartItemUpdate } from '@/utils/type';
+import type { Cart, CartItem, CartItemUpdate } from '@/utils/type';
 
 export const useCartStore = defineStore('cartStore', () => {
-  const cart = ref({ carts: [] });
+  const cart: Ref<Cart> = ref({ carts: [], total: 0, final_total: 0 });
   const status = statusStore();
   const cartTotalQty = computed(() => {
     let total = 0;

@@ -26,7 +26,7 @@
                       <div class="px-1 w-100">
                         <select id="qty" class="form-select form-select-sm  " v-model="item.qty"
                           :disabled="item.id === status.cartLoadingItem" @change="updateCart(item)">
-                          <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
+                          <option :value="pn" v-for="pn in item.product.num" :key="pn">{{ pn }}</option>
                         </select>
                       </div>
                     </div>
@@ -117,7 +117,7 @@
                 <select id="pc-qty" class="form-select" v-model="item.qty"
                   :disabled="item.id === status.cartLoadingItem" @change="updateCart(item)">
 
-                  <option :value="item" v-for="item in item.product.num" :key="item">{{ item }}</option>
+                  <option :value="pn" v-for="pn in item.product.num" :key="pn">{{ pn }}</option>
                 </select>
               </td>
               <td class="text-end">
@@ -181,54 +181,70 @@
   <RemoveAllCartConfirm :cartTotalQty="cartTotalQty" ref="removeAllItemRef" @remove-items="removeAllCartItem()" />
 </template>
 
-<script setup>
-import {ref, watch} from 'vue';
-import {userCouponApi} from '@/utils/config/path';
-import {useCartStore} from '@/stores/cartStore';
+<script setup lang="ts">
+import { ref, watch, type Ref } from 'vue';
+import { userCouponApi } from '@/utils/config/path';
+import { useCartStore } from '@/stores/cartStore';
 import fetchAct from '@/utils/methods/fetchAct';
-import {storeToRefs} from 'pinia';
+import { storeToRefs } from 'pinia';
 
 import RemoveCartConfirm from '@/components/user/modal/RemoveCartConfirm.vue';
 import RemoveAllCartConfirm from '@/components/user/modal/RemoveAllCartConfirm.vue';
-import {useDeviceSize} from '@/composables/useDeviceSize'
+import { useDeviceSize } from '@/composables/useDeviceSize'
 import statusStore from '@/stores/statusStore';
+import type { CartTempItem } from '@/utils/type';
+
 const status = statusStore();
-const {isExtraSmallDevice} = useDeviceSize()
+const { isExtraSmallDevice } = useDeviceSize()
 const cartStore = useCartStore();
-const {getCart, updateCart, removeCartByID, removeAllItems} = cartStore
+const { getCart, updateCart, removeCartByID, removeAllItems } = cartStore
 getCart(true)
-const {cart, cartTotalQty} = storeToRefs(cartStore);
+const { cart, cartTotalQty } = storeToRefs(cartStore);
 
 const props = defineProps({
   checkout: Boolean,
 });
-const removeItemRef = ref(null);
-const removeAllItemRef = ref(null);
-const tempItem = ref({});
+const removeItemRef = ref<InstanceType<typeof RemoveCartConfirm> | null>(null);
+const removeAllItemRef = ref<InstanceType<typeof RemoveAllCartConfirm> | null>(null);
+const tempItem: Ref<CartTempItem> = ref({
+  product: { title: '' },
+  id: ''
+});
 const coupon_code = ref('');
 
-const removeConfirm = (item) => {
-  tempItem.value = {...item};
+const removeConfirm = (item: CartTempItem) => {
+  tempItem.value = { ...item };
+
   const confirmModal = removeItemRef.value
-  confirmModal.showModal()
+  if (confirmModal) {
+    (confirmModal).showModal();
+  }
+
 };
 
-const removeCartItem = (id) => {
+const removeCartItem = (id: string) => {
 
   removeCartByID(id);
   const confirmModal = removeItemRef.value;
-  confirmModal.hideModal();
+  if (confirmModal) {
+    confirmModal.hideModal();
+  }
 };
 
 const deleteAll = () => {
   const confirmModal = removeAllItemRef.value
-  confirmModal.showModal();
+  if (confirmModal) {
+    confirmModal.showModal();
+  }
 };
 const removeAllCartItem = () => {
 
   removeAllItems();
   const confirmModal = removeAllItemRef.value;
-  confirmModal.hideModal();
+  if (confirmModal) {
+
+    confirmModal.hideModal();
+  }
 };
 const addCouponCode = () => {
   const url = userCouponApi;
@@ -236,7 +252,7 @@ const addCouponCode = () => {
     code: coupon_code.value,
   };
 
-  fetchAct.post(url, {data: coupon}).then(() => {
+  fetchAct.post(url, { data: coupon }).then(() => {
     getCart();
 
   });
