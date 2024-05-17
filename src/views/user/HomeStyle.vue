@@ -7,6 +7,6 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import HomeStyleContent from '@/components/user/HomeStyleContent.vue'
 </script>

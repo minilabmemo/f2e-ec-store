@@ -39,18 +39,19 @@
   </div>
 </template>
 
-<script setup>
-import {ref} from 'vue'
+<script setup lang="ts">
+import { ref } from 'vue'
 import HomeBanner from '@/components/user/HomeBanner.vue'
 import HomeItems from '@/components/user/HomeItems.vue'
 import HomeNews from '@/components/user/HomeNews.vue'
 import categoriesConfig from '@/utils/config/categories'
-import {storeToRefs} from 'pinia'
+import { storeToRefs } from 'pinia'
+import { useProductStore } from '@/stores/productStore'
+
 const categories = ref(categoriesConfig)
-import {useProductStore} from '@/stores/productStore'
 const productStore = useProductStore()
-const {getProducts} = productStore
-const {products} = storeToRefs(productStore)
+const { getProducts } = productStore
+const { products } = storeToRefs(productStore)
 getProducts()
 </script>
 
