@@ -66,21 +66,21 @@
   </nav>
 
 </template>
-<script setup>
+<script setup lang="ts">
 import categories from '@/utils/config/categories'
 import 'bootstrap/js/dist/collapse';
-import {ref, onMounted, onUnmounted, computed, watch} from 'vue';
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue';
 import Offcanvas from 'bootstrap/js/dist/offcanvas';
 import HomeLogo from '@/components/user/HomeLogo.vue';
 import CATNav from '@/components/user/CategoriesNav.vue';
-import {useRoute, useRouter} from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
 const keyword = ref("");
 const isCollapsed = ref(false);
-const bsOffcanvas = ref({});
+const bsOffcanvas = ref<Offcanvas | null>(null);
 watch(() => route.path, () => {
-  bsOffcanvas.value.hide()
+  bsOffcanvas.value?.hide()
 });
 
 const search = () => {
@@ -109,9 +109,7 @@ const searchClasses = computed(() => ({
 onMounted(() => {
   const myOffcanvas = document.getElementById('offcanvasNavbar');
   if (myOffcanvas) {
-    bsOffcanvas.value = new Offcanvas(myOffcanvas, {
-      toggle: false
-    });
+    bsOffcanvas.value = new Offcanvas(myOffcanvas);
     myOffcanvas.addEventListener('hide.bs.offcanvas', handleOffcanvasHide);
     myOffcanvas.addEventListener('show.bs.offcanvas', handleOffcanvasShow);
   }
