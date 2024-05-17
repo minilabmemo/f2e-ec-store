@@ -10,7 +10,19 @@ export const useProductStore = defineStore('productStore', () => {
 
   const defaultProductsSort = ref();
   const productsByCAT = ref();
-  const product = ref({});
+  const defaultProduct: Product = {
+    id: '',
+    imageUrl: '',
+    title: '',
+    unit: '',
+    price: 0,
+    origin_price: 0,
+    num: 0,
+    category: '',
+    subcategory: ''
+  };
+  const product: Ref<Product> = ref(defaultProduct);
+
   function getProducts() {
     const url = `${userProductsApi}`;
     fetchAct.get(url).then((data: any) => {
@@ -29,7 +41,7 @@ export const useProductStore = defineStore('productStore', () => {
       product.value = data.product;
     });
   }
-  function filterByCategory(category: string, subcategory: string) {
+  function filterByCategory(category: string, subcategory?: string) {
     let itemsByCAT = [];
     if (!products.value) {
       return;

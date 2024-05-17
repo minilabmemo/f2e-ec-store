@@ -10,6 +10,12 @@ export interface Product {
   subcategory: string;
   [key: string]: any;
 }
+export interface SaveProduct {
+  id: string;
+  title: string;
+  imageUrl: string;
+  on_stock: boolean;
+}
 
 interface CartProduct {
   id: string;

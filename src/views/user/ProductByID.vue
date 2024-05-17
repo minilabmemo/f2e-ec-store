@@ -150,56 +150,75 @@
   </button>
 </template>
 
-<script setup>
-import {ref, watch, watchEffect, onMounted, onBeforeUnmount, computed} from 'vue'
-import {useRoute, useRouter} from 'vue-router'
+<script setup lang="ts">
+import { ref, watch, watchEffect, onMounted, onBeforeUnmount, computed, type Ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import categories from '@/utils/config/categories'
 import AddCartConfirm from '@/components/user/modal/AddCartConfirm.vue'
 import SaveButton from '@/components/user/SaveButton.vue'
 import SaleItem from '@/components/user/SaleItem.vue'
-import {useCartStore} from '@/stores/cartStore'
-import {storeToRefs} from 'pinia'
-import {useProductStore} from '@/stores/productStore'
-import {addCartCheck} from '@/utils/methods/addCartCheck'
-import {useDeviceSize} from '@/composables/useDeviceSize'
-const {isExtraSmallDevice} = useDeviceSize()
-const productStore = useProductStore()
-const {product, products} = storeToRefs(productStore)
+import { useCartStore } from '@/stores/cartStore'
+import { storeToRefs } from 'pinia'
+import { useProductStore } from '@/stores/productStore'
+import { addCartCheck } from '@/utils/methods/addCartCheck'
+import { useDeviceSize } from '@/composables/useDeviceSize'
+import type { Product, SaveProduct } from '@/utils/type';
 import statusStore from '@/stores/statusStore'
+
+const { isExtraSmallDevice } = useDeviceSize()
+const productStore = useProductStore()
+const { product, products } = storeToRefs(productStore)
 const status = statusStore()
 
 const cartStore = useCartStore()
 
-const {cart} = storeToRefs(cartStore)
+const { cart } = storeToRefs(cartStore)
 
-const {productsByCAT} = storeToRefs(productStore)
-const {getProductByID, getProducts, filterByCategory} = productStore
+const { productsByCAT } = storeToRefs(productStore)
+const { getProductByID, getProducts, filterByCategory } = productStore
 const route = useRoute()
-const cartConfirm = ref(null)
+
+const cartConfirm = ref<InstanceType<typeof AddCartConfirm> | null>(null);
+
 const id = ref('')
 const itemQty = ref(1)
-const saveButtonItem = ref({})
+const saveButtonItem: Ref<SaveProduct> = ref({ id: '', title: '', imageUrl: '', on_stock: false })
 const showScrollToTopButton = ref(false)
 
 const category_name = computed(() => {
-  return categories[route.params.category] ? categories[route.params.category].name : ''
+  let category = route.params.category;
+  if (Array.isArray(category)) {
+    category = category[0];
+  }
+
+  if (typeof category === 'string' && categories[category]) {
+    return categories[category].name;
+  }
+  return '';
 })
 
 const sub_category_name = computed(() => {
-  if (
-    categories[route.params.category]?.sub_category &&
-    categories[route.params.category].sub_category[route.params.subcategory]
-  ) {
-    return categories[route.params.category].sub_category[route.params.subcategory].name
+  let category = route.params.category;
+  let subcategory = route.params.subcategory;
+
+  if (Array.isArray(category)) {
+    category = category[0];
   }
-  return ''
-})
+  if (Array.isArray(subcategory)) {
+    subcategory = subcategory[0];
+  }
+
+  if (typeof category === 'string' && typeof subcategory === 'string') {
+    return categories[category]?.sub_category?.[subcategory]?.name ?? '';
+  }
+  return '';
+});
 
 const recommendItems = computed(() => {
   let items = []
   let removeID = id.value
   if (productsByCAT.value) {
-    items = productsByCAT.value.filter((item) => item.id != removeID)
+    items = productsByCAT.value.filter((item: Product) => item.id != removeID)
   }
   if (items.length === 0) {
     if (products.value && products.value.length >= 3) {
@@ -214,7 +233,7 @@ const goToCart = () => {
   router.push('/user/cart/flow')
 }
 
-async function checkAndAddCart(id, qty = 1, retries = 3) {
+async function checkAndAddCart(id: string, qty = 1, retries = 3) {
   if (status.isAddLoading === undefined || status.isAddLoading) {
     if (retries === 0) {
       throw new Error('Maximum retries exceeded')
@@ -232,13 +251,16 @@ async function checkAndAddCart(id, qty = 1, retries = 3) {
   }
   if (confirmAddCart) {
     const confirmModal = cartConfirm.value
-    confirmModal.showModal()
+    if (confirmModal) {
+      confirmModal.showModal()
+    }
+
   } else {
     addCart(id, qty, true)
   }
 }
 
-function addCart(id, qty = 1, redirect = false) {
+function addCart(id: string, qty = 1, redirect = false) {
   const isAdd = addCartCheck(id, qty)
   if (!isAdd) {
     return
@@ -254,11 +276,15 @@ const handleScroll = () => {
 }
 
 const scrollToTop = () => {
-  window.scrollTo({top: 0, behavior: 'smooth'})
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 onMounted(() => {
-  id.value = route.params.productId
+  let paramsProductId = route.params.productId;
+  if (Array.isArray(paramsProductId)) {
+    paramsProductId = paramsProductId[0];
+  }
+  id.value = paramsProductId
   getProductByID(id.value)
   getProducts()
   window.addEventListener('scroll', handleScroll)
@@ -280,16 +306,25 @@ watchEffect(() => {
 watch(
   () => products,
   () => {
-    filterByCategory(route.params.category)
+    let category = route.params.category;
+
+    if (Array.isArray(category)) {
+      category = category[0];
+    }
+    filterByCategory(category)
   },
-  {deep: true}
+  { deep: true }
 )
 
 watch(
   () => route.params.productId,
   (newV, oldV) => {
     if (newV !== oldV) {
-      id.value = route.params.productId
+      let paramsProductId = route.params.productId;
+      if (Array.isArray(paramsProductId)) {
+        paramsProductId = paramsProductId[0];
+      }
+      id.value = paramsProductId
       getProductByID(id.value)
       getProducts()
     }

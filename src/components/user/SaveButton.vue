@@ -39,15 +39,12 @@ import LocalStorage from '@/utils/methods/localStorage'
 import statusStore from '@/stores/statusStore';
 
 import { ref, watch, onMounted } from 'vue';
-import type { Product } from '@/utils/type';
+import type { SaveProduct } from '@/utils/type';
 
 const status = statusStore();
 
 const props = defineProps<{
-  item: {
-    id: string;
-
-  }
+  item: SaveProduct
 }>()
 
 const saveKey = "favorite";
@@ -55,7 +52,7 @@ let isSave = ref(false);
 
 const syncSaveStatus = () => {
   isSave.value = false;
-  const saveItems: Product[] = LocalStorage.get(saveKey);
+  const saveItems: SaveProduct[] = LocalStorage.get(saveKey);
   if (saveItems) {
     for (const value of Object.values(saveItems)) {
       if (value.id === props.item.id) {
@@ -82,8 +79,8 @@ const saveItem = () => {
 };
 
 const removeItem = () => {
-  let saveItems: Product[] = [];
-  const nowItems: Product[] = LocalStorage.get(saveKey);
+  let saveItems: SaveProduct[] = [];
+  const nowItems: SaveProduct[] = LocalStorage.get(saveKey);
   if (nowItems) {
     for (const value of Object.values(nowItems)) {
       if (value.id !== props.item.id) {
