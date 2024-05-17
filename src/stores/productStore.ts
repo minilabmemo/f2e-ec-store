@@ -82,7 +82,7 @@ export const useProductStore = defineStore('productStore', () => {
 
     productsByCAT.value = itemsByCAT;
   }
-  function sortProductsBy(field: string, order: 'asc' | 'desc') {
+  function sortProductsBy(field: string, order?: 'asc' | 'desc') {
     if (!products.value || !Array.isArray(products.value)) {
       console.error('Products array is empty or invalid.');
       return;

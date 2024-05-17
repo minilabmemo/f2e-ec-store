@@ -9,29 +9,32 @@
   </div>
 </template>
 
-<script setup>
-import {computed} from 'vue'
+<script setup lang="ts">
+import { computed } from 'vue'
 import SaleItem from '@/components/user/SaleItem.vue'
+import { useProductStore } from '@/stores/productStore'
+import { storeToRefs } from 'pinia'
+import { useRoute } from 'vue-router'
+import statusStore from '@/stores/statusStore'
 
-import {useProductStore} from '@/stores/productStore'
 const productStore = useProductStore()
-import {storeToRefs} from 'pinia'
-const {getProducts} = productStore
-const {products, status} = storeToRefs(productStore)
+const { getProducts } = productStore
+const { products } = storeToRefs(productStore)
 getProducts()
 
-import {useRoute} from 'vue-router'
+const status = statusStore()
 
 const route = useRoute()
 const filterItems = computed(() => {
   let itemsBYSearch = []
   let items = products.value ? products.value : []
+  const keywordKey = route.params.keyword as string;
+
   itemsBYSearch = items.filter((item) => !item.category.toString().includes('test'))
-  itemsBYSearch = items.filter((item) => item.title.toString().includes(route.params.keyword))
+  itemsBYSearch = items.filter((item) => item.title.toString().includes(keywordKey))
 
   if (itemsBYSearch.length !== 0) {
     return itemsBYSearch.map((item) => ({
-      title: item.title,
       src: item.imageUrl,
       ...item
     }))

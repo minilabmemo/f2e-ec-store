@@ -49,25 +49,28 @@
     <Pagination :pages="pagination" @change-page-num="filterItemsByPage" v-if="showItems.length !== 0" />
   </div>
 </template>
-<script setup>
-import {ref, computed, watchEffect, watch} from 'vue'
+
+<script setup lang="ts">
+import { ref, computed, watchEffect, watch, type Ref } from 'vue'
 import SaleItem from '@/components/user/SaleItem.vue'
 import Pagination from '@/components/PaginationAct.vue'
 import categoriesConfig from '@/utils/config/categories'
-import {storeToRefs} from 'pinia'
-import {useProductStore} from '@/stores/productStore'
-import {useRoute} from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useProductStore } from '@/stores/productStore'
+import { useRoute } from 'vue-router'
 import statusStore from '@/stores/statusStore'
+import type { Product } from '@/utils/type';
+
 const categories = categoriesConfig
 
 const productStore = useProductStore()
-const {getProducts, sortProductsBy} = productStore
-const {products} = storeToRefs(productStore)
+const { getProducts, sortProductsBy } = productStore
+const { products } = storeToRefs(productStore)
 const status = statusStore()
 getProducts()
 
-const catItems = ref([])
-const showItems = ref([])
+const catItems: Ref<Product[]> = ref([])
+const showItems: Ref<Product[]> = ref([])
 
 let pagination = ref({
   total_pages: 1,
@@ -79,7 +82,10 @@ const dataPerPage = 12
 
 const route = useRoute()
 function filterItems() {
-  let itemByCAT = []
+
+  const categoryKey = route.params.category as string;
+  const subCategoryKey = route.params.subcategory as string;
+  let itemByCAT: Product[] = []
   if (!products.value) {
     return
   }
@@ -90,7 +96,7 @@ function filterItems() {
       break
     default:
       itemByCAT = products.value.filter((item) =>
-        item.category.toString().includes(route.params.category)
+        item.category.toString().includes(categoryKey)
       )
       break
   }
@@ -100,10 +106,10 @@ function filterItems() {
       break
     default:
       itemByCAT = products.value.filter((item) =>
-        item.category.toString().includes(route.params.category)
+        item.category.toString().includes(categoryKey)
       )
       itemByCAT = itemByCAT.filter((item) =>
-        item.category.toString().includes(route.params.subcategory)
+        item.category.toString().includes(subCategoryKey)
       )
       break
   }
@@ -135,29 +141,43 @@ function filterItemsByPage(currentPage = 1) {
 }
 
 let sortByID = 0
-function sortByButton(sortId, field, order) {
+function sortByButton(sortId: number, field: string, order?: 'asc' | 'desc') {
   sortByID = sortId
   sortProductsBy(field, order)
 }
 
-const category_name = computed(() =>
-  categories[route.params.category] ? categories[route.params.category].name : ''
+const category_name = computed(() => {
+
+  let category = route.params.category;
+  if (Array.isArray(category)) {
+    category = category[0];
+  }
+  return categories[category] ? categories[category].name : ''
+}
+
 )
 const sub_category_name = computed(() => {
-  if (
-    categories[route.params.category]?.sub_category &&
-    categories[route.params.category].sub_category[route.params.subcategory]
-  ) {
-    return categories[route.params.category].sub_category[route.params.subcategory].name
+  let category = route.params.category;
+  let subcategory = route.params.subcategory;
+
+  if (Array.isArray(category)) {
+    category = category[0];
   }
-  return ''
-})
+  if (Array.isArray(subcategory)) {
+    subcategory = subcategory[0];
+  }
+
+  if (typeof category === 'string' && typeof subcategory === 'string') {
+    return categories[category]?.sub_category?.[subcategory]?.name ?? '';
+  }
+  return '';
+});
 
 watch(
   () => pagination.value.current_page,
   (newValue, oldValue) => {
     if (newValue != oldValue) {
-      window.scrollTo({top: 0, behavior: 'smooth'})
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 )

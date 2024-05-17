@@ -307,7 +307,6 @@ watch(
   () => products,
   () => {
     let category = route.params.category;
-
     if (Array.isArray(category)) {
       category = category[0];
     }
