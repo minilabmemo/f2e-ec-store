@@ -24,15 +24,21 @@
     </div>
   </div>
 </template>
-<script setup>
-import {ref} from 'vue'
-import {useModal} from '@/composables/useModal'
-defineProps({
-  item: Object,
-});
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useModal } from '@/composables/useModal'
+defineProps<{
+  item: {
+    product: {
+      title: string;
+    };
+    id: string;
+  };
+}>();
+
 const modal = ref(null)
 
-const {showModal, hideModal} = useModal(modal);
+const { showModal, hideModal } = useModal(modal);
 defineExpose({
   showModal, hideModal
 })

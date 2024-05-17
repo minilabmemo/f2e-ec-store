@@ -25,15 +25,16 @@
   </div>
 </template>
 
-<script setup>
-import {ref} from 'vue'
-import {useModal} from '@/composables/useModal'
-defineProps({
-  cartTotalQty: Number,
-});
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useModal } from '@/composables/useModal'
+
+defineProps<{
+  cartTotalQty: number
+}>()
 const modal = ref(null)
 
-const {showModal, hideModal} = useModal(modal);
+const { showModal, hideModal } = useModal(modal);
 defineExpose({
   showModal, hideModal
 })

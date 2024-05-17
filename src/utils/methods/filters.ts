@@ -1,4 +1,8 @@
 export function currency(num: string | number): string {
+  if (num === undefined) {
+    return '';
+  }
+
   const n = typeof num === 'string' ? parseInt(num, 10) : num;
   return `${n.toFixed(0).replace(/./g, (c, i, a) => (i && c !== '.' && (a.length - i) % 3 === 0 ? `, ${c}`.replace(/\s/g, '') : c))}`;
 }

@@ -27,19 +27,23 @@
   </div>
 </template>
 
-<script setup>
-import {ref, computed} from 'vue'
-import {useModal} from '@/composables/useModal'
-import {useRouter} from 'vue-router'
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { useModal } from '@/composables/useModal'
+import { useRouter } from 'vue-router'
 const router = useRouter();
-const props = defineProps({
+
+const props = defineProps<{
   item: {
-    total: Number
+    total: number;
+    products: Record<string, { qty: number }>;
+
   }
-});
+}>()
+
 const modal = ref(null)
 
-const {showModal, hideModal} = useModal(modal);
+const { showModal, hideModal } = useModal(modal);
 defineExpose({
   showModal, hideModal
 })
