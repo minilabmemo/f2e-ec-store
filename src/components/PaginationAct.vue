@@ -25,32 +25,30 @@
     </ul>
   </nav>
 </template>
-<script setup>
+<script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useDeviceSize } from '@/composables/useDeviceSize'
+const { isExtraSmallDevice } = useDeviceSize()
 
-// :pages="{ 頁碼資訊 }" 
-// 頁碼資訊:{
-// total_pages:3
-// current_page:3
-// has_pre:true
-// has_next:false}
-// @change-page-num="更新頁面事件" ,param = current_page (number)
-
-import {ref, computed} from 'vue';
-import {useDeviceSize} from '@/composables/useDeviceSize'
-const {isExtraSmallDevice} = useDeviceSize()
-const props = defineProps({
-  pages: Object,
-});
-
+const props = defineProps<{
+  pages: {
+    total_pages: number;
+    current_page: number;
+    has_pre: boolean;
+    has_next: boolean;
+  }
+}>()
 const emit = defineEmits(['change-page-num']);
 
-function updatePage(pageNum) {
-  emit('change-page-num', pageNum);
+function updatePage(pageNum: string | number) {
+  if (typeof pageNum === 'number') {
+    emit('change-page-num', pageNum);//param = current_page 
+  }
 }
 const omitStr = ref("...");
 
 const displayPages = computed(() => {
-  const {total_pages, current_page} = props.pages;
+  const { total_pages, current_page } = props.pages;
   const maxDisplayPages = 10;
   const pagesArray = [];
 
