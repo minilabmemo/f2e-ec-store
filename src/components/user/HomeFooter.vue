@@ -70,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import sectionIds from '@/utils/config/sectionIds.js';
+import sectionIds from '@/utils/config/sectionIds';
 import { ref } from 'vue'
 const sectionIdsRef = ref(sectionIds)
 

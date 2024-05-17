@@ -89,11 +89,13 @@
     <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
   </div>
 </template>
-<script setup>
-import {ref} from 'vue'
-import sectionIds from '@/utils/config/sectionIds.js'
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import sectionIds from '@/utils/config/sectionIds'
 const sectionIdsRef = ref(sectionIds)
 </script>
+
 <style scoped>
 .section {
   width: max(18.75rem, 80%);
