@@ -4,7 +4,7 @@
 
     <div class="row">
 
-      <HomeItem v-for="(item) in showItems" :key="item.id" :item="item" class="col-4" :filter-err="filterErr" />
+      <HomeItem v-for="(item, key) in showItems" :key="key" :item="item" class="col-4" :filter-err="filterErr" />
     </div>
 
     <div class="d-flex justify-content-center gap-3 mt-3">
@@ -17,32 +17,34 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import HomeItem from '@/components/user/HomeItem.vue';
 import coming1 from '@/assets/img/design/coming1.png';
 import coming2 from '@/assets/img/design/coming2.png';
 import coming3 from '@/assets/img/design/coming3.png';
 import categories from '@/utils/config/categories'
-import {ref, watchEffect} from 'vue'
-const props = defineProps({
-  section: String,
-  CAT: String,
-  products: Array,
-});
+import { ref, watchEffect } from 'vue'
+import type { Product } from '@/utils/type';
+const props = defineProps<{
+  section: string;
+  CAT: string;
+  products: Product[];
+}>()
+
 const filterErr = ref("");
-const showItems = ref({
+const showItems = ref<{ [key: number]: { title: string; src: string; color?: string } }>({
   1: {
     title: `${props.CAT === categories.new.key ? "韓國熱銷 ONLINE - 新品 " : ""}`, src: coming1, color: "orange",
   },
   2: {
     title: `${props.CAT === categories.new.key ? "秋冬時裝 - 最新流行色" : ""}`, src: coming2, color: "secondary",
   },
-  3: {title: `${props.CAT === categories.new.key ? "針織罩衫系列 - 簡約氣質" : ""}`, src: coming3, color: "gray", },
+  3: { title: `${props.CAT === categories.new.key ? "針織罩衫系列 - 簡約氣質" : ""}`, src: coming3, color: "gray", },
 });
 
 watchEffect(() => {
-  let previewItem = [];
-  let filterProducts = props.products ? props.products.filter((item) => item.category.toString().includes(props.CAT)) : [];
+  let previewItem: Product[] = [];
+  let filterProducts = props.products ? props.products.filter((item: Product) => item.category.toString().includes(props.CAT)) : [];
 
   if (filterProducts.length >= 3) {
     previewItem = filterProducts.slice(0, 3);

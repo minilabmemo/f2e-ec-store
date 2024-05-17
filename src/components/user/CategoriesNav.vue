@@ -7,10 +7,10 @@
           v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/all`" width="0.75rem"
           height="0.75rem">
         <router-link class="nav-link  fw-bold px-2 "
-          :class="{ 'nav-inactive': !countByCAT(key), 'text-800': countByCAT(key) }" aria-current="page" href="#"
-          :to="`/product/${key}/all`">
+          :class="{ 'nav-inactive': !countByCAT(String(key)), 'text-800': countByCAT(String(key)) }" aria-current="page"
+          href="#" :to="`/product/${key}/all`">
 
-          {{ cat.name }} {{ key }} <span>({{ countByCAT(key) }})</span>
+          {{ cat.name }} {{ key }} <span>({{ countByCAT(String(key)) }})</span>
         </router-link>
       </div>
 
@@ -20,10 +20,10 @@
             v-if="`${$route.params.category}/${$route.params.subcategory}` === `${key}/${subKey}`" width="0.75rem"
             height="0.75rem">
           <router-link class="nav-link" :to="`/product/${key}/${subKey}`"
-            :class="{ 'nav-inactive': !countByCAT(key, subKey), 'text-900': countByCAT(key, subKey) }">
+            :class="{ 'nav-inactive': !countByCAT(String(key), String(subKey)), 'text-900': countByCAT(String(key), String(subKey)) }">
             {{ item.name }} {{ item.key }}
             <span>
-              ({{ countByCAT(key, subKey) }})
+              ({{ countByCAT(String(key), String(subKey)) }})
             </span>
 
           </router-link>
@@ -40,14 +40,21 @@
 
 </template>
 
-<script setup>
-import {ref, computed} from 'vue';
+<script setup lang="ts">
+import { ref, computed } from 'vue';
 import categoriesConfig from '@/utils/config/categories';
-import {useProductStore} from '@/stores/productStore';
-import {storeToRefs} from 'pinia'
+import { useProductStore } from '@/stores/productStore';
+import { storeToRefs } from 'pinia'
+import type { Product } from '@/utils/type';
+
+interface Category {
+  num: number;
+  name: string;
+  sub_category: Record<string, { name: string; num: number }>;
+}
 const productStore = useProductStore();
-const {getProducts, } = productStore;
-const {products} = storeToRefs(productStore);
+const { getProducts, } = productStore;
+const { products } = storeToRefs(productStore);
 getProducts();
 
 defineProps({
@@ -56,12 +63,11 @@ defineProps({
 
 const categories = ref(categoriesConfig);
 let catNumMap = computed(() => {
-
   let sum = sumProductsCAT(products.value);
   return sum
 })
 
-function countByCAT(cat, subCat) {
+function countByCAT(cat: string, subCat?: string): number {
   if (!catNumMap.value) {
     return 0
   }
@@ -83,7 +89,7 @@ function countByCAT(cat, subCat) {
   return 0;
 }
 
-function sumProductsCAT(products) {
+function sumProductsCAT(products: Product[]): Record<string, Category> | undefined {
 
   if (!products) {
 
@@ -101,8 +107,8 @@ function sumProductsCAT(products) {
 
     products.forEach(item => {
 
-      let cats = item.category.toString().split(',').flatMap(subStr => subStr.split('|'));
-      cats.forEach(cat => {
+      let cats = item.category.toString().split(',').flatMap((subStr: string) => subStr.split('|'));
+      cats.forEach((cat: string) => {
         if (!cat.includes('/')) {
 
           if (obj[cat]) {

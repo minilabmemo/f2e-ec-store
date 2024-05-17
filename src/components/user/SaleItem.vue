@@ -25,14 +25,13 @@
 
 </template>
 
-<script setup>
-defineProps({
-  filterErr: String,
-  item: {title: "no name"},
-  path: String,
+<script setup lang="ts">
+import type { Product } from '@/utils/type';
 
-});
-
+defineProps<{
+  path: string;
+  item: Product;
+}>();
 </script>
 
 <style scoped>

@@ -1,7 +1,21 @@
-export interface ProductItem {
+export interface Product {
   id: string;
   imageUrl: string;
   title: string;
+  unit: string;
+  price: number;
+  origin_price: number;
+  num: number;
+  category: string;
+  subcategory: string;
+  [key: string]: any;
+}
+
+interface CartProduct {
+  id: string;
+  imageUrl: string;
+  title: string;
+  unit: string;
   price: number;
   origin_price: number;
   num: number;
@@ -11,7 +25,7 @@ export interface CartItem {
   id: string;
   product_id: string;
   qty: number;
-  product: ProductItem;
+  product: CartProduct;
   coupon: string;
   final_total: number;
 }

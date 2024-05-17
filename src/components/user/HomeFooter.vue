@@ -69,9 +69,9 @@
   </footer>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import sectionIds from '@/utils/config/sectionIds.js';
-import {ref} from 'vue'
+import { ref } from 'vue'
 const sectionIdsRef = ref(sectionIds)
 
 </script>

@@ -95,34 +95,37 @@
   </VeeForm>
 </template>
 
-<script setup>
-import {ref, watch} from 'vue';
-import {storeToRefs} from 'pinia'
-import {useOrderStore} from '@/stores/orderStore'
-import {useCartStore} from '@/stores/cartStore';
-import {useDeviceSize} from '@/composables/useDeviceSize'
+<script setup lang="ts">
+import { ref, watch } from 'vue';
+import { storeToRefs } from 'pinia'
+import { useOrderStore } from '@/stores/orderStore'
+import { useCartStore } from '@/stores/cartStore';
+import { useDeviceSize } from '@/composables/useDeviceSize'
 import statusStore from '@/stores/statusStore'
 
-const {isExtraSmallDevice} = useDeviceSize()
+const { isExtraSmallDevice } = useDeviceSize()
 
 const cartStore = useCartStore();
-const {cart, cartTotalQty} = storeToRefs(cartStore);
-const {getCart} = useCartStore();
+const { cart, cartTotalQty } = storeToRefs(cartStore);
+const { getCart } = useCartStore();
 
 const orderStore = useOrderStore();
-const {createOrder, } = orderStore;
+const { createOrder, } = orderStore;
 
 const status = statusStore()
 
-import {memberStorage} from '@/utils/methods/memberStorage';
-const {getMemberData} = memberStorage();
+import { memberStorage } from '@/utils/methods/memberStorage';
+const { getMemberData } = memberStorage();
 
 function importDataCheckbox() {
 
   const memberData = getMemberData();
   if (!memberData) {
     alert('您沒有保存的會員資料，請先更新會員資料。');
-    document.getElementById('importDataCheckbox').checked = false;
+    const importDataCheckbox = document.getElementById('importDataCheckbox') as HTMLInputElement;
+    if (importDataCheckbox) {
+      importDataCheckbox.checked = false;
+    }
   } else {
     form.value = memberData;
   }
@@ -148,7 +151,7 @@ function sendOrder() {
   const body = form.value;
   createOrder(body)
 }
-function isPhone(value) {
+function isPhone(value: string) {
   const phoneNumber = /^(09)[0-9]{8}$/
   return phoneNumber.test(value) ? true : '請填寫台灣手機號碼，以 09 開頭加上 8 位數字之格式。'
 }
@@ -162,7 +165,7 @@ watch(
 
     }
     getCart();
-  }, {deep: true})
+  }, { deep: true })
 
 const maxMessage = ref(50);
 
