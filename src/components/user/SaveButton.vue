@@ -34,21 +34,28 @@
   </button>
 
 </template>
-<script setup>
+<script setup lang="ts">
 import LocalStorage from '@/utils/methods/localStorage'
 import statusStore from '@/stores/statusStore';
+
+import { ref, watch, onMounted } from 'vue';
+import type { Product } from '@/utils/type';
+
 const status = statusStore();
-import {ref, watch, onMounted} from 'vue';
-const props = defineProps({
-  item: Object,
-});
+
+const props = defineProps<{
+  item: {
+    id: string;
+
+  }
+}>()
 
 const saveKey = "favorite";
 let isSave = ref(false);
 
 const syncSaveStatus = () => {
   isSave.value = false;
-  const saveItems = LocalStorage.get(saveKey);
+  const saveItems: Product[] = LocalStorage.get(saveKey);
   if (saveItems) {
     for (const value of Object.values(saveItems)) {
       if (value.id === props.item.id) {
@@ -69,14 +76,14 @@ const saveItem = () => {
   LocalStorage.set(saveKey, saveItems);
   status.pushMessage({
     title: '加入收藏',
-    response: {data: {message: "", success: true}, }
+    response: { data: { message: "", success: true }, }
   });
   syncSaveStatus();
 };
 
 const removeItem = () => {
-  let saveItems = [];
-  const nowItems = LocalStorage.get(saveKey);
+  let saveItems: Product[] = [];
+  const nowItems: Product[] = LocalStorage.get(saveKey);
   if (nowItems) {
     for (const value of Object.values(nowItems)) {
       if (value.id !== props.item.id) {
@@ -86,7 +93,7 @@ const removeItem = () => {
   }
   status.pushMessage({
     title: '移除收藏',
-    response: {data: {message: "", success: true}, }
+    response: { data: { message: "", success: true }, }
   });
   LocalStorage.set(saveKey, saveItems);
   syncSaveStatus();
@@ -98,7 +105,7 @@ onMounted(() => {
 
 watch(() => props.item, () => {
   syncSaveStatus();
-}, {deep: true});
+}, { deep: true });
 
 </script>
 

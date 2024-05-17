@@ -57,13 +57,13 @@ import categoriesConfig from '@/utils/config/categories'
 import {storeToRefs} from 'pinia'
 import {useProductStore} from '@/stores/productStore'
 import {useRoute} from 'vue-router'
-
+import statusStore from '@/stores/statusStore'
 const categories = categoriesConfig
 
 const productStore = useProductStore()
 const {getProducts, sortProductsBy} = productStore
-const {products, status} = storeToRefs(productStore)
-
+const {products} = storeToRefs(productStore)
+const status = statusStore()
 getProducts()
 
 const catItems = ref([])
