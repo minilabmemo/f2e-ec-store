@@ -54,7 +54,7 @@
                   <div class="mb-3 col-8">
                     <label for="image" class="form-label">輸入圖片網址</label>
                     <button type="button" class="ms-2 btn btn-outline-danger btn-sm"
-                      @click="tempProduct.imagesUrl.splice(index, 1);">移除
+                      @click="tempProduct.imagesUrl?.splice(index, 1);">移除
                     </button>
                     <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結"
                       v-model="tempProduct.imagesUrl[index]">
@@ -95,7 +95,7 @@
                   <select id="category" class="form-select" v-model.trim="selectCategories" multiple>
                     <option value="test">test</option>
                     <option value="styles">styles</option>
-                    <option :value="item.key" v-for="item in findCategoriesList()" :key="item.id">{{ item.key }} -{{
+                    <option :value="item.key" v-for="item in findCategoriesList()" :key="item.key">{{ item.key }} -{{
                       item.name }}
                     </option>
                   </select>
@@ -171,105 +171,110 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { ref, watch, type Ref } from 'vue'
+import { useModal } from '@/composables/useModal'
 import categories from '@/utils/config/categories'
-
-import {adminUploadApi} from "@/utils/config/path"
-import {useModal} from '@/composables/useModal'
 import itemLimit from '@/utils/config/itemLimit'
-import fetchAct from '@/utils/methods/fetchAct';
-import {ref, watch} from 'vue'
-const modal = ref(null)
+import { adminUploadApi } from '@/utils/config/path'
+import fetchAct from '@/utils/methods/fetchAct'
+import type { Product } from '@/utils/type';
 
-const {showModal, hideModal} = useModal(modal);
-defineExpose({
-  showModal, hideModal
+const modal = ref<HTMLElement | null>(null)
+const { showModal, hideModal } = useModal(modal)
+defineExpose({ showModal, hideModal })
+
+const props = defineProps<{ product: Product }>()
+const tempProduct: Ref<Product> = ref({
+  id: '', imagesUrl: [], imageUrl: '', title: '', category: '', subcategory: '', number: 0, unit: '',
+  origin_price: 0, description: '', content: '', is_enabled: 0, num: 0, price: 0
 })
-const props = defineProps({
-  product: Object,
-});
-const tempProduct = ref({unit: ""})
-const selectCategories = ref(['test'])
+
+const selectCategories = ref<string[]>(['test'])
+const fileInput = ref<HTMLInputElement | null>(null)
+const filesInput = ref<(HTMLInputElement | null)[]>([]);
 
 function setTempProductDefault() {
-  tempProduct.value = props.product;
-  tempProduct.value.imagesUrl = tempProduct.value.imagesUrl ? tempProduct.value.imagesUrl : [];
-  tempProduct.value.category = props.product.category ? props.product.category : "test";
-  selectCategories.value = tempProduct.value.category.split(",");
-  tempProduct.value.unit = props.product.unit ? props.product.unit : "件";
-  tempProduct.value.num = props.product.num ? props.product.num : itemLimit.min_num;
+  tempProduct.value = { ...props.product }
+  tempProduct.value.imagesUrl = tempProduct.value.imagesUrl || []
+  tempProduct.value.category = props.product.category || 'test'
+  selectCategories.value = tempProduct.value.category.split(',')
+  tempProduct.value.unit = props.product.unit || '件'
+  tempProduct.value.num = props.product.num || itemLimit.min_num
 }
-watch(
-  () => props.product, () => {
-    setTempProductDefault()
-  }
-);
-watch(
-  () => selectCategories.value, () => {
-    tempProduct.value.category = selectCategories.value.join(',');
 
+watch(
+  () => props.product,
+  () => {
+    setTempProductDefault()
+  },
+  { immediate: true }
+)
+
+watch(
+  () => selectCategories.value,
+  () => {
+    if (tempProduct.value) {
+      tempProduct.value.category = selectCategories.value.join(',')
+    }
   }
-);
+)
 
 function findCategoriesList() {
-  let lists = []
-  for (const [key, value] of Object.entries(categories,)) {
+  let lists: { key: string; name: string }[] = []
+  for (const [key, value] of Object.entries(categories)) {
     if (value.sub_category) {
       for (const [subKey, sub] of Object.entries(value.sub_category)) {
-        let item = {key: `${key}/${subKey}`, name: `${value.name}/${sub.name}`}
-        lists.push(item)
+        lists.push({ key: `${key}/${subKey}`, name: `${value.name}/${sub.name}` })
       }
     } else {
-      let item = {key: `${key}`, name: value.name}
-      lists.push(item)
+      lists.push({ key: `${key}`, name: value.name })
     }
   }
 
   return lists
 }
-let fileInput = ref(null);
-let filesInput = ref(null);
 
-function uploadFile(isMain, index) {
-  let uploadedFile = null;
-
+function uploadFile(isMain: boolean, index?: number) {
+  let uploadedFile: File | null = null
   if (isMain) {
-    uploadedFile = fileInput.value.files[0];
-  }
-  if (!isMain) {
-    uploadedFile = filesInput.value[index].files[0];
+    uploadedFile = fileInput.value?.files?.[0] || null
+  } else if (index !== undefined) {
+    uploadedFile = filesInput.value[index]?.files?.[0] || null
   }
 
-  const formData = new FormData();
-  formData.append('file-to-upload', uploadedFile);
-  fetchAct.post(adminUploadApi, formData, {msgTitle: "上傳圖片"}).then((response) => {
+  if (!uploadedFile) return
 
+  const formData = new FormData()
+  formData.append('file-to-upload', uploadedFile)
+  fetchAct.post(adminUploadApi, formData, { msgTitle: '上傳圖片' }).then((response: any) => {
     if (response.success) {
       if (isMain) {
-        tempProduct.value.imageUrl = response.imageUrl;
-      } else {
+        tempProduct.value.imageUrl = response.imageUrl
+      } else if (index !== undefined) {
+
         tempProduct.value.imagesUrl[index] = response.imageUrl;
       }
-
     }
-  });
+  })
 }
+
 function addImages() {
-  tempProduct.value.imagesUrl.push([]);
+  if (tempProduct.value.imagesUrl) {
+    tempProduct.value.imagesUrl.push('')
+  }
 }
 
-const emit = defineEmits(['update-product'])
+const emit = defineEmits(['update-product']);
 
-function confirmAction(tempProduct) {
-
-  const form = document.querySelector('.needs-validation');
+function confirmAction(tempProduct: Partial<Product>) {
+  const form = document.querySelector('.needs-validation') as HTMLFormElement
   if (form.checkValidity()) {
-    form.submit();
-    emit('update-product', tempProduct);
+    form.submit()
+    emit('update-product', tempProduct as Product)
   } else {
-    form.classList.add('was-validated');
+    form.classList.add('was-validated')
   }
-
 }
 
 </script>

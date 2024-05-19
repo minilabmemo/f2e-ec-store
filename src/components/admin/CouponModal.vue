@@ -45,33 +45,51 @@
   </div>
 </template>
 
-<script setup>
-import {ref, watch} from 'vue'
-import {useModal} from '@/composables/useModal'
-defineEmits(['update-coupon'])
+<script setup lang="ts">
+import { ref, watch, type Ref } from 'vue';
+import { useModal } from '@/composables/useModal';
+defineEmits(['update-coupon']);
 
-const props = defineProps({
-  coupon: Object,
-});
-const modal = ref(null)
+interface Coupon {
+  due_date: number;
+  title: string;
+  code: string;
+  percent: number;
+  is_enabled: boolean;
+}
 
-const {showModal, hideModal} = useModal(modal);
+const props = defineProps<{
+  coupon: Coupon;
+}>();
+
+const modal = ref(null);
+
+const { showModal, hideModal } = useModal(modal);
 defineExpose({
   showModal, hideModal
-})
-const tempCoupon = ref({})
-const due_date = ref("")
-watch(
-  () => props.coupon, () => {
-    tempCoupon.value = props.coupon;
-    const dateAndTime = new Date(tempCoupon.value.due_date * 1000).toISOString().split('T'); // 將時間格式改為 YYYY-MM-DD
-    [due_date.value] = dateAndTime;
+});
 
-  }
-);
+const tempCoupon: Ref<Coupon> = ref({ due_date: 0, title: '', code: '', percent: 0, is_enabled: false });
+const due_date = ref("");
+
 watch(
-  () => due_date.value, () => {
-    tempCoupon.value.due_date = Math.floor(new Date(due_date.value) / 1000);
+  () => props.coupon,
+  (newCoupon) => {
+    tempCoupon.value = { ...newCoupon };
+    if (tempCoupon.value.due_date) {
+      const dateAndTime = new Date(tempCoupon.value.due_date * 1000).toISOString().split('T'); // 將時間格式改為 YYYY-MM-DD
+      [due_date.value] = dateAndTime;
+    }
+  },
+  { immediate: true }
+);
+
+watch(
+  () => due_date.value,
+  (newDate) => {
+    if (newDate) {
+      tempCoupon.value.due_date = Math.floor(new Date(newDate).getTime() / 1000);
+    }
   }
 );
 
