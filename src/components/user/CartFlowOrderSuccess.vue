@@ -87,19 +87,20 @@
   <CheckoutConfirm :item="order" ref="checkoutConfirm" @pay-order="payOrder" v-if="order" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-import {useOrderStore} from '@/stores/orderStore'
+import { useOrderStore } from '@/stores/orderStore'
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 const props = defineProps({
   orderId: String,
 });
-import {storeToRefs} from 'pinia';
-import {watch, ref} from 'vue';
+import { storeToRefs } from 'pinia';
+import { watch, ref } from 'vue';
 const orderStore = useOrderStore()
-const {order} = storeToRefs(orderStore);
-const {getOrderByID, payOrderByID} = orderStore;
-const checkoutConfirm = ref(null)
+const { order } = storeToRefs(orderStore);
+const { getOrderByID, payOrderByID } = orderStore;
+
+const checkoutConfirm = ref<InstanceType<typeof CheckoutConfirm> | null>(null);
 
 function getOrder() {
   if (props.orderId === "") {
@@ -116,12 +117,18 @@ watch(() => props.orderId,
 );
 function confirmPay() {
   const confirmModal = checkoutConfirm.value;
-  confirmModal.showModal();
+  if (confirmModal) {
+    confirmModal.showModal();
+
+  }
+
 }
 function payOrder() {
   payOrderByID(props.orderId)
   const confirmModal = checkoutConfirm.value;
-  confirmModal.hideModal();
+  if (confirmModal) {
+    confirmModal.hideModal();
+  }
 }
 
 </script>

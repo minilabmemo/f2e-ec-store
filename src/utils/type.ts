@@ -82,3 +82,12 @@ export interface Order {
   message: string;
   products: OrderProduct[];
 }
+
+export interface Coupon {
+  id: string;
+  due_date: number;
+  title: string;
+  code: string;
+  percent: number;
+  is_enabled: number;
+}

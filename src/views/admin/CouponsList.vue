@@ -41,72 +41,93 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
 import CouponModal from '@/components/admin/CouponModal.vue';
 import DelModal from '@/components/DelModal.vue';
-import {adminCouponsApi, adminCouponApi} from '@/utils/config/path'
-import {ref} from 'vue'
+import { adminCouponsApi, adminCouponApi } from '@/utils/config/path'
+import { ref, type Ref } from 'vue'
 import fetchAct from '@/utils/methods/fetchAct';
 import statusStore from '@/stores/statusStore';
+import type { Coupon } from '@/utils/type';
+
 const status = statusStore();
-const delModal = ref(null)
-const couponModal = ref(null)
-const coupons = ref({})
-const tempCoupon = ref({
+const delModal = ref<InstanceType<typeof DelModal> | null>(null);
+const couponModal = ref<InstanceType<typeof CouponModal> | null>(null);
+const coupons: Ref<Coupon[]> = ref([])
+let defaultValue = {
+  id: '',
   title: '',
   is_enabled: 0,
-  percent: 100,
+  percent: 10,
   code: '',
-})
+  due_date: 0
+}
+
+const tempCoupon: Ref<Coupon> = ref(defaultValue)
 const isNewRef = ref(false)
 
-function openCouponModal(isNew, item) {
+function openCouponModal(isNew: boolean, item?: Coupon) {
   isNewRef.value = isNew;
   if (isNew) {
-    tempCoupon.value = {
-      due_date: new Date().getTime() / 1000,
-    };
-  } else {
-    tempCoupon.value = {...item};
+    defaultValue.due_date = Math.floor(new Date().getTime() / 1000);
+    tempCoupon.value = { ...defaultValue };
+
+  } else if (item) {
+    tempCoupon.value = { ...item };
   }
-  couponModal.value.showModal();
+  if (couponModal.value) {
+    couponModal.value.showModal();
+
+  }
 }
-function openDelCouponModal(item) {
-  tempCoupon.value = {...item};
+function openDelCouponModal(item: Coupon) {
+  tempCoupon.value = { ...item };
   const delComponent = delModal;
-  delComponent.value.showModal();
+  if (delComponent.value) {
+    delComponent.value.showModal();
+  }
+
 }
 function getCoupons() {
   const url = `${adminCouponsApi}`;
-  fetchAct.get(url).then((response) => {
+  fetchAct.get(url).then((response: any) => {
     if (response.success) {
       coupons.value = response.coupons;
     }
   })
 }
-function updateCoupon(tempCoupon) {
+function updateCoupon(tempCoupon: Coupon) {
   if (isNewRef.value) {
     const url = `${adminCouponApi}`;
-    fetchAct.post(url, {data: tempCoupon},  {msgTitle:"新增優惠券"}).then(() => {
+    fetchAct.post(url, { data: tempCoupon }, { msgTitle: "新增優惠券" }).then(() => {
 
       getCoupons();
-      couponModal.value.hideModal();
+      if (couponModal.value) {
+        couponModal.value.hideModal();
+
+      }
     });
   } else {
     const url = `${adminCouponApi}/${tempCoupon.id}`;
-    fetchAct.put(url, {data: tempCoupon},  {msgTitle:"修改優惠券"}).then(() => {
+    fetchAct.put(url, { data: tempCoupon }, { msgTitle: "修改優惠券" }).then(() => {
 
       getCoupons();
-      couponModal.value.hideModal();
+      if (couponModal.value) {
+        couponModal.value.hideModal();
+
+      }
     });
   }
 }
 function delCoupon() {
   const url = `${adminCouponApi}/${tempCoupon.value.id}`;
-  fetchAct.delete(url, {msgTitle: "刪除優惠券"}).then(() => {
+  fetchAct.delete(url, { msgTitle: "刪除優惠券" }).then(() => {
     const delComponent = delModal;
-    delComponent.value.hideModal();
+    if (delComponent.value) {
+      delComponent.value.hideModal();
+    }
+
     getCoupons();
   });
 }

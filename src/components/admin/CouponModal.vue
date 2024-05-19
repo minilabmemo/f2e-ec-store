@@ -49,14 +49,7 @@
 import { ref, watch, type Ref } from 'vue';
 import { useModal } from '@/composables/useModal';
 defineEmits(['update-coupon']);
-
-interface Coupon {
-  due_date: number;
-  title: string;
-  code: string;
-  percent: number;
-  is_enabled: boolean;
-}
+import type { Coupon } from '@/utils/type';
 
 const props = defineProps<{
   coupon: Coupon;
@@ -69,7 +62,7 @@ defineExpose({
   showModal, hideModal
 });
 
-const tempCoupon: Ref<Coupon> = ref({ due_date: 0, title: '', code: '', percent: 0, is_enabled: false });
+const tempCoupon: Ref<Coupon> = ref({ id: '', due_date: 0, title: '', code: '', percent: 0, is_enabled: 0 });
 const due_date = ref("");
 
 watch(
