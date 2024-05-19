@@ -57,20 +57,42 @@
 
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ProductModal from "@/components/admin/EditProductModal.vue";
 import DelModal from "@/components/DelModal.vue";
-import {adminProductApi} from '@/utils/config/path'
+import { adminProductApi } from '@/utils/config/path'
 import Pagination from '@/components/PaginationAct.vue';
-import {ref} from 'vue'
+import { ref, type Ref } from 'vue'
 import fetchAct from '@/utils/methods/fetchAct';
 import statusStore from '@/stores/statusStore';
+import type { Product } from '@/utils/type';
+
 const status = statusStore();
-const delModal = ref(null)
-const productModal = ref(null)
-const products = ref([])
-const pagination = ref({})
-const tempProduct = ref({})
+
+const delModal = ref<InstanceType<typeof DelModal> | null>(null);
+
+const productModal = ref<InstanceType<typeof ProductModal> | null>(null);
+
+const products: Ref<Product[]> = ref([])
+const pagination = ref({
+  total_pages: 0,
+  current_page: 0,
+  has_pre: false,
+  has_next: false,
+})
+
+let defaultValue = {
+  id: '',
+  imageUrl: '',
+  title: '',
+  unit: '',
+  price: 0,
+  origin_price: 0,
+  num: 0,
+  category: '',
+  subcategory: '',
+}
+const tempProduct: Ref<Product> = ref(defaultValue)
 const isNewRef = ref(false)
 const currentPageRef = ref(1)
 
@@ -78,7 +100,7 @@ function getProducts(currentPage = 1) {
   currentPageRef.value = currentPage;
 
   const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${currentPage}`
-  fetchAct.get(url).then((response) => {
+  fetchAct.get(url).then((response: any) => {
     if (response.success) {
       products.value = response.products;
       pagination.value = response.pagination;
@@ -87,24 +109,30 @@ function getProducts(currentPage = 1) {
 
   })
 }
-function openModal(isNew, item) {
+function openModal(isNew: boolean, item?: Product) {
 
   if (isNew) {
-    tempProduct.value = {};
-  } else {
-    tempProduct.value = {...item};
+    tempProduct.value = defaultValue;
+  } else if (item) {
+    tempProduct.value = { ...item };
   }
   isNewRef.value = isNew;
   const productModalVal = productModal.value;
-  productModalVal.showModal();
-}
-function openDelModal(item) {
+  if (productModalVal) {
+    productModalVal.showModal();
 
-  tempProduct.value = {...item};
-  const delModalVal = delModal.value;
-  delModalVal.showModal();
+  }
 }
-function updateProduct(item) {
+function openDelModal(item: Product) {
+
+  tempProduct.value = { ...item };
+  const delModalVal = delModal.value;
+  if (delModalVal) {
+    delModalVal.showModal();
+
+  }
+}
+function updateProduct(item: Product) {
 
   tempProduct.value = item;
   let api = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/product`;
@@ -114,8 +142,10 @@ function updateProduct(item) {
     httpMethod = 'put';
   }
   const productComponent = productModal.value;
-  fetchAct[httpMethod](api, {data: tempProduct.value}, {msgTitle: "更新產品"}).then(() => {
-    productComponent.hideModal();
+  fetchAct[httpMethod](api, { data: tempProduct.value }, { msgTitle: "更新產品" }).then(() => {
+    if (productComponent) {
+      productComponent.hideModal();
+    }
     getProducts(currentPageRef.value);
   });
 
@@ -123,9 +153,12 @@ function updateProduct(item) {
 function deleteProduct() {
 
   let api = `${adminProductApi}/${tempProduct.value.id}`;
-  fetchAct.delete(api, {msgTitle: "刪除產品"}).then(() => {
+  fetchAct.delete(api, { msgTitle: "刪除產品" }).then(() => {
     const delComponent = delModal.value;
-    delComponent.hideModal();
+    if (delComponent) {
+      delComponent.hideModal();
+
+    }
     getProducts(currentPageRef.value);
   });
 

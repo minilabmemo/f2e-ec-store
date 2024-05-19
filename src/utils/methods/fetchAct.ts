@@ -122,7 +122,7 @@ class FetchAct {
 
     return new Promise((resolve) => {
       FetchAct.setLoading(true, opts);
-
+      axios['post'](url).then();
       axios
         .delete(url)
         .then((response) => {
@@ -142,6 +142,7 @@ class FetchAct {
         });
     });
   }
+  [key: string]: any;
 }
 
 export default new FetchAct();
