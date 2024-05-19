@@ -40,7 +40,7 @@
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">檢視</button>
+              <button class="btn btn-outline-primary btn-sm" @click="openModal(item)">檢視</button>
               <button class="btn btn-outline-danger btn-sm" @click="openDelOrderModal(item)">刪除</button>
             </div>
           </td>
@@ -48,26 +48,36 @@
       </template>
     </tbody>
   </table>
-  <OrderModal :order="tempOrder" ref="orderModal" />
-  <DelModal :item="tempOrder" ref="delModal" @del-item="delOrder" />
+  <OrderModal :order="orderForModal" ref="orderModal" />
+  <DelModal :item="{ title: orderForModal.id }" ref="delModal" @del-item="delOrder" />
   <Pagination :pages="pagination" @change-page-num="getOrders" />
 </template>
 
-<script setup>
+<script setup lang="ts">
 import DelModal from '@/components/DelModal.vue';
 import OrderModal from '@/components/OrderModal.vue';
 import Pagination from '@/components/PaginationAct.vue';
-import {adminOrderApi, adminOrdersApi} from '@/utils/config/path'
+import { adminOrderApi, adminOrdersApi } from '@/utils/config/path'
 import statusStore from '@/stores/statusStore';
 import fetchAct from '@/utils/methods/fetchAct';
-import {ref} from 'vue'
+import { computed, ref, type Ref } from 'vue'
+import type { Order } from '@/utils/type';
 const status = statusStore();
-const delModal = ref(null)
-const orderModal = ref(null)
-const pagination = ref({})
-const tempOrder = ref({})
 
-const orders = ref({})
+const delModal = ref<InstanceType<typeof DelModal> | null>(null);
+const orderModal = ref<InstanceType<typeof OrderModal> | null>(null);
+
+const pagination = ref({
+  total_pages: 0,
+  current_page: 0,
+  has_pre: false,
+  has_next: false,
+})
+
+const tempOrder: Ref<Partial<Order>> = ref({})
+const orderForModal = computed(() => tempOrder.value as Order);
+
+const orders: Ref<Order[]> = ref([])
 const currentPageRef = ref(1)
 
 const isNewRef = ref(false)
@@ -75,39 +85,48 @@ const isNewRef = ref(false)
 function getOrders(currentPage = 1) {
   currentPageRef.value = currentPage;
   const url = `${adminOrdersApi}?page=${currentPage}`;
-  fetchAct.get(url).then((response) => {
+  fetchAct.get(url).then((response: any) => {
     if (response.success) {
       orders.value = response.orders;
       pagination.value = response.pagination;
     }
   })
 }
-function openModal(isNew, item) {
-  tempOrder.value = {...item};
+function openModal(item: Order) {
+  tempOrder.value = { ...item };
   isNewRef.value = false;
   const orderComponent = orderModal;
-  orderComponent.value.showModal();
+  if (orderComponent.value) {
+    orderComponent.value.showModal();
+
+  }
 }
-function openDelOrderModal(item) {
-  tempOrder.value = {...item};
+function openDelOrderModal(item: Order) {
+  tempOrder.value = { ...item };
   const delComponent = delModal;
-  delComponent.value.showModal();
+  if (delComponent.value) {
+    delComponent.value.showModal();
+  }
+
 }
-function updatePaid(item) {
+function updatePaid(item: Order) {
   const api = `${adminOrderApi}/${item.id}`;
   const paid = {
     is_paid: item.is_paid,
   };
-  fetchAct.put(api, {data: paid}, {msgTitle: "更新付款狀態"}).then(() => {
+  fetchAct.put(api, { data: paid }, { msgTitle: "更新付款狀態" }).then(() => {
     getOrders(currentPageRef.value);
 
   });
 }
 function delOrder() {
   const url = `${adminOrderApi}/${tempOrder.value.id}`;
-  fetchAct.delete(url, {msgTitle: "刪除訂單"}).then(() => {
+  fetchAct.delete(url, { msgTitle: "刪除訂單" }).then(() => {
     const delComponent = delModal;
-    delComponent.value.hideModal();
+    if (delComponent.value) {
+      delComponent.value.hideModal();
+
+    }
     getOrders(currentPageRef.value);
   });
 }
