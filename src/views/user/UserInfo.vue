@@ -48,10 +48,10 @@
   </div>
 </template>
 
-<script setup>
-import {ref} from 'vue'
-import {memberStorage} from '@/utils/methods/memberStorage'
-const {saveMemberData, getMemberData} = memberStorage()
+<script setup lang="ts">
+import { ref } from 'vue'
+import { memberStorage } from '@/utils/methods/memberStorage'
+const { saveMemberData, getMemberData } = memberStorage()
 
 const memberData = getMemberData()
 
@@ -69,7 +69,7 @@ const formData = ref(
     }
 )
 
-function isPhone(value) {
+function isPhone(value: string) {
   const phoneNumber = /^(09)[0-9]{8}$/
   return phoneNumber.test(value) ? true : '請填寫台灣手機號碼，以 09 開頭加上 8 位數字之格式。'
 }

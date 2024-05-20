@@ -71,20 +71,20 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import CartFlowItems from '@/components/user/CartFlowItems.vue'
 import CartFlowOrderLoc from '@/components/user/CartFlowOrderLoc.vue'
 import CartFlowOrderSuccess from '@/components/user/CartFlowOrderSuccess.vue'
-import {useCartStore} from '@/stores/cartStore'
-import {storeToRefs} from 'pinia'
-import {ref} from 'vue'
-import {useDeviceSize} from '@/composables/useDeviceSize'
+import { useCartStore } from '@/stores/cartStore'
+import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
+import { useDeviceSize } from '@/composables/useDeviceSize'
 import statusStore from '@/stores/statusStore'
-const {isExtraSmallDevice} = useDeviceSize()
+const { isExtraSmallDevice } = useDeviceSize()
 const cartStore = useCartStore()
 
 const status = statusStore()
-const {cart} = storeToRefs(cartStore)
+const { cart } = storeToRefs(cartStore)
 
 const orderId = ref('')
 const stepRecord = ref(0)
@@ -92,7 +92,7 @@ const checkout = ref(false)
 
 let activeTab = ref(1)
 
-function setActiveTab(index) {
+function setActiveTab(index: number) {
   if (!checkout.value) {
     activeTab.value = index
   }
@@ -109,9 +109,9 @@ function goPrevTab() {
   setActiveTab(prev)
 }
 
-function updateOrderID(orderID) {
+function updateOrderID(orderID: string) {
   orderId.value = orderID
   goNextTab()
   checkout.value = true
 }
-</script>
+</script>: number: string

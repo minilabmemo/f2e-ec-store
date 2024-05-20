@@ -31,14 +31,12 @@
 import { ref, computed } from 'vue'
 import { useModal } from '@/composables/useModal'
 import { useRouter } from 'vue-router'
+import type { Order } from '@/utils/type';
+
 const router = useRouter();
 
 const props = defineProps<{
-  item: {
-    total: number;
-    products: Record<string, { qty: number }>;
-
-  }
+  item: Order
 }>()
 
 const modal = ref(null)

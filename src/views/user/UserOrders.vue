@@ -16,7 +16,7 @@
           <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
             <td>
               <div> {{ $filters.date(item.create_at) }}</div>
-              <a href="#" class=" " @click.prevent="openModal(false, item)"> <i class="bi bi-search me-2"></i>
+              <a href="#" class=" " @click.prevent="openModal(item)"> <i class="bi bi-search me-2"></i>
                 <small>查看訂單</small> </a>
 
             </td>
@@ -60,7 +60,7 @@
         <template v-for="(item) in orders" :key="item.id">
 
           <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
-            <td> <a href="#" class=" " @click.prevent="openModal(false, item)"> <i class="bi bi-search me-2"></i>
+            <td> <a href="#" class=" " @click.prevent="openModal(item)"> <i class="bi bi-search me-2"></i>
                 <small>查看訂單內容</small> </a> </td>
             <td>{{ $filters.date(item.create_at) }}</td>
             <td><span v-text="item.user.email" v-if="item.user" class="d-inline-block text-truncate"
@@ -95,51 +95,61 @@
       </tbody>
     </table>
 
-    <OrderModal :order="tempOrder" ref="orderModal" />
-    <CheckoutConfirm :item="tempOrder" ref="checkoutConfirm" @pay-order="payOrder" />
+    <OrderModal :order="orderForModal" ref="orderModal" />
+    <CheckoutConfirm :item="orderForModal" ref="checkoutConfirm" @pay-order="payOrder" />
     <PaginationAct :pages="pagination" @change-page-num="getOrders" />
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 import OrderModal from '@/components/OrderModal.vue';
 import PaginationAct from '@/components/PaginationAct.vue';
-import {useOrderStore} from '@/stores/orderStore'
-import {ref} from 'vue'
-import {storeToRefs} from 'pinia';
+import { useOrderStore } from '@/stores/orderStore'
+import { computed, ref, type Ref } from 'vue'
+import { storeToRefs } from 'pinia';
 import statusStore from '@/stores/statusStore'
+import type { Order } from '@/utils/type';
 
-const tempOrder = ref({})
+const tempOrder: Ref<Partial<Order>> = ref({})
+const orderForModal = computed(() => tempOrder.value as Order);
+
 const orderStore = useOrderStore()
-const {orders, pagination} = storeToRefs(orderStore);
-const {getOrders, payOrderByID} = orderStore;
+const { orders, pagination } = storeToRefs(orderStore);
+const { getOrders, payOrderByID } = orderStore;
 getOrders()
-const orderModal = ref(null);
-const checkoutConfirm = ref(null);
+
+const orderModal = ref<InstanceType<typeof OrderModal> | null>(null);
+const checkoutConfirm = ref<InstanceType<typeof CheckoutConfirm> | null>(null);
+
 const status = statusStore()
-function openModal(isNew, item) {
-  tempOrder.value = {...item};
-  isNew = false;
+function openModal(item: Order) {
+  tempOrder.value = { ...item };
+
   const orderComponent = orderModal.value;
   if (orderComponent) {
     orderComponent.showModal();
   }
 }
 let orderId = "";
-function confirmPay(item) {
-  tempOrder.value = {...item};
+function confirmPay(item: Order) {
+  tempOrder.value = { ...item };
   orderId = item.id;
   const confirmModal = checkoutConfirm.value;
-  confirmModal.showModal();
+  if (confirmModal) {
+    confirmModal.showModal();
+
+  }
 }
 
 function payOrder() {
   const confirmModal = checkoutConfirm.value;
-  confirmModal.hideModal();
+  if (confirmModal) {
+    confirmModal.hideModal();
+
+  }
   if (orderId) {
     payOrderByID(orderId)
-
   }
 }
 </script>
