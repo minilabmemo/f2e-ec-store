@@ -59,7 +59,7 @@
         </div>
         <div class="d-flex fs-6 flex-column gap-2 my-3">
           <div class="d-flex justify-content-between ">
-            <div class=" ">總計</div>
+            <div>總計</div>
 
             <div class="text-end">${{ $filters.currency(cart.total) }}</div>
           </div>

@@ -39,7 +39,7 @@
           <div class="d-flex flex-wrap align-items-baseline  ">
             <input type="checkbox" id="importDataCheckbox" @change="importDataCheckbox()" class="me-1">
             <label for="importDataCheckbox"> 從會員資料中匯入</label>
-            <div>（<router-link class=" " to="/user/info">點此更新會員資料</router-link>）</div>
+            <div>（<router-link to="/user/info">點此更新會員資料</router-link>）</div>
           </div>
           <div class="mb-3">
             <label for="email" class="form-label"><span class="text-primary fw-bold fs-3 ">*</span>Email</label>

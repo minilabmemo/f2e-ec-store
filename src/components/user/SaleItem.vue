@@ -10,7 +10,7 @@
         </div>
 
         <div class="text-center d-flex flex-column    justify-content-between   h-100">
-          <h4 style="" class=" "> {{ item.title }}</h4>
+          <h4 style=""> {{ item.title }}</h4>
           <div class="d-flex gap-2 justify-content-center  align-items-baseline mb-3 mt-auto ">
 
             <span class="text-500" v-show="item.price !== item.origin_price"> <del>${{

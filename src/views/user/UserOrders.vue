@@ -16,12 +16,12 @@
           <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
             <td>
               <div> {{ $filters.date(item.create_at) }}</div>
-              <a href="#" class=" " @click.prevent="openModal(item)"> <i class="bi bi-search me-2"></i>
+              <a href="#" @click.prevent="openModal(item)"> <i class="bi bi-search me-2"></i>
                 <small>查看訂單</small> </a>
 
             </td>
             <td>
-              <div class=" ">${{ $filters.currency(item.total) }}</div>
+              <div>${{ $filters.currency(item.total) }}</div>
             </td>
             <td>
 
@@ -60,7 +60,7 @@
         <template v-for="(item) in orders" :key="item.id">
 
           <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
-            <td> <a href="#" class=" " @click.prevent="openModal(item)"> <i class="bi bi-search me-2"></i>
+            <td> <a href="#" @click.prevent="openModal(item)"> <i class="bi bi-search me-2"></i>
                 <small>查看訂單內容</small> </a> </td>
             <td>{{ $filters.date(item.create_at) }}</td>
             <td><span v-text="item.user.email" v-if="item.user" class="d-inline-block text-truncate"
@@ -68,15 +68,25 @@
 
             </td>
             <td>
-              <ul class="list-unstyled">
-                <li v-for="(product) in item.products" :key="product.product.id">
-                  <small> {{ product.product.title }} 數量：{{ product.qty }}
-                    {{ product.product.unit }}</small>
+              <ul class="list-unstyled ">
+                <template v-for="(product, key, index) in item.products" :key="product.product.id">
+                  <li v-if="index < 3">
+                    <small> {{ product.product.title }} |{{ index }}數量：{{ product.qty }}
+                      {{ product.product.unit }}</small>
 
+                  </li>
+
+                </template>
+
+                <li v-if="Object.keys(item.products).length > 3">
+
+                  <a href="#" @click.prevent="openModal(item)" class="nav-link ">
+                    <small> ...More</small> </a>
                 </li>
               </ul>
             </td>
-            <td class="text-right">{{ $filters.currency(item.total) }}</td>
+            <td class=" text-right">{{ $filters.currency(item.total) }}
+            </td>
             <td>
 
               <div v-if="item.is_paid" class="d-flex justify-content-start align-items-center  gap-1 flex-grow-1 ">
