@@ -23,28 +23,24 @@
 </template>
 
 <script setup lang="ts">
-import { loginApi } from "@/utils/config/path"
-import { useRouter } from 'vue-router'
+import { loginApi } from '@/utils/config/path';
+import { useRouter } from 'vue-router';
 import fetchAct from '@/utils/methods/fetchAct';
-import { ref } from 'vue'
+import { ref } from 'vue';
 const user = ref({
   username: null,
-  password: null,
-})
-const router = useRouter()
+  password: null
+});
+const router = useRouter();
 function login() {
-
-  const url = loginApi
+  const url = loginApi;
   fetchAct.post(url, user.value).then((response: any) => {
     if (response.success) {
       const { token, expired } = response;
       document.cookie = `defToken=${token}; expires=${new Date(expired)}`;
 
-      router.push('/admin/dashboard/products')
+      router.push('/admin/dashboard/products');
     }
-
-  })
-
+  });
 }
-
 </script>

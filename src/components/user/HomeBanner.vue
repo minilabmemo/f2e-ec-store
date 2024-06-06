@@ -31,19 +31,19 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import Carousel from 'bootstrap/js/dist/carousel.js'
+import { onMounted } from 'vue';
+import Carousel from 'bootstrap/js/dist/carousel.js';
 
 onMounted(() => {
-  const bannersCarouselElement = document.querySelector('#bannersCarousel')
+  const bannersCarouselElement = document.querySelector('#bannersCarousel');
   if (bannersCarouselElement) {
     new Carousel(bannersCarouselElement, {
       interval: 2000,
       touch: true,
       ride: 'carousel'
-    })
+    });
   } else {
-    console.error('Element with ID "bannersCarousel" not found.')
+    console.error('Element with ID "bannersCarousel" not found.');
   }
-})
+});
 </script>

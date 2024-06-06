@@ -12,16 +12,17 @@
       </tr>
     </thead>
     <tbody>
-      <template v-for="(item) in orders" :key="item.id">
+      <template v-for="item in orders" :key="item.id">
         <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
           <td>{{ $filters.date(item.create_at) }}</td>
-          <td> <a :href="`mailto:${item.user.email}}`">
-              <span class="d-inline-block text-truncate" style="max-width: 12.5rem;">{{
-                item.user.email }}</span>
-            </a></td>
+          <td>
+            <a :href="`mailto:${item.user.email}}`">
+              <span class="d-inline-block text-truncate" style="max-width: 12.5rem">{{ item.user.email }}</span>
+            </a>
+          </td>
           <td>
             <ul class="list-unstyled">
-              <li v-for="(product) in item.products" :key="product.product.id">
+              <li v-for="product in item.products" :key="product.product.id">
                 {{ product.product.title }} 數量：{{ product.qty }}
                 {{ product.product.unit }}
               </li>
@@ -57,10 +58,10 @@
 import DelModal from '@/components/DelModal.vue';
 import OrderModal from '@/components/OrderModal.vue';
 import Pagination from '@/components/PaginationAct.vue';
-import { adminOrderApi, adminOrdersApi } from '@/utils/config/path'
+import { adminOrderApi, adminOrdersApi } from '@/utils/config/path';
 import statusStore from '@/stores/statusStore';
 import fetchAct from '@/utils/methods/fetchAct';
-import { computed, ref, type Ref } from 'vue'
+import { computed, ref, type Ref } from 'vue';
 import type { Order } from '@/utils/type';
 const status = statusStore();
 
@@ -71,16 +72,16 @@ const pagination = ref({
   total_pages: 0,
   current_page: 0,
   has_pre: false,
-  has_next: false,
-})
+  has_next: false
+});
 
-const tempOrder: Ref<Partial<Order>> = ref({})
+const tempOrder: Ref<Partial<Order>> = ref({});
 const orderForModal = computed(() => tempOrder.value as Order);
 
-const orders: Ref<Order[]> = ref([])
-const currentPageRef = ref(1)
+const orders: Ref<Order[]> = ref([]);
+const currentPageRef = ref(1);
 
-const isNewRef = ref(false)
+const isNewRef = ref(false);
 
 function getOrders(currentPage = 1) {
   currentPageRef.value = currentPage;
@@ -90,7 +91,7 @@ function getOrders(currentPage = 1) {
       orders.value = response.orders;
       pagination.value = response.pagination;
     }
-  })
+  });
 }
 function openModal(item: Order) {
   tempOrder.value = { ...item };
@@ -98,7 +99,6 @@ function openModal(item: Order) {
   const orderComponent = orderModal;
   if (orderComponent.value) {
     orderComponent.value.showModal();
-
   }
 }
 function openDelOrderModal(item: Order) {
@@ -107,29 +107,25 @@ function openDelOrderModal(item: Order) {
   if (delComponent.value) {
     delComponent.value.showModal();
   }
-
 }
 function updatePaid(item: Order) {
   const api = `${adminOrderApi}/${item.id}`;
   const paid = {
-    is_paid: item.is_paid,
+    is_paid: item.is_paid
   };
-  fetchAct.put(api, { data: paid }, { msgTitle: "更新付款狀態" }).then(() => {
+  fetchAct.put(api, { data: paid }, { msgTitle: '更新付款狀態' }).then(() => {
     getOrders(currentPageRef.value);
-
   });
 }
 function delOrder() {
   const url = `${adminOrderApi}/${tempOrder.value.id}`;
-  fetchAct.delete(url, { msgTitle: "刪除訂單" }).then(() => {
+  fetchAct.delete(url, { msgTitle: '刪除訂單' }).then(() => {
     const delComponent = delModal;
     if (delComponent.value) {
       delComponent.value.hideModal();
-
     }
     getOrders(currentPageRef.value);
   });
 }
 getOrders();
-
 </script>

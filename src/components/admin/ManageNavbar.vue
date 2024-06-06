@@ -19,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { logoutApi } from '@/utils/config/path'
+import { logoutApi } from '@/utils/config/path';
 import fetchAct from '@/utils/methods/fetchAct';
-import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router';
 const router = useRouter();
 function logout() {
   const url = logoutApi;
@@ -31,5 +31,4 @@ function logout() {
     }
   });
 }
-
 </script>

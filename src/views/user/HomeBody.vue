@@ -30,8 +30,8 @@
       </div>
       <div class="d-flex justify-content-center gap-5">
         <button class="btn btn-black explore-btn">
-          <router-link :to="`/style`" class="nav-link">
-            Styles Book<img src="@/assets/img/icons/next_arrow.svg" alt="Next Arrow"></router-link>
+          <router-link :to="`/style`" class="nav-link"> Styles Book<img src="@/assets/img/icons/next_arrow.svg"
+              alt="Next Arrow"></router-link>
         </button>
       </div>
     </div>
@@ -40,19 +40,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import HomeBanner from '@/components/user/HomeBanner.vue'
-import HomeItems from '@/components/user/HomeItems.vue'
-import HomeNews from '@/components/user/HomeNews.vue'
-import categoriesConfig from '@/utils/config/categories'
-import { storeToRefs } from 'pinia'
-import { useProductStore } from '@/stores/productStore'
+import { ref } from 'vue';
+import HomeBanner from '@/components/user/HomeBanner.vue';
+import HomeItems from '@/components/user/HomeItems.vue';
+import HomeNews from '@/components/user/HomeNews.vue';
+import categoriesConfig from '@/utils/config/categories';
+import { storeToRefs } from 'pinia';
+import { useProductStore } from '@/stores/productStore';
 
-const categories = ref(categoriesConfig)
-const productStore = useProductStore()
-const { getProducts } = productStore
-const { products } = storeToRefs(productStore)
-getProducts()
+const categories = ref(categoriesConfig);
+const productStore = useProductStore();
+const { getProducts } = productStore;
+const { products } = storeToRefs(productStore);
+getProducts();
 </script>
 
 <style scoped>

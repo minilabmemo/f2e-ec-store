@@ -38,10 +38,7 @@
           您可以登入您的帳號，網站右上角的選單可以點擊會員，在訂單頁面查看訂單狀態，或者聯繫我們的客服團隊查詢。
         </p>
         <p><strong>問題 2：</strong> 退換貨政策是什麼？</p>
-        <p>
-          <strong>解答：</strong> 我們提供 30
-          天無憂退換貨服務，請參閱我們的退換貨政策頁面獲取更多信息，或者聯繫我們的客服團隊查詢。
-        </p>
+        <p><strong>解答：</strong> 我們提供 30 天無憂退換貨服務，請參閱我們的退換貨政策頁面獲取更多信息，或者聯繫我們的客服團隊查詢。</p>
       </div>
     </div>
     <img src="@/assets/img/icons/hr.svg" alt="hr" class="img-fluid my-5">
@@ -91,9 +88,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import sectionIds from '@/utils/config/sectionIds'
-const sectionIdsRef = ref(sectionIds)
+import { ref } from 'vue';
+import sectionIds from '@/utils/config/sectionIds';
+const sectionIdsRef = ref(sectionIds);
 </script>
 
 <style scoped>

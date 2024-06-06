@@ -10,27 +10,26 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
 
+<script setup lang="ts">
 import Toast from 'bootstrap/js/dist/toast';
+import { onMounted, ref, type Ref } from 'vue';
 
 defineProps<{
   msg: {
     title: string;
     style: string;
     content: string;
-  }
-}>()
-import { onMounted, ref, type Ref } from 'vue'
+  };
+}>();
 const toastRef: Ref<HTMLElement | null> = ref(null);
 onMounted(() => {
   if (toastRef.value) {
     const toastEl = toastRef.value;
     const toast = new Toast(toastEl, {
-      delay: 2000,
+      delay: 2000
     });
     toast.show();
   }
-})
-
+});
 </script>

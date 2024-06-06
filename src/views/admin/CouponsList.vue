@@ -2,9 +2,7 @@
   <div>
     <LoadingOverlay :active="status.isLoading" />
     <div class="text-end mt-4">
-      <button type="button" class="btn btn-primary" @click="openCouponModal(true)">
-        建立新的優惠券
-      </button>
+      <button type="button" class="btn btn-primary" @click="openCouponModal(true)">建立新的優惠券</button>
     </div>
     <table class="table mt-4">
       <thead>
@@ -18,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item) in coupons" :key="item.id">
+        <tr v-for="item in coupons" :key="item.id">
           <td>{{ item.title }}</td>
           <td>{{ item.code }}</td>
           <td>{{ item.percent }}%</td>
@@ -42,11 +40,10 @@
 </template>
 
 <script setup lang="ts">
-
 import CouponModal from '@/components/admin/CouponModal.vue';
 import DelModal from '@/components/DelModal.vue';
-import { adminCouponsApi, adminCouponApi } from '@/utils/config/path'
-import { ref, type Ref } from 'vue'
+import { adminCouponsApi, adminCouponApi } from '@/utils/config/path';
+import { ref, type Ref } from 'vue';
 import fetchAct from '@/utils/methods/fetchAct';
 import statusStore from '@/stores/statusStore';
 import type { Coupon } from '@/utils/type';
@@ -54,7 +51,7 @@ import type { Coupon } from '@/utils/type';
 const status = statusStore();
 const delModal = ref<InstanceType<typeof DelModal> | null>(null);
 const couponModal = ref<InstanceType<typeof CouponModal> | null>(null);
-const coupons: Ref<Coupon[]> = ref([])
+const coupons: Ref<Coupon[]> = ref([]);
 let defaultValue = {
   id: '',
   title: '',
@@ -62,23 +59,21 @@ let defaultValue = {
   percent: 10,
   code: '',
   due_date: 0
-}
+};
 
-const tempCoupon: Ref<Coupon> = ref(defaultValue)
-const isNewRef = ref(false)
+const tempCoupon: Ref<Coupon> = ref(defaultValue);
+const isNewRef = ref(false);
 
 function openCouponModal(isNew: boolean, item?: Coupon) {
   isNewRef.value = isNew;
   if (isNew) {
     defaultValue.due_date = Math.floor(new Date().getTime() / 1000);
     tempCoupon.value = { ...defaultValue };
-
   } else if (item) {
     tempCoupon.value = { ...item };
   }
   if (couponModal.value) {
     couponModal.value.showModal();
-
   }
 }
 function openDelCouponModal(item: Coupon) {
@@ -87,7 +82,6 @@ function openDelCouponModal(item: Coupon) {
   if (delComponent.value) {
     delComponent.value.showModal();
   }
-
 }
 function getCoupons() {
   const url = `${adminCouponsApi}`;
@@ -95,34 +89,30 @@ function getCoupons() {
     if (response.success) {
       coupons.value = response.coupons;
     }
-  })
+  });
 }
 function updateCoupon(tempCoupon: Coupon) {
   if (isNewRef.value) {
     const url = `${adminCouponApi}`;
-    fetchAct.post(url, { data: tempCoupon }, { msgTitle: "新增優惠券" }).then(() => {
-
+    fetchAct.post(url, { data: tempCoupon }, { msgTitle: '新增優惠券' }).then(() => {
       getCoupons();
       if (couponModal.value) {
         couponModal.value.hideModal();
-
       }
     });
   } else {
     const url = `${adminCouponApi}/${tempCoupon.id}`;
-    fetchAct.put(url, { data: tempCoupon }, { msgTitle: "修改優惠券" }).then(() => {
-
+    fetchAct.put(url, { data: tempCoupon }, { msgTitle: '修改優惠券' }).then(() => {
       getCoupons();
       if (couponModal.value) {
         couponModal.value.hideModal();
-
       }
     });
   }
 }
 function delCoupon() {
   const url = `${adminCouponApi}/${tempCoupon.value.id}`;
-  fetchAct.delete(url, { msgTitle: "刪除優惠券" }).then(() => {
+  fetchAct.delete(url, { msgTitle: '刪除優惠券' }).then(() => {
     const delComponent = delModal;
     if (delComponent.value) {
       delComponent.value.hideModal();
@@ -133,5 +123,4 @@ function delCoupon() {
 }
 
 getCoupons();
-
 </script>

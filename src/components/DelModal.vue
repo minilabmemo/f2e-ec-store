@@ -13,10 +13,8 @@
           是否刪除 <strong class="text-danger">{{ item.title }}</strong> (刪除後將無法恢復)。
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消
-          </button>
-          <button type="button" class="btn btn-danger" @click="$emit('del-item')">確認刪除
-          </button>
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-danger" @click="$emit('del-item')">確認刪除</button>
         </div>
       </div>
     </div>
@@ -24,19 +22,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, } from 'vue'
-import { useModal } from '@/composables/useModal'
+import { ref } from 'vue';
+import { useModal } from '@/composables/useModal';
 
 defineProps<{
   item: {
     title: string;
-  }
-}>()
+  };
+}>();
 
-const modal = ref(null)
+const modal = ref(null);
 
 const { showModal, hideModal } = useModal(modal);
 defineExpose({
-  showModal, hideModal
-})
+  showModal,
+  hideModal
+});
 </script>

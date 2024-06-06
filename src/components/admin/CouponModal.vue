@@ -29,15 +29,14 @@
             <div class="form-check">
               <input class="form-check-input" type="checkbox" :true-value="1" :false-value="0"
                 v-model="tempCoupon.is_enabled" id="is_enabled">
-              <label class="form-check-label" for="is_enabled">
-                是否啟用
-              </label>
+              <label class="form-check-label" for="is_enabled"> 是否啟用 </label>
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" @click="$emit('update-coupon', tempCoupon)">更新優惠券
+          <button type="button" class="btn btn-primary" @click="$emit('update-coupon', tempCoupon)">
+            更新優惠券
           </button>
         </div>
       </div>
@@ -59,11 +58,19 @@ const modal = ref(null);
 
 const { showModal, hideModal } = useModal(modal);
 defineExpose({
-  showModal, hideModal
+  showModal,
+  hideModal
 });
 
-const tempCoupon: Ref<Coupon> = ref({ id: '', due_date: 0, title: '', code: '', percent: 0, is_enabled: 0 });
-const due_date = ref("");
+const tempCoupon: Ref<Coupon> = ref({
+  id: '',
+  due_date: 0,
+  title: '',
+  code: '',
+  percent: 0,
+  is_enabled: 0
+});
+const due_date = ref('');
 
 watch(
   () => props.coupon,
@@ -85,5 +92,4 @@ watch(
     }
   }
 );
-
 </script>

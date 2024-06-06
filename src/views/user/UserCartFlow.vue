@@ -42,9 +42,7 @@
                 <CartFlowItems :checkout="checkout" />
               </div>
               <div class="d-flex justify-content-center gap-2">
-                <button class="btn btn-primary text-white" type="button" @click="goNextTab">
-                  填寫訂單資訊
-                </button>
+                <button class="btn btn-primary text-white" type="button" @click="goNextTab">填寫訂單資訊</button>
               </div>
             </div>
             <div class="tab-pane fade" :class="{ show: activeTab === 2, active: activeTab === 2 }">
@@ -72,46 +70,46 @@
 </template>
 
 <script setup lang="ts">
-import CartFlowItems from '@/components/user/CartFlowItems.vue'
-import CartFlowOrderLoc from '@/components/user/CartFlowOrderLoc.vue'
-import CartFlowOrderSuccess from '@/components/user/CartFlowOrderSuccess.vue'
-import { useCartStore } from '@/stores/cartStore'
-import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
-import { useDeviceSize } from '@/composables/useDeviceSize'
-import statusStore from '@/stores/statusStore'
-const { isExtraSmallDevice } = useDeviceSize()
-const cartStore = useCartStore()
+import CartFlowItems from '@/components/user/CartFlowItems.vue';
+import CartFlowOrderLoc from '@/components/user/CartFlowOrderLoc.vue';
+import CartFlowOrderSuccess from '@/components/user/CartFlowOrderSuccess.vue';
+import { useCartStore } from '@/stores/cartStore';
+import { storeToRefs } from 'pinia';
+import { ref } from 'vue';
+import { useDeviceSize } from '@/composables/useDeviceSize';
+import statusStore from '@/stores/statusStore';
+const { isExtraSmallDevice } = useDeviceSize();
+const cartStore = useCartStore();
 
-const status = statusStore()
-const { cart } = storeToRefs(cartStore)
+const status = statusStore();
+const { cart } = storeToRefs(cartStore);
 
-const orderId = ref('')
-const stepRecord = ref(0)
-const checkout = ref(false)
+const orderId = ref('');
+const stepRecord = ref(0);
+const checkout = ref(false);
 
-let activeTab = ref(1)
+let activeTab = ref(1);
 
 function setActiveTab(index: number) {
   if (!checkout.value) {
-    activeTab.value = index
+    activeTab.value = index;
   }
 }
 
 function goNextTab() {
-  const next = activeTab.value + 1
-  stepRecord.value = next
-  setActiveTab(next)
+  const next = activeTab.value + 1;
+  stepRecord.value = next;
+  setActiveTab(next);
 }
 
 function goPrevTab() {
-  const prev = activeTab.value - 1
-  setActiveTab(prev)
+  const prev = activeTab.value - 1;
+  setActiveTab(prev);
 }
 
 function updateOrderID(orderID: string) {
-  orderId.value = orderID
-  goNextTab()
-  checkout.value = true
+  orderId.value = orderID;
+  goNextTab();
+  checkout.value = true;
 }
-</script>: number: string
+</script>

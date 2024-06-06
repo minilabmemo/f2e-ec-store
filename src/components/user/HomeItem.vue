@@ -1,8 +1,6 @@
 <template>
-
-  <div class="d-flex flex-column gap-3  home-item">
-
-    <div class="position-relative ">
+  <div class="d-flex flex-column gap-3 home-item">
+    <div class="position-relative">
       <router-link :to="`/product/all/all/id/${item.id}`" class="nav-link">
         <img :src="item.src" alt="clothes" class="flex-image">
       </router-link>
@@ -10,7 +8,6 @@
         <h1>coming</h1>
         <h1>soon</h1>
       </div>
-
     </div>
 
     <div>
@@ -26,15 +23,11 @@
           {{ item.title }}
         </router-link>
       </h4>
-
     </div>
-
   </div>
-
 </template>
 
 <script setup lang="ts">
-
 import statusStore from '@/stores/statusStore';
 const status = statusStore();
 
@@ -42,15 +35,14 @@ defineProps({
   filterErr: String,
   item: {
     type: Object,
-    default: () => ({ title: "no name" })
+    default: () => ({ title: 'no name' })
   }
 });
-
 </script>
 
 <style scoped>
 .home-item:hover {
-  opacity: .8
+  opacity: 0.8;
 }
 
 .photo-mix-text {
@@ -68,7 +60,7 @@ defineProps({
   }
 
   50% {
-    opacity: .2;
+    opacity: 0.2;
   }
 
   100% {

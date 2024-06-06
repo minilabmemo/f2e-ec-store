@@ -1,9 +1,8 @@
 <template>
   <LoadingOverlay :active="status.isLoading" />
   <div class="pt-5">
-
     <div class="text-end">
-      <button class="btn btn-primary " type="button" @click="openModal(true)"> 增加一個產品</button>
+      <button class="btn btn-primary" type="button" @click="openModal(true)">增加一個產品</button>
     </div>
     <table class="table mt-4">
       <thead>
@@ -18,15 +17,12 @@
         </tr>
       </thead>
       <tbody>
-
         <tr v-for="item in products" :key="item.id">
-
           <td>{{ item.category }}</td>
-          <td class="d-flex ">
-            <div style="flex:1"> <img style="width: 6.25rem;" :src="item.imageUrl" alt="clothes" class="flex-image">
+          <td class="d-flex">
+            <div style="flex: 1"><img style="width: 6.25rem" :src="item.imageUrl" alt="clothes" class="flex-image">
             </div>
-            <div style="flex:2"> {{ item.title }}</div>
-
+            <div style="flex: 2">{{ item.title }}</div>
           </td>
           <td class="text-right">
             {{ $filters.currency(item.num) }}
@@ -54,15 +50,14 @@
   <Pagination :pages="pagination" @change-page-num="getProducts" />
   <ProductModal ref="productModal" :product="tempProduct" @update-product="updateProduct" />
   <DelModal ref="delModal" :item="tempProduct" @del-item="deleteProduct" />
-
 </template>
 
 <script setup lang="ts">
-import ProductModal from "@/components/admin/EditProductModal.vue";
-import DelModal from "@/components/DelModal.vue";
-import { adminProductApi } from '@/utils/config/path'
+import ProductModal from '@/components/admin/EditProductModal.vue';
+import DelModal from '@/components/DelModal.vue';
+import { adminProductApi } from '@/utils/config/path';
 import Pagination from '@/components/PaginationAct.vue';
-import { ref, type Ref } from 'vue'
+import { ref, type Ref } from 'vue';
 import fetchAct from '@/utils/methods/fetchAct';
 import statusStore from '@/stores/statusStore';
 import type { Product } from '@/utils/type';
@@ -73,13 +68,13 @@ const delModal = ref<InstanceType<typeof DelModal> | null>(null);
 
 const productModal = ref<InstanceType<typeof ProductModal> | null>(null);
 
-const products: Ref<Product[]> = ref([])
+const products: Ref<Product[]> = ref([]);
 const pagination = ref({
   total_pages: 0,
   current_page: 0,
   has_pre: false,
-  has_next: false,
-})
+  has_next: false
+});
 
 let defaultValue = {
   id: '',
@@ -90,27 +85,24 @@ let defaultValue = {
   origin_price: 0,
   num: 0,
   category: '',
-  subcategory: '',
-}
-const tempProduct: Ref<Product> = ref(defaultValue)
-const isNewRef = ref(false)
-const currentPageRef = ref(1)
+  subcategory: ''
+};
+const tempProduct: Ref<Product> = ref(defaultValue);
+const isNewRef = ref(false);
+const currentPageRef = ref(1);
 
 function getProducts(currentPage = 1) {
   currentPageRef.value = currentPage;
 
-  const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${currentPage}`
+  const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${currentPage}`;
   fetchAct.get(url).then((response: any) => {
     if (response.success) {
       products.value = response.products;
       pagination.value = response.pagination;
-
     }
-
-  })
+  });
 }
 function openModal(isNew: boolean, item?: Product) {
-
   if (isNew) {
     tempProduct.value = defaultValue;
   } else if (item) {
@@ -120,20 +112,16 @@ function openModal(isNew: boolean, item?: Product) {
   const productModalVal = productModal.value;
   if (productModalVal) {
     productModalVal.showModal();
-
   }
 }
 function openDelModal(item: Product) {
-
   tempProduct.value = { ...item };
   const delModalVal = delModal.value;
   if (delModalVal) {
     delModalVal.showModal();
-
   }
 }
 function updateProduct(item: Product) {
-
   tempProduct.value = item;
   let api = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/product`;
   let httpMethod = 'post';
@@ -142,30 +130,25 @@ function updateProduct(item: Product) {
     httpMethod = 'put';
   }
   const productComponent = productModal.value;
-  fetchAct[httpMethod](api, { data: tempProduct.value }, { msgTitle: "更新產品" }).then(() => {
+  fetchAct[httpMethod](api, { data: tempProduct.value }, { msgTitle: '更新產品' }).then(() => {
     if (productComponent) {
       productComponent.hideModal();
     }
     getProducts(currentPageRef.value);
   });
-
 }
 function deleteProduct() {
-
   let api = `${adminProductApi}/${tempProduct.value.id}`;
-  fetchAct.delete(api, { msgTitle: "刪除產品" }).then(() => {
+  fetchAct.delete(api, { msgTitle: '刪除產品' }).then(() => {
     const delComponent = delModal.value;
     if (delComponent) {
       delComponent.hideModal();
-
     }
     getProducts(currentPageRef.value);
   });
-
 }
 
 getProducts();
-
 </script>
 
 <style lang="css" scoped>

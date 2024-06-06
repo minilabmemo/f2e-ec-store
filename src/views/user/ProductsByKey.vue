@@ -10,35 +10,35 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import SaleItem from '@/components/user/SaleItem.vue'
-import { useProductStore } from '@/stores/productStore'
-import { storeToRefs } from 'pinia'
-import { useRoute } from 'vue-router'
-import statusStore from '@/stores/statusStore'
+import { computed } from 'vue';
+import SaleItem from '@/components/user/SaleItem.vue';
+import { useProductStore } from '@/stores/productStore';
+import { storeToRefs } from 'pinia';
+import { useRoute } from 'vue-router';
+import statusStore from '@/stores/statusStore';
 
-const productStore = useProductStore()
-const { getProducts } = productStore
-const { products } = storeToRefs(productStore)
-getProducts()
+const productStore = useProductStore();
+const { getProducts } = productStore;
+const { products } = storeToRefs(productStore);
+getProducts();
 
-const status = statusStore()
+const status = statusStore();
 
-const route = useRoute()
+const route = useRoute();
 const filterItems = computed(() => {
-  let itemsBYSearch = []
-  let items = products.value ? products.value : []
+  let itemsBYSearch = [];
+  let items = products.value ? products.value : [];
   const keywordKey = route.params.keyword as string;
 
-  itemsBYSearch = items.filter((item) => !item.category.toString().includes('test'))
-  itemsBYSearch = items.filter((item) => item.title.toString().includes(keywordKey))
+  itemsBYSearch = items.filter((item) => !item.category.toString().includes('test'));
+  itemsBYSearch = items.filter((item) => item.title.toString().includes(keywordKey));
 
   if (itemsBYSearch.length !== 0) {
     return itemsBYSearch.map((item) => ({
       src: item.imageUrl,
       ...item
-    }))
+    }));
   }
-  return itemsBYSearch
-})
+  return itemsBYSearch;
+});
 </script>

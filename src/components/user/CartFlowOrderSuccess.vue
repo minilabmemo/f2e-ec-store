@@ -1,22 +1,19 @@
 <template>
   <div class="my-2 my-md-5 row justify-content-center" v-if="order">
-
     <div v-if="order.is_paid" class="text-success d-flex flex-column justify-content-center align-items-center mb-5">
-      <div class="fs-1"> <i class="bi bi-check-circle "></i></div>
+      <div class="fs-1"><i class="bi bi-check-circle"></i></div>
 
       <span> 付款完成</span>
-
     </div>
 
     <div v-else class="text-primary d-flex flex-column justify-content-center align-items-center mb-5">
-      <div class="fs-1"> <i class="bi bi-cart-check"></i></div>
+      <div class="fs-1"><i class="bi bi-cart-check"></i></div>
       <span> 已收到訂單，<b>付款完成</b>後會為您立即出貨。</span>
-
     </div>
     <h4 class="mt-3">訂單資訊</h4>
     <form class="row" @submit.prevent="confirmPay">
       <div class="col-12 col-md-7">
-        <table class="table align-middle ">
+        <table class="table align-middle">
           <thead>
             <th>品名</th>
             <th>數量</th>
@@ -24,7 +21,7 @@
           </thead>
           <tbody>
             <tr v-for="item in order.products" :key="item.id">
-              <td style="width:60%">{{ item.product.title }}</td>
+              <td style="width: 60%">{{ item.product.title }}</td>
               <td>{{ item.qty }}/{{ item.product.unit }}</td>
               <td>{{ $filters.currency(item.final_total) }}</td>
             </tr>
@@ -46,7 +43,9 @@
             </tr>
             <tr>
               <th width="100">Email</th>
-              <td> <span class="text-break ">{{ order.user.email }}</span></td>
+              <td>
+                <span class="text-break">{{ order.user.email }}</span>
+              </td>
             </tr>
             <tr>
               <th>姓名</th>
@@ -67,7 +66,7 @@
             <tr>
               <th>付款狀態</th>
               <td>
-                <span v-if="!order.is_paid" class="text-danger ">尚未付款</span>
+                <span v-if="!order.is_paid" class="text-danger">尚未付款</span>
                 <span v-else class="text-success">付款完成</span>
               </td>
             </tr>
@@ -77,9 +76,9 @@
       <div class="text-center" v-if="order.is_paid === false">
         <button class="btn btn-primary">進行付款</button>
       </div>
-      <div class="text-center " v-else>
-        <button class="btn btn-outline-primary " type="button"> <router-link to="/product/all/all" class="nav-link ">
-            繼續購物</router-link>
+      <div class="text-center" v-else>
+        <button class="btn btn-outline-primary" type="button">
+          <router-link to="/product/all/all" class="nav-link"> 繼續購物</router-link>
         </button>
       </div>
     </form>
@@ -88,47 +87,44 @@
 </template>
 
 <script setup lang="ts">
-
-import { useOrderStore } from '@/stores/orderStore'
+import { useOrderStore } from '@/stores/orderStore';
 import CheckoutConfirm from '@/components/user/modal/CheckoutConfirm.vue';
 const props = defineProps({
-  orderId: String,
+  orderId: String
 });
 import { storeToRefs } from 'pinia';
 import { watch, ref } from 'vue';
-const orderStore = useOrderStore()
+const orderStore = useOrderStore();
 const { order } = storeToRefs(orderStore);
 const { getOrderByID, payOrderByID } = orderStore;
 
 const checkoutConfirm = ref<InstanceType<typeof CheckoutConfirm> | null>(null);
 
 function getOrder() {
-  if (props.orderId === "") {
-    return
+  if (props.orderId === '') {
+    return;
   }
-  getOrderByID(props.orderId)
+  getOrderByID(props.orderId);
 }
-getOrder()
+getOrder();
 
-watch(() => props.orderId,
+watch(
+  () => props.orderId,
   () => {
-    getOrder()
+    getOrder();
   }
 );
 function confirmPay() {
   const confirmModal = checkoutConfirm.value;
   if (confirmModal) {
     confirmModal.showModal();
-
   }
-
 }
 function payOrder() {
-  payOrderByID(props.orderId)
+  payOrderByID(props.orderId);
   const confirmModal = checkoutConfirm.value;
   if (confirmModal) {
     confirmModal.hideModal();
   }
 }
-
 </script>
