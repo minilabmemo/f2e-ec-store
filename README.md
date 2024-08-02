@@ -13,9 +13,9 @@
     - 本地端：http://localhost:5173/
     - 線上端：https://minilabmemo.github.io/f2e-ec-store/#/
 
-- 功能細節請見：[Feature_Design](./Feature_Design.md)
-- 專案建立與開發筆記：[README_PROJECT](./README_create.md)
-- 版本與修正紀錄：[CHANGELOG](./CHANGELOG.md)
+- 功能細節請見：[Feature_Design](./Readmes/Feature_Design.md)
+- 專案建立與開發筆記：[README_PROJECT](./Readmes/README_create.md)
+- 版本與修正紀錄：[CHANGELOG](./Readmes/CHANGELOG.md)
 
 ## Start
 

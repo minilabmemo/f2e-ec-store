@@ -1,3 +1,9 @@
+## 0.6.0 (2024-05-20)//TODO
+
+### Fix
+
+- 第三次 review 修正 - typescript 優化 & tidy layout
+
 ## 0.5.0 (2024-05-20)
 
 ### Fix
