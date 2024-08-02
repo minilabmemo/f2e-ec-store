@@ -54,25 +54,27 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import Pagination from '@/components/PaginationAct.vue';
-import {useProductStore} from '@/stores/productStore';
-import {ref, watch} from 'vue';
-import {storeToRefs} from 'pinia';
+import { useProductStore } from '@/stores/productStore';
+import { ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
 import LocalStorage from '@/utils/methods/localStorage';
-import {addCartCheck} from '@/utils/methods/addCartCheck';
-import {useDeviceSize} from '@/composables/useDeviceSize';
-const {isExtraSmallDevice} = useDeviceSize();
+import { addCartCheck } from '@/utils/methods/addCartCheck';
+import { useDeviceSize } from '@/composables/useDeviceSize';
+import type { PaginationT, SaveProduct, Product } from '@/utils/type';
+
+const { isExtraSmallDevice } = useDeviceSize();
 
 const productStore = useProductStore();
-const {products} = storeToRefs(productStore);
-const {getProducts} = productStore;
+const { products } = storeToRefs(productStore);
+const { getProducts } = productStore;
 
 const saveKey = 'favorite';
-let saveItems = ref({});
-let displayItems = ref({});
+let saveItems = ref<{ data: Record<string, Product> }>({ data: {} });
+let displayItems = ref<Product[]>([]);
 
-const pagination = ref({
+const pagination = ref<PaginationT>({
   total_pages: 1,
   current_page: 1,
   has_pre: true,
@@ -81,7 +83,27 @@ const pagination = ref({
 const dataPerPage = 5;
 
 const getSaveItems = () => {
-  saveItems.value.data = LocalStorage.get(saveKey) || {};
+  const saveProducts: SaveProduct[] = LocalStorage.get(saveKey) || [];
+
+  //  SaveProduct 類型轉為 Product
+  const productsMap: Record<string, Product> = {};
+  saveProducts.forEach((item) => {
+    const product: Product = {
+      id: item.id,
+      title: item.title,
+      imageUrl: item.imageUrl,
+      num: 0,
+      origin_price: 0,
+      price: 0,
+      on_stock: false,
+      unit: "",
+      category: "",
+      subcategory: "",
+    };
+    productsMap[item.id] = product;
+  });
+
+  saveItems.value.data = productsMap;
   filterItemsByPage();
 };
 
@@ -98,11 +120,10 @@ const filterItemsByPage = (currentPage = 1) => {
   displayItems.value = Object.values(saveItems.value.data).slice(startIndex, endIndex);
 };
 
-const removeItem = (id) => {
-  let nowItems = LocalStorage.get(saveKey) || [];
-  const saveItems = Object.values(nowItems).filter((value) => value.id !== id);
-
-  LocalStorage.set(saveKey, saveItems);
+const removeItem = (id: string) => {
+  let nowItems: SaveProduct[] = LocalStorage.get(saveKey) || [];
+  const updatedItems = nowItems.filter(item => item.id !== id);
+  LocalStorage.set(saveKey, updatedItems);
   getSaveItems();
 };
 
@@ -125,11 +146,12 @@ watch(
       filterItemsByPage();
     }
   },
-  {deep: true}
+  { deep: true }
 );
 getSaveItems();
 getProducts();
 </script>
+
 <style lang="css" scoped>
 .flex-image {
   object-fit: cover;

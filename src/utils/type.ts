@@ -91,3 +91,21 @@ export interface Coupon {
   percent: number;
   is_enabled: number;
 }
+
+export interface PaginationT {
+  total_pages: number;
+  current_page: number;
+  has_pre: boolean;
+  has_next: boolean;
+}
+
+export interface MemberT {
+  user: UserT;
+  message: string;
+}
+export interface UserT {
+  name: string;
+  email: string;
+  tel: string;
+  address: string;
+}

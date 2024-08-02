@@ -47,7 +47,7 @@ let isSave = ref(false);
 
 const syncSaveStatus = () => {
   isSave.value = false;
-  const saveItems: SaveProduct[] = LocalStorage.get(saveKey);
+  const saveItems: SaveProduct[] = LocalStorage.get<SaveProduct[]>(saveKey) || [];
   if (saveItems) {
     for (const value of Object.values(saveItems)) {
       if (value.id === props.item.id) {
@@ -58,13 +58,12 @@ const syncSaveStatus = () => {
 };
 
 const saveItem = () => {
-  let saveItems = LocalStorage.get(saveKey);
-  if (saveItems) {
-    saveItems = [...saveItems, props.item];
-  } else {
-    saveItems = [props.item];
+  let saveItems = LocalStorage.get<SaveProduct[]>(saveKey) || [];
+  if (!Array.isArray(saveItems)) {
+    saveItems = [];
   }
 
+  saveItems = [...saveItems, props.item];
   LocalStorage.set(saveKey, saveItems);
   status.pushMessage({
     title: '加入收藏',
@@ -75,7 +74,7 @@ const saveItem = () => {
 
 const removeItem = () => {
   let saveItems: SaveProduct[] = [];
-  const nowItems: SaveProduct[] = LocalStorage.get(saveKey);
+  const nowItems: SaveProduct[] = LocalStorage.get<SaveProduct[]>(saveKey) || [];
   if (nowItems) {
     for (const value of Object.values(nowItems)) {
       if (value.id !== props.item.id) {
