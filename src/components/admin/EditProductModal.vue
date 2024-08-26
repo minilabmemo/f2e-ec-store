@@ -166,6 +166,12 @@ import { adminUploadApi } from '@/utils/config/path';
 import fetchAct from '@/utils/methods/fetchAct';
 import type { Product } from '@/utils/type';
 
+interface UploadResponse {
+  success: boolean;
+  imageUrl: string;
+  message?: string;
+}
+
 const modal = ref<HTMLElement | null>(null);
 const { showModal, hideModal } = useModal(modal);
 defineExpose({ showModal, hideModal });
@@ -245,7 +251,7 @@ function uploadFile(isMain: boolean, index?: number) {
 
   const formData = new FormData();
   formData.append('file-to-upload', uploadedFile);
-  fetchAct.post(adminUploadApi, formData, { msgTitle: '上傳圖片' }).then((response: any) => {
+  fetchAct.post<UploadResponse>(adminUploadApi, formData, { msgTitle: '上傳圖片' }).then((response) => {
     if (response.success) {
       if (isMain) {
         tempProduct.value.imageUrl = response.imageUrl;

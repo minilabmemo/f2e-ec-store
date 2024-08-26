@@ -67,21 +67,18 @@ class FetchAct {
     });
   }
 
-  post(url: string, body: any | null, opts?: RequestOptions) {
+  post<T, D = any>(url: string, body: D, opts?: RequestOptions): Promise<T> {
     FetchAct.setOptions(opts);
 
     return new Promise((resolve) => {
       FetchAct.setLoading(true, opts);
       axios
-        .post(url, body)
-        .then((response) => {
+        .post<T>(url, body)
+        .then((response: AxiosResponse) => {
           FetchAct.setLoading(false, opts);
           FetchAct.sendMessage(response, opts);
-
-          if (response.data.success) {
-            resolve(response.data);
-          } else {
-            resolve(response.data);
+          resolve(response.data);
+          if (!response.data.success) {
             dataErr(response);
           }
         })
