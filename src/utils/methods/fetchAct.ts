@@ -1,11 +1,11 @@
-import { catchErr, dataErr } from '@/utils/methods/handleErr';
+import { handleError, handleResError } from '@/utils/methods/handleErr';
 import statusStore, { type BooleanProperties } from '@/stores/statusStore';
 import axios, { type AxiosResponse } from 'axios';
 interface RequestOptions {
   msgTitle?: string;
   token?: string;
   loadStates?: string[];
-  allowNotSuccess?: boolean; //允許 API 回覆不成功
+  allowNotSuccess?: boolean; //允許 API 回覆不成功 不做 handleResError 處理
 }
 
 class FetchAct {
@@ -59,13 +59,13 @@ class FetchAct {
           if (response.data.success) {
             resolve(response.data);
           } else {
-            dataErr(response);
+            handleResError(response);
           }
         })
         .catch((error) => {
           FetchAct.setLoading(false, opts);
 
-          catchErr(error);
+          handleError(error);
         });
     });
   }
@@ -82,12 +82,12 @@ class FetchAct {
           FetchAct.sendMessage(response, opts);
           resolve(response.data);
           if (!response.data.success && !opts?.allowNotSuccess) {
-            dataErr(response);
+            handleResError(response);
           }
         })
         .catch((err) => {
           FetchAct.setLoading(false, opts);
-          catchErr(err);
+          handleError(err);
         });
     });
   }
@@ -107,13 +107,13 @@ class FetchAct {
           if (response.data.success) {
             resolve(response.data);
           } else {
-            dataErr(response);
+            handleResError(response);
           }
         })
         .catch((err) => {
           FetchAct.setLoading(false, opts);
 
-          catchErr(err);
+          handleError(err);
         });
     });
   }
@@ -132,12 +132,12 @@ class FetchAct {
           if (response.data.success) {
             resolve(response.data);
           } else {
-            dataErr(response);
+            handleResError(response);
           }
         })
         .catch((error) => {
           FetchAct.setLoading(false, opts);
-          catchErr(error);
+          handleError(error);
         });
     });
   }
