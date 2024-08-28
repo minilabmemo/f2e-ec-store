@@ -62,7 +62,7 @@ import { adminOrderApi, adminOrdersApi } from '@/utils/config/path';
 import statusStore from '@/stores/statusStore';
 import fetchAct from '@/utils/methods/fetchAct';
 import { computed, ref, type Ref } from 'vue';
-import type { Order } from '@/utils/type';
+import type { Order, PaginationT } from '@/utils/type';
 const status = statusStore();
 
 const delModal = ref<InstanceType<typeof DelModal> | null>(null);
@@ -82,11 +82,16 @@ const orders: Ref<Order[]> = ref([]);
 const currentPageRef = ref(1);
 
 const isNewRef = ref(false);
-
+interface getOrdersResponse {
+  success: boolean;
+  orders: Order[];
+  pagination: PaginationT;
+  message?: string;
+}
 function getOrders(currentPage = 1) {
   currentPageRef.value = currentPage;
   const url = `${adminOrdersApi}?page=${currentPage}`;
-  fetchAct.get(url).then((response: any) => {
+  fetchAct.get<getOrdersResponse>(url).then((response) => {
     if (response.success) {
       orders.value = response.orders;
       pagination.value = response.pagination;

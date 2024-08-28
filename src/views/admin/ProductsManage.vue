@@ -55,12 +55,12 @@
 <script setup lang="ts">
 import ProductModal from '@/components/admin/EditProductModal.vue';
 import DelModal from '@/components/DelModal.vue';
-import { adminProductApi } from '@/utils/config/path';
+import { adminProductApi, adminProductsApi } from '@/utils/config/path';
 import Pagination from '@/components/PaginationAct.vue';
 import { ref, type Ref } from 'vue';
 import fetchAct from '@/utils/methods/fetchAct';
 import statusStore from '@/stores/statusStore';
-import type { Product } from '@/utils/type';
+import type { Product, PaginationT } from '@/utils/type';
 
 const status = statusStore();
 
@@ -90,12 +90,16 @@ let defaultValue = {
 const tempProduct: Ref<Product> = ref(defaultValue);
 const isNewRef = ref(false);
 const currentPageRef = ref(1);
-
+interface getProductsResponse {
+  success: boolean;
+  products: Product[];
+  pagination: PaginationT;
+  message?: string;
+}
 function getProducts(currentPage = 1) {
   currentPageRef.value = currentPage;
-
-  const url = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/products?page=${currentPage}`;
-  fetchAct.get(url).then((response: any) => {
+  const url = `${adminProductsApi}?page=${currentPage}`;
+  fetchAct.get<getProductsResponse>(url).then((response) => {
     if (response.success) {
       products.value = response.products;
       pagination.value = response.pagination;
