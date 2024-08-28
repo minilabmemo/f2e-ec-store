@@ -234,7 +234,7 @@ const addCouponCode = () => {
     code: coupon_code.value
   };
 
-  fetchAct.post(url, { data: coupon }).then(() => {
+  fetchAct.post(url, { data: coupon }, { msgTitle: `套用優惠卷${coupon_code.value} `, allowNotSuccess: true }).then(() => {
     getCart();
   });
 };

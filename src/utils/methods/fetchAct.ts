@@ -5,6 +5,7 @@ interface RequestOptions {
   msgTitle?: string;
   token?: string;
   loadStates?: string[];
+  allowNotSuccess?: boolean; //允許 API 回覆不成功
 }
 
 class FetchAct {
@@ -80,7 +81,7 @@ class FetchAct {
           FetchAct.setLoading(false, opts);
           FetchAct.sendMessage(response, opts);
           resolve(response.data);
-          if (!response.data.success) {
+          if (!response.data.success && !opts?.allowNotSuccess) {
             dataErr(response);
           }
         })
