@@ -54,7 +54,7 @@ export interface CartItemUpdate {
   qty: number;
 }
 
-interface OrderUser {
+export interface OrderUser {
   name: string;
   email: string;
   tel: string;
@@ -108,4 +108,9 @@ export interface UserT {
   email: string;
   tel: string;
   address: string;
+}
+
+export interface CommonResponse {
+  success: boolean;
+  message?: string;
 }

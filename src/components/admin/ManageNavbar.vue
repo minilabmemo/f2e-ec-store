@@ -22,15 +22,12 @@
 import { logoutApi } from '@/utils/config/path';
 import fetchAct from '@/utils/methods/fetchAct';
 import { useRouter } from 'vue-router';
-interface logoutResponse {
-  success: boolean;
-  message?: string;
-}
+import type { CommonResponse } from '@/utils/type';
 
 const router = useRouter();
 function logout() {
   const url = logoutApi;
-  fetchAct.post<logoutResponse>(url, null).then((res) => {
+  fetchAct.post<CommonResponse>(url, null).then((res) => {
     if (res.success) {
       router.push('/login');
     }

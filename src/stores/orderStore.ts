@@ -3,6 +3,8 @@ import { ref } from 'vue';
 import { userOrdersApi, userOrderPayApi, userOrderApi } from '@/utils/config/path';
 import statusStore from './statusStore';
 import fetchAct from '@/utils/methods/fetchAct';
+import type { OrderUser } from '@/utils/type';
+
 interface Pagination {
   total_pages: number;
   current_page: number;
@@ -51,7 +53,13 @@ export const useOrderStore = defineStore('orderStore', () => {
       getOrderByID(orderId);
     });
   }
-  function createOrder(body: { user: { name: any; email: any; tel: any; address: any } }) {
+
+  interface createOrderResponse {
+    success: boolean;
+    orderId: string;
+    message?: string;
+  }
+  function createOrder(body: { user: OrderUser }) {
     if (!body.user) {
       console.error(' order.user params is empty or invalid.');
       return;
@@ -64,7 +72,7 @@ export const useOrderStore = defineStore('orderStore', () => {
 
     const url = userOrderApi;
     status.orderTemp.paySuccess = false;
-    fetchAct.post(url, { data: body }, { msgTitle: `訂單送出` }).then((data: any) => {
+    fetchAct.post<createOrderResponse>(url, { data: body }, { msgTitle: `訂單送出` }).then((data) => {
       status.orderTemp.paySuccess = true;
       status.orderTemp.orderId = data.orderId;
     });

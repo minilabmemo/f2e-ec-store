@@ -227,6 +227,7 @@ const removeAllCartItem = () => {
     confirmModal.hideModal();
   }
 };
+
 const addCouponCode = () => {
   const url = userCouponApi;
   const coupon = {

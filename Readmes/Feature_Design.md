@@ -2,6 +2,8 @@
 
 功能與設計細節。
 
+- [六角學院 Vue3 課程的 API 說明文檔](https://github.com/hexschool/vue3-course-api-wiki/wiki)
+
 ## 前台
 
 ### 整體頁面

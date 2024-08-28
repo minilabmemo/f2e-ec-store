@@ -31,10 +31,17 @@ const user = ref({
   username: null,
   password: null
 });
+interface loginResponse {
+  success: boolean;
+  uid: string;
+  token: string;
+  expired: string;
+  message?: string;
+}
 const router = useRouter();
 function login() {
   const url = loginApi;
-  fetchAct.post(url, user.value).then((response: any) => {
+  fetchAct.post<loginResponse>(url, user.value).then((response) => {
     if (response.success) {
       const { token, expired } = response;
       document.cookie = `defToken=${token}; expires=${new Date(expired)}`;
