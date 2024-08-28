@@ -79,13 +79,17 @@ const pagination = ref({
 let defaultValue = {
   id: '',
   imageUrl: '',
+  imagesUrl: [],
   title: '',
   unit: '',
   price: 0,
   origin_price: 0,
   num: 0,
   category: '',
-  subcategory: ''
+  subcategory: '',
+  is_enabled: 0,
+  content: '',
+  description: '',
 };
 const tempProduct: Ref<Product> = ref(defaultValue);
 const isNewRef = ref(false);

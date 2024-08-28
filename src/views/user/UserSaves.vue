@@ -92,6 +92,7 @@ const getSaveItems = () => {
       id: item.id,
       title: item.title,
       imageUrl: item.imageUrl,
+      imagesUrl: [],
       num: 0,
       origin_price: 0,
       price: 0,
@@ -99,6 +100,9 @@ const getSaveItems = () => {
       unit: "",
       category: "",
       subcategory: "",
+      is_enabled: 0,
+      content: '',
+      description: '',
     };
     productsMap[item.id] = product;
   });
@@ -125,6 +129,7 @@ const removeItem = (id: string) => {
   const updatedItems = nowItems.filter(item => item.id !== id);
   LocalStorage.set(saveKey, updatedItems);
   getSaveItems();
+  getProducts();
 };
 
 watch(

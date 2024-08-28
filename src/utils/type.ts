@@ -1,6 +1,7 @@
 export interface Product {
   id: string;
   imageUrl: string;
+  imagesUrl: string[];
   title: string;
   unit: string;
   price: number;
@@ -8,7 +9,11 @@ export interface Product {
   num: number;
   category: string;
   subcategory: string;
-  [key: string]: any;
+  is_enabled: number;
+  content: string;
+  description: string;
+  on_stock?: boolean;
+  [key: string]: any; //for sortedProducts
 }
 export interface SaveProduct {
   id: string;

@@ -11,12 +11,16 @@ describe('ProductModal', () => {
           id: '123',
           title: 'product1',
           imageUrl: '',
+          imagesUrl: [],
           unit: '',
           price: 0,
           origin_price: 0,
           num: 0,
           category: '',
-          subcategory: ''
+          subcategory: '',
+          is_enabled: 0,
+          content: '',
+          description: ''
         }
       }
     });
