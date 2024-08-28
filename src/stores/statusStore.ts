@@ -24,6 +24,18 @@ export interface BooleanProperties {
   isAddLoading: boolean;
   isUpdateLoading: boolean;
 }
+interface ResponseData {
+  message: string | string[] | Record<string, any>; // 允許字串、字串陣列或對象
+  success: boolean;
+}
+interface PushMessageData {
+  title: string;
+  response: {
+    data: ResponseData;
+  };
+  content?: string;
+  style?: string;
+}
 
 export default defineStore('statusStore', {
   state: (): StatusStore => ({
@@ -39,13 +51,13 @@ export default defineStore('statusStore', {
     }
   }),
   actions: {
-    pushMessage(data: { title: any; response: any; content?: any; style?: any }) {
+    pushMessage(data: PushMessageData) {
       const { title, content, style = 'success', response } = data;
       if (!response || !response.data) {
         const message: Message = {
           style: style ? style : 'info',
           title: `${title}`,
-          content: content
+          content: content ?? ''
         };
         this.messages.push(message);
         return;
@@ -55,29 +67,29 @@ export default defineStore('statusStore', {
         const message = {
           style,
           title: `${title}成功`,
-          content
+          content: content ?? ''
         };
         this.messages.push(message);
       } else {
         // 有些訊息是字串，陣列或物件，在此統一格式成字串陣列，再列出訊息。
         let contents = [];
-        switch (typeof response.data.message) {
-          case 'string':
-            contents = [response.data.message];
-            break;
-          case 'object':
-            contents = Object.keys(response.data.message).map((key) => response.data.message[key]);
-            break;
-          default:
-            contents = response.data.message;
-            break;
+        const message = response.data.message;
+
+        if (typeof message === 'string') {
+          contents = [message];
+        } else if (Array.isArray(message)) {
+          contents = message;
+        } else if (typeof message === 'object') {
+          contents = Object.keys(message).map((key) => {
+            return (message as Record<string, string>)[key];
+          });
         }
-        const message = {
+        const errorMessage = {
           style: 'danger',
           title: `${title}失敗`,
           content: contents !== undefined ? contents.join('、') : ''
         };
-        this.messages.push(message);
+        this.messages.push(errorMessage);
       }
     },
     setState<K extends keyof BooleanProperties>(key: K, value: StatusStore[K]): void {
