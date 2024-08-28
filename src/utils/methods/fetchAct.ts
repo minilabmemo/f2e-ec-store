@@ -40,7 +40,7 @@ class FetchAct {
     }
   }
 
-  get(url: string, opts?: RequestOptions) {
+  get<T>(url: string, opts?: RequestOptions): Promise<T> {
     FetchAct.setOptions(opts);
 
     return new Promise((resolve) => {
@@ -88,7 +88,7 @@ class FetchAct {
         });
     });
   }
-  put(url: string, body: any, opts?: RequestOptions) {
+  put<T, D = any>(url: string, body: D, opts?: RequestOptions): Promise<T> {
     FetchAct.setOptions(opts);
 
     return new Promise((resolve) => {

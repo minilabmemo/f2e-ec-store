@@ -83,9 +83,14 @@ function openDelCouponModal(item: Coupon) {
     delComponent.value.showModal();
   }
 }
+interface getCouponsResponse {
+  success: boolean;
+  coupons: Coupon[];
+  message?: string;
+}
 function getCoupons() {
   const url = `${adminCouponsApi}`;
-  fetchAct.get(url).then((response: any) => {
+  fetchAct.get<getCouponsResponse>(url).then((response) => {
     if (response.success) {
       coupons.value = response.coupons;
     }

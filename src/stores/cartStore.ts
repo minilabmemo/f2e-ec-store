@@ -23,15 +23,19 @@ export const useCartStore = defineStore('cartStore', () => {
 
     return total;
   });
-
+  interface getCartResponse {
+    success: boolean;
+    data: Cart;
+    message?: string;
+  }
   function getCart(isGlobeLoad?: Boolean) {
     const url = `${userCartApi}`;
     if (isGlobeLoad) {
-      fetchAct.get(url).then((res: any) => {
+      fetchAct.get<getCartResponse>(url).then((res) => {
         cart.value = res.data;
       });
     } else {
-      fetchAct.get(url, { loadStates: ['isGetLoading'] }).then((res: any) => {
+      fetchAct.get<getCartResponse>(url, { loadStates: ['isGetLoading'] }).then((res) => {
         cart.value = res.data;
       });
     }

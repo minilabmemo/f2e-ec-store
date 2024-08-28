@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { userOrdersApi, userOrderPayApi, userOrderApi } from '@/utils/config/path';
 import statusStore from './statusStore';
 import fetchAct from '@/utils/methods/fetchAct';
-import type { OrderUser } from '@/utils/type';
+import type { OrderUser, Order } from '@/utils/type';
 
 interface Pagination {
   total_pages: number;
@@ -23,20 +23,35 @@ export const useOrderStore = defineStore('orderStore', () => {
     has_next: false
   });
   const status = statusStore();
-  function getOrderByID(orderId: any) {
+
+  interface getOrderResponse {
+    success: boolean;
+    order: Order;
+    message?: string;
+  }
+
+  function getOrderByID(orderId: string) {
     if (!orderId) {
       console.error('params is empty or invalid.');
       return;
     }
     const url = `${userOrderApi}/${orderId}`;
-    fetchAct.get(url).then((data: any) => {
+    fetchAct.get<getOrderResponse>(url).then((data) => {
       order.value = data.order;
     });
   }
+
+  interface getOrdersResponse {
+    success: boolean;
+    orders: Order[];
+    pagination: Pagination;
+    message?: string;
+  }
+
   function getOrders(currentPage = 1) {
     pagination.value.current_page = currentPage;
     const url = `${userOrdersApi}?page=${currentPage}`;
-    fetchAct.get(url).then((data: any) => {
+    fetchAct.get<getOrdersResponse>(url).then((data) => {
       orders.value = data.orders;
       pagination.value = data.pagination;
     });

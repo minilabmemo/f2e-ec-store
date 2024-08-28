@@ -21,14 +21,24 @@ export const useProductStore = defineStore('productStore', () => {
     category: '',
     subcategory: ''
   };
-  const product: Ref<Product> = ref(defaultProduct);
 
+  const product: Ref<Product> = ref(defaultProduct);
+  interface getProductsResponse {
+    success: boolean;
+    products: Product[];
+    message?: string;
+  }
   function getProducts() {
     const url = `${userProductsApi}`;
-    fetchAct.get(url).then((data: any) => {
+    fetchAct.get<getProductsResponse>(url).then((data) => {
       products.value = data.products;
       defaultProductsSort.value = data.products;
     });
+  }
+  interface getProductResponse {
+    success: boolean;
+    product: Product;
+    message?: string;
   }
   function getProductByID(id: string) {
     if (!id) {
@@ -37,7 +47,7 @@ export const useProductStore = defineStore('productStore', () => {
     }
     const url = `${userProductApi}/${id}`;
 
-    fetchAct.get(url).then((data: any) => {
+    fetchAct.get<getProductResponse>(url).then((data) => {
       product.value = data.product;
     });
   }
@@ -49,17 +59,11 @@ export const useProductStore = defineStore('productStore', () => {
 
     switch (category) {
       case 'all':
-        itemsByCAT = products.value.filter(
-          (item: { category: { toString: () => string | string[] } }) =>
-            !item.category.toString().includes('test')
-        );
+        itemsByCAT = products.value.filter((item: { category: { toString: () => string | string[] } }) => !item.category.toString().includes('test'));
 
         break;
       default:
-        itemsByCAT = products.value.filter(
-          (item: { category: { toString: () => string | any[] } }) =>
-            item.category.toString().includes(category)
-        );
+        itemsByCAT = products.value.filter((item: { category: { toString: () => string | any[] } }) => item.category.toString().includes(category));
 
         break;
     }
@@ -68,14 +72,8 @@ export const useProductStore = defineStore('productStore', () => {
         case 'all':
           break;
         default:
-          itemsByCAT = products.value.filter(
-            (item: { category: { toString: () => string | any[] } }) =>
-              item.category.toString().includes(category)
-          );
-          itemsByCAT = itemsByCAT.filter(
-            (item: { category: { toString: () => string | string[] } }) =>
-              item.category.toString().includes(subcategory)
-          );
+          itemsByCAT = products.value.filter((item: { category: { toString: () => string | any[] } }) => item.category.toString().includes(category));
+          itemsByCAT = itemsByCAT.filter((item: { category: { toString: () => string | string[] } }) => item.category.toString().includes(subcategory));
           break;
       }
     }

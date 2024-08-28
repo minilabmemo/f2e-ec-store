@@ -101,7 +101,7 @@ const { getOrderByID, payOrderByID } = orderStore;
 const checkoutConfirm = ref<InstanceType<typeof CheckoutConfirm> | null>(null);
 
 function getOrder() {
-  if (props.orderId === '') {
+  if (!props.orderId) {
     return;
   }
   getOrderByID(props.orderId);
