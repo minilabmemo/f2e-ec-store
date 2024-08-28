@@ -98,19 +98,18 @@ export const useProductStore = defineStore('productStore', () => {
     const sortedProducts = [...products.value];
 
     sortedProducts.sort((a, b) => {
-      if (!a[field] || !b[field]) {
+      const aValue = a[field];
+      const bValue = b[field];
+
+      if (aValue === undefined || bValue === undefined) {
         console.error(`Field "${field}" does not exist in products.`);
         return 0;
       }
 
       if (order === 'asc') {
-        if (a[field] < b[field]) return -1;
-        if (a[field] > b[field]) return 1;
-        return 0;
+        return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
       } else {
-        if (a[field] < b[field]) return 1;
-        if (a[field] > b[field]) return -1;
-        return 0;
+        return aValue < bValue ? 1 : aValue > bValue ? -1 : 0;
       }
     });
 

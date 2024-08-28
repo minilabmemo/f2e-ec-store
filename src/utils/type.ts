@@ -13,7 +13,7 @@ export interface Product {
   content: string;
   description: string;
   on_stock?: boolean;
-  [key: string]: any; //for sortedProducts
+  [key: string]: string | number | boolean | string[] | undefined; //動態屬性 for sortedProducts
 }
 export interface SaveProduct {
   id: string;
