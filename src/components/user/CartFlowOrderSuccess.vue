@@ -121,6 +121,9 @@ function confirmPay() {
   }
 }
 function payOrder() {
+  if (!props.orderId) {
+    return;
+  }
   payOrderByID(props.orderId);
   const confirmModal = checkoutConfirm.value;
   if (confirmModal) {

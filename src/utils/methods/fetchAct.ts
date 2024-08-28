@@ -1,11 +1,12 @@
 import { catchErr, dataErr } from '@/utils/methods/handleErr';
-import statusStore from '@/stores/statusStore';
+import statusStore, { type BooleanProperties } from '@/stores/statusStore';
 import axios, { type AxiosResponse } from 'axios';
 interface RequestOptions {
   msgTitle?: string;
   token?: string;
   loadStates?: string[];
 }
+
 class FetchAct {
   static instance: any;
   constructor() {
@@ -19,12 +20,13 @@ class FetchAct {
       axios.defaults.headers.common['Authorization'] = opts.token;
     }
   }
+
   private static setLoading(isLoading: boolean, opts?: RequestOptions) {
     const status = statusStore();
 
     if (opts && opts.loadStates) {
       opts.loadStates.forEach((stateKey: string) => {
-        status.setState(stateKey, isLoading);
+        status.setState(stateKey as keyof BooleanProperties, isLoading);
       });
     } else {
       status.isLoading = isLoading;

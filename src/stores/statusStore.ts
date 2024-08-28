@@ -17,7 +17,12 @@ interface StatusStore {
   isAddLoading: boolean;
   isUpdateLoading: boolean;
   orderTemp: OrderTemp;
-  [key: string]: any;
+}
+export interface BooleanProperties {
+  isLoading: boolean;
+  isGetLoading: boolean;
+  isAddLoading: boolean;
+  isUpdateLoading: boolean;
 }
 
 export default defineStore('statusStore', {
@@ -75,8 +80,12 @@ export default defineStore('statusStore', {
         this.messages.push(message);
       }
     },
-    setState(key: string, value: any): void {
-      this[key] = value;
+    setState<K extends keyof BooleanProperties>(key: K, value: StatusStore[K]): void {
+      if (typeof this[key] === 'boolean') {
+        this[key] = value;
+      } else {
+        console.error(`Cannot set state for key "${key}", as it is not a boolean.`);
+      }
     }
   }
 });

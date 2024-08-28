@@ -57,7 +57,7 @@ export const useOrderStore = defineStore('orderStore', () => {
     });
   }
 
-  function payOrderByID(orderId: any) {
+  function payOrderByID(orderId: string) {
     if (!orderId) {
       console.error(' pay order params is empty or invalid.');
       return;

@@ -67,7 +67,7 @@ export const useProductStore = defineStore('productStore', () => {
 
         break;
       default:
-        itemsByCAT = products.value.filter((item: { category: { toString: () => string | any[] } }) => item.category.toString().includes(category));
+        itemsByCAT = products.value.filter((item: { category: { toString: () => string | string[] } }) => item.category.toString().includes(category));
 
         break;
     }
@@ -76,7 +76,7 @@ export const useProductStore = defineStore('productStore', () => {
         case 'all':
           break;
         default:
-          itemsByCAT = products.value.filter((item: { category: { toString: () => string | any[] } }) => item.category.toString().includes(category));
+          itemsByCAT = products.value.filter((item: { category: { toString: () => string | string[] } }) => item.category.toString().includes(category));
           itemsByCAT = itemsByCAT.filter((item: { category: { toString: () => string | string[] } }) => item.category.toString().includes(subcategory));
           break;
       }
