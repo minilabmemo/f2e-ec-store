@@ -38,7 +38,7 @@ class FetchAct {
       status.isLoading = isLoading;
     }
   }
-  private static sendMessage(response: AxiosResponse<any, any>, opts?: RequestOptions) {
+  private static sendMessage(response: AxiosResponse, opts?: RequestOptions) {
     const status = statusStore();
     if (opts && opts.msgTitle && status.pushMessage) {
       status.pushMessage({

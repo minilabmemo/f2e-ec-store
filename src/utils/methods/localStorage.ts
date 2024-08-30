@@ -55,7 +55,7 @@ class LocalStorage {
 
     localStorage.removeItem(key);
 
-    const data = this.get<any>(key);
+    const data = this.get(key);
 
     if (data) {
       console.error('刪除 localStorage 失敗');
