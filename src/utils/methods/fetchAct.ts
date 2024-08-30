@@ -9,8 +9,8 @@ interface RequestOptions {
 }
 export interface HTTPMethods {
   get<T>(url: string, opts?: RequestOptions): Promise<T>;
-  post<T, D = any>(url: string, body: D, opts?: RequestOptions): Promise<T>;
-  put<T, D = any>(url: string, body: D, opts?: RequestOptions): Promise<T>;
+  post<T, D = unknown>(url: string, body: D, opts?: RequestOptions): Promise<T>;
+  put<T, D = unknown>(url: string, body: D, opts?: RequestOptions): Promise<T>;
   delete<T>(url: string, opts?: RequestOptions): Promise<T>;
 }
 class FetchAct {
@@ -75,7 +75,7 @@ class FetchAct {
     });
   }
 
-  post<T, D = any>(url: string, body: D, opts?: RequestOptions): Promise<T> {
+  post<T, D = unknown>(url: string, body: D, opts?: RequestOptions): Promise<T> {
     FetchAct.setOptions(opts);
 
     return new Promise((resolve) => {
@@ -96,7 +96,7 @@ class FetchAct {
         });
     });
   }
-  put<T, D = any>(url: string, body: D, opts?: RequestOptions): Promise<T> {
+  put<T, D = unknown>(url: string, body: D, opts?: RequestOptions): Promise<T> {
     FetchAct.setOptions(opts);
 
     return new Promise((resolve) => {
