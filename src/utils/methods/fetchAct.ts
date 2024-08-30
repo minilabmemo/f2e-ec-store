@@ -67,7 +67,7 @@ class FetchAct {
             handleResError(response);
           }
         })
-        .catch((error) => {
+        .catch((error: unknown) => {
           FetchAct.setLoading(false, opts);
 
           handleError(error);
@@ -90,7 +90,7 @@ class FetchAct {
             handleResError(response);
           }
         })
-        .catch((err) => {
+        .catch((err: unknown) => {
           FetchAct.setLoading(false, opts);
           handleError(err);
         });
@@ -115,7 +115,7 @@ class FetchAct {
             handleResError(response);
           }
         })
-        .catch((err) => {
+        .catch((err: unknown) => {
           FetchAct.setLoading(false, opts);
 
           handleError(err);
@@ -140,7 +140,7 @@ class FetchAct {
             handleResError(response);
           }
         })
-        .catch((error) => {
+        .catch((error: unknown) => {
           FetchAct.setLoading(false, opts);
           handleError(error);
         });
