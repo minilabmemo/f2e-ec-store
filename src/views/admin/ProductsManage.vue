@@ -58,7 +58,7 @@ import DelModal from '@/components/DelModal.vue';
 import { adminProductApi, adminProductsApi } from '@/utils/config/path';
 import Pagination from '@/components/PaginationAct.vue';
 import { ref, type Ref } from 'vue';
-import fetchAct from '@/utils/methods/fetchAct';
+import fetchAct, { type HTTPMethods } from '@/utils/methods/fetchAct';
 import statusStore from '@/stores/statusStore';
 import type { Product, PaginationT } from '@/utils/type';
 
@@ -132,7 +132,7 @@ function openDelModal(item: Product) {
 function updateProduct(item: Product) {
   tempProduct.value = item;
   let api = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/product`;
-  let httpMethod = 'post';
+  let httpMethod: keyof HTTPMethods = 'post';
   if (!isNewRef.value) {
     api = `${import.meta.env.VITE_API}api/${import.meta.env.VITE_PATH}/admin/product/${item.id}`;
     httpMethod = 'put';

@@ -7,9 +7,14 @@ interface RequestOptions {
   loadStates?: string[];
   allowNotSuccess?: boolean; //允許 API 回覆不成功 不做 handleResError 處理
 }
-
+export interface HTTPMethods {
+  get<T>(url: string, opts?: RequestOptions): Promise<T>;
+  post<T, D = any>(url: string, body: D, opts?: RequestOptions): Promise<T>;
+  put<T, D = any>(url: string, body: D, opts?: RequestOptions): Promise<T>;
+  delete<T>(url: string, opts?: RequestOptions): Promise<T>;
+}
 class FetchAct {
-  static instance: any;
+  private static instance: FetchAct;
   constructor() {
     if (FetchAct.instance) {
       return FetchAct.instance;
@@ -141,7 +146,6 @@ class FetchAct {
         });
     });
   }
-  [key: string]: any;
 }
 
 export default new FetchAct();
