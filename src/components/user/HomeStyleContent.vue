@@ -32,7 +32,7 @@ const items = computed(() => {
 });
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 .flex-image {
   object-fit: cover;
   aspect-ratio: 2/3;

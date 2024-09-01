@@ -247,7 +247,7 @@ watch(
 );
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 .flex-image {
   object-fit: cover;
   aspect-ratio: 1/1;

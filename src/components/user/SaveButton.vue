@@ -103,7 +103,7 @@ watch(
 );
 </script>
 
-<style lang="css" scoped>
+<style scoped>
 .btn-outline-primary:hover svg,
 .btn-outline-800:hover svg,
 .btn.active svg,
