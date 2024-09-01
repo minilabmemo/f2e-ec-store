@@ -20,7 +20,7 @@
                 class="bg-800 text-white py-0 rounded-1 cart-number-icon-size d-flex justify-content-center align-items-center">
                 <span v-if="!status.isAddLoading" class="cart-number-font-size">{{
                   cartTotalQty
-                }}</span>
+                  }}</span>
                 <div v-else class="spinner-border spinner-border-sm" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
@@ -33,7 +33,7 @@
 
     <div class="col-4 col-xl-4 d-flex justify-content-center align-items-center">
       <div class="dropdown">
-        <button class="btn btn-sm border-0 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        <button type="button" class="btn btn-sm border-0 dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" data-bs-toggle="dropdown">
           <img src="@/assets/img/icons/person.svg" alt="person" class="icon-size">
         </button>

@@ -4,7 +4,7 @@
     <span class="fs-3 fw-bold" style="width: 9.375rem"> 無收藏商品。</span>
 
     <div class="mt-3" style="width: 9.375rem">
-      <button class="btn btn-outline-primary" type="button">
+      <button type="button" class="btn btn-outline-primary">
         <router-link to="/product/all/all" class="nav-link"> 探索更多商品</router-link>
       </button>
     </div>

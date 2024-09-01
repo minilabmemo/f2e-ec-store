@@ -74,10 +74,10 @@
         </table>
       </div>
       <div class="text-center" v-if="order.is_paid === false">
-        <button class="btn btn-primary">進行付款</button>
+        <button type="submit" class="btn btn-primary">進行付款</button>
       </div>
       <div class="text-center" v-else>
-        <button class="btn btn-outline-primary" type="button">
+        <button type="button" class="btn btn-outline-primary">
           <router-link to="/product/all/all" class="nav-link"> 繼續購物</router-link>
         </button>
       </div>

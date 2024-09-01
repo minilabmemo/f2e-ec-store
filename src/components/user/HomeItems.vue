@@ -7,7 +7,7 @@
     </div>
 
     <div class="d-flex justify-content-center gap-3 mt-3">
-      <button class="btn btn-black explore-btn" type="button">
+      <button type="button" class="btn btn-black explore-btn">
         <router-link :to="`/product/${CAT}/all`" class="nav-link">
           Explore More <img src="@/assets/img/icons/next_arrow.svg" alt="Next Arrow"></router-link>
       </button>

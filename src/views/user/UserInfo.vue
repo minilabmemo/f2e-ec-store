@@ -40,7 +40,7 @@
         </div>
 
         <div class="text-end">
-          <button class="btn btn-primary">更新</button>
+          <button type="submit" class="btn btn-primary">更新</button>
         </div>
       </VeeForm>
     </div>

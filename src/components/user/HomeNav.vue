@@ -4,7 +4,7 @@
       <div class="container-lg d-lg-none p-0 nav-bar-for-small">
         <div class="row justify-content-between align-items-center g-0">
           <div class="col-2 col-sm-3 d-flex justify-content-start">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
               aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="
                 --bs-btn-padding-y: 0.1rem;
                 --bs-btn-padding-x: 0.2rem;
@@ -33,7 +33,7 @@
                 v-model="keyword" @keyup.enter="search">
             </div>
             <div class="col-auto">
-              <button class="btn btn-outline-primary btn-sm" type="button" @click="search">
+              <button type="button" class="btn btn-outline-primary btn-sm" @click="search">
                 <i class="bi bi-search"></i>
               </button>
             </div>

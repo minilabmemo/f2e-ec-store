@@ -24,11 +24,11 @@
           <img src="@/assets/img/design/news3.png" class="d-block w-100" alt="news">
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+      <button type="button" class="carousel-control-prev" data-bs-target="#newsCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+      <button type="button" class="carousel-control-next" data-bs-target="#newsCarousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>

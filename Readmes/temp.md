@@ -1,7 +1,5 @@
 review note temp
 
-如果預設是 css 就不用特別寫 lang="css”哩。
-button 標籤請補上 type="button" 屬性，詳情可見助教文章。
 函式宣告方式建議可以統一，目前有函式陳述跟函式表達混用。
 ProductsByKey.vue 33 跟 34 行可能會有非同步的問題發生，要稍微注意一下。
 composables 的 useModal 不應可以接受 null 才對，畢竟要呼叫他必定是在 DOM 生成完畢階段，所以型別斷定上用 null 比較不建議。

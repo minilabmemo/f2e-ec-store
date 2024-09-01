@@ -2,7 +2,7 @@
   <LoadingOverlay :active="status.isLoading" />
   <div class="pt-5">
     <div class="text-end">
-      <button class="btn btn-primary" type="button" @click="openModal(true)">增加一個產品</button>
+      <button type="button" class="btn btn-primary" @click="openModal(true)">增加一個產品</button>
     </div>
     <table class="table mt-4">
       <thead>
@@ -39,8 +39,8 @@
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
-              <button class="btn btn-outline-danger btn-sm" @click="openDelModal(item)">刪除</button>
+              <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" @click="openDelModal(item)">刪除</button>
             </div>
           </td>
         </tr>

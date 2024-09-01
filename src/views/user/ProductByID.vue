@@ -144,7 +144,7 @@
   <AddCartConfirm v-if="product" :item="{ title: product.title, qty: itemQty }" ref="cartConfirm"
     @add-item="addCart(product.id, itemQty, true)" @go-carts="goToCart" />
 
-  <button @click="scrollToTop" class="btn bg-primary rounded-circle"
+  <button type="button" @click="scrollToTop" class="btn bg-primary rounded-circle"
     :class="{ 'scroll-to-top-button': true, show: showScrollToTopButton }">
     <i class="bi bi-arrow-bar-up text-white"></i>
   </button>

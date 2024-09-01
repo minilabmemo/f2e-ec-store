@@ -9,29 +9,29 @@
           <div class="my-3 border-bottom bolder-500"></div>
           <ul class="nav">
             <li class="nav-item">
-              <button class="btn border-0" :class="{
+              <button type="button" class="btn border-0" :class="{
                 'btn-secondary': activeTab === 1,
                 'text-white': activeTab === 1,
                 'btn-sm': isExtraSmallDevice
-              }" type="button" role="tab" @click="setActiveTab(1)">
+              }" role="tab" @click="setActiveTab(1)">
                 01 購物車
               </button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="btn border-0" :disabled="stepRecord < 2" :class="{
+              <button type="button" class="btn border-0" :disabled="stepRecord < 2" :class="{
                 'btn-secondary': activeTab === 2,
                 'text-white': activeTab === 2,
                 'btn-sm': isExtraSmallDevice
-              }" type="button" role="tab" @click="setActiveTab(2)">
+              }" role="tab" @click="setActiveTab(2)">
                 02 填寫訂單
               </button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="btn border-0" :disabled="stepRecord < 3" :class="{
+              <button type="button" class="btn border-0" :disabled="stepRecord < 3" :class="{
                 'btn-secondary': activeTab === 3,
                 'text-white': activeTab === 3,
                 'btn-sm': isExtraSmallDevice
-              }" type="button" role="tab" @click="setActiveTab(3)">
+              }" role="tab" @click="setActiveTab(3)">
                 03 結帳
               </button>
             </li>
@@ -42,7 +42,7 @@
                 <CartFlowItems :checkout="checkout" />
               </div>
               <div class="d-flex justify-content-center gap-2">
-                <button class="btn btn-primary text-white" type="button" @click="goNextTab">填寫訂單資訊</button>
+                <button type="button" class="btn btn-primary text-white" @click="goNextTab">填寫訂單資訊</button>
               </div>
             </div>
             <div class="tab-pane fade" :class="{ show: activeTab === 2, active: activeTab === 2 }">
@@ -61,7 +61,7 @@
 
         <div class="fs-4">您的購物車是空的，請先將商品放入購物車。</div>
 
-        <button class="btn btn-outline-primary mt-3 mt-lg-4" type="button">
+        <button type="button" class="btn btn-outline-primary mt-3 mt-lg-4">
           <router-link to="/product/all/all" class="nav-link"> 前往購物</router-link>
         </button>
       </div>

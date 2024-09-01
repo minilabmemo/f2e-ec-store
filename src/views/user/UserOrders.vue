@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="d-flex flex-column w-100" v-else>
-                  <button class="btn btn-outline-danger btn-sm text-nowrap" @click="confirmPay(item)"
+                  <button type="button" class="btn btn-outline-danger btn-sm text-nowrap" @click="confirmPay(item)"
                     v-if="!item.is_paid">付款</button>
                 </div>
               </div>
@@ -79,7 +79,7 @@
                 <span>已付款</span>
               </div>
 
-              <button class="btn btn-outline-danger btn-sm text-nowrap w-100 mt-1" @click="confirmPay(item)"
+              <button type="button" class="btn btn-outline-danger btn-sm text-nowrap w-100 mt-1" @click="confirmPay(item)"
                 v-if="!item.is_paid">付款</button>
             </td>
           </tr>

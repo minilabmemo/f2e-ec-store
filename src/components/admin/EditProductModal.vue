@@ -42,7 +42,7 @@
                 <div class="row">
                   <div class="d-flex gap-2">
                     <h5>副圖</h5>
-                    <button class="btn btn-outline-primary btn-sm" @click="addImages">
+                    <button type="button" class="btn btn-outline-primary btn-sm" @click="addImages">
                       新增圖片
                     </button>
                   </div>

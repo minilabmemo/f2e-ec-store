@@ -41,8 +41,8 @@
           </td>
           <td>
             <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm" @click="openModal(item)">檢視</button>
-              <button class="btn btn-outline-danger btn-sm" @click="openDelOrderModal(item)">刪除</button>
+              <button type="button" class="btn btn-outline-primary btn-sm" @click="openModal(item)">檢視</button>
+              <button type="button" class="btn btn-outline-danger btn-sm" @click="openDelOrderModal(item)">刪除</button>
             </div>
           </td>
         </tr>
