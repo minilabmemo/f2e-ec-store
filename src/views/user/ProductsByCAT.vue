@@ -66,7 +66,7 @@ getProducts();
 const catItems: Ref<Product[]> = ref([]);
 const showItems: Ref<Product[]> = ref([]);
 
-let pagination = ref({
+const pagination = ref({
   total_pages: 1,
   current_page: 1,
   has_pre: true,

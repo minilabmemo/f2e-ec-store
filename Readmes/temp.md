@@ -1,9 +1,5 @@
-revie 3 note temp
+review note temp
 
-會建議如果對 TypeScript 沒有很熟的話，作為一個作品來講，會建議先拔掉，否則會混雜兩種東西在裡面，這樣其實會很疑惑（未修正）
-使用 TypeScript 應盡可能避免使用 Any 哩。
-ref 宣告的基本上都是屬於 const 不會是 let 哦。
-頂級標籤 (template、script、style) 之間建議可以有個換行符號，如：App.vue（未修正）
 如果預設是 css 就不用特別寫 lang="css”哩。
 button 標籤請補上 type="button" 屬性，詳情可見助教文章。
 函式宣告方式建議可以統一，目前有函式陳述跟函式表達混用。

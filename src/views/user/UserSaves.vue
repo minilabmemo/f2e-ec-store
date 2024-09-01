@@ -71,8 +71,8 @@ const { products } = storeToRefs(productStore);
 const { getProducts } = productStore;
 
 const saveKey = 'favorite';
-let saveItems = ref<{ data: Record<string, Product> }>({ data: {} });
-let displayItems = ref<Product[]>([]);
+const saveItems = ref<{ data: Record<string, Product> }>({ data: {} });
+  const displayItems = ref<Product[]>([]);
 
 const pagination = ref<PaginationT>({
   total_pages: 1,

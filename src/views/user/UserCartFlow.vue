@@ -88,7 +88,7 @@ const orderId = ref('');
 const stepRecord = ref(0);
 const checkout = ref(false);
 
-let activeTab = ref(1);
+const activeTab = ref(1);
 
 function setActiveTab(index: number) {
   if (!checkout.value) {

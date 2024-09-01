@@ -43,7 +43,7 @@ const props = defineProps<{
 }>();
 
 const saveKey = 'favorite';
-let isSave = ref(false);
+const isSave = ref(false);
 
 const syncSaveStatus = () => {
   isSave.value = false;
