@@ -4,7 +4,7 @@
     <h5>歷史訂單</h5>
     <table class="phone-table table table-sm align-middle d-table d-lg-none">
       <thead>
-        <tr>
+        <tr class="border-bottom border-600">
           <th>訂單資訊</th>
           <th>總金額</th>
           <th>付款狀況</th>
@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <template v-for="item in orders" :key="item.id">
-          <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
+          <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }" class="border-top border-300">
             <td>
               <div>{{ $filters.date(item.create_at) }}</div>
               <a href="#" @click.prevent="openModal(item)"> <i class="bi bi-search me-2"></i> <small>查看訂單</small> </a>
@@ -39,7 +39,7 @@
     </table>
     <table class="pc-table table align-middle d-none d-lg-table">
       <thead>
-        <tr>
+        <tr class="border-bottom border-600">
           <th>訂單資訊</th>
           <th>購買時間</th>
           <th>電子郵件</th>
@@ -50,7 +50,7 @@
       </thead>
       <tbody>
         <template v-for="item in orders" :key="item.id">
-          <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }">
+          <tr v-if="orders.length" :class="{ 'text-secondary': !item.is_paid }" class="border-bottom border-300">
             <td>
               <a href="#" @click.prevent="openModal(item)"> <i class="bi bi-search me-2"></i> <small>查看訂單內容</small> </a>
             </td>
@@ -79,8 +79,8 @@
                 <span>已付款</span>
               </div>
 
-              <button type="button" class="btn btn-outline-danger btn-sm text-nowrap w-100 mt-1" @click="confirmPay(item)"
-                v-if="!item.is_paid">付款</button>
+              <button type="button" class="btn btn-outline-danger btn-sm text-nowrap w-100 mt-1"
+                @click="confirmPay(item)" v-if="!item.is_paid">付款</button>
             </td>
           </tr>
         </template>

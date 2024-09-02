@@ -45,7 +45,7 @@
             </div>
           </div>
 
-          <div class="border-bottom border-500"></div>
+          <div class="border-bottom border-300"></div>
         </div>
       </template>
 

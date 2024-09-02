@@ -103,7 +103,7 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer border-top border-500">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">確認</button>
         </div>
       </div>
