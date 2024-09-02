@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5 d-flex flex-column align-items-center">
+  <div class="container mt-5 d-flex flex-column align-items-center px-0">
     <div class="section mb-5" :id="sectionIdsRef.brand">
       <h3 class="mb-4 text-center text-primary">品牌介紹</h3>
       <div class="content text-justify">
@@ -103,7 +103,7 @@ const sectionIdsRef = ref(sectionIds);
 }
 
 .content {
-  width: 80%;
+  width: 100%;
   max-width: 42.5rem;
 }
 </style>
