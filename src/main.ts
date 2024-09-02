@@ -1,5 +1,5 @@
-import '@/assets/css/scss/all.scss';
-import '@/assets/css/custom.css';
+import '@/assets/css/bootstrap/all.scss';
+import '@/assets/css/custom.scss';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import axios from 'axios';

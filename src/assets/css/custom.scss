@@ -1,7 +1,5 @@
-
-
-@import "./fonts/tenorsans.css";
-@import "./fonts/notosanstc.css";
+@import './fonts/tenorsans.css';
+@import './fonts/notosanstc.css';
 .tenor-sans-regular {
   font-family: 'Tenor Sans', sans-serif;
   font-weight: 400;
@@ -30,104 +28,84 @@
 .btn-outline-800:hover {
   --bs-btn-hover-color: white;
 }
-.btn-outline-primary.btn.active,.btn-outline-primary.btn:first-child:active{
+.btn-outline-primary.btn.active,
+.btn-outline-primary.btn:first-child:active {
   --bs-btn-active-color: white;
- 
 }
 
-.offcanvas{
-  --bs-offcanvas-width: 16.25rem;;
+.offcanvas {
+  --bs-offcanvas-width: 16.25rem;
 }
 
 /* RWD setting*/
 
-
 .font-sm {
-  font-size: clamp( 0.875rem, 2.5vw, 1rem);
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
 }
 
 .explore-btn {
-  font-size: clamp( 1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
 }
 
-h1{
+h1 {
   font-size: clamp(1.125rem, 0.55rem + 2.875vw, 4rem);
 }
 h3 {
   font-size: clamp(1rem, 0.9rem + 0.5vw, 1.5rem);
   color: var(--bs-gray-800);
-} 
+}
 h4 {
   font-size: clamp(0.875rem, 0.8rem + 0.375vw, 1.25rem);
   color: var(--bs-gray-800);
-} 
-  
-.price{
+}
+
+.price {
   font-size: clamp(0.875rem, 0.65rem + 1.125vw, 2rem);
   color: var(--bs-primary);
 }
- 
 
- 
-  .icon-size{
-    width: 1.2rem;
-    height: 1.2rem;
-  }
- 
-  .font-small {
-    font-size: 0.875rem;
-  }
+.icon-size {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.font-small {
+  font-size: 0.875rem;
+}
 /* Small devices (landscape phones, 375px and up) */
-@media (min-width: 375px) {  
- 
-
+@media (min-width: 375px) {
 }
 /* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {  
- 
-
-  .icon-size{
+@media (min-width: 576px) {
+  .icon-size {
     width: 1.5rem;
     height: 1.5rem;
   }
-
- 
 }
- 
+
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
-@media (min-width: 768px) {  
-
-
+@media (min-width: 768px) {
 }
- 
+
 /* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) { 
-
- 
-
+@media (min-width: 992px) {
 }
- 
+
 /* Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {  
- 
-
+@media (min-width: 1200px) {
 }
- 
-
-
-
 
 /* 捲軸寬度及高度 */
 ::-webkit-scrollbar {
-  width: .625rem; /*右側捲軸寬度*/
-  height: .625rem; /*下方捲軸高度*/
+  width: 0.625rem; /*右側捲軸寬度*/
+  height: 0.625rem; /*下方捲軸高度*/
 }
 /* 軌道背景底色 */
 ::-webkit-scrollbar-track {
-  background: var(--bs-gray-200); 
+  background: var(--bs-gray-200);
 }
- 
+
 /* 滑桿顏色 */
 ::-webkit-scrollbar-thumb {
-  background: var(--bs-primary); 
+  background: var(--bs-primary);
 }

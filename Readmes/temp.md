@@ -4,4 +4,3 @@ review note temp
 ProductsByKey.vue 33 跟 34 行可能會有非同步的問題發生，要稍微注意一下。
 composables 的 useModal 不應可以接受 null 才對，畢竟要呼叫他必定是在 DOM 生成完畢階段，所以型別斷定上用 null 比較不建議。
 defineProps 會建議宣告一個變數接著再去渲染到 template 上，這樣比較能夠明確知道來源是 props 還是哪邊來的，否則單看程式碼閱讀時，會不確定其來源要往下閱讀才能確定。
-.css 檔案可以嘗試統一改成 .scss 這樣比較具有統一性哩。
