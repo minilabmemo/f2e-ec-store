@@ -3,7 +3,7 @@
     <div class="container-fluid px-0">
       <div class="container-lg d-lg-none p-0 nav-bar-for-small">
         <div class="row justify-content-between align-items-center g-0">
-          <div class="col-2  d-flex justify-content-start">
+          <div class="col-2   d-flex justify-content-start">
             <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
               aria-controls="offcanvasNavbar" aria-label="Toggle navigation" style="
                 --bs-btn-padding-y: 0.1rem;
@@ -13,10 +13,10 @@
               <span class="navbar-toggler-icon" style="height: 1.2rem; width: 1.2rem"></span>
             </button>
           </div>
-          <div class="col-4 d-flex justify-content-center align-items-center">
+          <div class="col-6  d-flex justify-content-center align-items-center">
             <HomeLogo />
           </div>
-          <div class="col-5 d-flex justify-content-end align-items-center" id="device-sm-location">
+          <div class="col-4   d-flex justify-content-end align-items-center" id="device-sm-location">
             <!-- <for teleport> -->
           </div>
         </div>

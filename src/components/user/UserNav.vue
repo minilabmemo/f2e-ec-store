@@ -1,5 +1,5 @@
 <template>
-  <div class="w-100 row justify-content-center align-items-center">
+  <div class="w-100 row justify-content-center align-items-center gx-0 gx-xs-4 ">
     <div class="col-4 col-xl-4 d-flex justify-content-center align-items-center">
       <router-link to="/user/saves" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title="前往收藏清單">
         <img src="@/assets/img/icons/save.svg" alt="save" class="icon-size">
@@ -20,7 +20,7 @@
                 class="bg-800 text-white py-0 rounded-1 cart-number-icon-size d-flex justify-content-center align-items-center">
                 <span v-if="!status.isAddLoading" class="cart-number-font-size">{{
                   cartTotalQty
-                  }}</span>
+                }}</span>
                 <div v-else class="spinner-border spinner-border-sm" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
@@ -78,7 +78,7 @@ onMounted(() => {
 .cart-number {
   position: absolute;
   top: -50%;
-  right: -0.875rem;
+  right: -0.75rem;
 }
 
 .cart-number-font-size {
