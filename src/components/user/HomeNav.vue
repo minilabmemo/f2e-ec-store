@@ -87,7 +87,7 @@ watch(
   }
 );
 
-const search = () => {
+function search() {
   if (keyword.value === '') {
     alert('請輸入關鍵字');
   } else {
@@ -95,11 +95,11 @@ const search = () => {
   }
 };
 
-const handleOffcanvasHide = () => {
+function handleOffcanvasHide() {
   isCollapsed.value = false;
 };
 
-const handleOffcanvasShow = () => {
+function handleOffcanvasShow() {
   isCollapsed.value = true;
 };
 

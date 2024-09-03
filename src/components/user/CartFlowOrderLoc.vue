@@ -21,7 +21,7 @@
             <tfoot>
               <tr>
                 <td>總計</td>
-                <td>{{ cartTotalQty }}件</td>
+                <td>{{ cartTotalQty }} 件</td>
                 <td>${{ $filters.currency(cart.total) }}</td>
               </tr>
               <tr v-if="cart.final_total !== cart.total">

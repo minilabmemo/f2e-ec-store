@@ -229,7 +229,7 @@ const recommendItems = computed(() => {
   return items
 })
 const router = useRouter()
-const goToCart = () => {
+function goToCart() {
   router.push('/user/cart/flow')
 }
 
@@ -271,11 +271,11 @@ function addCart(id: string, qty = 1, redirect = false) {
   }
 }
 
-const handleScroll = () => {
+function handleScroll() {
   showScrollToTopButton.value = window.pageYOffset > window.innerHeight / 2
 }
 
-const scrollToTop = () => {
+function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 

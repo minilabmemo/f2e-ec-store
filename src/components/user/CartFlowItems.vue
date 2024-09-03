@@ -122,7 +122,7 @@
         <tfoot>
           <tr>
             <td colspan="2" class="text-end">總計</td>
-            <td class="text-center">{{ cartTotalQty }}件</td>
+            <td class="text-center">{{ cartTotalQty }} 件</td>
             <td class="text-end">${{ $filters.currency(cart.total) }}</td>
           </tr>
           <tr v-if="cart.final_total !== cart.total">
@@ -197,7 +197,7 @@ const tempItem: Ref<CartTempItem> = ref({
 });
 const coupon_code = ref('');
 
-const removeConfirm = (item: CartTempItem) => {
+function removeConfirm(item: CartTempItem) {
   tempItem.value = { ...item };
 
   const confirmModal = removeItemRef.value;
@@ -206,7 +206,7 @@ const removeConfirm = (item: CartTempItem) => {
   }
 };
 
-const removeCartItem = (id: string) => {
+function removeCartItem(id: string) {
   removeCartByID(id);
   const confirmModal = removeItemRef.value;
   if (confirmModal) {
@@ -214,13 +214,13 @@ const removeCartItem = (id: string) => {
   }
 };
 
-const deleteAll = () => {
+function deleteAll() {
   const confirmModal = removeAllItemRef.value;
   if (confirmModal) {
     confirmModal.showModal();
   }
 };
-const removeAllCartItem = () => {
+function removeAllCartItem() {
   removeAllItems();
   const confirmModal = removeAllItemRef.value;
   if (confirmModal) {
@@ -228,7 +228,7 @@ const removeAllCartItem = () => {
   }
 };
 
-const addCouponCode = () => {
+function addCouponCode() {
   const url = userCouponApi;
   const coupon = {
     code: coupon_code.value

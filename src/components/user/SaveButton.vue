@@ -45,7 +45,7 @@ const props = defineProps<{
 const saveKey = 'favorite';
 const isSave = ref(false);
 
-const syncSaveStatus = () => {
+function syncSaveStatus() {
   isSave.value = false;
   const saveItems: SaveProduct[] = LocalStorage.get<SaveProduct[]>(saveKey) || [];
   if (saveItems) {
@@ -57,7 +57,7 @@ const syncSaveStatus = () => {
   }
 };
 
-const saveItem = () => {
+function saveItem() {
   let saveItems = LocalStorage.get<SaveProduct[]>(saveKey) || [];
   if (!Array.isArray(saveItems)) {
     saveItems = [];
@@ -72,7 +72,7 @@ const saveItem = () => {
   syncSaveStatus();
 };
 
-const removeItem = () => {
+function removeItem() {
   let saveItems: SaveProduct[] = [];
   const nowItems: SaveProduct[] = LocalStorage.get<SaveProduct[]>(saveKey) || [];
   if (nowItems) {

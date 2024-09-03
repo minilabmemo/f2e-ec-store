@@ -82,7 +82,7 @@ const pagination = ref<PaginationT>({
 });
 const dataPerPage = 5;
 
-const getSaveItems = () => {
+function getSaveItems() {
   const saveProducts: SaveProduct[] = LocalStorage.get(saveKey) || [];
 
   //  SaveProduct 類型轉為 Product
@@ -111,7 +111,7 @@ const getSaveItems = () => {
   filterItemsByPage();
 };
 
-const filterItemsByPage = (currentPage = 1) => {
+function filterItemsByPage(currentPage = 1) {
   if (!saveItems.value) return;
 
   pagination.value.current_page = currentPage;
@@ -124,7 +124,7 @@ const filterItemsByPage = (currentPage = 1) => {
   displayItems.value = Object.values(saveItems.value.data).slice(startIndex, endIndex);
 };
 
-const removeItem = (id: string) => {
+function removeItem(id: string) {
   let nowItems: SaveProduct[] = LocalStorage.get(saveKey) || [];
   const updatedItems = nowItems.filter(item => item.id !== id);
   LocalStorage.set(saveKey, updatedItems);
