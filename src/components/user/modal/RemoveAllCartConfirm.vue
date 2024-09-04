@@ -8,7 +8,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <div>確認是否將 {{ cartTotalQty }} 件商品全部移出購物車</div>
+          <div>確認是否將 {{ props.cartTotalQty }} 件商品全部移出購物車</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
@@ -27,7 +27,7 @@
 import { ref } from 'vue';
 import { useModal } from '@/composables/useModal';
 
-defineProps<{
+const props = defineProps<{
   cartTotalQty: number;
 }>();
 const modal = ref(null);

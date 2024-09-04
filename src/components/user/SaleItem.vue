@@ -24,10 +24,11 @@
 <script setup lang="ts">
 import type { Product } from '@/utils/type';
 
-defineProps<{
+const { path, item } = defineProps<{
   path: string;
   item: Product;
 }>();
+
 </script>
 
 <style scoped>

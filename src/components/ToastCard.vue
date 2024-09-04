@@ -15,13 +15,14 @@
 import Toast from 'bootstrap/js/dist/toast';
 import { onMounted, ref, type Ref } from 'vue';
 
-defineProps<{
+const { msg } = defineProps<{
   msg: {
     title: string;
     style: string;
     content: string;
   };
 }>();
+
 const toastRef: Ref<HTMLElement | null> = ref(null);
 onMounted(() => {
   if (toastRef.value) {

@@ -31,13 +31,13 @@
 import statusStore from '@/stores/statusStore';
 const status = statusStore();
 
-defineProps({
-  filterErr: String,
+const { item } = defineProps({
   item: {
     type: Object,
     default: () => ({ title: 'no name' })
   }
 });
+
 </script>
 
 <style scoped>

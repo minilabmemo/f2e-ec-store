@@ -52,10 +52,6 @@ const { getProducts } = productStore;
 const { products } = storeToRefs(productStore);
 getProducts();
 
-defineProps({
-  isCollapsed: Boolean
-});
-
 const categories = ref(categoriesConfig);
 let catNumMap = computed(() => {
   let sum = sumProductsCAT(products.value);

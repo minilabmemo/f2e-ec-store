@@ -29,7 +29,7 @@
 import { ref } from 'vue'
 import { useModal } from '@/composables/useModal'
 import type { CartTempItem } from '@/utils/type';
-defineProps<{
+const { item } = defineProps<{
   item: CartTempItem;
 }>();
 

@@ -25,7 +25,7 @@
 import { ref } from 'vue';
 import { useModal } from '@/composables/useModal';
 
-defineProps<{
+const { item } = defineProps<{
   item: {
     title: string;
   };
