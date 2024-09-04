@@ -3,7 +3,7 @@ describe('Product By ID Page  - visible Test', () => {
   it('navbar visible.', () => {
     cy.viewport('samsung-s10')
     cy.visit('/#/product/all/all')
-    cy.get('.col-sm-3.justify-content-center > #logo').should('be.visible')
+    cy.get('.justify-content-center > #logo').should('be.visible')
     cy.get('.navbar-toggler').should('be.visible')
 
     cy.viewport(992, 768)

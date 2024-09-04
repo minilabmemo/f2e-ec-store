@@ -5,13 +5,13 @@ describe('Home Layout Test', () => {
   it('visits the landing page website at 360px.', () => {
     cy.viewport('samsung-s10')
     cy.visit('/')
-    cy.get('.col-sm-3.justify-content-center > #logo').should('be.visible');
+    cy.get('.justify-content-center > #logo').should('be.visible');
     cy.visitAndCheckPage()
   })
   it('visits the landing page website at 375px.', () => {
     cy.viewport('iphone-6')
     cy.visit('/')
-    cy.get('.col-sm-3.justify-content-center > #logo').should('be.visible');
+    cy.get('.justify-content-center > #logo').should('be.visible');
 
     cy.visitAndCheckPage()
   })
